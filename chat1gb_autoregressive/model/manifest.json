@@ -1,10 +1,10 @@
 {
-  "created_utc": "2026-11-03T14:13:09.959116+00:00",
+  "created_utc": "2026-11-03T15:10:42.175710+00:00",
   "parameter_count": 250000000,
   "weight_bytes": 1000000000,
   "padding_bytes": 0,
-  "nonzero_parameters": 873633,
-  "nonzero_fraction": 0.003494532,
+  "nonzero_parameters": 929381,
+  "nonzero_fraction": 0.003717524,
   "training_steps": 0,
   "optimizer_steps": 0,
   "pretrained_weights_used": false,
@@ -13,9 +13,9 @@
   "complete_response_bank": false,
   "construction": "analytically compiled token-level circuits inside a causal transformer",
   "relu_units_used_per_block": [
-    848,
-    919,
-    2339,
+    878,
+    3272,
+    2282,
     874,
     483,
     504,
@@ -34,16 +34,16 @@
   ],
   "atomic_entity_records": 40,
   "sha256": {
-    "weights.f32": "07349cb626864c4ea77e32300af5670a6de69ee612662ec5e9d2d2cdba43cea5",
+    "weights.f32": "ff0b1e1af0909fc6237bdcfc7fc41e6df590cd678bc9552705bb3a943e2b549d",
     "config.json": "56df33d5842a0d3a1351dae78732c01589bde1ce55a33868f9d13dec171bee91"
   },
   "source_sha256": {
-    "build.py": "077b1bfeaf328a5ad1744acf3a57e9ea9650ff4d86b92c25fa7b6b10bd98518f",
-    "spec.py": "7cc813634115801262949b1b8a4fe8b8c243150d332dc8ffaa15477d57d693a2",
+    "build.py": "87bba0edb3b0055898f92c635e16757ac23c66a9a82fc314ddcfbcdd1652b2e9",
+    "spec.py": "ee19917b97e5103371ccb9656390fbba85fa5bda17c858d0d03350bcb09b7ecb",
     "knowledge.py": "b7cd8bd0c584d36c11c068266016d24a92f3259816dcc94bcfb4b45f5ea4c4fd",
     "offline.py": "61d7321c6c08717b53fb5627a48ff9c243e59ee4719845d4f974cd0e6384cc57"
   },
-  "build_seconds": 1.7072094999894034,
+  "build_seconds": 1.761495200014906,
   "limitations": [
     "Sparse directly programmed circuits; most standard transformer connections remain zero.",
     "Small authored lexicon and fact vocabulary; general language understanding is unproven.",
@@ -51,6 +51,9 @@
     "Arithmetic circuit is intended for two signed operands with magnitudes no greater than 999.",
     "Object-specific truth questions and logical negation support seven predicates under a limited inversion grammar.",
     "Proposition composition uses three-valued reductions for homogeneous AND or OR; mixed-operator syntax and arbitrary requests remain unsupported.",
+    "Shared AND assertion objects use clause-local neural subject/predicate/polarity binding with a bounded grammar.",
+    "Coordinated objects are committed at a following boundary token; question/directive clauses are excluded from assertions.",
+    "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
     "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."
   ]
 }

@@ -16,6 +16,15 @@
   (382/390, 61/76) remain archived with exact results. v13b misaligns clause
   coordinates at punctuation; v13c loses low bits in a recycled float32 field.
   v13d preserves the coordinate scale while keeping the ideal attention score.
+- After freeze commit `4382108`, assertion seed 3178044486 scores 382/390 on
+  CPU and CUDA. Boundary seed 3284145273 scores 65/76 on CUDA and 64/76 on CPU;
+  all 48 short cases pass on both. The device difference is in a long-context
+  isolation case. These are fresh names/combinations from known generators,
+  not independently designed generalization evidence. No frozen weights are tuned.
+- All 22 matched v13a/v13d suites retain their earlier passes. The conditional
+  stress regression against v12b remains in the direct comparison. All integrity
+  checks and neural interventions pass; frozen source reproduces exact raw and
+  config hashes. A separate 20-turn publication smoke conversation passes locally.
 
 The long-context audit fails some cases beginning at 2,048 padding tokens.
 The 5,048-token storage window is **not** a demonstrated accuracy window.

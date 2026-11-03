@@ -558,3 +558,19 @@ This candidate is committed before choosing its fresh assertion/boundary seeds.
 Useful general chat remains unachieved. The next priority is the demonstrated
 long-context positional/generation failure, followed by broader expression
 structure, rather than treating the full storage window as reliable.
+
+## 2026-11-04: v13d fresh inputs and v0.5 preparation
+
+After freeze commit `4382108`, assertion seed 3178044486 scores 382/390 on CUDA
+and CPU. Boundary seed 3284145273 scores 65/76 CUDA and 64/76 CPU, including
+48/48 short controls on each. The discrepancy and all remaining failures occur
+in long contexts. Generators and structures were known before freezing; these
+are fresh combinations, not independent evidence of broad intelligence.
+No v13d source or raw weights were tuned after these runs.
+
+The default local model now references v13d; the previous v12b raw hash remains
+unchanged. Prepared four archives for v0.5, preserving v13a, failed v13b,
+intermediate v13c and v13d. Streamed decompression validates hashes and CRC for
+every checkpoint. The 20-turn local publication smoke passes 20/20, exercising
+deferred objects, subject isolation, correction, inherited properties, negative
+facts, question/directive isolation, arithmetic and unsupported-request abstention.

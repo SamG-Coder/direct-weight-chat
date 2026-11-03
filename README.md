@@ -51,6 +51,10 @@ creative writing and code generation. Some context checks fail from 2,048 paddin
 tokens onward: the 5,048-token storage window is not a demonstrated accuracy
 window. Correct abstention on a poem request does not demonstrate poetry generation.
 
+After freezing v13d at `4382108`, fresh assertion inputs score 382/390 on CPU and
+CUDA. Fresh boundary inputs score 65/76 on CUDA and 64/76 on CPU; all 48 short
+cases pass on both, and the failures remain in the long-context cases.
+
 ## Run offline
 
 Use a Python environment with NumPy for construction and PyTorch for inference
