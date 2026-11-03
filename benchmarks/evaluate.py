@@ -36,6 +36,7 @@ def main():
     parser.add_argument('--version', required=True)
     parser.add_argument('--device', default='auto', choices=['auto', 'cpu', 'cuda'])
     parser.add_argument('--compare', type=Path)
+    parser.add_argument('--evaluation-status', help='Override the suite provenance label, e.g. when an old post-freeze set is now regression evidence')
     args = parser.parse_args()
     if args.output.exists():
         raise SystemExit('Refusing to overwrite an experiment result')
@@ -48,7 +49,7 @@ def main():
     assert sum(w.numel() for w in model.w.values()) == 250_000_000
     assert not any(n.endswith(('.knowledge', '.build', '.program')) for n in sys.modules)
     model.generate('Hello', 4)  # Excluded warm-up, then reset before evaluation.
-    result = dict(version=args.version, suite=suite['name'], evaluation_status=suite['status'],
+    result = dict(version=args.version, suite=suite['name'], evaluation_status=args.evaluation_status or suite['status'],
                   created_utc=datetime.now(timezone.utc).isoformat(), git=git_state(),
                   model_sha256=weight_hash, suite_sha256=digest(args.suite),
                   runtime_sha256=digest(Path(__file__).resolve().parents[1] / 'chat1gb_autoregressive' / 'engine.py'),

@@ -731,3 +731,41 @@ difference. This removes absolute clause precision from competition between
 valid subjects. The source tests, baselines and traces are committed before
 changing the compiler. v14b post-freeze cases become regression evidence for the
 new candidate; they are not new held-out tests for that candidate.
+
+## 2026-11-04: v15a separates recency selection from clause validation
+
+Replaced both clause-penalized assertion heads with a shared two-stage primitive.
+Attention uses `65536*valid + 8*position`, returning the selected event and its
+group. Each dependent ReLU pattern, validity gate and bounded identity copy
+includes `512*(retrieved_group-current_group)`. An older clause is rejected;
+matching groups cannot bias attention's recency ranking. Predicate/frame scratch
+fields are cleared before later query/grammar roles. The generic tensor runtime
+is unchanged. Exact weight bytes remain 1,000,000,000; 961,697 parameters are
+nonzero. Raw SHA-256 is
+`6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81`.
+
+All 29 existing CUDA suites were rerun, with zero regressions against v14b.
+This includes 136/136 subject binding, 126/126 context, 382/390 assertions and
+76/76 boundary controls. The earlier unsupported structures remain failures.
+The evaluator now permits an explicit provenance label: old post-freeze suites
+are labeled regression evidence for new candidates, without modifying the
+original suite or its historical reports.
+
+The first integrity attempt stopped because removing recency on a two-subject
+probe did not change its Yes answer. This ineffective intervention is preserved
+in `recency-intervention-v15a-design.json`. Three-subject controls reveal both
+the missed latest fact and a false fact attached to an earlier subject when
+recency is removed. The revised diagnostic retains the original neutral probe
+and records all outcomes; no model source or weights changed in response.
+CUDA integrity then passes, including scope-gate removal and all older
+interventions. CPU binding improves 133/136 to 136/136, repairing all three
+failures. The former fresh context set improves 125/126 to 126/126 CPU; the long
+conversation improves 19/20 to 20/20. Two matched root CPU reports have zero
+regressions, and the separately compared conversation retains all old passes.
+
+CPU integrity and interventions also pass. Both devices retain zero errors in
+the 45,432-address audit. The repaired CPU trace retrieves subject 371: the newer
+water fact scores 103215.9721 versus 103175.9721 for the older wings fact. Clause
+rounding no longer competes with that 40-point recency gap. Archived source
+reproduces exact raw/config hashes. The candidate is committed before any new
+binding seed is selected; no general-conversation success is claimed.

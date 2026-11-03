@@ -10,18 +10,19 @@ def main():
     versions = sorted([p.name.removeprefix('autoregressive_') for p in (root / 'versions').glob('autoregressive_*')], key=lambda v: (int(re.search(r'v([0-9]+)', v).group(1)), v))
     rows = ['# Version results', '',
             'Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.', '',
-            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Context /126 | Nonzero parameters | Source commit |',
-            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
+            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Context /126 | Binding CPU /136 | Nonzero parameters | Source commit |',
+            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
     index = []
     for v in versions:
         source = Path('versions') / ('autoregressive_' + v)
         m = json.loads((root / source / 'model' / 'manifest.json').read_text(encoding='utf-8'))
         commit = subprocess.check_output(['git', 'log', '--diff-filter=A', '--format=%H', '--', str(source / 'build.py')], cwd=root, text=True).strip().splitlines()[-1]
         scores, reports = [], []
-        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions', 'assertion-boundaries', 'context'):
-            p = root / 'results' / f'{suite}-{v}-cuda.json'
+        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions', 'assertion-boundaries', 'context', 'binding-positions'):
+            device = 'cpu' if suite == 'binding-positions' else 'cuda'
+            p = root / 'results' / f'{suite}-{v}-{device}.json'
             if not p.exists():
-                p = root / 'results' / f'{suite}-{v}-baseline-cuda.json'
+                p = root / 'results' / f'{suite}-{v}-baseline-{device}.json'
             if p.exists():
                 r = json.loads(p.read_text(encoding='utf-8'))
                 score = r['summary']['all']
@@ -86,6 +87,12 @@ def main():
              '- After freeze commit `b3b6e1b`, context seed 2063643282 scores [126/126 CUDA](context-v14b-postfreeze-cuda.json) and [125/126 CPU](context-v14b-postfreeze-cpu.json). CPU case context-086, with a 4,720-token prefix, answers I do not know instead of Yes for an unfamiliar subject\'s second coordinated object. This failure is retained. Known-generator combinations and repeated fixed structures do not establish general conversation ability.',
              '- [v0.6 packaging](release-assets-v0.6.json) preserves failed v14a and current v14b, with streamed raw/config hashes and ZIP CRC checks. The local [long 20-turn publication smoke](long-publication-smoke-v14b-cuda.json), preceded by 3,000 declarative distractor tokens, passes on CUDA.', '',
              '- [v0.6 publication verification](publication-v0.6.json) confirms both downloaded archive digests/sizes, checksum entries, raw/config hashes, CRC and frozen-source manifests. Fresh tagged-clone integrity and all interventions pass on CPU and CUDA. The long conversation scores [20/20 CUDA](release-validation-v0.6/fresh-smoke-cuda.json) and [19/20 CPU](release-validation-v0.6/fresh-smoke-cpu.json). CPU turn 2, at a 3,036-token prefix, loses the second object of a changed subject. That failure remains public; frozen weights were not retuned.', '',
+             '## Subject binding across context positions', '',
+             '- A 136-case suite was committed before implementation at `0dd1266`. It covers all seven predicates, positive/negative changed subjects, isolation, controls, random offsets, corrections and dialogue. Frozen v14b scores [136/136 CUDA](binding-positions-v14b-baseline-cuda.json) and [133/136 CPU](binding-positions-v14b-baseline-cpu.json). Two misses and one false cross-subject fact are retained.',
+             '- The [CPU activation trace](trace-binding-v14b-cpu.json) and [CUDA trace](trace-binding-v14b-cuda.json) capture the old failure without modifying inference. Two nominally equal group coordinates differ by about 0.0000038 on CPU; the large attention coefficient turns this into a 64-point bias, outweighing a 40-point recency advantage. Float64 score recomputation from captured Q/K retains the wrong winner, locating the error before the final dot-product reduction.',
+             '- v15a separates latest-event attention from clause validation in neural gates. Binding scores [136/136 CPU](binding-positions-v15a-cpu.json) and [136/136 CUDA](binding-positions-v15a-cuda.json). [All 29 CUDA suites](all-suites-v15a-cuda.json) were rerun; [matched comparison](regressions-v15a-cuda.json) has zero regressions. Existing grammar and reasoning stresses remain failures.',
+             '- [CUDA integrity](integrity-v15a-cuda.json) includes removing the new scope terms and frame recency. The [first recency probe](recency-intervention-v15a-design.json) did not change its answer and is preserved, together with stronger three-subject controls. No model source or saved weights changed in response to that diagnostic outcome. The generic inference runtime remains unchanged.', '',
+             '- CPU also repairs the old [context set to 126/126](context-v15a-v14b-regression-cpu.json) and [long conversation to 20/20](long-publication-smoke-v15a-cpu.json). [Two matched CPU suites](regressions-v15a-cpu.json) have no regressions; the separately compared conversation retains its earlier passes. [Repaired CPU trace](trace-binding-v15a-cpu.json) restores the intended 40-point recency advantage. [CPU integrity](integrity-v15a-cpu.json), both 45,432-address audits and [frozen-source reproduction](reproduction-v15a.json) pass.', '',
              '## Provenance and timing', '',
              '[experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.', '',
              'Response timings include token generation and formatting, exclude one warm-up, and depend on prompt/output length and machine load. They are not a comparison against trained language models. Exact per-case timings and hardware are in each JSON. CUDA and CPU evaluations were run separately.', '',

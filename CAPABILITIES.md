@@ -1,6 +1,39 @@
 # Capabilities and limitations
 
-## Current v14b
+## v15a candidate
+
+- The new 136-case binding development suite passes on CPU and CUDA. Frozen
+  v14b scores 133/136 CPU and 136/136 CUDA. The three CPU repairs include two
+  missed second objects and a false fact assigned to the previous subject.
+- The same retrieval primitive serves lexical predicates and subject frames.
+  Attention selects by validity/recency; following neural gates check clause
+  membership. Tiny clause-coordinate errors no longer rank competing subjects.
+- All 29 existing CUDA suites retain their v14b passes. Older post-freeze sets
+  are explicitly labeled regression evidence for this candidate. Earlier
+  unsupported language/reasoning structures remain failures.
+- CUDA integrity and all interventions pass. The original ineffective recency
+  probe remains recorded alongside three-subject controls that expose missed
+  and falsely bound facts when recency is removed. The inference runtime is
+  unchanged; all diagnostic interventions restore the runtime tensors.
+- CPU regression checks also repair the original context failure (125/126 to
+  126/126) and the long conversation (19/20 to 20/20). The old fresh inputs are
+  now regression evidence. No previous CPU passes are lost in those checks.
+- CPU integrity and all interventions pass. The local address audit remains
+  exact at all 45,432 positions on both devices. A repaired CPU activation trace
+  selects the newer subject with its expected 40-point recency advantage.
+  Archived source reproduces the exact raw/config hashes. The candidate is
+  committed before selecting a new binding seed.
+
+This is a numerical reliability improvement to the controlled grammar. It does
+not add conditional-rule reasoning, disjunctive assertions, mixed-precedence
+parsing, open multi-value answers, creative writing, code generation or useful
+general conversation. Those capabilities remain unachieved.
+
+v15a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **961,697
+nonzero parameters (0.3846788%)**. Raw weight SHA-256:
+`6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81`.
+
+## Historical v14b
 
 - Context/position development scores 126/126 on CUDA, versus v13d 61/126.
   Assertions return to 382/390 after the v14a correction regression. The

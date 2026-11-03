@@ -87,6 +87,11 @@ ASSERTION_PREVIOUS = PREV[2]  # valid[1], predicate[7], polarity[1], object[14]
 ASSERTION_TERMINATOR = PREV[2] + 23
 ASSERTION_POSITION_SQ, ASSERTION_PREVIOUS_GROUP = PREV[3], PREV[3] + 1
 ASSERTION_GROUP_TEMP = GATES + 23
+# v15 scope validation reuses cleared parsing fields. Predicate group is read
+# and cleared in block 1; frame group is read and cleared in block 2. Neither
+# is part of runtime tokenizer state or a host-side fact representation.
+PREDICATE_GROUP = GATES + 24
+ASSERTION_FRAME_GROUP = ASSERTION_POSITION_SQ
 # Bounded positional basis, live through block-2 attention. These four fields
 # have no arithmetic/article/second-number readers until later blocks.
 LOOKBACK_POSITION = (MATH_SUM, NEGATIVE_RESULT, NUM_SECOND_POS, CLASS_VOWEL)

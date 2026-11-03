@@ -1,0 +1,2544 @@
+{
+  "git": {
+    "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+    "dirty": true
+  },
+  "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81",
+  "device": "cuda",
+  "checks": {
+    "file_and_source_hashes": true,
+    "runtime_imports_no_compiler": true,
+    "parameter_count": 250000000,
+    "weight_bytes": 1000000000,
+    "nonzero_parameters": 961697,
+    "finite_weights": true,
+    "socket_audit_guard": true,
+    "causal_prefix_max_logit_difference": 0.0,
+    "cached_and_full_prefix_tokens_match": true,
+    "multi_hop_ablation": {
+      "prompt": "A lavrik is a pelvon. A pelvon is a nebvik. A nebvik can shimmer. What can a lavrik do?",
+      "original": "Lavrik can shimmer.",
+      "ablated": "I do not know.",
+      "changed": true,
+      "layers": [
+        5,
+        7,
+        9
+      ]
+    },
+    "output_head_ablation_removes_text": true,
+    "polarity_ablation": [
+      {
+        "prompt": "A kelv cannot fly. What can a kelv do?",
+        "original": "Kelv cannot fly.",
+        "ablated": "Kelv can fly."
+      },
+      {
+        "prompt": "A kelv is not a bird. What can a kelv do?",
+        "original": "I do not know.",
+        "ablated": "Kelv can fly."
+      }
+    ],
+    "arithmetic_ablation": {
+      "prompt": "149 - 370",
+      "original": "-221.",
+      "ablated": "0."
+    },
+    "unary_sign_ablation": {
+      "original": "-519.",
+      "ablated": "-221."
+    },
+    "arity_gate_forced_valid": {
+      "original": "I do not know.",
+      "forced_valid": "8."
+    },
+    "truth_ablations": [
+      {
+        "intervention": "remove_proposition_head",
+        "original": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.02505840000230819,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 366,
+              "token": "yes",
+              "top3": [
+                {
+                  "token": "yes",
+                  "logit": 112.0
+                },
+                {
+                  "token": "sunlight",
+                  "logit": 96.0
+                },
+                {
+                  "token": "fact",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "I do not know.",
+          "token_ids": [
+            158,
+            89,
+            220,
+            175,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 6,
+          "seconds": 0.016236099996604025,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 158,
+              "token": "i",
+              "top3": [
+                {
+                  "token": "i",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "ice",
+                  "logit": 96.0
+                },
+                {
+                  "token": "are",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 89,
+              "token": "do",
+              "top3": [
+                {
+                  "token": "do",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "compose",
+                  "logit": 96.0
+                },
+                {
+                  "token": "animal",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 220,
+              "token": "not",
+              "top3": [
+                {
+                  "token": "not",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "might",
+                  "logit": 96.0
+                },
+                {
+                  "token": "dog",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "token_id": 175,
+              "token": "know",
+              "top3": [
+                {
+                  "token": "know",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "isn't",
+                  "logit": 96.0
+                },
+                {
+                  "token": "blow",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 4,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                },
+                {
+                  "token": "-",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 5,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "intervention": "remove_object_identity",
+        "original": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.02505840000230819,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 366,
+              "token": "yes",
+              "top3": [
+                {
+                  "token": "yes",
+                  "logit": 112.0
+                },
+                {
+                  "token": "sunlight",
+                  "logit": 96.0
+                },
+                {
+                  "token": "fact",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "No.",
+          "token_ids": [
+            219,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.008761600009165704,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 219,
+              "token": "no",
+              "top3": [
+                {
+                  "token": "no",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "horse",
+                  "logit": 95.99999237060547
+                },
+                {
+                  "token": "doesn't",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "truth_cached_and_full_prefix_tokens_match": true,
+    "query_negation_ablation": {
+      "prompt": "A kelv cannot fly. Can a kelv not fly?",
+      "original": "Yes.",
+      "ablated": "No."
+    },
+    "composition_ablations": [
+      {
+        "intervention": "and_to_or",
+        "original": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can kelv fly and swim?",
+          "text": "No.",
+          "token_ids": [
+            219,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.00854299997445196,
+          "device": "cuda",
+          "prefix_tokens": 19,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 219,
+              "token": "no",
+              "top3": [
+                {
+                  "token": "no",
+                  "logit": 112.0
+                },
+                {
+                  "token": "horse",
+                  "logit": 96.0
+                },
+                {
+                  "token": "doesn't",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can kelv fly and swim?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.00870439998107031,
+          "device": "cuda",
+          "prefix_tokens": 19,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 366,
+              "token": "yes",
+              "top3": [
+                {
+                  "token": "yes",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "sunlight",
+                  "logit": 95.99999237060547
+                },
+                {
+                  "token": "fact",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "intervention": "remove_unknown",
+        "original": {
+          "prompt": "A kelv can fly. Can kelv fly and glimmer?",
+          "text": "I do not know.",
+          "token_ids": [
+            158,
+            89,
+            220,
+            175,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 6,
+          "seconds": 0.016024599986849353,
+          "device": "cuda",
+          "prefix_tokens": 14,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 158,
+              "token": "i",
+              "top3": [
+                {
+                  "token": "i",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "grow",
+                  "logit": 95.99999237060547
+                },
+                {
+                  "token": "are",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 89,
+              "token": "do",
+              "top3": [
+                {
+                  "token": "do",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "compose",
+                  "logit": 96.0
+                },
+                {
+                  "token": "animal",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 220,
+              "token": "not",
+              "top3": [
+                {
+                  "token": "not",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "might",
+                  "logit": 96.0
+                },
+                {
+                  "token": "dog",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "token_id": 175,
+              "token": "know",
+              "top3": [
+                {
+                  "token": "know",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "isn't",
+                  "logit": 96.0
+                },
+                {
+                  "token": "blow",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 4,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                },
+                {
+                  "token": "-",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 5,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv can fly. Can kelv fly and glimmer?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.00838579999981448,
+          "device": "cuda",
+          "prefix_tokens": 14,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 366,
+              "token": "yes",
+              "top3": [
+                {
+                  "token": "yes",
+                  "logit": 112.0
+                },
+                {
+                  "token": "sunlight",
+                  "logit": 96.0
+                },
+                {
+                  "token": "fact",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "=",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "intervention": "remove_clause_scope",
+        "original": {
+          "prompt": "A kelv cannot fly. A kelv can swim. Can kelv fly? Can kelv swim and glimmer?",
+          "text": "I do not know.",
+          "token_ids": [
+            158,
+            89,
+            220,
+            175,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 6,
+          "seconds": 0.016527900006622076,
+          "device": "cuda",
+          "prefix_tokens": 23,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 158,
+              "token": "i",
+              "top3": [
+                {
+                  "token": "i",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "ice",
+                  "logit": 96.0
+                },
+                {
+                  "token": "are",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 89,
+              "token": "do",
+              "top3": [
+                {
+                  "token": "do",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "compose",
+                  "logit": 96.0
+                },
+                {
+                  "token": "animal",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 220,
+              "token": "not",
+              "top3": [
+                {
+                  "token": "not",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "might",
+                  "logit": 96.0
+                },
+                {
+                  "token": "dog",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "token_id": 175,
+              "token": "know",
+              "top3": [
+                {
+                  "token": "know",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "isn't",
+                  "logit": 96.0
+                },
+                {
+                  "token": "blow",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 4,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                },
+                {
+                  "token": "-",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 5,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv cannot fly. A kelv can swim. Can kelv fly? Can kelv swim and glimmer?",
+          "text": "No.",
+          "token_ids": [
+            219,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.008677100006025285,
+          "device": "cuda",
+          "prefix_tokens": 23,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 219,
+              "token": "no",
+              "top3": [
+                {
+                  "token": "no",
+                  "logit": 112.0
+                },
+                {
+                  "token": "horse",
+                  "logit": 96.0
+                },
+                {
+                  "token": "doesn't",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "compound_unknown_cached_and_full_prefix_tokens_match": true,
+    "assertion_ablations": [
+      {
+        "intervention": "remove_continuation_validity",
+        "original": [
+          {
+            "prompt": "A kelv has wings and sensors. Does kelv have sensors?",
+            "text": "Yes.",
+            "token_ids": [
+              366,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 3,
+            "seconds": 0.008415999996941537,
+            "device": "cuda",
+            "prefix_tokens": 15,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 366,
+                "token": "yes",
+                "top3": [
+                  {
+                    "token": "yes",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "sunlight",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "fact",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 112.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "ablated": [
+          {
+            "prompt": "A kelv has wings and sensors. Does kelv have sensors?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.016566599981160834,
+            "device": "cuda",
+            "prefix_tokens": 15,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "grow",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "intervention": "remove_predicate_binding",
+        "original": [
+          {
+            "prompt": "A kelv can fly and has wings and sensors. Does kelv have sensors?",
+            "text": "Yes.",
+            "token_ids": [
+              366,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 3,
+            "seconds": 0.008604800008470193,
+            "device": "cuda",
+            "prefix_tokens": 18,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 366,
+                "token": "yes",
+                "top3": [
+                  {
+                    "token": "yes",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "sunlight",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "fact",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 112.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "ablated": [
+          {
+            "prompt": "A kelv can fly and has wings and sensors. Does kelv have sensors?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.016284899989841506,
+            "device": "cuda",
+            "prefix_tokens": 18,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "ice",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "intervention": "remove_question_exclusion",
+        "original": [
+          {
+            "prompt": "Does kelv need water and lavrik has wings?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.016506899992236868,
+            "device": "cuda",
+            "prefix_tokens": 12,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "grow",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "prompt": "Does lavrik have wings?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.01638380001531914,
+            "device": "cuda",
+            "prefix_tokens": 25,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "ice",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "ablated": [
+          {
+            "prompt": "Does kelv need water and lavrik has wings?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.01587850000942126,
+            "device": "cuda",
+            "prefix_tokens": 12,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "grow",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "prompt": "Does lavrik have wings?",
+            "text": "Yes.",
+            "token_ids": [
+              366,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 3,
+            "seconds": 0.008653199998661876,
+            "device": "cuda",
+            "prefix_tokens": 25,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 366,
+                "token": "yes",
+                "top3": [
+                  {
+                    "token": "yes",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "sunlight",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "fact",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 112.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "intervention": "remove_assertion_clause_scope",
+        "original": [
+          {
+            "prompt": "A kelv can fly. And swim. Can kelv swim?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.016457000019727275,
+            "device": "cuda",
+            "prefix_tokens": 15,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "grow",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "ablated": [
+          {
+            "prompt": "A kelv can fly. And swim. Can kelv swim?",
+            "text": "Yes.",
+            "token_ids": [
+              366,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 3,
+            "seconds": 0.008597300009569153,
+            "device": "cuda",
+            "prefix_tokens": 15,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 366,
+                "token": "yes",
+                "top3": [
+                  {
+                    "token": "yes",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "sunlight",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "fact",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "=",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "intervention": "force_following_token_valid",
+        "original": [
+          {
+            "prompt": "A kelv has wings and lavrik needs water. Does kelv have lavrik?",
+            "text": "I do not know.",
+            "token_ids": [
+              158,
+              89,
+              220,
+              175,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 6,
+            "seconds": 0.01637050000135787,
+            "device": "cuda",
+            "prefix_tokens": 17,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 158,
+                "token": "i",
+                "top3": [
+                  {
+                    "token": "i",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "ice",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "are",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 89,
+                "token": "do",
+                "top3": [
+                  {
+                    "token": "do",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "compose",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "animal",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 220,
+                "token": "not",
+                "top3": [
+                  {
+                    "token": "not",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "might",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "dog",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 3,
+                "token_id": 175,
+                "token": "know",
+                "top3": [
+                  {
+                    "token": "know",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "isn't",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "blow",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 4,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 5,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "ablated": [
+          {
+            "prompt": "A kelv has wings and lavrik needs water. Does kelv have lavrik?",
+            "text": "Yes.",
+            "token_ids": [
+              366,
+              9,
+              0
+            ],
+            "stopped_on_eos": true,
+            "generated_tokens": 3,
+            "seconds": 0.009309199987910688,
+            "device": "cuda",
+            "prefix_tokens": 17,
+            "token_trace": [
+              {
+                "step": 0,
+                "token_id": 366,
+                "token": "yes",
+                "top3": [
+                  {
+                    "token": "yes",
+                    "logit": 111.99999237060547
+                  },
+                  {
+                    "token": "sunlight",
+                    "logit": 95.99999237060547
+                  },
+                  {
+                    "token": "fact",
+                    "logit": 95.99999237060547
+                  }
+                ]
+              },
+              {
+                "step": 1,
+                "token_id": 9,
+                "token": ".",
+                "top3": [
+                  {
+                    "token": ".",
+                    "logit": 112.0
+                  },
+                  {
+                    "token": "-",
+                    "logit": 96.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 96.0
+                  }
+                ]
+              },
+              {
+                "step": 2,
+                "token_id": 0,
+                "token": "<eos>",
+                "top3": [
+                  {
+                    "token": "<eos>",
+                    "logit": 1.0
+                  },
+                  {
+                    "token": "<user>",
+                    "logit": 0.0
+                  },
+                  {
+                    "token": "<bos>",
+                    "logit": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "deferred_assertion_cached_and_full_prefix_tokens_match": true,
+    "segmented_binding_recency_ablation": [
+      {
+        "original": {
+          "prompt": "A kelv has wings and a lavrik needs water and fuel. Does lavrik need fuel?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.0089014999975916,
+          "device": "cuda",
+          "prefix_tokens": 20
+        },
+        "ablated": {
+          "prompt": "A kelv has wings and a lavrik needs water and fuel. Does lavrik need fuel?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.00824670001748018,
+          "device": "cuda",
+          "prefix_tokens": 20
+        },
+        "changed": false
+      },
+      {
+        "original": {
+          "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does norv produce light?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.008543700008885935,
+          "device": "cuda",
+          "prefix_tokens": 25
+        },
+        "ablated": {
+          "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does norv produce light?",
+          "text": "I do not know.",
+          "token_ids": [
+            158,
+            89,
+            220,
+            175,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 6,
+          "seconds": 0.016571200016187504,
+          "device": "cuda",
+          "prefix_tokens": 25
+        },
+        "changed": true
+      },
+      {
+        "original": {
+          "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does kelv produce light?",
+          "text": "I do not know.",
+          "token_ids": [
+            158,
+            89,
+            220,
+            175,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 6,
+          "seconds": 0.016169699985766783,
+          "device": "cuda",
+          "prefix_tokens": 25
+        },
+        "ablated": {
+          "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does kelv produce light?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.00886299999547191,
+          "device": "cuda",
+          "prefix_tokens": 25
+        },
+        "changed": true
+      }
+    ],
+    "periodic_position_ablations": [
+      {
+        "removed_phase": "fast",
+        "original": {
+          "prompt": "Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. A kelv can fly and swim. Can kelv swim?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.015562300017336383,
+          "device": "cuda",
+          "prefix_tokens": 270
+        },
+        "ablated": {
+          "prompt": "Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. A kelv can fly and swim. Can kelv swim?",
+          "text": "I do not",
+          "token_ids": [
+            158,
+            89,
+            220,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 4,
+          "seconds": 0.017963999998755753,
+          "device": "cuda",
+          "prefix_tokens": 270
+        }
+      },
+      {
+        "removed_phase": "slow",
+        "original": {
+          "prompt": "Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. A kelv can fly and swim. Can kelv swim?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.014698100014356896,
+          "device": "cuda",
+          "prefix_tokens": 270
+        },
+        "ablated": {
+          "prompt": "Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. A kelv can fly and swim. Can kelv swim?",
+          "text": "I do not",
+          "token_ids": [
+            158,
+            89,
+            220,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 4,
+          "seconds": 0.018062899995129555,
+          "device": "cuda",
+          "prefix_tokens": 270
+        }
+      }
+    ],
+    "long_prefix_cached_and_full_tokens_match": {
+      "prefix_tokens": 2055,
+      "text": "I do not know."
+    },
+    "fact_coordinate_amplitude_intervention": {
+      "original": {
+        "prompt": "A kelv can fly and swim. A kelv cannot swim. Can kelv swim?",
+        "text": "No.",
+        "token_ids": [
+          219,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.008767299994360656,
+        "device": "cuda",
+        "prefix_tokens": 19
+      },
+      "protected": {
+        "prompt": "A kelv can fly and swim. A kelv cannot swim. Can kelv swim?",
+        "text": "No.",
+        "token_ids": [
+          219,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.008582699985709041,
+        "device": "cuda",
+        "prefix_tokens": 19
+      },
+      "unprotected": {
+        "prompt": "A kelv can fly and swim. A kelv cannot swim. Can kelv swim?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.008619600004749373,
+        "device": "cuda",
+        "prefix_tokens": 19
+      },
+      "identity_scale": 1.001
+    },
+    "weight_file_unchanged_after_ablations": true
+  },
+  "note": "Ablations replace selected runtime tensor references with zero copies, then restore them. The saved checkpoint is never modified."
+}

@@ -27,6 +27,7 @@ def main():
     p.add_argument('--deferred-assertions', action='store_true', help='Use v13c delayed-clause layout and ablate following-token validation')
     p.add_argument('--periodic-lookbacks', action='store_true', help='Ablate the two v14 positional phases and check long-prefix cache parity')
     p.add_argument('--fact-canonicalization', action='store_true', help='Test the v14b fact-coordinate saturation under a controlled magnitude perturbation')
+    p.add_argument('--segmented-binding', action='store_true', help='Use v15 neural clause gates and ablate their scope and recency terms')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -311,6 +312,15 @@ def main():
                     clone('blocks.1.mlp.down.weight')[506:508] = 0
                     bias = clone('blocks.1.mlp.down.bias')
                     bias[506], bias[507] = 1, -1  # Following-token validity feature 253.
+                elif a.segmented_binding:
+                    # Remove only rows that compare the current/retrieved
+                    # clause, leaving unrelated field clearing and queries.
+                    for layer, current, retrieved in ((1, 414, 508), (2, 258, 257)):
+                        weight = clone(f'blocks.{layer}.mlp.up.weight')
+                        rows = (weight[:, 2*current] != 0) & (weight[:, 2*retrieved] != 0)
+                        assert bool(rows.any())
+                        for column in (2*current, 2*current+1, 2*retrieved, 2*retrieved+1):
+                            weight[rows, column] = 0
                 else:
                     # Remove the group-ID key in both lexical-predicate and
                     # full-subject attention. The query offset is common to
@@ -340,6 +350,32 @@ def main():
                 logits, cache, _ = m.forward([token], cache)
             assert m.tokenizer.decode(generated) == 'Yes.'
             checks['deferred_assertion_cached_and_full_prefix_tokens_match'] = True
+    if a.segmented_binding:
+        # Two nearly identical identity codes can retain an answer despite a
+        # mixed frame. Keep that ineffective probe, and include three-subject
+        # controls to observe both a missed fact and erroneous cross-binding.
+        probes = [
+            ('A kelv has wings and a lavrik needs water and fuel. Does lavrik need fuel?', 'Yes.'),
+            ('A kelv has wings and a lavrik needs water and a norv produces heat and light. Does norv produce light?', 'Yes.'),
+            ('A kelv has wings and a lavrik needs water and a norv produces heat and light. Does kelv produce light?', 'I do not know.'),
+        ]
+        checks['segmented_binding_recency_ablation'] = []
+        for prompt, expected in probes:
+            m.reset()
+            original = m.generate(prompt)
+            name = 'blocks.2.attn.qkv.weight'
+            saved = m.w[name]
+            try:
+                m.w[name] = saved.clone()
+                m.w[name][1024 + 64, 4:6] = 0  # Frame head: remove positional recency.
+                m.reset()
+                ablated = m.generate(prompt)
+            finally:
+                m.w[name] = saved
+            assert original['text'] == expected, (original['text'], expected)
+            checks['segmented_binding_recency_ablation'].append(
+                dict(original=original, ablated=ablated, changed=original['text'] != ablated['text']))
+        assert any(probe['changed'] for probe in checks['segmented_binding_recency_ablation'])
     if a.periodic_lookbacks:
         prompt = 'Hello. ' * 128 + 'A kelv can fly and swim. Can kelv swim?'
         heads = [(0, h) for h in (2, 3, 4, 5)] + [(1, h) for h in (5, 6, 7, 10)] + [(2, 2)]

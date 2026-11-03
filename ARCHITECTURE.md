@@ -359,3 +359,51 @@ the explicit later denial still wins. Removing the saturation output then makes
 the older positive assertion win. This controlled intervention demonstrates the
 role of the numerical barrier; it changes cloned runtime tensors only. The
 saved checkpoint and normal inference remain immutable.
+
+## v15a: separate event recency from clause validation
+
+The v14b CPU failure exposed a remaining source of amplified error. Two full
+assertions in the same clause held coordinates 36.7265625 and 36.7265586853.
+The old clause coefficient, 16,777,216 at position/128 scale, turned that tiny
+difference into 64 score points. A five-token-newer subject gained only 40 from
+recency, so the earlier subject incorrectly acquired the coordinated object.
+Recomputing attention scores in float64 from the captured Q/K retained the
+wrong winner: precision had already been lost in the group representation.
+
+The new shared `scoped_latest` primitive has two stages, both compiled into
+ordinary transformer weights:
+
+1. Attention retrieves the latest valid event with score `65536*v + 8*p` and
+   also returns that event's clause coordinate. The validity bonus exceeds the
+   maximum position bonus in the 5,048-token context. Clause coordinates do not
+   participate in this ranking, so their errors cannot reorder valid events.
+2. The following ReLU gates include `512*(g_retrieved-g_current)`. Stored group
+   coordinates use position/128. An event from a clause at least one position
+   older contributes at most -4, suppressing the otherwise unit-valued gate or
+   bounded code copy. Matching groups contribute zero in real arithmetic.
+
+Clause IDs never decrease in causal order. If the latest valid event is from
+an older clause, there cannot be a more recent valid event in the current one.
+This makes retrieval followed by validation equivalent to selecting the latest
+current-clause event, under the existing Boolean-event representation. If there
+is no valid event anywhere, the retrieved zero validity also blocks the gate.
+The earlier coordinate discrepancy now contributes about 0.00195 to validation
+instead of 64 to ranking. Existing fact saturation removes small endpoint
+magnitude differences before proposition retrieval; numerical validation still
+requires tests rather than assuming exact real-number execution.
+
+Block 1 uses this primitive for lexical predicates, storing the returned group
+in scratch field 508 and clearing it in that MLP. Block 2 uses it for subject
+frames, storing the group in the former unused square-position field 257.
+The query group remains the preceding token's clause (field 258), preserving
+deferred object commitment at punctuation. Every dependent metadata gate and
+identity copy includes the scope penalty. Scratch lifetimes end before their
+query/grammar roles, and the runtime and 250M-parameter tensor layout are unchanged.
+
+Scope interventions remove only the paired group-difference terms from those
+gates. Recency interventions remove the frame head's position coefficient.
+The initial two-subject recency probe retains its answer despite the mixed
+frame, so that ineffective probe is preserved alongside three-subject controls
+that expose both a missed fact and a false cross-subject assertion. Ablation
+effects are measured externally; no saved weights or normal runtime operations
+are changed. This is a general numerical repair, not an added answer rule.

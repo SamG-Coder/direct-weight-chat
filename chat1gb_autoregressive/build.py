@@ -73,13 +73,13 @@ class Compiler:
         for feature in features:
             self.linear(layer, {feature: 1}, {feature: -1})
 
-    def gate(self, layer, positive=(), negative=(), targets=None):
+    def gate(self, layer, positive=(), negative=(), targets=None, extra=None):
         expression = {}
         for feature in positive:
             expression[feature] = expression.get(feature, 0) + 2
         for feature in negative:
             expression[feature] = expression.get(feature, 0) - 2
-        self.unit(layer, expression, targets or {}, threshold=2 * len(positive) - 1)
+        self.unit(layer, expr(expression, extra or {}), targets or {}, threshold=2 * len(positive) - 1)
 
     def word(self, layer, word, targets, start=S.CODE, positive=(), negative=()):
         expression = {start + i: bit for i, bit in enumerate(S.code(self.ids[word]))}
@@ -89,12 +89,12 @@ class Compiler:
             expression[feature] = expression.get(feature, 0) - 2
         self.unit(layer, expression, targets, threshold=S.CODE_BITS + 2 * len(positive) - 1)
 
-    def pattern(self, layer, words, targets, positive=(), negative=(), any_of=()):
+    def pattern(self, layer, words, targets, positive=(), negative=(), any_of=(), extra=None):
         """Conjoin lexical identities and Boolean flags into one ReLU gate."""
         expression = expr(*({start + i: bit for i, bit in enumerate(S.code(self.ids[word]))}
                             for start, word in words),
                           *({f: 2} for f in positive), *({f: -2} for f in negative),
-                          *({f: 2 for f in group} for group in any_of))
+                          *({f: 2 for f in group} for group in any_of), extra or {})
         # Each any_of group is a one-hot lexical category, so its sum is Boolean.
         self.unit(layer, expression, targets,
                   threshold=S.CODE_BITS * len(words) + 2 * (len(positive) + len(any_of)) - 1)
@@ -109,9 +109,9 @@ class Compiler:
             self.unit(layer, expr({source + i: 1}, {gate: 4}, {suppress: -4}), {destination + i: scale}, threshold=4)
             self.unit(layer, expr({source + i: -1}, {gate: 4}, {suppress: -4}), {destination + i: -scale}, threshold=4)
 
-    def copy_when(self, layer, source, destination, positive=(), negative=(), count=1, scale=1):
+    def copy_when(self, layer, source, destination, positive=(), negative=(), count=1, scale=1, extra=None):
         """Copy a bounded code under a conjunction, using two ReLUs per bit."""
-        conditions = expr(*({f: 4} for f in positive), *({f: -4} for f in negative))
+        conditions = expr(*({f: 4} for f in positive), *({f: -4} for f in negative), extra or {})
         for i in range(count):
             self.unit(layer, expr({source + i: 1}, conditions), {destination + i: scale}, threshold=4 * len(positive))
             self.unit(layer, expr({source + i: -1}, conditions), {destination + i: -scale}, threshold=4 * len(positive))
@@ -161,17 +161,20 @@ class Compiler:
             keys += [{cosine: 1}, {sine: 1}]
         self.attention(layer, head, queries, keys, sources, destinations)
 
-    def latest_in_clause(self, layer, head, candidate, group, group_scale, sources, destinations, query_group=None):
-        """Prefer an event in this causal clause, otherwise its zero sentinel.
+    def scoped_latest(self, layer, head, candidate, group, group_scale, sources, destinations,
+                      retrieved_group, query_group=None):
+        """Retrieve by validity/recency, then return a neural clause penalty.
 
-        Group IDs are nondecreasing boundary positions. A one-position older
-        group loses more score than any validity/recency bonus can supply.
-        Cancel the query's common group offset before adding token recency.
+        Causal group IDs are nondecreasing. If the newest valid event is from
+        an older group, no valid event exists in the current group. Separating
+        selection from validation prevents tiny group-coordinate differences
+        from competing with recency. A one-position group gap contributes -4
+        to the following ReLU gate, suppressing its otherwise unit output.
+        The caller incorporates this expression into every dependent gate.
         """
-        penalty = 131072 * group_scale
-        self.attention(layer, head, [{S.ONE: 8}, {group if query_group is None else query_group: -8 * penalty}, {S.ONE: 8}],
-                       [{group: penalty}, {S.ONE: 1}, {candidate: 65536, S.POS: 8 * 128}],
-                       sources, destinations)
+        self.latest(layer, head, candidate, sources + [group], destinations + [retrieved_group])
+        return {retrieved_group: 4 * group_scale,
+                group if query_group is None else query_group: -4 * group_scale}
 
 
 def shapes():
@@ -395,9 +398,10 @@ def main():
     # MLP before the query parser writes the actual event-validity bit.
     c.latest(1, 8, S.CLAUSE_FIRST, [S.LEXICAL_REQUEST, S.QUESTION_HEAD_TEMP],
              [S.Q_EVENT_VALID, S.QUESTION_CLAUSE])
-    c.latest_in_clause(1, 9, S.LEXICAL_VALID, S.CLAUSE_START, 128,
+    predicate_scope = c.scoped_latest(1, 9, S.LEXICAL_VALID, S.CLAUSE_START, 128,
                        list(range(S.LEXICAL_RELATION, S.LEXICAL_RELATION + 7)) + [S.LEXICAL_NEGATIVE, S.LEXICAL_VALID],
-                       list(range(S.PREDICATE_CONTEXT, S.PREDICATE_CONTEXT + 7)) + [S.PREDICATE_NEGATIVE, S.PREDICATE_VALID])
+                       list(range(S.PREDICATE_CONTEXT, S.PREDICATE_CONTEXT + 7)) + [S.PREDICATE_NEGATIVE, S.PREDICATE_VALID],
+                       S.PREDICATE_GROUP)
     # The clause of the preceding token remains available at a punctuation
     # boundary, where the current token already begins a new clause ID.
     c.previous(1, 10, 1, [S.CLAUSE_START], [S.ASSERTION_GROUP_TEMP])
@@ -411,7 +415,7 @@ def main():
     c.linear(1, {S.ADJECTIVE: 1}, {S.LOCAL_ADJECTIVE: 1})
     c.linear(1, {S.CLAUSE_FIRST: 1}, {S.Q_EVENT_CANDIDATE: 1})
     c.clear(1, [S.CLAUSE_FIRST, S.LEXICAL_REQUEST])
-    c.clear(1, [S.QUESTION_HEAD_TEMP, S.QUESTION_CLAUSE] + list(range(S.LEXICAL_RELATION, S.LEXICAL_NEGATIVE + 1)))
+    c.clear(1, [S.QUESTION_HEAD_TEMP, S.QUESTION_CLAUSE, S.PREDICATE_GROUP] + list(range(S.LEXICAL_RELATION, S.LEXICAL_NEGATIVE + 1)))
     # Only the first two old lexical buffers are read by block 2. Reuse the
     # remaining ones for a delayed event and its previous-clause address.
     c.clear(1, range(S.PREV[2], S.PREV[3] + 27))
@@ -533,10 +537,10 @@ def main():
                 targets = {S.ASSERTION_CONTINUATION: 1, S.FACT_RELATION + relation: 1}
                 if local_negative:
                     targets[S.FACT_NEGATIVE] = 1
-                c.pattern(1, [(join_at, 'and')], targets, pos, neg, any_of)
+                c.pattern(1, [(join_at, 'and')], targets, pos, neg, any_of, extra=predicate_scope)
                 if not local_negative:
                     c.pattern(1, [(join_at, 'and')], {S.FACT_NEGATIVE: 1},
-                              pos + [S.PREDICATE_NEGATIVE], neg, any_of)
+                              pos + [S.PREDICATE_NEGATIVE], neg, any_of, extra=predicate_scope)
     c.latest(2, 0, S.Q_EVENT_CANDIDATE,
              list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_EVENT_NEGATIVE, S.Q_EVENT_GROUP],
              list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP) + [S.Q_QUERY_NEGATIVE, S.Q_GROUP])
@@ -544,9 +548,10 @@ def main():
     # period the current clause ID has advanced, but its delayed object and
     # its frame still belong to the clause just completed. Full fact events
     # occur after a subject/verb, so their previous/current clause IDs agree.
-    c.latest_in_clause(2, 1, S.FACT_VALID, S.ASSERTION_PREVIOUS_GROUP, 128,
+    frame_scope = c.scoped_latest(2, 1, S.FACT_VALID, S.ASSERTION_PREVIOUS_GROUP, 128,
                        list(range(S.FACT_SUBJECT, S.FACT_SUBJECT + 14)) + [S.FACT_VALID],
-                       list(range(S.CURRENT, S.CURRENT + 14)) + [S.ASSERTION_FRAME_VALID])
+                       list(range(S.CURRENT, S.CURRENT + 14)) + [S.ASSERTION_FRAME_VALID],
+                       S.ASSERTION_FRAME_GROUP)
     # The token after a provisional object decides whether it is complete.
     # In 'X has wings and Y needs water', Y is followed by a verb and must not
     # be committed as X's object. This delay is causal and uses generic tensor
@@ -556,11 +561,11 @@ def main():
                 [S.FACT_NEGATIVE] + list(range(S.CODE, S.CODE + 14)),
                 list(range(S.ASSERTION_PREVIOUS, S.ASSERTION_PREVIOUS + 23)))
     continuation = [S.ASSERTION_PREVIOUS, S.ASSERTION_FRAME_VALID, S.ASSERTION_TERMINATOR]
-    c.copy_when(2, S.CURRENT, S.FACT_SUBJECT, continuation, [S.Q_MODE], count=14)
-    c.copy_when(2, S.ASSERTION_PREVIOUS + 9, S.FACT_OBJECT, continuation, [S.Q_MODE], count=14)
-    c.copy_when(2, S.ASSERTION_PREVIOUS + 1, S.FACT_RELATION, continuation, [S.Q_MODE], count=7)
-    c.copy_when(2, S.ASSERTION_PREVIOUS + 8, S.FACT_NEGATIVE, continuation, [S.Q_MODE])
-    c.gate(2, continuation, [S.Q_MODE], {S.FACT_VALID: 1})
+    c.copy_when(2, S.CURRENT, S.FACT_SUBJECT, continuation, [S.Q_MODE], count=14, extra=frame_scope)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 9, S.FACT_OBJECT, continuation, [S.Q_MODE], count=14, extra=frame_scope)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 1, S.FACT_RELATION, continuation, [S.Q_MODE], count=7, extra=frame_scope)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 8, S.FACT_NEGATIVE, continuation, [S.Q_MODE], extra=frame_scope)
+    c.gate(2, continuation, [S.Q_MODE], {S.FACT_VALID: 1}, extra=frame_scope)
 
     # Release local parsing scratch and initialize a neural graph cursor.
     # All writes within this MLP read its pre-MLP input, so clearing the old
@@ -910,6 +915,7 @@ def main():
                         "Coordinated objects are committed at a following boundary token; question/directive clauses are excluded from assertions.",
                         "Local lookbacks use bounded periodic address features; broader semantic accuracy still requires separate context tests.",
                         "Fact coordinates are saturated before proposition retrieval to reduce numeric magnitude bias between assertion paths.",
+                        "Assertion subject/predicate retrieval separates recency selection from neural clause validation to limit coordinate-error amplification.",
                         "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }

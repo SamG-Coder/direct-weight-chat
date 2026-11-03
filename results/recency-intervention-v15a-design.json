@@ -1,0 +1,149 @@
+{
+  "version": "v15a",
+  "git": {
+    "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+    "dirty": true
+  },
+  "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81",
+  "probes": [
+    {
+      "prompt": "A kelv has wings and a lavrik needs water and fuel. Does lavrik need fuel?",
+      "original": {
+        "prompt": "A kelv has wings and a lavrik needs water and fuel. Does lavrik need fuel?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.13830950000556186,
+        "device": "cuda",
+        "prefix_tokens": 20
+      },
+      "ablated": {
+        "prompt": "A kelv has wings and a lavrik needs water and fuel. Does lavrik need fuel?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.008641299995360896,
+        "device": "cuda",
+        "prefix_tokens": 20
+      },
+      "changed": false
+    },
+    {
+      "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does norv produce light?",
+      "original": {
+        "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does norv produce light?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.009173900005407631,
+        "device": "cuda",
+        "prefix_tokens": 25
+      },
+      "ablated": {
+        "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does norv produce light?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.016551399981835857,
+        "device": "cuda",
+        "prefix_tokens": 25
+      },
+      "changed": true
+    },
+    {
+      "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does kelv produce light?",
+      "original": {
+        "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does kelv produce light?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.01672740001231432,
+        "device": "cuda",
+        "prefix_tokens": 25
+      },
+      "ablated": {
+        "prompt": "A kelv has wings and a lavrik needs water and a norv produces heat and light. Does kelv produce light?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.00867629999993369,
+        "device": "cuda",
+        "prefix_tokens": 25
+      },
+      "changed": true
+    },
+    {
+      "prompt": "A zelp can fly. A kelv has wings and an omvik needs water and fuel. Does omvik need fuel?",
+      "original": {
+        "prompt": "A zelp can fly. A kelv has wings and an omvik needs water and fuel. Does omvik need fuel?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.008608700009062886,
+        "device": "cuda",
+        "prefix_tokens": 25
+      },
+      "ablated": {
+        "prompt": "A zelp can fly. A kelv has wings and an omvik needs water and fuel. Does omvik need fuel?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.01650520000839606,
+        "device": "cuda",
+        "prefix_tokens": 25
+      },
+      "changed": true
+    }
+  ],
+  "weights_unchanged": true,
+  "initial_integrity_failure": "The initial single-probe recency ablation expected a changed answer but both original and ablated answered Yes. The full integrity run stopped at that assertion. No source or saved model weights were changed in response."
+}
