@@ -621,7 +621,13 @@ def main():
     rule_conditions = [S.RULE_TERMINATOR, S.RULE_PREVIOUS_CONTEXT, S.RULE_AFTER_THEN,
                        S.RULE_PREMISE_TEMP + 36, S.RULE_CONCLUSION_TEMP + 36]
     rule_scope = {S.RULE_PREMISE_TEMP + 37: 512, S.RULE_CONCLUSION_TEMP + 37: 512,
-                  S.ASSERTION_PREVIOUS_GROUP: -1024}
+                  S.ASSERTION_PREVIOUS_GROUP: -1024,
+                  S.RULE_TERMINATOR: 4096, S.ONE: -4096}
+    # At an entity token the two temporary group fields can include original
+    # atomic bits. Their maximum positive contamination is 2*512, so the
+    # independent 4096 terminator penalty dominates it and the bounded gates.
+    # At a true terminator the original atomic vector is zero and this extra
+    # penalty cancels. A non-record row must never be licensed by scope alone.
     for source, destination in ((S.RULE_PREMISE_TEMP, S.RULE_PREMISE),
                                 (S.RULE_CONCLUSION_TEMP, S.RULE_CONCLUSION)):
         c.copy_when(2, source, destination, rule_conditions, [S.RULE_HAS_JOIN], count=36, extra=rule_scope)
@@ -1047,7 +1053,8 @@ def main():
                         "Local lookbacks use bounded periodic address features; broader semantic accuracy still requires separate context tests.",
                         "Fact coordinates are saturated before proposition retrieval to reduce numeric magnitude bias between assertion paths.",
                         "Assertion subject/predicate retrieval separates recency selection from neural clause validation to limit coordinate-error amplification.",
-                        "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
+                        "Ground single-premise implications support at most three backward links through the latest matching rule; alternate proof search and variables are unsupported.",
+                        "Compound conditional premises, disjunctive assertions, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }
     (MODEL / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

@@ -10,19 +10,21 @@ def main():
     versions = sorted([p.name.removeprefix('autoregressive_') for p in (root / 'versions').glob('autoregressive_*')], key=lambda v: (int(re.search(r'v([0-9]+)', v).group(1)), v))
     rows = ['# Version results', '',
             'Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.', '',
-            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Context /126 | Binding CPU /136 | Nonzero parameters | Source commit |',
-            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
+            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Context /126 | Binding CPU /136 | Conditionals /293 | Rule guards /36 | Nonzero parameters | Source commit |',
+            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
     index = []
     for v in versions:
         source = Path('versions') / ('autoregressive_' + v)
         m = json.loads((root / source / 'model' / 'manifest.json').read_text(encoding='utf-8'))
         commit = subprocess.check_output(['git', 'log', '--diff-filter=A', '--format=%H', '--', str(source / 'build.py')], cwd=root, text=True).strip().splitlines()[-1]
         scores, reports = [], []
-        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions', 'assertion-boundaries', 'context', 'binding-positions'):
+        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions', 'assertion-boundaries', 'context', 'binding-positions', 'conditionals', 'conditional-guards'):
             device = 'cpu' if suite == 'binding-positions' else 'cuda'
             p = root / 'results' / f'{suite}-{v}-{device}.json'
             if not p.exists():
                 p = root / 'results' / f'{suite}-{v}-baseline-{device}.json'
+            if not p.exists() and suite == 'assertion-boundaries':
+                p = root / 'results' / f'{suite}-{v}-v13a-regression-{device}.json'
             if p.exists():
                 r = json.loads(p.read_text(encoding='utf-8'))
                 score = r['summary']['all']
@@ -95,6 +97,9 @@ def main():
              '- CPU also repairs the old [context set to 126/126](context-v15a-v14b-regression-cpu.json) and [long conversation to 20/20](long-publication-smoke-v15a-cpu.json). [Two matched CPU suites](regressions-v15a-cpu.json) have no regressions; the separately compared conversation retains its earlier passes. [Repaired CPU trace](trace-binding-v15a-cpu.json) restores the intended 40-point recency advantage. [CPU integrity](integrity-v15a-cpu.json), both 45,432-address audits and [frozen-source reproduction](reproduction-v15a.json) pass.', '',
              '- After freeze `a583d2b`, binding seed 192095465 scores [136/136 CPU](binding-positions-v15a-postfreeze-cpu.json) and [136/136 CUDA](binding-positions-v15a-postfreeze-cuda.json). New names, combinations and eight random offsets use a known generator; fixed offsets and structures repeat. No frozen weights were retuned. [v0.7 packaging](release-assets-v0.7.json) verifies the decompressed checkpoint hash and ZIP CRC.', '',
              '- [v0.7 publication verification](publication-v0.7.json) confirms the downloaded archive digest/size, checksum, raw/config hashes, CRC and source manifest. Fresh tagged-checkout integrity and all interventions pass on both devices. The 23-turn conversation, including three-subject binding, isolation and correction after long distractors, scores [23/23 CUDA](release-validation-v0.7/fresh-smoke-cuda.json) and [23/23 CPU](release-validation-v0.7/fresh-smoke-cpu.json). These remain controlled-grammar checks, not general chat evidence.', '',
+             '## Conditional reasoning', '',
+             'The 293-case conditional suite was committed before the compiler changes. v15a scores 152/293, including zero of the 98 positive/signed rule applications. v16 follows at most three ground rules backward through exact subject/object/predicate/polarity matches. Missing or false premises remain unknown. The 36 additional author-designed guards retain unsupported paraphrase false positives and open-answer/compound-rule failures; they are development evidence, not held-out tests.', '',
+             'v16a and v16b are retained failed candidates: v16a allowed proof state to interfere with open answers; v16b repaired that isolation but corrupted a static fact by treating an atomic bit as a rule coordinate. [The comparison](regressions-v16b.json) and [activation trace](trace-rules-v16b-static-cuda.json) preserve those failures. v16c adds a record-type penalty that dominates the bounded coordinate spillover. The initial object-match intervention was ineffective because it also removed the match reward; the corrected diagnostic preserves that reward while removing identity dependence.', '',
              '## Provenance and timing', '',
              '[experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.', '',
              'Response timings include token generation and formatting, exclude one warm-up, and depend on prompt/output length and machine load. They are not a comparison against trained language models. Exact per-case timings and hardware are in each JSON. CUDA and CPU evaluations were run separately.', '',

@@ -472,3 +472,19 @@ establish general conditional-language understanding. Cycles without base
 evidence remain unknown. Tests preserve failures beyond these bounds rather
 than removing them. Ablations separately remove rule selection, premise
 evidence, record validity, object matching and signed-premise handling.
+
+v16b also exposed a typed-storage failure: a +1 atomic bit at an entity token
+occupied a temporary rule-group coordinate and contributed +512 to its scope
+gate. This could overwhelm the missing terminator condition and create a false
+rule record. v16c adds `4096*(terminator-1)` to every rule-record gate/copy.
+The two atomic group bits can contribute at most +1024; the independent type
+penalty dominates that contamination and the other bounded gate terms. At a
+true terminator the atomic vector is zero and the penalty cancels. The trace
+and a targeted penalty-removal intervention record the resulting distinction.
+
+Removing an identity dot product also removes its positive matching score.
+Consequently the initial object-identity ablation made every rule lose to the
+BOS sentinel and left its negative control unchanged. The corrected diagnostic
+substitutes a constant maximum +14 reward on valid rules while removing object
+identity dependence. This preserves the intended retrieval margin and exposes
+false matching; neither diagnostic changes the saved checkpoint.

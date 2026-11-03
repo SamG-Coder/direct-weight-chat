@@ -20,7 +20,7 @@ def main():
     m = Model(a.model, device=a.device)
     checks = []
 
-    def check(name, prompt, expected, ablated_expected, changes):
+    def check(name, prompt, expected, ablated_expected, changes, additions=()):
         m.reset()
         normal = m.generate(prompt)
         saved = {}
@@ -30,6 +30,11 @@ def main():
                     saved[tensor] = m.w[tensor]
                     m.w[tensor] = saved[tensor].clone()
                 m.w[tensor][rows, columns] = 0
+            for tensor, row, column, value in additions:
+                if tensor not in saved:
+                    saved[tensor] = m.w[tensor]
+                    m.w[tensor] = saved[tensor].clone()
+                m.w[tensor][row, column] += value
             m.reset()
             altered = m.generate(prompt)
         finally:
@@ -48,10 +53,20 @@ def main():
     check('rule_record_validity', chain + 'Does zor have fins?', 'Yes.', 'I do not know.',
           [('blocks.2.mlp.down.weight', slice(350, 352), slice(None))])
     check('consequent_object_identity', chain + 'Does zor have scales?', 'I do not know.', 'Yes.',
-          [(f'blocks.{layer}.attn.qkv.weight', slice(10*64+14, 10*64+28), slice(None)) for layer in (4, 6, 8)])
+          [(f'blocks.{layer}.attn.qkv.weight', slice(10*64+14, 10*64+28), slice(None)) for layer in (4, 6, 8)],
+          # Keep the object's maximum +14 reward as a constant on valid rules,
+          # removing identity dependence without making every rule lose to BOS.
+          [(f'blocks.{layer}.attn.qkv.weight', 1024+10*64+35, column, value)
+           for layer in (4, 6, 8) for column, value in ((350, 7), (351, -7))])
     check('signed_premise', 'Kelv can shimmer. If kelv cannot shimmer then zor has fins. Does zor have fins?',
           'I do not know.', 'Yes.',
           [(f'blocks.{layer}.mlp.down.weight', slice(646, 648), slice(None)) for layer in (4, 6, 8)])
+    up = m.w['blocks.2.mlp.up.weight']
+    guarded = ((up[:, 518] > 2000) & (up[:, 202] == 256) & (up[:, 278] == 256)).nonzero().flatten().tolist()
+    assert len(guarded) == 145, len(guarded)
+    check('typed_rule_terminator', 'Does a robot have sensors?', 'Yes.', 'I do not know.', [],
+          [('blocks.2.mlp.up.weight', row, column, value)
+           for row in guarded for column, value in ((518, -2048), (519, 2048), (2, 2048), (3, -2048))])
 
     m.reset()
     s = m.config['special']

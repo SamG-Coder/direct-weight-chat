@@ -862,3 +862,28 @@ even on the intended ablated path. That ineffective intervention is preserved
 in `conditional-integrity-v16b-cuda.json`. A corrected diagnostic must retain
 the maximum object reward while removing dependence on the object's identity.
 The model itself will not be changed to make an intervention pass.
+
+### v16c typed rule records and completed CUDA regressions
+
+The compiler adds `4096*(terminator-1)` to each rule-record copy/gate. Its
+negative type penalty dominates the maximum +1024 spillover from the two
+atomic bits occupying temporary group coordinates, plus the bounded gate
+terms. The penalty cancels at real terminators where the original atomic
+vector is zero. The corrected robot trace has rule validity zero and answers
+Yes. No entity-specific weight or answer exception was added.
+
+All 33 matching CUDA suites retain every v15a pass: 5,499/5,619 cases, 130
+improvements and zero regressions. The count includes repeated structures
+across historical suites. Conditional development is 269/293; guards 29/36;
+assertions improve to 383/390; legacy is 185/185 and truth returns to 236/239.
+v16a and v16b and their exact failures remain archived. All eight conditional
+interventions now pass, alongside the existing integrity/intervention suite.
+The 31-turn publication smoke passes on CUDA. CPU validation follows.
+
+Rebuilding the frozen v16c compiler reproduces raw SHA-256
+`385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc`
+and the unchanged config hash. It has 995,881 nonzero parameters, still exactly
+250,000,000 float32 values / 1,000,000,000 bytes without padding. The ordinary
+inference runtime is unchanged. Three release archives are prepared offline,
+including the failed v16a/v16b candidates, with decompressed hashes and CRC
+verified. The full research goal remains active.
