@@ -20,6 +20,7 @@ def main():
     p.add_argument('--polarity', action='store_true', help='Also ablate the v8 fact-polarity register')
     p.add_argument('--arithmetic-layer', type=int, choices=[10, 11], default=11)
     p.add_argument('--signed-operands', action='store_true', help='Ablate unary sign and operand-count validity in v9')
+    p.add_argument('--truth', action='store_true', help='Ablate proposition retrieval and its object identity in v10')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -155,6 +156,54 @@ def main():
             m.w[weight_name], m.w[bias_name] = saved_w, saved_b
         assert original_arity['text'] == 'I do not know.' and forced_arity['text'] == '8.'
         checks['arity_gate_forced_valid'] = dict(original=original_arity['text'], forced_valid=forced_arity['text'])
+    if a.truth:
+        prompt = 'A kelv can fly. A kelv cannot swim. Can a kelv fly?'
+        m.reset()
+        original = m.generate(prompt, trace=True)
+        assert original['text'] == 'Yes.'
+        interventions = []
+        for intervention in ('remove_proposition_head', 'remove_object_identity'):
+            saved = {}
+            try:
+                for layer in (3, 5, 7, 9):
+                    if intervention == 'remove_proposition_head':
+                        name = f'blocks.{layer}.attn.out.weight'
+                        saved[name] = m.w[name]
+                        m.w[name] = saved[name].clone()
+                        m.w[name][:, 8 * 64:9 * 64] = 0
+                    else:
+                        name = f'blocks.{layer}.attn.qkv.weight'
+                        saved[name] = m.w[name]
+                        m.w[name] = saved[name].clone()
+                        # Exact proposition head: subject[14], object[14],
+                        # relation[7], validity/sentinel, recency. Remove the
+                        # object component and lower the sentinel by 14 so
+                        # lookup now accepts any object of the right relation.
+                        m.w[name][8 * 64 + 14:8 * 64 + 28] = 0
+                        sentinel_row = 1024 + 8 * 64 + 35
+                        m.w[name][sentinel_row, 8] = 9
+                        m.w[name][sentinel_row, 9] = -9
+                m.reset()
+                ablated = m.generate(prompt, trace=True)
+            finally:
+                m.w.update(saved)
+            expected = 'I do not know.' if intervention == 'remove_proposition_head' else 'No.'
+            assert ablated['text'] == expected, (intervention, ablated['text'])
+            interventions.append(dict(intervention=intervention, original=original, ablated=ablated))
+        checks['truth_ablations'] = interventions
+        m.reset()
+        prefix = [s['bos'], s['user']] + m.tokenizer.encode(prompt) + [s['assistant']]
+        logits, cache, _ = m.forward(prefix)
+        generated = []
+        for _ in range(10):
+            full, _, _ = m.forward(prefix + generated)
+            token = int(logits[-1].argmax().item())
+            assert token == int(full[-1].argmax().item())
+            generated.append(token)
+            if token == s['eos']:
+                break
+            logits, cache, _ = m.forward([token], cache)
+        checks['truth_cached_and_full_prefix_tokens_match'] = True
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,

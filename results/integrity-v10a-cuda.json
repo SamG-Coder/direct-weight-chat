@@ -1,0 +1,419 @@
+{
+  "git": {
+    "commit": "9271b3f816ee10aecb640b64887d88b4509fcae4",
+    "dirty": true
+  },
+  "model_sha256": "1734f1e0ed9bac539f5148e676dfc9b9792ccd881b848e5220c06b134208362f",
+  "device": "cuda",
+  "checks": {
+    "file_and_source_hashes": true,
+    "runtime_imports_no_compiler": true,
+    "parameter_count": 250000000,
+    "weight_bytes": 1000000000,
+    "nonzero_parameters": 732615,
+    "finite_weights": true,
+    "socket_audit_guard": true,
+    "causal_prefix_max_logit_difference": 0.0,
+    "cached_and_full_prefix_tokens_match": true,
+    "multi_hop_ablation": {
+      "prompt": "A lavrik is a pelvon. A pelvon is a nebvik. A nebvik can shimmer. What can a lavrik do?",
+      "original": "Lavrik can shimmer.",
+      "ablated": "I do not know.",
+      "changed": true,
+      "layers": [
+        5,
+        7,
+        9
+      ]
+    },
+    "output_head_ablation_removes_text": true,
+    "polarity_ablation": [
+      {
+        "prompt": "A kelv cannot fly. What can a kelv do?",
+        "original": "Kelv cannot fly.",
+        "ablated": "Kelv can fly."
+      },
+      {
+        "prompt": "A kelv is not a bird. What can a kelv do?",
+        "original": "I do not know.",
+        "ablated": "Kelv can fly."
+      }
+    ],
+    "arithmetic_ablation": {
+      "prompt": "149 - 370",
+      "original": "-221.",
+      "ablated": "0."
+    },
+    "unary_sign_ablation": {
+      "original": "-519.",
+      "ablated": "-221."
+    },
+    "arity_gate_forced_valid": {
+      "original": "I do not know.",
+      "forced_valid": "8."
+    },
+    "truth_ablations": [
+      {
+        "intervention": "remove_proposition_head",
+        "original": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.029901100002462044,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 366,
+              "token": "yes",
+              "top3": [
+                {
+                  "token": "yes",
+                  "logit": 112.0
+                },
+                {
+                  "token": "sunlight",
+                  "logit": 96.0
+                },
+                {
+                  "token": "fact",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "I do not know.",
+          "token_ids": [
+            158,
+            89,
+            220,
+            175,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 6,
+          "seconds": 0.016942899994319305,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 158,
+              "token": "i",
+              "top3": [
+                {
+                  "token": "i",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "grow",
+                  "logit": 95.99999237060547
+                },
+                {
+                  "token": "are",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 89,
+              "token": "do",
+              "top3": [
+                {
+                  "token": "do",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "compose",
+                  "logit": 96.0
+                },
+                {
+                  "token": "animal",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 220,
+              "token": "not",
+              "top3": [
+                {
+                  "token": "not",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "might",
+                  "logit": 96.0
+                },
+                {
+                  "token": "dog",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "token_id": 175,
+              "token": "know",
+              "top3": [
+                {
+                  "token": "know",
+                  "logit": 111.99998474121094
+                },
+                {
+                  "token": "isn't",
+                  "logit": 95.99999237060547
+                },
+                {
+                  "token": "blow",
+                  "logit": 95.99998474121094
+                }
+              ]
+            },
+            {
+              "step": 4,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                },
+                {
+                  "token": "-",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 5,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "intervention": "remove_object_identity",
+        "original": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "Yes.",
+          "token_ids": [
+            366,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.029901100002462044,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 366,
+              "token": "yes",
+              "top3": [
+                {
+                  "token": "yes",
+                  "logit": 112.0
+                },
+                {
+                  "token": "sunlight",
+                  "logit": 96.0
+                },
+                {
+                  "token": "fact",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "ablated": {
+          "prompt": "A kelv can fly. A kelv cannot swim. Can a kelv fly?",
+          "text": "No.",
+          "token_ids": [
+            219,
+            9,
+            0
+          ],
+          "stopped_on_eos": true,
+          "generated_tokens": 3,
+          "seconds": 0.008656100020743906,
+          "device": "cuda",
+          "prefix_tokens": 18,
+          "token_trace": [
+            {
+              "step": 0,
+              "token_id": 219,
+              "token": "no",
+              "top3": [
+                {
+                  "token": "no",
+                  "logit": 111.99999237060547
+                },
+                {
+                  "token": "horse",
+                  "logit": 95.99999237060547
+                },
+                {
+                  "token": "doesn't",
+                  "logit": 95.99999237060547
+                }
+              ]
+            },
+            {
+              "step": 1,
+              "token_id": 9,
+              "token": ".",
+              "top3": [
+                {
+                  "token": ".",
+                  "logit": 112.0
+                },
+                {
+                  "token": "-",
+                  "logit": 96.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 96.0
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "token_id": 0,
+              "token": "<eos>",
+              "top3": [
+                {
+                  "token": "<eos>",
+                  "logit": 1.0
+                },
+                {
+                  "token": "<user>",
+                  "logit": 0.0
+                },
+                {
+                  "token": "<bos>",
+                  "logit": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "truth_cached_and_full_prefix_tokens_match": true,
+    "weight_file_unchanged_after_ablations": true
+  },
+  "note": "Ablations replace selected runtime tensor references with zero copies, then restore them. The saved checkpoint is never modified."
+}

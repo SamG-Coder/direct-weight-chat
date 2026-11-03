@@ -106,3 +106,32 @@ Forcing that validity feature to true makes `10 - 3 - 2` produce the incorrect
 first/last-operand result `8.` instead of abstaining. Disabling unary sign
 changes `-149 - 370` from `-519.` to `-221.`. These interventions are recorded
 alongside graph, polarity and accumulator ablations.
+# v10a: object-specific proposition lookup
+
+Clause-boundary and auxiliary-inversion detectors bind the subject of `Can X V?`
+and `Does X need/have/produce Y?`. Optional articles use the same subject code.
+The parser marks a query event separately from assertion events; an auxiliary
+question cannot become evidence for its own answer. Request-reset sentinels
+separate user turns and the tested following wh-questions. Lexical/role fields
+are reused only after their previous readers have finished.
+
+A new head at each of the four graph steps compares 14-bit subject identity,
+14-bit queried-object identity, and predicate. A full match scores 33 before
+scaling; a one-bit mismatch scores at most 31. The zero-value BOS sentinel
+scores 32. Scores are scaled by 8192 and token position breaks ties. Thus the
+latest assertion for that exact proposition wins without discarding other
+objects of the same relation. Separate heads compare permanent atomic values.
+Explicit evidence overrides a matching permanent value; the nearest graph node
+with matching evidence supplies the truth value. No match remains unknown.
+
+The retrieved found/polarity bits drive token-level yes/no generation, with
+punctuation and EOS emitted in later forward passes. Unknown follows the existing
+abstention grammar. There is no Python truth lookup or response selection, and
+the inference runtime is unchanged. The model remains an ordinary causal
+transformer with the same 250M-parameter layout.
+
+An ablation removes the proposition head and changes `Yes.` to `I do not know.`.
+A second removes only the object-key component (with the corresponding sentinel
+adjustment): the same prompt then mistakes a later denial of another action for
+the queried action and says `No.`. Open wh-questions still use the older one-value
+retrieval path; this experiment does not fix that separate multiple-action bug.

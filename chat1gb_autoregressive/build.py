@@ -98,6 +98,13 @@ class Compiler:
             self.unit(layer, expr({source + i: 1}, {gate: 4}, {suppress: -4}), {destination + i: scale}, threshold=4)
             self.unit(layer, expr({source + i: -1}, {gate: 4}, {suppress: -4}), {destination + i: -scale}, threshold=4)
 
+    def copy_when(self, layer, source, destination, positive=(), negative=(), count=1):
+        """Copy a bounded code under a conjunction, using two ReLUs per bit."""
+        conditions = expr(*({f: 4} for f in positive), *({f: -4} for f in negative))
+        for i in range(count):
+            self.unit(layer, expr({source + i: 1}, conditions), {destination + i: 1}, threshold=4 * len(positive))
+            self.unit(layer, expr({source + i: -1}, conditions), {destination + i: -1}, threshold=4 * len(positive))
+
     def emit(self, layer, word, positive=(), negative=()):
         self.gate(layer, positive, negative, {S.OUTPUT + i: bit for i, bit in enumerate(S.code(self.ids[word]))})
 
@@ -267,6 +274,21 @@ def main():
                        {p1 + i: 16 * bit for i, bit in enumerate(S.code(ids["-"]))})
     c.unit(0, unary_minus, {S.NUMBER_VALUE: -2}, threshold=16 * S.CODE_BITS)
 
+    # Bind an inverted-question subject only after a clause boundary. Local
+    # identity conjunctions distinguish "Can X ..." from "X can Y" without
+    # host parsing. The same code works for any entity/pointer-token identity.
+    for verb, marker in (("can", S.Q_PREFIX_CAN), ("does", S.Q_PREFIX_DOES)):
+        for article in (False, True):
+            verb_at, boundary_at = (p2, p3) if article else (p1, p2)
+            for boundary in ("<user>", ".", "?", "!"):
+                conditions = [S.ENTITY, S.USER_STATE] + ([p1 + 22] if article else [])
+                expression = expr({verb_at + i: bit for i, bit in enumerate(S.code(ids[verb]))},
+                                  {boundary_at + i: bit for i, bit in enumerate(S.code(ids[boundary]))},
+                                  *({f: 2} for f in conditions))
+                c.unit(0, expression, {marker: 1}, threshold=28 + 2 * len(conditions) - 1)
+    # These embedding features have already been consumed by block-0 readers.
+    c.clear(0, list(range(25, 30)) + list(range(40, 49)) + [50])
+
     # Block 1: prompt subject/facts, request, and first/last numeric operands.
     sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.FACTS, S.FACTS + 112))
     destinations = list(range(S.SUBJECT, S.SUBJECT + 14)) + [S.SUBJECT_PRESENT] + list(range(S.CONTEXT_FACTS, S.CONTEXT_FACTS + 112))
@@ -279,6 +301,23 @@ def main():
     c.attention(1, 3, [{S.ONE: 8}], [{S.LIVE_NUMBER: 65536, S.USER_START: 16384 * 128, S.POS: -8 * 128}],
                 [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_FIRST, S.NUM_FIRST_POS, S.NUM_FIRST_PRESENT])
     c.latest(1, 4, S.LIVE_NUMBER, [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_LAST, S.NUM_LAST_POS, S.NUM_LAST_PRESENT])
+    for shift, destinations in ((1, S.Q_PREV1), (2, S.Q_PREV2)):
+        sharpness = 16
+        queries = [{S.POS: 8 * 2 * sharpness * 128 ** 2, S.ONE: -8 * 2 * sharpness * shift * 128},
+                   {S.ONE: -8 * sharpness * 128 ** 2}]
+        c.attention(1, 4 + shift, queries, [{S.POS: 1}, {S.POS_SQ: 1}],
+                    [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES], list(destinations))
+    # Query events use CURRENT temporarily; they are read by block 2 before
+    # it initializes the normal graph cursor. No completed answer is stored.
+    c.clear(1, list(range(25, 30)) + list(range(30, 44)) + [S.Q_EVENT_CANDIDATE, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES])
+    query_cases = [(1, p1, [S.Q_PREV1[0]])]
+    query_cases += [(r, p2, [S.Q_PREV2[1], p1 + 15 + r]) for r in (2, 3, 4)]
+    for relation, subject, conditions in query_cases:
+        conditions += [S.OBJECT_ALLOWED, S.USER_STATE]
+        c.gate(1, conditions, targets={S.Q_EVENT_VALID: 1, S.Q_EVENT_CANDIDATE: 1, S.Q_EVENT_REL + relation - 1: 1})
+        c.copy_when(1, subject, S.CURRENT, positive=conditions, count=14)
+    for reset in ("<bos>", "<user>", "what", "where", "describe", "explain"):
+        c.word(1, reset, {S.Q_EVENT_CANDIDATE: 1})
     # Mark user numbers after the turn's first number. The clipped ramp is
     # evaluated neurally; no host-side token counting or expression parser.
     after_first = {S.POS: 128, S.NUM_FIRST_POS: -128, S.NUMBER: 8192, S.USER_STATE: 8192}
@@ -312,6 +351,8 @@ def main():
     # Compile syntax alternatives into shared relation/subject/polarity gates,
     # rather than allocating one semantic register per surface pattern.
     for relation, subject, pos, neg, polarity_source in cases:
+        # Auxiliary inversion is a question, not new positive evidence.
+        neg = neg + [S.Q_PREV2[1]]
         subject_gate = S.GATES + 7 + (p2, p3, p4).index(subject)
         targets = {S.GATES + relation: 1, subject_gate: 1, S.GATES + 21: 1}
         if polarity_source is None:
@@ -319,6 +360,9 @@ def main():
         c.gate(1, pos + [S.OBJECT_ALLOWED], neg, targets)
         if polarity_source is not None:
             c.gate(1, pos + [S.OBJECT_ALLOWED, polarity_source], neg, {S.GATES + 20: 1})
+    c.latest(2, 0, S.Q_EVENT_CANDIDATE,
+             list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.Q_EVENT_REL, S.Q_EVENT_REL + 4)),
+             list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP))
     for i, subject in enumerate((p2, p3, p4)):
         c.copy(2, subject, S.GATES + 7 + i, S.FACT_SUBJECT, 14)
     c.copy(2, S.CODE, S.GATES + 21, S.FACT_OBJECT, 14)
@@ -331,8 +375,19 @@ def main():
     # All writes within this MLP read its pre-MLP input, so clearing the old
     # lookbacks here does not interfere with the fact copies above.
     c.clear(2, range(S.RETURN, S.RETURN + 112))
-    for bit in range(14):
-        c.linear(2, {S.SUBJECT + bit: 1}, {S.CURRENT + bit: 1})
+    c.clear(2, range(S.CURRENT, S.CURRENT + 14))
+    c.copy_unless(2, S.SUBJECT, S.ONE, S.Q_MODE, S.CURRENT, 14)
+    c.copy(2, S.SUBJECT, S.Q_MODE, S.SUBJECT, 14, scale=-1)
+    for bit, source in enumerate(S.Q_SUBJECT_TEMP):
+        c.copy(2, source, S.Q_MODE, S.SUBJECT + bit)
+        c.copy(2, source, S.Q_MODE, S.CURRENT + bit)
+    c.copy(2, S.CONTEXT_FACTS, S.Q_MODE, S.CONTEXT_FACTS, 112, scale=-1)
+    c.copy(2, S.REQUEST, S.Q_MODE, S.REQUEST, 10, scale=-1)
+    for relation, source in enumerate(S.Q_REL_TEMP, 1):
+        c.copy(2, source, S.Q_MODE, S.REQUEST + relation)
+    c.clear(2, range(S.Q_OBJECT, S.Q_OBJECT + 14))
+    c.copy(2, S.Q_OBJECT, S.Q_MODE, S.Q_OBJECT, 14)
+    c.clear(2, list(S.Q_SUBJECT_TEMP) + [S.Q_EVENT_CANDIDATE])
     # Preserve the grammar's previous-token predicates before recycling PREV.
     # GATES[0:10] belong to fact parsing; [10:19] are free until block 11.
     previous_words = ("<assistant>", "a", "an", "can", "needs", "has", "produces", "in", "is")
@@ -372,6 +427,32 @@ def main():
                         c.linear(layer, {scratch + i: 1}, {destination + i: 1})
                 else:
                     c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
+            # A separate associative head asks for an exact proposition,
+            # retaining all event objects rather than one object per predicate.
+            truth_queries = ([{S.CURRENT + bit: 8 * 8192} for bit in range(14)] +
+                             [{S.Q_OBJECT + bit: 8 * 8192} for bit in range(14)] +
+                             [{S.REQUEST + r: 8 * 8192 * 4} for r in range(7)] +
+                             [{S.ONE: 8 * 8192}, {S.ONE: 8}])
+            truth_keys = ([{S.FACT_SUBJECT + bit: 1} for bit in range(14)] +
+                          [{S.FACT_OBJECT + bit: 1} for bit in range(14)] +
+                          [{S.FACT_RELATION + r: 1} for r in range(7)] +
+                          [{S.FACT_VALID: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
+            c.attention(layer, 8, truth_queries, truth_keys, [S.FACT_VALID, S.FACT_NEGATIVE],
+                        [S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_NEGATIVE])
+            # Permanent atomic properties use the same subject/object match;
+            # a missing value never constitutes evidence of a negative fact.
+            for relation in range(7):
+                slot = S.slot(S.FACTS, relation)
+                static_queries = ([{S.CURRENT + bit: 8 * 8192} for bit in range(14)] +
+                                  [{S.Q_OBJECT + bit: 8 * 8192} for bit in range(14)] +
+                                  [{S.REQUEST + relation: 8 * 8192}, {S.ONE: 8 * 8192}, {S.ONE: 8}])
+                static_keys = ([{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids["<bos>"])[bit]} for bit in range(14)] +
+                               [{slot + bit: 1} for bit in range(14)] +
+                               [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
+                c.attention(layer, 9 + relation, static_queries, static_keys, [slot + 14], [S.Q_STATIC_FOUND])
+            c.copy_unless(layer, S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_FOUND, S.Q_FOUND, S.Q_FOUND, 2)
+            c.gate(layer, [S.Q_STATIC_FOUND], [S.Q_EXPLICIT_FOUND, S.Q_FOUND], {S.Q_FOUND: 1})
+            c.clear(layer, [S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_NEGATIVE, S.Q_STATIC_FOUND])
             c.clear(layer, range(S.CURRENT, S.CURRENT + 14))
             # Negative class membership is stored as information but cannot
             # license traversal of the positive class edge.
@@ -442,7 +523,12 @@ def main():
     c.clear(11, range(S.GATES, S.GATES + 28))
     state = {word: S.STATES + i for i, word in enumerate(S.STATE_WORDS)}
     for relation in range(7):
-        c.gate(11, [state["<assistant>"], S.REQUEST + relation, S.slot(S.CONTEXT_FACTS, relation) + 14], targets={S.GATES: 1})
+        c.gate(11, [state["<assistant>"], S.REQUEST + relation, S.slot(S.CONTEXT_FACTS, relation) + 14], [S.Q_MODE], targets={S.GATES: 1})
+    c.gate(11, [state["<assistant>"], S.Q_MODE, S.Q_FOUND], targets={S.GATES + 25: 1})
+    c.emit(11, "yes", [state["<assistant>"], S.Q_MODE, S.Q_FOUND], [S.Q_NEGATIVE])
+    c.emit(11, "no", [state["<assistant>"], S.Q_MODE, S.Q_FOUND, S.Q_NEGATIVE])
+    for answer in ("yes", "no"):
+        c.word(11, answer, {S.OUTPUT + i: bit for i, bit in enumerate(S.code(ids["."]))}, positive=[S.Q_MODE])
     c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_HELLO], targets={S.GATES + 1: 1})
     c.emit(11, "hello", [state["<assistant>"], S.REQUEST + S.Q_HELLO])
     c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_ADD, S.STATES + 26, S.STATES + 27,
@@ -493,7 +579,7 @@ def main():
     c.emit(12, "-", [S.GATES + 2, S.NEGATIVE_RESULT])
     c.gate(12, [S.GATES + 2], [S.NEGATIVE_RESULT], {S.GATES + 21: 1})
     c.gate(12, [S.STATES + 29, S.REQUEST + S.Q_ADD], targets={S.GATES + 21: 1})
-    c.emit(12, "i", [state["<assistant>"]], [S.GATES, S.GATES + 1, S.GATES + 2])
+    c.emit(12, "i", [state["<assistant>"]], [S.GATES, S.GATES + 1, S.GATES + 2, S.GATES + 25])
     c.copy(12, S.SUBJECT, S.GATES, S.OUTPUT, 14)
     for relation in range(7):
         c.copy(12, S.slot(S.CONTEXT_FACTS, relation), S.GATES + 3 + relation, S.OUTPUT, 14)
@@ -542,7 +628,8 @@ def main():
         "limitations": ["Sparse directly programmed circuits; most standard transformer connections remain zero.",
                         "Small authored lexicon and fact vocabulary; general language understanding is unproven.",
                         "New input words are represented by fixed pointer-token slots.",
-                        "Arithmetic circuit is intended for two non-negative operands no greater than 999.",
+                        "Arithmetic circuit is intended for two signed operands with magnitudes no greater than 999.",
+                        "Object-specific truth questions support can/need/have/produce under a limited inversion grammar.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }
     (MODEL / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

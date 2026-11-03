@@ -231,3 +231,26 @@ distractors, inherited facts, question/assertion separation and dialogue. Eleven
 composition/scope stresses preserve broader syntax and multiple-value limits.
 Frozen v9a passes 45/239; most passes are existing abstentions. Exact baseline
 outputs and timings are in `results/truth-v9a-baseline-cuda.json`.
+
+## 2026-11-04: v10a proposition identity and three-valued queries
+
+Compiled clause-boundary/auxiliary subject binding and distinct query events.
+Four graph steps now also retrieve exact subject/predicate/object propositions;
+per-object recency and nearest inherited evidence preserve polarity. Missing
+evidence stays unknown. Permanent atomic facts use the same identity comparison.
+The normal transformer runtime and parameter layout are unchanged.
+
+Truth development improves from 45/239 to 229/239, including all 228 non-stress
+cases. Ten composition/scope cases still fail. Legacy 185/185, graph 75/79,
+arithmetic 115/120 and signed 153/159 retain their scores; polarity rises from
+227/233 to 229/233 because its two earlier yes/no stresses now pass. All four
+former post-freeze suites were rerun as regressions with the same respective
+scores. The old open-question multiple-action bug remains.
+
+Integrity, exact parameter size/hash, finite values, offline guard, causal
+prefixes and cached/full decoding pass. Removing proposition retrieval changes
+yes to unknown; removing only object identity changes yes to an unrelated no.
+Other graph, polarity and arithmetic interventions retain their effects. Frozen
+v10a has 732,615 nonzero parameters; raw SHA-256 is
+`1734f1e0ed9bac539f5148e676dfc9b9792ccd881b848e5220c06b134208362f`.
+This candidate is archived before choosing a fresh truth-suite seed.
