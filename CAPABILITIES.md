@@ -23,9 +23,13 @@
   instead of `Yes.`. This failure is retained; v14b was not retuned.
   These are fresh combinations from a known generator, not independent tests
   of broad language ability. The six near-capacity requests repeat.
-- A separate 20-turn publication smoke conversation passes locally on CUDA,
-  after 3,000 initial tokens of declarative distractors. It exercises existing
-  grammar at later positions, not new linguistic understanding.
+- A separate 20-turn publication smoke conversation, after 3,000 initial tokens
+  of declarative distractors, scores 20/20 on CUDA and 19/20 on CPU from a fresh
+  tagged clone and downloaded checkpoint. CPU turn 2 loses the second object
+  of a changed subject at a 3,036-token prefix. This corroborates the fresh
+  context failure; no frozen weights were retuned. Both downloaded archives
+  verify. Downloaded v14b passes integrity and all interventions on both devices.
+  See [publication evidence](results/publication-v0.6.json).
 
 This repairs the tested numerical failures, not every possible long-language
 problem. The existing controlled grammar still fails disjunction, conditional

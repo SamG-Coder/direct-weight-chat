@@ -15,8 +15,8 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
-The current frozen version is **v14b**, packaged with failed candidate v14a
-for the [v0.6 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.6.0-experiment).
+The current frozen version is **v14b**, available with failed candidate v14a
+in the [v0.6 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.6.0-experiment).
 It replaces numerically unstable local attention addresses with bounded
 sinusoidal features, then saturates fact coordinates before proposition retrieval.
 This improves existing grammar and reasoning at long context positions; it does
@@ -110,8 +110,7 @@ python -m benchmarks.integrity --model build/current --source versions/autoregre
 - [Research log](RESEARCH_LOG.md): experiments, failures and next steps.
 - [Capabilities](CAPABILITIES.md): measured abilities and limits.
 - [Architecture](ARCHITECTURE.md): mathematical construction and runtime boundary.
-- [v0.6 checkpoint packaging](results/release-assets-v0.6.json): both archives pass decompressed raw/config hashes and ZIP CRC checks.
-- [Previous v0.5 release verification](results/publication-v0.5.json): all four downloaded archives match; fresh CPU/CUDA integrity and 20/20 smoke conversations pass.
+- [v0.6 release verification](results/publication-v0.6.json): both downloaded archives match; integrity and all interventions pass on CPU/CUDA. The long 20-turn conversation scores 20/20 on CUDA and 19/20 on CPU. Its CPU binding failure remains public.
 - Fresh v14b context evidence: [CUDA 126/126](results/context-v14b-postfreeze-cuda.json), [CPU 125/126](results/context-v14b-postfreeze-cpu.json), with the remaining CPU failure retained.
 - `tests/`: frozen development cases and separately identified post-freeze cases.
 - `benchmarks/`: external evaluators; expected answers are never passed to inference.

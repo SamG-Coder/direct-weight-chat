@@ -46,6 +46,14 @@ graph/arithmetic/truth/composition/assertion interventions also pass. Frozen
 v14b source reproduces exact raw and config hashes. A separate local 20-turn
 publication smoke passes after 3,000 initial tokens of declarative distractors.
 
+Fresh-download verification confirms both published archive digests, sizes,
+raw/config hashes, ZIP CRC and frozen-source manifests. All integrity checks
+and interventions pass on CPU and CUDA from the clean tagged checkout. The long
+20-turn conversation scores **20/20 on CUDA and 19/20 on CPU**. At turn 2, with
+a 3,036-token prefix, CPU loses a changed subject's second object and says
+`I do not know.` instead of `Yes.`. This corroborates the separate fresh context
+failure. Exact results remain in the [publication evidence](https://github.com/SamG-Coder/direct-weight-chat/blob/main/results/publication-v0.6.json).
+
 **The model still cannot provide useful open-ended chat.** Conditional rules,
 disjunctive assertions, mixed query precedence, multiple class parents, repeated
 negation and open multi-value answers remain unsupported. Creative writing and

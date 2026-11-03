@@ -679,3 +679,26 @@ Streamed decompression verifies both raw/config hashes and ZIP CRC. The default
 local checkpoint now references v14b; the frozen v13d raw hash is unchanged.
 The remaining CPU binding failure is a suitable next diagnostic target before
 extending logical structure or claiming reliable long conversations.
+
+## 2026-11-04: v0.6 published and independently downloaded
+
+Published v0.6.0-experiment at source commit
+`ad07de31df757bcd7393cb3cb3e6210d400c3ec2`, with v14a/v14b ZIPs and SHA256SUMS.
+Both downloaded archives match public digests, sizes, the local package report
+and checksum entries. Streamed decompression verifies raw/config hashes and CRC;
+both manifests and compiler hashes match the clean tagged clone. Extracted v14b
+has exactly 1,000,000,000 raw weight bytes and leaves the source tree clean.
+
+Fresh-download integrity and all interventions pass on CPU and CUDA, including
+bounded-phase removal, long-prefix cache parity and fact-magnitude saturation.
+The long 20-turn smoke conversation scores 20/20 CUDA and 19/20 CPU. CPU turn 2
+asks `A neru has wings and a selv needs water and fuel. Does selv need fuel?`
+at a 3,036-token prefix and answers `I do not know.` instead of `Yes.`. This is
+another second-object/changed-subject binding failure. It remains in the public
+report, not a passing publication smoke. Saved weights are unchanged.
+
+Evidence is in `results/publication-v0.6.json` and `results/release-validation-v0.6/`.
+The next useful experiment should trace and stress numerical subject/frame
+binding across positions and devices. The general conversation objective remains
+active and unachieved; addressing arithmetic or language expansion alone would
+not resolve this demonstrated context reliability gap.
