@@ -825,3 +825,15 @@ conditional understanding: unsupported syntax can be mistaken for assertions.
 Exact outputs, timings and source/model hashes are in the two baseline reports.
 The next compiler experiment will encode typed rule records, retrieve a rule
 by its conclusion, and check its signed premise through neural fact attention.
+
+### First conditional candidate v16a
+
+The frozen first candidate scores 269/293 conditional cases on CUDA, including
+49/49 positive predicate pairs, 49/49 signed cases, and all nine chain cases
+through depth three. Its 24 remaining failures include deeper chains and an
+older satisfied alternative hidden by a newer unsatisfied rule. Legacy checks
+regress to 182/185: the reused context bank can accidentally activate rule
+attention on open-answer requests. The candidate and exact repeated-token
+outputs are retained. The correction must gate both rule attention and proof
+acceptance explicitly by the binary-question mode, not just by a state field
+that serves a different purpose in open-answer generation.

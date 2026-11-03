@@ -92,6 +92,22 @@ ASSERTION_GROUP_TEMP = GATES + 23
 # is part of runtime tokenizer state or a host-side fact representation.
 PREDICATE_GROUP = GATES + 24
 ASSERTION_FRAME_GROUP = ASSERTION_POSITION_SQ
+# Conditional parsing markers occupy unused positive-fact polarity fields
+# until block 2 restores the atomic fact vectors. Rule records then share the
+# FACTS bank with those vectors, distinguished by RULE_VALID.
+IF_WORD, THEN_WORD, RULE_JOIN_WORD = 79, 95, 111
+IF_POSITION, THEN_POSITION, RULE_JOIN_POSITION = GATES, GATES + 1, GATES + 2
+IF_ACTIVE, THEN_ACTIVE = GATES + 10, GATES + 11
+IF_PREVIOUS, IF_PREVIOUS_USER, IF_JOINED = GATES + 12, GATES + 13, GATES + 14
+RULE_CONTEXT, RULE_AFTER_THEN, RULE_PREVIOUS_CONTEXT = 56, 59, 60
+RULE_TERMINATOR, RULE_HAS_JOIN = 259, 260
+RULE_PREMISE_TEMP, RULE_CONCLUSION_TEMP = 64, 102  # 36 literal fields + valid + group
+RULE_PREMISE, RULE_CONCLUSION, RULE_VALID = 64, 100, 175
+# A signed literal is [subject 14, object 14, predicate 7, negative 1].
+# Binary questions reuse the otherwise unused open-answer context bank.
+RULE_GOAL, RULE_ROOT_NEGATIVE, RULE_ACTIVE = 288, 324, 325
+RULE_RETRIEVED, RULE_RETRIEVED_VALID, RULE_RETRIEVED_NEGATIVE = 327, 363, 364
+RULE_FACT_FOUND, RULE_FACT_NEGATIVE, RULE_STATIC_FOUND = 365, 366, 367
 # Bounded positional basis, live through block-2 attention. These four fields
 # have no arithmetic/article/second-number readers until later blocks.
 LOOKBACK_POSITION = (MATH_SUM, NEGATIVE_RESULT, NUM_SECOND_POS, CLASS_VOWEL)

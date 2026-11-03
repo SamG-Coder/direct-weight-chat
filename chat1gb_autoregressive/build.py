@@ -231,7 +231,7 @@ def main():
     object_words = set(FACTS) | {value for facts in FACTS.values() for value in facts.values()}
     request_introducers = set(('what where describe explain tell about color colour more '
                               'hello hi hey add plus sum calculate a an can does is + -').split())
-    nonassertive_heads = set(('what who where when why how which can does is are could would should will may if '
+    nonassertive_heads = set(('what who where when why how which can does is are could would should will may '
                              'tell describe explain write compare calculate add sum').split())
     for tid, label in enumerate(labels):
         row = tensors["token_embedding"][tid]
@@ -271,6 +271,10 @@ def main():
             put_pair(row, S.ADJECTIVE, 1)
         if label in nonassertive_heads:
             put_pair(row, S.QUESTION_HEAD_WORD, 1)
+        for words, feature in ((('if',), S.IF_WORD), (('then',), S.THEN_WORD),
+                               (('and', 'or'), S.RULE_JOIN_WORD)):
+            if label in words:
+                put_pair(row, feature, 1)
         if label in FACTS or dynamic_start <= tid < number_start:
             put_pair(row, S.ENTITY, 1)
         if label in object_words or tid >= dynamic_start:
@@ -312,6 +316,21 @@ def main():
         c.previous(0, shift + 1, shift, sources, list(range(destination, destination + 27)))
     c.latest(0, 6, S.ROLE_USER, [S.POS], [S.USER_START])
     c.latest(0, 7, S.CLAUSE_BOUNDARY, [S.POS], [S.CLAUSE_START])
+    # Three lexical position registers. BOS beats every noncandidate even
+    # at the end of the declared window, so absent markers return position 0.
+    for head, marker, destination in ((8, S.IF_WORD, S.IF_POSITION),
+                                     (9, S.THEN_WORD, S.THEN_POSITION),
+                                     (10, S.RULE_JOIN_WORD, S.RULE_JOIN_POSITION)):
+        c.attention(0, head, [{S.ONE: 8}],
+                    [{marker: 65536, S.BOS_FLAG: 49152, S.POS: 1024}],
+                    [S.POS], [destination])
+    for left, right, destination in ((S.IF_POSITION, S.CLAUSE_START, S.IF_ACTIVE),
+                                     (S.THEN_POSITION, S.IF_POSITION, S.THEN_ACTIVE),
+                                     (S.RULE_JOIN_POSITION, S.IF_POSITION, S.IF_JOINED)):
+        difference = {left: 128, right: -128}
+        c.unit(0, difference, {destination: 1})
+        c.unit(0, difference, {destination: -1}, threshold=1)
+    c.clear(0, [S.IF_POSITION, S.THEN_POSITION, S.RULE_JOIN_POSITION])
     for src, dst in ((S.ENTITY, S.LIVE_ENTITY), (S.QUERY_CANDIDATE, S.LIVE_QUERY), (S.NUMBER, S.LIVE_NUMBER)):
         c.gate(0, [src, S.USER_STATE], targets={dst: 1})
     p1, p2, p3, p4 = S.PREV
@@ -404,7 +423,13 @@ def main():
                        S.PREDICATE_GROUP)
     # The clause of the preceding token remains available at a punctuation
     # boundary, where the current token already begins a new clause ID.
-    c.previous(1, 10, 1, [S.CLAUSE_START], [S.ASSERTION_GROUP_TEMP])
+    c.previous(1, 10, 1, [S.CLAUSE_START, S.IF_ACTIVE, S.USER_STATE],
+               [S.ASSERTION_GROUP_TEMP, S.IF_PREVIOUS, S.IF_PREVIOUS_USER])
+    c.clear(1, [S.RULE_CONTEXT, S.RULE_AFTER_THEN, S.RULE_PREVIOUS_CONTEXT])
+    c.gate(1, [S.IF_ACTIVE, S.USER_STATE], targets={S.RULE_CONTEXT: 1})
+    c.linear(1, {S.THEN_ACTIVE: 1}, {S.RULE_AFTER_THEN: 1})
+    c.gate(1, [S.IF_PREVIOUS, S.IF_PREVIOUS_USER], targets={S.RULE_PREVIOUS_CONTEXT: 1})
+    c.clear(1, [S.IF_ACTIVE, S.THEN_ACTIVE, S.IF_PREVIOUS, S.IF_PREVIOUS_USER, S.IF_JOINED])
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
     c.clear(1, list(range(25, 51)) + [52, 54, 55, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS])
@@ -419,6 +444,9 @@ def main():
     # Only the first two old lexical buffers are read by block 2. Reuse the
     # remaining ones for a delayed event and its previous-clause address.
     c.clear(1, range(S.PREV[2], S.PREV[3] + 27))
+    c.linear(1, {S.IF_JOINED: 1}, {S.RULE_HAS_JOIN: 1})
+    for terminator in ('.', '!', '<user>', '<assistant>'):
+        c.word(1, terminator, {S.RULE_TERMINATOR: 1})
     # Preserve the natural position/128 scale. Dividing by another 64 before
     # writing over a +/-1 residual loses low bits in float32 cancellation;
     # multiplying that error by a clause penalty can overwhelm recency.
@@ -561,11 +589,46 @@ def main():
                 [S.FACT_NEGATIVE] + list(range(S.CODE, S.CODE + 14)),
                 list(range(S.ASSERTION_PREVIOUS, S.ASSERTION_PREVIOUS + 23)))
     continuation = [S.ASSERTION_PREVIOUS, S.ASSERTION_FRAME_VALID, S.ASSERTION_TERMINATOR]
-    c.copy_when(2, S.CURRENT, S.FACT_SUBJECT, continuation, [S.Q_MODE], count=14, extra=frame_scope)
-    c.copy_when(2, S.ASSERTION_PREVIOUS + 9, S.FACT_OBJECT, continuation, [S.Q_MODE], count=14, extra=frame_scope)
-    c.copy_when(2, S.ASSERTION_PREVIOUS + 1, S.FACT_RELATION, continuation, [S.Q_MODE], count=7, extra=frame_scope)
-    c.copy_when(2, S.ASSERTION_PREVIOUS + 8, S.FACT_NEGATIVE, continuation, [S.Q_MODE], extra=frame_scope)
-    c.gate(2, continuation, [S.Q_MODE], {S.FACT_VALID: 1}, extra=frame_scope)
+    excluded = [S.Q_MODE, S.RULE_PREVIOUS_CONTEXT]
+    c.copy_when(2, S.CURRENT, S.FACT_SUBJECT, continuation, excluded, count=14, extra=frame_scope)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 9, S.FACT_OBJECT, continuation, excluded, count=14, extra=frame_scope)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 1, S.FACT_RELATION, continuation, excluded, count=7, extra=frame_scope)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 8, S.FACT_NEGATIVE, continuation, excluded, extra=frame_scope)
+    c.gate(2, continuation, excluded, {S.FACT_VALID: 1}, extra=frame_scope)
+
+    # A rule is committed only at a declarative terminator. Retrieve both
+    # literals by their syntactic phase, then validate their clause identity.
+    literal_sources = list(range(S.FACT_SUBJECT, S.FACT_RELATION + 7)) + [S.FACT_NEGATIVE]
+    for head, destination, sign, sentinel in ((3, S.RULE_PREMISE_TEMP, -1, 1.5),
+                                            (4, S.RULE_CONCLUSION_TEMP, 1, 2.5)):
+        c.attention(2, head, [{S.ONE: 8}],
+                    [{S.FACT_VALID: 131072, S.RULE_CONTEXT: 131072,
+                      S.RULE_AFTER_THEN: sign * 131072, S.BOS_FLAG: sentinel * 131072, S.POS: 1024}],
+                    literal_sources + [S.FACT_VALID, S.ASSERTION_PREVIOUS_GROUP],
+                    list(range(destination, destination + 38)))
+    # The temporary attention values may add to an entity's atomic embedding.
+    # Reconstruct that same original vector from its token identity; rule
+    # records are emitted only at punctuation/role tokens with zero atom data.
+    c.clear(2, range(S.FACTS, S.FACTS + 112))
+    for word, facts in FACTS.items():
+        targets = {}
+        for relation, key in enumerate(('type', 'can', 'needs', 'has', 'produces', 'trait', 'location')):
+            if key in facts:
+                slot = S.slot(S.FACTS, relation)
+                targets.update({slot + bit: value for bit, value in enumerate(S.code(ids[facts[key]]))})
+                targets[slot + 14] = 1
+        c.word(2, word, targets)
+    rule_conditions = [S.RULE_TERMINATOR, S.RULE_PREVIOUS_CONTEXT, S.RULE_AFTER_THEN,
+                       S.RULE_PREMISE_TEMP + 36, S.RULE_CONCLUSION_TEMP + 36]
+    rule_scope = {S.RULE_PREMISE_TEMP + 37: 512, S.RULE_CONCLUSION_TEMP + 37: 512,
+                  S.ASSERTION_PREVIOUS_GROUP: -1024}
+    for source, destination in ((S.RULE_PREMISE_TEMP, S.RULE_PREMISE),
+                                (S.RULE_CONCLUSION_TEMP, S.RULE_CONCLUSION)):
+        c.copy_when(2, source, destination, rule_conditions, [S.RULE_HAS_JOIN], count=36, extra=rule_scope)
+    c.gate(2, rule_conditions, [S.RULE_HAS_JOIN], {S.RULE_VALID: 1}, extra=rule_scope)
+    # Mentioning a premise or conclusion is not asserting it. Erase the
+    # provisional assertion fields throughout the conditional clause.
+    c.copy(2, S.FACT_SUBJECT, S.RULE_CONTEXT, S.FACT_SUBJECT, 37, scale=-1)
 
     # Release local parsing scratch and initialize a neural graph cursor.
     # All writes within this MLP read its pre-MLP input, so clearing the old
@@ -657,6 +720,16 @@ def main():
             # as stronger evidence and compete with recency. This shared
             # barrier covers all subjects, objects, predicates and polarities.
             c.clip(3, range(S.FACT_SUBJECT, S.FACT_NEGATIVE + 1))
+            c.clip(3, range(S.FACTS, S.FACTS + 112))
+            # Q_BIND_TEMP is the definitive query at this layer. Its mode
+            # selects the binary-proof bank instead of the open-answer bank.
+            c.copy(3, S.CONTEXT_FACTS, mode, S.CONTEXT_FACTS, 112, scale=-1)
+            c.copy(3, S.SUBJECT, mode, S.RULE_GOAL, 14)
+            for bit, source in enumerate(S.Q_BIND_TEMP[:14]):
+                c.copy(3, source, mode, S.RULE_GOAL + 14 + bit)
+            for relation, source in enumerate(S.Q_BIND_TEMP[14:21]):
+                c.copy(3, source, mode, S.RULE_GOAL + 28 + relation)
+            c.gate(3, [mode], targets={S.RULE_ACTIVE: 1})
         queries = [{S.CURRENT + bit: 8 * 8192} for bit in range(14)] + [{S.ONE: 8 * 8192}, {S.ONE: 8}]
         if layer % 2:
             for relation in range(7):
@@ -670,11 +743,10 @@ def main():
                 if layer == 3:
                     # A direct prompt assertion overrides the same subject's
                     # permanent fact. Later ancestors fill missing properties.
-                    c.copy(layer, destination, scratch + 14, destination, 16, scale=-1)
-                    for i in range(16):
-                        c.linear(layer, {scratch + i: 1}, {destination + i: 1})
+                    c.copy_when(layer, destination, destination, [scratch + 14], [mode], count=16, scale=-1)
+                    c.copy_unless(layer, scratch, S.ONE, mode, destination, 16)
                 else:
-                    c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
+                    c.copy_when(layer, scratch, destination, [scratch + 14], [destination + 14, S.Q_MODE], count=16)
             c.clear(layer, range(S.CURRENT, S.CURRENT + 14))
             # Negative class membership is stored as information but cannot
             # license traversal of the positive class edge.
@@ -691,7 +763,7 @@ def main():
             # The answer's class remains the closest class, not a distant one.
             for relation in range(1, 7):
                 scratch, destination = S.slot(S.RETURN, relation), S.slot(S.CONTEXT_FACTS, relation)
-                c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
+                c.copy_when(layer, scratch, destination, [scratch + 14], [destination + 14, S.Q_MODE], count=16)
         if layer % 2 == 0:
             # A separate associative head asks for an exact proposition,
             # retaining all event objects rather than one object per predicate.
@@ -714,7 +786,7 @@ def main():
                                   [{S.REQUEST + relation: 8 * 8192}, {S.ONE: 8 * 8192}, {S.ONE: 8}])
                 static_keys = ([{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids["<bos>"])[bit]} for bit in range(14)] +
                                [{slot + bit: 1} for bit in range(14)] +
-                               [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
+                               [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.RULE_VALID: -64, S.BOS_FLAG: 32}, {S.POS: 128}])
                 c.attention(layer, 3 + relation, static_queries, static_keys, [slot + 14], [S.Q_STATIC_FOUND])
             c.copy_unless(layer, S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_FOUND, S.Q_FOUND, S.Q_FOUND, 2)
             c.gate(layer, [S.Q_STATIC_FOUND], [S.Q_EXPLICIT_FOUND, S.Q_FOUND], {S.Q_FOUND: 1})
@@ -725,6 +797,63 @@ def main():
         if layer < 10:
             c.clear(layer, range(S.RETURN, S.RETURN + 112))
 
+        if layer in (4, 6, 8):
+            # Backward proof step: exact consequent identity chooses a ground
+            # rule, whose premise becomes the next goal. Later steps require
+            # its conclusion's sign to match the signed goal. A latest-rule
+            # choice is bounded, not a search over all alternative proofs.
+            queries = ([{S.RULE_GOAL + bit: 8 * 8192} for bit in range(28)] +
+                       [{S.RULE_GOAL + 28 + r: 8 * 8192 * 4} for r in range(7)] +
+                       [{S.ONE: 8 * 8192}, {S.ONE: 8},
+                        {S.ONE: 8 * 1_000_000, S.RULE_ACTIVE: -8 * 1_000_000}])
+            keys = ([{S.RULE_CONCLUSION + bit: 1} for bit in range(28)] +
+                    [{S.RULE_CONCLUSION + 28 + r: 1} for r in range(7)] +
+                    [{S.RULE_VALID: 4, S.BOS_FLAG: 35 if layer == 4 else 37},
+                     {S.POS: 128}, {S.BOS_FLAG: 1}])
+            if layer != 4:
+                queries += [{S.RULE_GOAL + 35: 8 * 8192 * 4, S.RULE_ACTIVE: -8 * 8192 * 2}]
+                keys += [{S.RULE_CONCLUSION + 35: 2, S.RULE_VALID: -1}]
+            c.attention(layer, 10, queries, keys,
+                        list(range(S.RULE_PREMISE, S.RULE_PREMISE + 36)) + [S.RULE_VALID, S.RULE_CONCLUSION + 35],
+                        list(range(S.RULE_RETRIEVED, S.RULE_RETRIEVED + 38)))
+            c.copy(layer, S.RULE_GOAL, S.Q_MODE, S.RULE_GOAL, 36, scale=-1)
+            valid = [S.Q_MODE, S.RULE_ACTIVE, S.RULE_RETRIEVED_VALID]
+            c.copy_when(layer, S.RULE_RETRIEVED, S.RULE_GOAL, valid, count=36)
+            c.copy(layer, S.RULE_ACTIVE, S.Q_MODE, S.RULE_ACTIVE, scale=-1)
+            c.gate(layer, valid, targets={S.RULE_ACTIVE: 1})
+            if layer == 4:
+                c.copy_when(layer, S.RULE_RETRIEVED_NEGATIVE, S.RULE_ROOT_NEGATIVE, valid)
+            c.copy(layer, S.RULE_RETRIEVED, S.Q_MODE, S.RULE_RETRIEVED, 38, scale=-1)
+
+        if layer in (5, 7, 9):
+            queries = ([{S.RULE_GOAL + bit: 8 * 8192} for bit in range(28)] +
+                       [{S.RULE_GOAL + 28 + r: 8 * 8192 * 4} for r in range(7)] +
+                       [{S.ONE: 8 * 8192}, {S.ONE: 8},
+                        {S.ONE: 8 * 1_000_000, S.RULE_ACTIVE: -8 * 1_000_000}])
+            keys = ([{S.FACT_SUBJECT + bit: 1} for bit in range(28)] +
+                    [{S.FACT_RELATION + r: 1} for r in range(7)] +
+                    [{S.FACT_VALID: 4, S.BOS_FLAG: 35}, {S.POS: 128}, {S.BOS_FLAG: 1}])
+            c.attention(layer, 7, queries, keys, [S.FACT_VALID, S.FACT_NEGATIVE],
+                        [S.RULE_FACT_FOUND, S.RULE_FACT_NEGATIVE])
+            for relation in range(7):
+                slot = S.slot(S.FACTS, relation)
+                queries = ([{S.RULE_GOAL + bit: 8 * 8192} for bit in range(14)] +
+                           [{S.RULE_GOAL + 14 + bit: 8 * 8192} for bit in range(14)] +
+                           [{S.RULE_GOAL + 28 + relation: 8 * 8192}, {S.ONE: 8 * 8192},
+                            {S.ONE: 8 * 1_000_000, S.RULE_ACTIVE: -8 * 1_000_000}])
+                keys = ([{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids['<bos>'])[bit]} for bit in range(14)] +
+                        [{slot + bit: 1} for bit in range(14)] +
+                        [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.RULE_VALID: -64, S.BOS_FLAG: 32},
+                         {S.BOS_FLAG: 1}])
+                c.attention(layer, 8 + relation, queries, keys, [slot + 14], [S.RULE_STATIC_FOUND])
+            proof_cases = [([S.RULE_ACTIVE, S.RULE_FACT_FOUND], [S.Q_FOUND, S.RULE_GOAL + 35, S.RULE_FACT_NEGATIVE]),
+                           ([S.RULE_ACTIVE, S.RULE_FACT_FOUND, S.RULE_GOAL + 35, S.RULE_FACT_NEGATIVE], [S.Q_FOUND]),
+                           ([S.RULE_ACTIVE, S.RULE_STATIC_FOUND], [S.Q_FOUND, S.RULE_GOAL + 35, S.RULE_FACT_FOUND])]
+            for positive, negative in proof_cases:
+                c.gate(layer, positive, negative, {S.Q_FOUND: 1})
+                c.copy_when(layer, S.RULE_ROOT_NEGATIVE, S.Q_NEGATIVE, positive, negative)
+            c.copy(layer, S.RULE_FACT_FOUND, S.Q_MODE, S.RULE_FACT_FOUND, 3, scale=-1)
+
     # Block 10: current/previous word detectors and valid arithmetic bounds.
     # Reinitialize coordinates after scratch reuse so tiny roundoff cannot
     # break the all-zero output code's deterministic EOS tie.
@@ -732,6 +861,7 @@ def main():
     c.clear(10, range(S.MATH_BITS, S.MATH_BITS + 14))
     c.clear(10, range(S.STATES, S.STATES + 37))
     c.clear(10, range(S.ATOM_TRUE, S.COMPOSED_KNOWN + 1))
+    c.copy(10, S.CONTEXT_FACTS, S.Q_MODE, S.CONTEXT_FACTS, 112, scale=-1)
     for i, word in enumerate(S.STATE_WORDS):
         c.word(10, word, {S.STATES + i: 1})
     for alias, canonical in (("cannot", "can"), ("need", "needs"), ("have", "has"), ("produce", "produces")):
