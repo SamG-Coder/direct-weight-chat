@@ -1,0 +1,848 @@
+{
+  "name": "signed-subtraction",
+  "status": "development; created before subtraction implementation",
+  "seed": 73061,
+  "cases": [
+    {
+      "id": "math-000",
+      "prompt": "0 - 0",
+      "expected": "0.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-001",
+      "prompt": "0 - 999",
+      "expected": "-999.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-002",
+      "prompt": "999 - 0",
+      "expected": "999.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-003",
+      "prompt": "999 - 999",
+      "expected": "0.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-004",
+      "prompt": "1 - 2",
+      "expected": "-1.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-005",
+      "prompt": "9 - 10",
+      "expected": "-1.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-006",
+      "prompt": "100 - 99",
+      "expected": "1.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-007",
+      "prompt": "500 - 501",
+      "expected": "-1.",
+      "category": "subtraction_boundary",
+      "reset": true
+    },
+    {
+      "id": "math-008",
+      "prompt": "Calculate 664 - 925.",
+      "expected": "-261.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-009",
+      "prompt": "949 - 925",
+      "expected": "24.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-010",
+      "prompt": "Please calculate 627 - 53.",
+      "expected": "574.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-011",
+      "prompt": "481 - 631",
+      "expected": "-150.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-012",
+      "prompt": "Please calculate 599 - 60.",
+      "expected": "539.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-013",
+      "prompt": "587-883",
+      "expected": "-296.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-014",
+      "prompt": "Please calculate 841 - 165.",
+      "expected": "676.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-015",
+      "prompt": "258-798",
+      "expected": "-540.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-016",
+      "prompt": "207 - 405",
+      "expected": "-198.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-017",
+      "prompt": "Calculate 679 - 752.",
+      "expected": "-73.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-018",
+      "prompt": "Calculate 579 - 82.",
+      "expected": "497.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-019",
+      "prompt": "512-760",
+      "expected": "-248.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-020",
+      "prompt": "Calculate 917 - 362.",
+      "expected": "555.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-021",
+      "prompt": "272 - 970",
+      "expected": "-698.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-022",
+      "prompt": "113-534",
+      "expected": "-421.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-023",
+      "prompt": "103-778",
+      "expected": "-675.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-024",
+      "prompt": "Calculate 429 - 886.",
+      "expected": "-457.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-025",
+      "prompt": "156 - 82",
+      "expected": "74.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-026",
+      "prompt": "Calculate 399 - 975.",
+      "expected": "-576.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-027",
+      "prompt": "734 - 817",
+      "expected": "-83.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-028",
+      "prompt": "Please calculate 703 - 575.",
+      "expected": "128.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-029",
+      "prompt": "450 - 768",
+      "expected": "-318.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-030",
+      "prompt": "Calculate 97 - 254.",
+      "expected": "-157.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-031",
+      "prompt": "Please calculate 864 - 405.",
+      "expected": "459.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-032",
+      "prompt": "619 - 880",
+      "expected": "-261.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-033",
+      "prompt": "Calculate 649 - 296.",
+      "expected": "353.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-034",
+      "prompt": "Please calculate 649 - 793.",
+      "expected": "-144.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-035",
+      "prompt": "668 - 657",
+      "expected": "11.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-036",
+      "prompt": "Please calculate 922 - 778.",
+      "expected": "144.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-037",
+      "prompt": "Calculate 360 - 433.",
+      "expected": "-73.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-038",
+      "prompt": "Please calculate 859 - 499.",
+      "expected": "360.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-039",
+      "prompt": "Calculate 31 - 797.",
+      "expected": "-766.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-040",
+      "prompt": "102 - 513",
+      "expected": "-411.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-041",
+      "prompt": "976-34",
+      "expected": "942.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-042",
+      "prompt": "458 - 62",
+      "expected": "396.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-043",
+      "prompt": "Please calculate 631 - 534.",
+      "expected": "97.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-044",
+      "prompt": "700-72",
+      "expected": "628.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-045",
+      "prompt": "415 - 666",
+      "expected": "-251.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-046",
+      "prompt": "Please calculate 257 - 341.",
+      "expected": "-84.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-047",
+      "prompt": "787-264",
+      "expected": "523.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-048",
+      "prompt": "Please calculate 905 - 307.",
+      "expected": "598.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-049",
+      "prompt": "Please calculate 881 - 253.",
+      "expected": "628.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-050",
+      "prompt": "786 - 436",
+      "expected": "350.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-051",
+      "prompt": "Calculate 717 - 401.",
+      "expected": "316.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-052",
+      "prompt": "Please calculate 735 - 755.",
+      "expected": "-20.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-053",
+      "prompt": "Calculate 739 - 344.",
+      "expected": "395.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-054",
+      "prompt": "Please calculate 370 - 796.",
+      "expected": "-426.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-055",
+      "prompt": "Please calculate 417 - 835.",
+      "expected": "-418.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-056",
+      "prompt": "Please calculate 581 - 406.",
+      "expected": "175.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-057",
+      "prompt": "369-902",
+      "expected": "-533.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-058",
+      "prompt": "Please calculate 974 - 472.",
+      "expected": "502.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-059",
+      "prompt": "Please calculate 744 - 649.",
+      "expected": "95.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-060",
+      "prompt": "424-120",
+      "expected": "304.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-061",
+      "prompt": "Please calculate 213 - 52.",
+      "expected": "161.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-062",
+      "prompt": "562 - 205",
+      "expected": "357.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-063",
+      "prompt": "Please calculate 309 - 491.",
+      "expected": "-182.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-064",
+      "prompt": "704-364",
+      "expected": "340.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-065",
+      "prompt": "Please calculate 516 - 477.",
+      "expected": "39.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-066",
+      "prompt": "Please calculate 616 - 970.",
+      "expected": "-354.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-067",
+      "prompt": "395 - 244",
+      "expected": "151.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-068",
+      "prompt": "Please calculate 346 - 482.",
+      "expected": "-136.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-069",
+      "prompt": "Please calculate 128 - 916.",
+      "expected": "-788.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-070",
+      "prompt": "Please calculate 901 - 190.",
+      "expected": "711.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-071",
+      "prompt": "Calculate 920 - 638.",
+      "expected": "282.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-072",
+      "prompt": "63 - 842",
+      "expected": "-779.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-073",
+      "prompt": "617-597",
+      "expected": "20.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-074",
+      "prompt": "700-606",
+      "expected": "94.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-075",
+      "prompt": "Calculate 940 - 279.",
+      "expected": "661.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-076",
+      "prompt": "865-593",
+      "expected": "272.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-077",
+      "prompt": "Please calculate 477 - 305.",
+      "expected": "172.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-078",
+      "prompt": "Calculate 12 - 680.",
+      "expected": "-668.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-079",
+      "prompt": "554 - 639",
+      "expected": "-85.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-080",
+      "prompt": "Please calculate 429 - 337.",
+      "expected": "92.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-081",
+      "prompt": "Calculate 931 - 662.",
+      "expected": "269.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-082",
+      "prompt": "375-906",
+      "expected": "-531.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-083",
+      "prompt": "989-476",
+      "expected": "513.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-084",
+      "prompt": "Calculate 166 - 667.",
+      "expected": "-501.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-085",
+      "prompt": "Calculate 617 - 312.",
+      "expected": "305.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-086",
+      "prompt": "752 - 633",
+      "expected": "119.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-087",
+      "prompt": "342-923",
+      "expected": "-581.",
+      "category": "subtraction_random",
+      "reset": true
+    },
+    {
+      "id": "math-088",
+      "prompt": "275 + 755",
+      "expected": "1030.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-089",
+      "prompt": "906 + 652",
+      "expected": "1558.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-090",
+      "prompt": "379 + 73",
+      "expected": "452.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-091",
+      "prompt": "160 + 986",
+      "expected": "1146.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-092",
+      "prompt": "201 + 157",
+      "expected": "358.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-093",
+      "prompt": "67 + 940",
+      "expected": "1007.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-094",
+      "prompt": "990 + 62",
+      "expected": "1052.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-095",
+      "prompt": "271 + 692",
+      "expected": "963.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-096",
+      "prompt": "568 + 670",
+      "expected": "1238.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-097",
+      "prompt": "229 + 51",
+      "expected": "280.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-098",
+      "prompt": "692 + 516",
+      "expected": "1208.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-099",
+      "prompt": "851 + 757",
+      "expected": "1608.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-100",
+      "prompt": "56 + 50",
+      "expected": "106.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-101",
+      "prompt": "200 + 89",
+      "expected": "289.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-102",
+      "prompt": "781 + 811",
+      "expected": "1592.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-103",
+      "prompt": "443 + 357",
+      "expected": "800.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-104",
+      "prompt": "471 + 17",
+      "expected": "488.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-105",
+      "prompt": "816 + 350",
+      "expected": "1166.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-106",
+      "prompt": "662 + 116",
+      "expected": "778.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-107",
+      "prompt": "471 + 871",
+      "expected": "1342.",
+      "category": "addition_regression",
+      "reset": true
+    },
+    {
+      "id": "math-108",
+      "prompt": "17 - 48",
+      "expected": "-31.",
+      "category": "mixed_conversation",
+      "reset": true
+    },
+    {
+      "id": "math-109",
+      "prompt": "125 + 456",
+      "expected": "581.",
+      "category": "mixed_conversation",
+      "reset": false
+    },
+    {
+      "id": "math-110",
+      "prompt": "999 - 999",
+      "expected": "0.",
+      "category": "mixed_conversation",
+      "reset": false
+    },
+    {
+      "id": "math-111",
+      "prompt": "0 - 999",
+      "expected": "-999.",
+      "category": "mixed_conversation",
+      "reset": false
+    },
+    {
+      "id": "math-112",
+      "prompt": "12 + 80",
+      "expected": "92.",
+      "category": "mixed_conversation",
+      "reset": false
+    },
+    {
+      "id": "math-113",
+      "prompt": "81 - 12",
+      "expected": "69.",
+      "category": "mixed_conversation",
+      "reset": false
+    },
+    {
+      "id": "math-114",
+      "prompt": "1000 - 1",
+      "expected": "999.",
+      "category": "range_stress",
+      "reset": true
+    },
+    {
+      "id": "math-115",
+      "prompt": "-5 - 3",
+      "expected": "-8.",
+      "category": "negative_operand_stress",
+      "reset": true
+    },
+    {
+      "id": "math-116",
+      "prompt": "17 * 24",
+      "expected": "408.",
+      "category": "multiplication_stress",
+      "reset": true
+    },
+    {
+      "id": "math-117",
+      "prompt": "81 / 9",
+      "expected": "9.",
+      "category": "division_stress",
+      "reset": true
+    },
+    {
+      "id": "math-118",
+      "prompt": "10 - 3 - 2",
+      "expected": "5.",
+      "category": "multi_step_stress",
+      "reset": true
+    },
+    {
+      "id": "math-119",
+      "prompt": "Subtract 3 from 8.",
+      "expected": "5.",
+      "category": "paraphrase_stress",
+      "reset": true
+    }
+  ],
+  "objective": "Two nonnegative integer operands at most 999; signed results; preserve addition and per-turn operator selection. Unsupported operations remain stress failures."
+}

@@ -1,0 +1,2894 @@
+{
+  "version": "v6c",
+  "suite": "signed-subtraction",
+  "evaluation_status": "development; created before subtraction implementation",
+  "created_utc": "2026-11-03T12:27:57.239203+00:00",
+  "git": {
+    "commit": "95f9754da6d5cccc8d4170dc767875a4867a8edb",
+    "dirty": true
+  },
+  "model_sha256": "79106ecf5246b412671b093b57f8a1e2fcba00b73792b3629a6dfc67144b7d41",
+  "suite_sha256": "fafd12c8c45c7263b89eabae3828cbbfe7121a09caf5525cfa9dfc3690330bcf",
+  "runtime_sha256": "ad3dfe963749f92166e313d36626f3deb2bd49313ef60c671937f441545499d6",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 717352,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "0 - 0",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01732129999436438,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-000",
+      "category": "subtraction_boundary",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "0 - 999",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016288200014969334,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-001",
+      "category": "subtraction_boundary",
+      "expected": "-999.",
+      "acceptable": [
+        "-999."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "999 - 0",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015230399993015453,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-002",
+      "category": "subtraction_boundary",
+      "expected": "999.",
+      "acceptable": [
+        "999."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "999 - 999",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015123599994694814,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-003",
+      "category": "subtraction_boundary",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "1 - 2",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015260000014677644,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-004",
+      "category": "subtraction_boundary",
+      "expected": "-1.",
+      "acceptable": [
+        "-1."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "9 - 10",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015216500003589317,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-005",
+      "category": "subtraction_boundary",
+      "expected": "-1.",
+      "acceptable": [
+        "-1."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "100 - 99",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015261299995472655,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-006",
+      "category": "subtraction_boundary",
+      "expected": "1.",
+      "acceptable": [
+        "1."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "500 - 501",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01520860000164248,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-007",
+      "category": "subtraction_boundary",
+      "expected": "-1.",
+      "acceptable": [
+        "-1."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 664 - 925.",
+      "text": "1589.",
+      "token_ids": [
+        2087,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008332900004461408,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-008",
+      "category": "subtraction_random",
+      "expected": "-261.",
+      "acceptable": [
+        "-261."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "949 - 925",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015274399978807196,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-009",
+      "category": "subtraction_random",
+      "expected": "24.",
+      "acceptable": [
+        "24."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 627 - 53.",
+      "text": "680.",
+      "token_ids": [
+        1178,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077108999830670655,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-010",
+      "category": "subtraction_random",
+      "expected": "574.",
+      "acceptable": [
+        "574."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "481 - 631",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015244899987010285,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-011",
+      "category": "subtraction_random",
+      "expected": "-150.",
+      "acceptable": [
+        "-150."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 599 - 60.",
+      "text": "659.",
+      "token_ids": [
+        1157,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007844899984775111,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-012",
+      "category": "subtraction_random",
+      "expected": "539.",
+      "acceptable": [
+        "539."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "587-883",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015385200007585809,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-013",
+      "category": "subtraction_random",
+      "expected": "-296.",
+      "acceptable": [
+        "-296."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 841 - 165.",
+      "text": "1006.",
+      "token_ids": [
+        1504,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007450700009940192,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-014",
+      "category": "subtraction_random",
+      "expected": "676.",
+      "acceptable": [
+        "676."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "258-798",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015226099989376962,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-015",
+      "category": "subtraction_random",
+      "expected": "-540.",
+      "acceptable": [
+        "-540."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "207 - 405",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01524720000452362,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-016",
+      "category": "subtraction_random",
+      "expected": "-198.",
+      "acceptable": [
+        "-198."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 679 - 752.",
+      "text": "1431.",
+      "token_ids": [
+        1929,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008019000000786036,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-017",
+      "category": "subtraction_random",
+      "expected": "-73.",
+      "acceptable": [
+        "-73."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 579 - 82.",
+      "text": "661.",
+      "token_ids": [
+        1159,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0075969000172335654,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-018",
+      "category": "subtraction_random",
+      "expected": "497.",
+      "acceptable": [
+        "497."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "512-760",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015279100014595315,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-019",
+      "category": "subtraction_random",
+      "expected": "-248.",
+      "acceptable": [
+        "-248."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 917 - 362.",
+      "text": "1279.",
+      "token_ids": [
+        1777,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077640000090468675,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-020",
+      "category": "subtraction_random",
+      "expected": "555.",
+      "acceptable": [
+        "555."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "272 - 970",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016139899991685525,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-021",
+      "category": "subtraction_random",
+      "expected": "-698.",
+      "acceptable": [
+        "-698."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "113-534",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015033200004836544,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-022",
+      "category": "subtraction_random",
+      "expected": "-421.",
+      "acceptable": [
+        "-421."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "103-778",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01509899998200126,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-023",
+      "category": "subtraction_random",
+      "expected": "-675.",
+      "acceptable": [
+        "-675."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 429 - 886.",
+      "text": "1315.",
+      "token_ids": [
+        1813,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007438100001309067,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-024",
+      "category": "subtraction_random",
+      "expected": "-457.",
+      "acceptable": [
+        "-457."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "156 - 82",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015437100024428219,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-025",
+      "category": "subtraction_random",
+      "expected": "74.",
+      "acceptable": [
+        "74."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 399 - 975.",
+      "text": "1374.",
+      "token_ids": [
+        1872,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00827029999345541,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-026",
+      "category": "subtraction_random",
+      "expected": "-576.",
+      "acceptable": [
+        "-576."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "734 - 817",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015144800010602921,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-027",
+      "category": "subtraction_random",
+      "expected": "-83.",
+      "acceptable": [
+        "-83."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 703 - 575.",
+      "text": "1278.",
+      "token_ids": [
+        1776,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007466000010026619,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-028",
+      "category": "subtraction_random",
+      "expected": "128.",
+      "acceptable": [
+        "128."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "450 - 768",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0150634000019636,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-029",
+      "category": "subtraction_random",
+      "expected": "-318.",
+      "acceptable": [
+        "-318."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 97 - 254.",
+      "text": "351.",
+      "token_ids": [
+        849,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007843100000172853,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-030",
+      "category": "subtraction_random",
+      "expected": "-157.",
+      "acceptable": [
+        "-157."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 864 - 405.",
+      "text": "1269.",
+      "token_ids": [
+        1767,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00739319997956045,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-031",
+      "category": "subtraction_random",
+      "expected": "459.",
+      "acceptable": [
+        "459."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "619 - 880",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016272699984256178,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-032",
+      "category": "subtraction_random",
+      "expected": "-261.",
+      "acceptable": [
+        "-261."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 649 - 296.",
+      "text": "945.",
+      "token_ids": [
+        1443,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008253900014096871,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-033",
+      "category": "subtraction_random",
+      "expected": "353.",
+      "acceptable": [
+        "353."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 649 - 793.",
+      "text": "1442.",
+      "token_ids": [
+        1940,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007505500019760802,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-034",
+      "category": "subtraction_random",
+      "expected": "-144.",
+      "acceptable": [
+        "-144."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "668 - 657",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015276499994797632,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-035",
+      "category": "subtraction_random",
+      "expected": "11.",
+      "acceptable": [
+        "11."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 922 - 778.",
+      "text": "1700.",
+      "token_ids": [
+        2198,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008133499999530613,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-036",
+      "category": "subtraction_random",
+      "expected": "144.",
+      "acceptable": [
+        "144."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 360 - 433.",
+      "text": "793.",
+      "token_ids": [
+        1291,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0076262000075075775,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-037",
+      "category": "subtraction_random",
+      "expected": "-73.",
+      "acceptable": [
+        "-73."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 859 - 499.",
+      "text": "1358.",
+      "token_ids": [
+        1856,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007991299993591383,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-038",
+      "category": "subtraction_random",
+      "expected": "360.",
+      "acceptable": [
+        "360."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 31 - 797.",
+      "text": "828.",
+      "token_ids": [
+        1326,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007849199988413602,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-039",
+      "category": "subtraction_random",
+      "expected": "-766.",
+      "acceptable": [
+        "-766."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "102 - 513",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015518100000917912,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-040",
+      "category": "subtraction_random",
+      "expected": "-411.",
+      "acceptable": [
+        "-411."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "976-34",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015732500003650784,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-041",
+      "category": "subtraction_random",
+      "expected": "942.",
+      "acceptable": [
+        "942."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "458 - 62",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015255699981935322,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-042",
+      "category": "subtraction_random",
+      "expected": "396.",
+      "acceptable": [
+        "396."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 631 - 534.",
+      "text": "1165.",
+      "token_ids": [
+        1663,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007854499999666587,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-043",
+      "category": "subtraction_random",
+      "expected": "97.",
+      "acceptable": [
+        "97."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "700-72",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015111400018213317,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-044",
+      "category": "subtraction_random",
+      "expected": "628.",
+      "acceptable": [
+        "628."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "415 - 666",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01541469999938272,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-045",
+      "category": "subtraction_random",
+      "expected": "-251.",
+      "acceptable": [
+        "-251."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 257 - 341.",
+      "text": "598.",
+      "token_ids": [
+        1096,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007437199994456023,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-046",
+      "category": "subtraction_random",
+      "expected": "-84.",
+      "acceptable": [
+        "-84."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "787-264",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014760099991690367,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-047",
+      "category": "subtraction_random",
+      "expected": "523.",
+      "acceptable": [
+        "523."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 905 - 307.",
+      "text": "1212.",
+      "token_ids": [
+        1710,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007919900002889335,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-048",
+      "category": "subtraction_random",
+      "expected": "598.",
+      "acceptable": [
+        "598."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 881 - 253.",
+      "text": "1134.",
+      "token_ids": [
+        1632,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00766140001360327,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-049",
+      "category": "subtraction_random",
+      "expected": "628.",
+      "acceptable": [
+        "628."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "786 - 436",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014822400000412017,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-050",
+      "category": "subtraction_random",
+      "expected": "350.",
+      "acceptable": [
+        "350."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 717 - 401.",
+      "text": "1118.",
+      "token_ids": [
+        1616,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007991000020410866,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-051",
+      "category": "subtraction_random",
+      "expected": "316.",
+      "acceptable": [
+        "316."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 735 - 755.",
+      "text": "1490.",
+      "token_ids": [
+        1988,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007493299985071644,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-052",
+      "category": "subtraction_random",
+      "expected": "-20.",
+      "acceptable": [
+        "-20."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 739 - 344.",
+      "text": "1083.",
+      "token_ids": [
+        1581,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007780299987643957,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-053",
+      "category": "subtraction_random",
+      "expected": "395.",
+      "acceptable": [
+        "395."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 370 - 796.",
+      "text": "1166.",
+      "token_ids": [
+        1664,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0074757999973371625,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-054",
+      "category": "subtraction_random",
+      "expected": "-426.",
+      "acceptable": [
+        "-426."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 417 - 835.",
+      "text": "1252.",
+      "token_ids": [
+        1750,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007859200006350875,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-055",
+      "category": "subtraction_random",
+      "expected": "-418.",
+      "acceptable": [
+        "-418."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 581 - 406.",
+      "text": "987.",
+      "token_ids": [
+        1485,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077852999966125935,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-056",
+      "category": "subtraction_random",
+      "expected": "175.",
+      "acceptable": [
+        "175."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "369-902",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014520800003083423,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-057",
+      "category": "subtraction_random",
+      "expected": "-533.",
+      "acceptable": [
+        "-533."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 974 - 472.",
+      "text": "1446.",
+      "token_ids": [
+        1944,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007922499993583187,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-058",
+      "category": "subtraction_random",
+      "expected": "502.",
+      "acceptable": [
+        "502."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 744 - 649.",
+      "text": "1393.",
+      "token_ids": [
+        1891,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007503000000724569,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-059",
+      "category": "subtraction_random",
+      "expected": "95.",
+      "acceptable": [
+        "95."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "424-120",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01492719998350367,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-060",
+      "category": "subtraction_random",
+      "expected": "304.",
+      "acceptable": [
+        "304."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 213 - 52.",
+      "text": "265.",
+      "token_ids": [
+        763,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007853200018871576,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-061",
+      "category": "subtraction_random",
+      "expected": "161.",
+      "acceptable": [
+        "161."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "562 - 205",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01578820002032444,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-062",
+      "category": "subtraction_random",
+      "expected": "357.",
+      "acceptable": [
+        "357."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 309 - 491.",
+      "text": "800.",
+      "token_ids": [
+        1298,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007651899999473244,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-063",
+      "category": "subtraction_random",
+      "expected": "-182.",
+      "acceptable": [
+        "-182."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "704-364",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01521610000054352,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-064",
+      "category": "subtraction_random",
+      "expected": "340.",
+      "acceptable": [
+        "340."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 516 - 477.",
+      "text": "993.",
+      "token_ids": [
+        1491,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007767900009639561,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-065",
+      "category": "subtraction_random",
+      "expected": "39.",
+      "acceptable": [
+        "39."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 616 - 970.",
+      "text": "1586.",
+      "token_ids": [
+        2084,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0073198000027332455,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-066",
+      "category": "subtraction_random",
+      "expected": "-354.",
+      "acceptable": [
+        "-354."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "395 - 244",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014750200003618374,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-067",
+      "category": "subtraction_random",
+      "expected": "151.",
+      "acceptable": [
+        "151."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 346 - 482.",
+      "text": "828.",
+      "token_ids": [
+        1326,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007657999987713993,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-068",
+      "category": "subtraction_random",
+      "expected": "-136.",
+      "acceptable": [
+        "-136."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 128 - 916.",
+      "text": "1044.",
+      "token_ids": [
+        1542,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0073546999774407595,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-069",
+      "category": "subtraction_random",
+      "expected": "-788.",
+      "acceptable": [
+        "-788."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 901 - 190.",
+      "text": "1091.",
+      "token_ids": [
+        1589,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007707400014624,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-070",
+      "category": "subtraction_random",
+      "expected": "711.",
+      "acceptable": [
+        "711."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 920 - 638.",
+      "text": "1558.",
+      "token_ids": [
+        2056,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007594800001243129,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-071",
+      "category": "subtraction_random",
+      "expected": "282.",
+      "acceptable": [
+        "282."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "63 - 842",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014839399984339252,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-072",
+      "category": "subtraction_random",
+      "expected": "-779.",
+      "acceptable": [
+        "-779."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "617-597",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01589450001483783,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-073",
+      "category": "subtraction_random",
+      "expected": "20.",
+      "acceptable": [
+        "20."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "700-606",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015431799984071404,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-074",
+      "category": "subtraction_random",
+      "expected": "94.",
+      "acceptable": [
+        "94."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 940 - 279.",
+      "text": "1219.",
+      "token_ids": [
+        1717,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007556299999123439,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-075",
+      "category": "subtraction_random",
+      "expected": "661.",
+      "acceptable": [
+        "661."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "865-593",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015262900007655844,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-076",
+      "category": "subtraction_random",
+      "expected": "272.",
+      "acceptable": [
+        "272."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 477 - 305.",
+      "text": "782.",
+      "token_ids": [
+        1280,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007355799985816702,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-077",
+      "category": "subtraction_random",
+      "expected": "172.",
+      "acceptable": [
+        "172."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 12 - 680.",
+      "text": "692.",
+      "token_ids": [
+        1190,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00813410000409931,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-078",
+      "category": "subtraction_random",
+      "expected": "-668.",
+      "acceptable": [
+        "-668."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "554 - 639",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015011399984359741,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-079",
+      "category": "subtraction_random",
+      "expected": "-85.",
+      "acceptable": [
+        "-85."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please calculate 429 - 337.",
+      "text": "766.",
+      "token_ids": [
+        1264,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007573800015961751,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "math-080",
+      "category": "subtraction_random",
+      "expected": "92.",
+      "acceptable": [
+        "92."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 931 - 662.",
+      "text": "1593.",
+      "token_ids": [
+        2091,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008139000012306497,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-081",
+      "category": "subtraction_random",
+      "expected": "269.",
+      "acceptable": [
+        "269."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "375-906",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016141700005391613,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-082",
+      "category": "subtraction_random",
+      "expected": "-531.",
+      "acceptable": [
+        "-531."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "989-476",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0152280000038445,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-083",
+      "category": "subtraction_random",
+      "expected": "513.",
+      "acceptable": [
+        "513."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 166 - 667.",
+      "text": "833.",
+      "token_ids": [
+        1331,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007825500011676922,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-084",
+      "category": "subtraction_random",
+      "expected": "-501.",
+      "acceptable": [
+        "-501."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 617 - 312.",
+      "text": "929.",
+      "token_ids": [
+        1427,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007889400003477931,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-085",
+      "category": "subtraction_random",
+      "expected": "305.",
+      "acceptable": [
+        "305."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "752 - 633",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014904599986039102,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-086",
+      "category": "subtraction_random",
+      "expected": "119.",
+      "acceptable": [
+        "119."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "342-923",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015178200002992526,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-087",
+      "category": "subtraction_random",
+      "expected": "-581.",
+      "acceptable": [
+        "-581."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "275 + 755",
+      "text": "1030.",
+      "token_ids": [
+        1528,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0074474000139161944,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-088",
+      "category": "addition_regression",
+      "expected": "1030.",
+      "acceptable": [
+        "1030."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "906 + 652",
+      "text": "1558.",
+      "token_ids": [
+        2056,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007814400014467537,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-089",
+      "category": "addition_regression",
+      "expected": "1558.",
+      "acceptable": [
+        "1558."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "379 + 73",
+      "text": "452.",
+      "token_ids": [
+        950,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007212700002128258,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-090",
+      "category": "addition_regression",
+      "expected": "452.",
+      "acceptable": [
+        "452."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "160 + 986",
+      "text": "1146.",
+      "token_ids": [
+        1644,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007587600004626438,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-091",
+      "category": "addition_regression",
+      "expected": "1146.",
+      "acceptable": [
+        "1146."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "201 + 157",
+      "text": "358.",
+      "token_ids": [
+        856,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007091899984516203,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-092",
+      "category": "addition_regression",
+      "expected": "358.",
+      "acceptable": [
+        "358."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "67 + 940",
+      "text": "1007.",
+      "token_ids": [
+        1505,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007578499993542209,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-093",
+      "category": "addition_regression",
+      "expected": "1007.",
+      "acceptable": [
+        "1007."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "990 + 62",
+      "text": "1052.",
+      "token_ids": [
+        1550,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007506599999032915,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-094",
+      "category": "addition_regression",
+      "expected": "1052.",
+      "acceptable": [
+        "1052."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "271 + 692",
+      "text": "963.",
+      "token_ids": [
+        1461,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007566799991764128,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-095",
+      "category": "addition_regression",
+      "expected": "963.",
+      "acceptable": [
+        "963."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "568 + 670",
+      "text": "1238.",
+      "token_ids": [
+        1736,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007143900002120063,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-096",
+      "category": "addition_regression",
+      "expected": "1238.",
+      "acceptable": [
+        "1238."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "229 + 51",
+      "text": "280.",
+      "token_ids": [
+        778,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007418599998345599,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-097",
+      "category": "addition_regression",
+      "expected": "280.",
+      "acceptable": [
+        "280."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "692 + 516",
+      "text": "1208.",
+      "token_ids": [
+        1706,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007651099993381649,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-098",
+      "category": "addition_regression",
+      "expected": "1208.",
+      "acceptable": [
+        "1208."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "851 + 757",
+      "text": "1608.",
+      "token_ids": [
+        2106,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007494199991924688,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-099",
+      "category": "addition_regression",
+      "expected": "1608.",
+      "acceptable": [
+        "1608."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "56 + 50",
+      "text": "106.",
+      "token_ids": [
+        604,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007085999997798353,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-100",
+      "category": "addition_regression",
+      "expected": "106.",
+      "acceptable": [
+        "106."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "200 + 89",
+      "text": "289.",
+      "token_ids": [
+        787,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007651199994143099,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-101",
+      "category": "addition_regression",
+      "expected": "289.",
+      "acceptable": [
+        "289."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "781 + 811",
+      "text": "1592.",
+      "token_ids": [
+        2090,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007351200008997694,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-102",
+      "category": "addition_regression",
+      "expected": "1592.",
+      "acceptable": [
+        "1592."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "443 + 357",
+      "text": "800.",
+      "token_ids": [
+        1298,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00776209999457933,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-103",
+      "category": "addition_regression",
+      "expected": "800.",
+      "acceptable": [
+        "800."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "471 + 17",
+      "text": "488.",
+      "token_ids": [
+        986,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007382499985396862,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-104",
+      "category": "addition_regression",
+      "expected": "488.",
+      "acceptable": [
+        "488."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "816 + 350",
+      "text": "1166.",
+      "token_ids": [
+        1664,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007666899997275323,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-105",
+      "category": "addition_regression",
+      "expected": "1166.",
+      "acceptable": [
+        "1166."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "662 + 116",
+      "text": "778.",
+      "token_ids": [
+        1276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007427400007145479,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-106",
+      "category": "addition_regression",
+      "expected": "778.",
+      "acceptable": [
+        "778."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "471 + 871",
+      "text": "1342.",
+      "token_ids": [
+        1840,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007608799991430715,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-107",
+      "category": "addition_regression",
+      "expected": "1342.",
+      "acceptable": [
+        "1342."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "17 - 48",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014591599989216775,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-108",
+      "category": "mixed_conversation",
+      "expected": "-31.",
+      "acceptable": [
+        "-31."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "125 + 456",
+      "text": "581.",
+      "token_ids": [
+        1079,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009631699998863041,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "math-109",
+      "category": "mixed_conversation",
+      "expected": "581.",
+      "acceptable": [
+        "581."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "999 - 999",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01643670001067221,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "math-110",
+      "category": "mixed_conversation",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "0 - 999",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01835689999279566,
+      "device": "cuda",
+      "prefix_tokens": 36,
+      "id": "math-111",
+      "category": "mixed_conversation",
+      "expected": "-999.",
+      "acceptable": [
+        "-999."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "12 + 80",
+      "text": "92.",
+      "token_ids": [
+        590,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010368000017479062,
+      "device": "cuda",
+      "prefix_tokens": 47,
+      "id": "math-112",
+      "category": "mixed_conversation",
+      "expected": "92.",
+      "acceptable": [
+        "92."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "81 - 12",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01801190001424402,
+      "device": "cuda",
+      "prefix_tokens": 55,
+      "id": "math-113",
+      "category": "mixed_conversation",
+      "expected": "69.",
+      "acceptable": [
+        "69."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "1000 - 1",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01482929999474436,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-114",
+      "category": "range_stress",
+      "expected": "999.",
+      "acceptable": [
+        "999."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "-5 - 3",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015383799996925518,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "math-115",
+      "category": "negative_operand_stress",
+      "expected": "-8.",
+      "acceptable": [
+        "-8."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "17 * 24",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014927700016414747,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-116",
+      "category": "multiplication_stress",
+      "expected": "408.",
+      "acceptable": [
+        "408."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "81 / 9",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01536720001604408,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "math-117",
+      "category": "division_stress",
+      "expected": "9.",
+      "acceptable": [
+        "9."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "10 - 3 - 2",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015258799976436421,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-118",
+      "category": "multi_step_stress",
+      "expected": "5.",
+      "acceptable": [
+        "5."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Subtract 3 from 8.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015197200002148747,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "math-119",
+      "category": "paraphrase_stress",
+      "expected": "5.",
+      "acceptable": [
+        "5."
+      ],
+      "reset": true,
+      "correct": false
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "subtraction_boundary": {
+      "passed": 0,
+      "total": 8,
+      "success_rate": 0.0,
+      "median_response_ms": 15.245200003846548
+    },
+    "subtraction_random": {
+      "passed": 0,
+      "total": 80,
+      "success_rate": 0.0,
+      "median_response_ms": 8.133800001814961
+    },
+    "addition_regression": {
+      "passed": 20,
+      "total": 20,
+      "success_rate": 1.0,
+      "median_response_ms": 7.500399995478801
+    },
+    "mixed_conversation": {
+      "passed": 2,
+      "total": 6,
+      "success_rate": 0.3333333333333333,
+      "median_response_ms": 15.514149999944493
+    },
+    "range_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 14.82929999474436
+    },
+    "negative_operand_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.383799996925518
+    },
+    "multiplication_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 14.927700016414747
+    },
+    "division_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.36720001604408
+    },
+    "multi_step_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.258799976436421
+    },
+    "paraphrase_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.197200002148747
+    },
+    "all": {
+      "passed": 22,
+      "total": 120,
+      "success_rate": 0.18333333333333332,
+      "median_response_ms": 8.133800001814961
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

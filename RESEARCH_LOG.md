@@ -60,3 +60,19 @@ Five retained failures are longer-than-three-link chains, an unsupported
 paraphrase and negation. This candidate is frozen before selecting a new
 random evaluation seed. It is a bounded graph algorithm, not unrestricted
 reasoning or general conversation.
+
+## 2026-11-03: post-freeze graph verification and arithmetic baseline
+
+v6c, frozen at commit `95f9754`, passed 74/79 with fresh seed 965544940 on both
+CUDA and CPU, including 48/48 novel chains. The seed was chosen after freezing
+weights; the generator and grammatical structures were already known. This is
+fresh-combination evidence, not a structurally independent benchmark. No weights
+were changed in response to those results. Causal prefix difference was zero;
+cache/full-prefix tokens agreed; graph ablation removed the inherited answer;
+source/weight hashes, exact size, finite values and offline guard passed.
+
+Created 120 arithmetic cases before implementation, including 88 subtraction
+cases, addition regression, mixed turns and six unsupported-operation stresses.
+v6c passed 22/120 (only addition cases). The next circuit will compute a signed
+difference with ReLU arithmetic, reusing the existing integer decoder. The model
+will still accept only two nonnegative operands of at most 999.
