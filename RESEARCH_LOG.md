@@ -427,3 +427,20 @@ capability is inferred from that. Publication evidence is recorded in
 `results/publication-v0.4.json` and `results/release-validation-v0.4/`.
 The research goal remains active, with all structural failures and historical
 regressions preserved.
+
+## 2026-11-04: compound-assertion baseline before implementation
+
+Added a deterministic 390-case suite for shared-subject assertions across all
+seven predicates, positive/negative coordination, predicate and subject changes,
+object determiners, correction, inheritance and multi-turn question isolation.
+The frozen v12b baseline is 158/390. In particular, shared-positive and
+shared-negative assertions each score 21/49, mixed binding 16/112, object
+determiners 0/24 and inherited compound properties 0/15. Four question-isolation
+failures show that declarative fragments inside a question can become evidence.
+
+Nine explicit stress cases retain disjunction, conditionals, multiple class
+parents, comma lists, longer negation, double negation and open multi-value
+generation. These score 1/9. The intended next circuit binds coordinated objects
+to clause-local subject/predicate/polarity registers while rejecting question
+clauses as assertions. The suite and exact baseline are committed before that
+compiler change; this is development evidence, not independent generalization.
