@@ -1,5 +1,7 @@
 # Research log
 
+Dates in this log use UTC.
+
 ## 2026-11-03: historical import
 
 Preserved the rejected response-selector prototype (v0) and five direct-written
@@ -189,3 +191,22 @@ remain failures. Legacy 185/185, graph 75/79, polarity 227/233, old arithmetic
 math test still fails its mathematical answer even though the separate validity
 test now correctly records abstention. All former fresh sets were rerun as
 regressions. Candidate frozen before a new signed-arithmetic seed.
+
+## 2026-11-03: v9a verification and release preparation
+
+Post-freeze signed seed 3220192550 scored 153/159 on CUDA and CPU, including all
+120 new random signed cases. Rebuilding from the frozen v9a compiler reproduces
+raw weight and config hashes exactly. Parameter count/size, finite values,
+causality, cached decoding and offline guard pass. Polarity, graph, accumulator,
+unary-sign and forced-validity ablations change the corresponding behaviors.
+Fourteen matched-suite comparisons identify no new v9a regressions against v8b;
+the one multiple-action regression introduced in v8 remains recorded against v7a.
+
+An exploratory conversation combines a negative fact, signed arithmetic,
+context recall, a correction and another inherited property; exact token traces
+are in `results/conversation-v9a.json`. It still cannot write the requested poem.
+Prepared v8a, v8b and v9a archives for a second experimental release. All three
+were streamed through CRC and decompressed SHA-256 verification. Earlier release
+assets remain preserved. The general conversational research objective remains
+incomplete. Next priority: object-specific truth queries and multi-value relation
+retrieval, then broader compositional language and mathematical algorithms.

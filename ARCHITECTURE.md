@@ -72,3 +72,37 @@ between a generated minus and a generated number. No Python subtraction,
 comparison, expression evaluation or answer rendering occurs inside inference.
 The large bounded integer-to-code decoder is retained; a reusable arbitrary-
 precision arithmetic algorithm remains future research.
+
+## v8: polarity as part of a fact
+
+Each relation slot now contains 14 object-code bits, a presence bit and a
+negative-polarity bit. A neural lexical classifier derives article choice from
+the selected class object's code, freeing the old vowel field. Four local
+attention lookbacks recognize negative auxiliaries and contractions and compile
+them into shared subject, predicate and polarity gates. This is still restricted
+syntax; it is not a general dependency parser.
+
+Retrieval carries polarity with the selected value. A negative class edge is
+stored but cannot advance the graph cursor. During generation, the requested
+relation and polarity determine copular negation, cannot, or does/not/base-verb
+transitions. The grammar can mix positive and negative clauses. The EOS output
+has a one-logit bias, smaller than the 16-logit valid-code margin, so tiny residual
+noise cannot break termination when no semantic output code is present.
+
+## v9: signed operands and bounded validity
+
+Lookback fields include number indicators. A unary minus conditionally reverses
+the numeric embedding; unary +/- tokens are excluded from binary-operator
+selection. Block 10 forms `r = a + b - 2*b*subtract`; the product is implemented
+by a gate because `subtract` is Boolean. Block 11 uses ReLU pairs to compute
+`abs(r)` and a one-unit ramp for the negative-result bit. Operand bounds test
+both sides of [-999,999]. No host arithmetic or expression evaluation is used.
+
+Another neural gate marks numbers after the first in a user turn. Attention
+retrieves the second numeric position; it must equal the last numeric position,
+and the first must belong to the current turn. This rejects unsupported operand
+counts, but does not parse arbitrary syntax or evaluate longer expressions.
+Forcing that validity feature to true makes `10 - 3 - 2` produce the incorrect
+first/last-operand result `8.` instead of abstaining. Disabling unary sign
+changes `-149 - 370` from `-519.` to `-221.`. These interventions are recorded
+alongside graph, polarity and accumulator ablations.

@@ -1,0 +1,1123 @@
+{
+  "name": "signed-operands",
+  "status": "post-freeze combinations for v9a; known grammar/generator, not independent structural evaluation",
+  "seed": 3220192550,
+  "cases": [
+    {
+      "id": "signed-000",
+      "prompt": "-999 + -999",
+      "expected": "-1998.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-001",
+      "prompt": "-999 - 999",
+      "expected": "-1998.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-002",
+      "prompt": "999 - -999",
+      "expected": "1998.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-003",
+      "prompt": "-999 + 999",
+      "expected": "0.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-004",
+      "prompt": "0 - -1",
+      "expected": "1.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-005",
+      "prompt": "-1 + 0",
+      "expected": "-1.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-006",
+      "prompt": "0 + 0",
+      "expected": "0.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-007",
+      "prompt": "-1 - -1",
+      "expected": "0.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-008",
+      "prompt": "1 - -2",
+      "expected": "3.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-009",
+      "prompt": "1 + -2",
+      "expected": "-1.",
+      "category": "signed_boundary",
+      "reset": true
+    },
+    {
+      "id": "signed-010",
+      "prompt": "185 - 118",
+      "expected": "67.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-011",
+      "prompt": "Please calculate 323 + -291.",
+      "expected": "32.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-012",
+      "prompt": "94 - 597",
+      "expected": "-503.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-013",
+      "prompt": "-938+449",
+      "expected": "-489.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-014",
+      "prompt": "Please calculate 431 + 915.",
+      "expected": "1346.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-015",
+      "prompt": "-41+438",
+      "expected": "397.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-016",
+      "prompt": "Please calculate 428 - 590.",
+      "expected": "-162.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-017",
+      "prompt": "33 - 749",
+      "expected": "-716.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-018",
+      "prompt": "116--527",
+      "expected": "643.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-019",
+      "prompt": "5 + -653",
+      "expected": "-648.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-020",
+      "prompt": "-444+921",
+      "expected": "477.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-021",
+      "prompt": "Calculate 307 - -288.",
+      "expected": "595.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-022",
+      "prompt": "Please calculate 19 + 884.",
+      "expected": "903.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-023",
+      "prompt": "Please calculate 79 + 654.",
+      "expected": "733.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-024",
+      "prompt": "-574--915",
+      "expected": "341.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-025",
+      "prompt": "-912-745",
+      "expected": "-1657.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-026",
+      "prompt": "-70--916",
+      "expected": "846.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-027",
+      "prompt": "-66+-738",
+      "expected": "-804.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-028",
+      "prompt": "Please calculate -139 - -285.",
+      "expected": "146.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-029",
+      "prompt": "-426-815",
+      "expected": "-1241.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-030",
+      "prompt": "Calculate 230 + 412.",
+      "expected": "642.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-031",
+      "prompt": "-258 + -731",
+      "expected": "-989.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-032",
+      "prompt": "-627 - 368",
+      "expected": "-995.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-033",
+      "prompt": "-700-21",
+      "expected": "-721.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-034",
+      "prompt": "Calculate 541 + -237.",
+      "expected": "304.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-035",
+      "prompt": "Calculate -178 - -114.",
+      "expected": "-64.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-036",
+      "prompt": "Calculate -925 + -331.",
+      "expected": "-1256.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-037",
+      "prompt": "Calculate -356 + 739.",
+      "expected": "383.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-038",
+      "prompt": "-223+959",
+      "expected": "736.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-039",
+      "prompt": "-394 - 698",
+      "expected": "-1092.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-040",
+      "prompt": "-13 - -506",
+      "expected": "493.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-041",
+      "prompt": "Please calculate -924 - -323.",
+      "expected": "-601.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-042",
+      "prompt": "-270-856",
+      "expected": "-1126.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-043",
+      "prompt": "Calculate -232 - 529.",
+      "expected": "-761.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-044",
+      "prompt": "985+608",
+      "expected": "1593.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-045",
+      "prompt": "-423--463",
+      "expected": "40.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-046",
+      "prompt": "-713 + -542",
+      "expected": "-1255.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-047",
+      "prompt": "Calculate -872 - 171.",
+      "expected": "-1043.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-048",
+      "prompt": "Calculate 570 - -367.",
+      "expected": "937.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-049",
+      "prompt": "Please calculate -442 + 398.",
+      "expected": "-44.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-050",
+      "prompt": "261 + -422",
+      "expected": "-161.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-051",
+      "prompt": "801 - 698",
+      "expected": "103.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-052",
+      "prompt": "135 - 327",
+      "expected": "-192.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-053",
+      "prompt": "586 - 247",
+      "expected": "339.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-054",
+      "prompt": "Please calculate -719 + -318.",
+      "expected": "-1037.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-055",
+      "prompt": "-1+71",
+      "expected": "70.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-056",
+      "prompt": "Calculate -801 + 483.",
+      "expected": "-318.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-057",
+      "prompt": "-851+-736",
+      "expected": "-1587.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-058",
+      "prompt": "247-551",
+      "expected": "-304.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-059",
+      "prompt": "149--68",
+      "expected": "217.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-060",
+      "prompt": "-591+355",
+      "expected": "-236.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-061",
+      "prompt": "Calculate -936 - -493.",
+      "expected": "-443.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-062",
+      "prompt": "Please calculate 611 + 858.",
+      "expected": "1469.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-063",
+      "prompt": "666 + 503",
+      "expected": "1169.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-064",
+      "prompt": "149--754",
+      "expected": "903.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-065",
+      "prompt": "Please calculate -362 - 772.",
+      "expected": "-1134.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-066",
+      "prompt": "Please calculate -104 + -872.",
+      "expected": "-976.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-067",
+      "prompt": "-483 - 49",
+      "expected": "-532.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-068",
+      "prompt": "-210--40",
+      "expected": "-170.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-069",
+      "prompt": "Please calculate 873 + 638.",
+      "expected": "1511.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-070",
+      "prompt": "851+650",
+      "expected": "1501.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-071",
+      "prompt": "-372 - 16",
+      "expected": "-388.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-072",
+      "prompt": "344--945",
+      "expected": "1289.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-073",
+      "prompt": "451 - -638",
+      "expected": "1089.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-074",
+      "prompt": "Calculate -339 + -225.",
+      "expected": "-564.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-075",
+      "prompt": "Please calculate -681 + 831.",
+      "expected": "150.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-076",
+      "prompt": "Please calculate -533 + -920.",
+      "expected": "-1453.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-077",
+      "prompt": "-845 + 231",
+      "expected": "-614.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-078",
+      "prompt": "Please calculate -917 - -986.",
+      "expected": "69.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-079",
+      "prompt": "551 - 98",
+      "expected": "453.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-080",
+      "prompt": "Please calculate 305 - 708.",
+      "expected": "-403.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-081",
+      "prompt": "Please calculate -650 - 817.",
+      "expected": "-1467.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-082",
+      "prompt": "653--18",
+      "expected": "671.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-083",
+      "prompt": "Please calculate -62 + 435.",
+      "expected": "373.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-084",
+      "prompt": "729+303",
+      "expected": "1032.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-085",
+      "prompt": "611--164",
+      "expected": "775.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-086",
+      "prompt": "Calculate -650 + 575.",
+      "expected": "-75.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-087",
+      "prompt": "Please calculate 435 - 314.",
+      "expected": "121.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-088",
+      "prompt": "Please calculate 299 + 854.",
+      "expected": "1153.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-089",
+      "prompt": "-200+737",
+      "expected": "537.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-090",
+      "prompt": "-813 - -14",
+      "expected": "-799.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-091",
+      "prompt": "135 - -131",
+      "expected": "266.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-092",
+      "prompt": "-190 + 400",
+      "expected": "210.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-093",
+      "prompt": "Please calculate 778 - 852.",
+      "expected": "-74.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-094",
+      "prompt": "Calculate -483 - -222.",
+      "expected": "-261.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-095",
+      "prompt": "-782+416",
+      "expected": "-366.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-096",
+      "prompt": "-87 - -283",
+      "expected": "196.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-097",
+      "prompt": "Calculate 940 - -450.",
+      "expected": "1390.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-098",
+      "prompt": "Please calculate 885 - 453.",
+      "expected": "432.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-099",
+      "prompt": "327 + 223",
+      "expected": "550.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-100",
+      "prompt": "Calculate -604 - -37.",
+      "expected": "-567.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-101",
+      "prompt": "Calculate -938 + -3.",
+      "expected": "-941.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-102",
+      "prompt": "-132 + 932",
+      "expected": "800.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-103",
+      "prompt": "341 + 711",
+      "expected": "1052.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-104",
+      "prompt": "Please calculate -70 + 54.",
+      "expected": "-16.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-105",
+      "prompt": "637 - 66",
+      "expected": "571.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-106",
+      "prompt": "Calculate -745 - -989.",
+      "expected": "244.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-107",
+      "prompt": "-59-770",
+      "expected": "-829.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-108",
+      "prompt": "Please calculate 234 - 617.",
+      "expected": "-383.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-109",
+      "prompt": "816 + -560",
+      "expected": "256.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-110",
+      "prompt": "Calculate 493 - 233.",
+      "expected": "260.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-111",
+      "prompt": "-893 - -395",
+      "expected": "-498.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-112",
+      "prompt": "Please calculate -646 - 791.",
+      "expected": "-1437.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-113",
+      "prompt": "111 + 631",
+      "expected": "742.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-114",
+      "prompt": "-184 + -107",
+      "expected": "-291.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-115",
+      "prompt": "878--140",
+      "expected": "1018.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-116",
+      "prompt": "158+628",
+      "expected": "786.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-117",
+      "prompt": "Please calculate 703 + -901.",
+      "expected": "-198.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-118",
+      "prompt": "Please calculate -236 + 152.",
+      "expected": "-84.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-119",
+      "prompt": "Please calculate 673 + 506.",
+      "expected": "1179.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-120",
+      "prompt": "-807 - -841",
+      "expected": "34.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-121",
+      "prompt": "-762+356",
+      "expected": "-406.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-122",
+      "prompt": "-228+120",
+      "expected": "-108.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-123",
+      "prompt": "Please calculate -701 - 974.",
+      "expected": "-1675.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-124",
+      "prompt": "-673 - 59",
+      "expected": "-732.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-125",
+      "prompt": "Calculate -375 + -116.",
+      "expected": "-491.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-126",
+      "prompt": "654 - 134",
+      "expected": "520.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-127",
+      "prompt": "Calculate -614 - 924.",
+      "expected": "-1538.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-128",
+      "prompt": "700+230",
+      "expected": "930.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-129",
+      "prompt": "Calculate -290 - -793.",
+      "expected": "503.",
+      "category": "signed_random",
+      "reset": true
+    },
+    {
+      "id": "signed-130",
+      "prompt": "5 + +3",
+      "expected": "8.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-131",
+      "prompt": "5 - +3",
+      "expected": "2.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-132",
+      "prompt": "+7 + +9",
+      "expected": "16.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-133",
+      "prompt": "-0 - -0",
+      "expected": "0.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-134",
+      "prompt": "Add -3 and 4.",
+      "expected": "1.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-135",
+      "prompt": "Sum -17 and -5.",
+      "expected": "-22.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-136",
+      "prompt": "Add 7 and 9.",
+      "expected": "16.",
+      "category": "unary_and_prefix",
+      "reset": true
+    },
+    {
+      "id": "signed-137",
+      "prompt": "-5 - 3",
+      "expected": "-8.",
+      "category": "signed_dialogue",
+      "reset": true
+    },
+    {
+      "id": "signed-138",
+      "prompt": "-5 + -3",
+      "expected": "-8.",
+      "category": "signed_dialogue",
+      "reset": false
+    },
+    {
+      "id": "signed-139",
+      "prompt": "999 - -999",
+      "expected": "1998.",
+      "category": "signed_dialogue",
+      "reset": false
+    },
+    {
+      "id": "signed-140",
+      "prompt": "8 + 7",
+      "expected": "15.",
+      "category": "signed_dialogue",
+      "reset": false
+    },
+    {
+      "id": "signed-141",
+      "prompt": "-3 - -11",
+      "expected": "8.",
+      "category": "signed_dialogue",
+      "reset": false
+    },
+    {
+      "id": "signed-142",
+      "prompt": "0 + 0",
+      "expected": "0.",
+      "category": "signed_dialogue",
+      "reset": false
+    },
+    {
+      "id": "signed-143",
+      "prompt": "10 - 3 - 2",
+      "expected": "I do not know.",
+      "category": "unsupported_arity_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-144",
+      "prompt": "4 + 5 + 6",
+      "expected": "I do not know.",
+      "category": "unsupported_arity_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-145",
+      "prompt": "Calculate 7 + 8 + 9.",
+      "expected": "I do not know.",
+      "category": "unsupported_arity_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-146",
+      "prompt": "Calculate 3 + 4 and then 5.",
+      "expected": "I do not know.",
+      "category": "unsupported_arity_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-147",
+      "prompt": "Calculate 4.",
+      "expected": "I do not know.",
+      "category": "unsupported_arity_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-148",
+      "prompt": "Calculate.",
+      "expected": "I do not know.",
+      "category": "unsupported_arity_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-149",
+      "prompt": "-1000 + 1",
+      "expected": "I do not know.",
+      "category": "range_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-150",
+      "prompt": "999 + -1000",
+      "expected": "I do not know.",
+      "category": "range_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-151",
+      "prompt": "1000 - 1",
+      "expected": "I do not know.",
+      "category": "range_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-152",
+      "prompt": "-1000 - -1000",
+      "expected": "I do not know.",
+      "category": "range_abstention",
+      "reset": true
+    },
+    {
+      "id": "signed-153",
+      "prompt": "5 + * 3",
+      "expected": "I do not know.",
+      "category": "syntax_stress",
+      "reset": true
+    },
+    {
+      "id": "signed-154",
+      "prompt": "Calculate 3 4.",
+      "expected": "I do not know.",
+      "category": "syntax_stress",
+      "reset": true
+    },
+    {
+      "id": "signed-155",
+      "prompt": "5 + monkey + 3",
+      "expected": "I do not know.",
+      "category": "syntax_stress",
+      "reset": true
+    },
+    {
+      "id": "signed-156",
+      "prompt": "17 * -24",
+      "expected": "-408.",
+      "category": "multiplication_stress",
+      "reset": true
+    },
+    {
+      "id": "signed-157",
+      "prompt": "-81 / 9",
+      "expected": "-9.",
+      "category": "division_stress",
+      "reset": true
+    },
+    {
+      "id": "signed-158",
+      "prompt": "(-5 + 3) - 2",
+      "expected": "-4.",
+      "category": "parentheses_stress",
+      "reset": true
+    }
+  ],
+  "objective": "Two signed operands with magnitude <=999; unary signs are not binary operators; retain prefix addition; reject unsupported operand counts and ranges. Syntax and other-operation failures remain visible.",
+  "frozen_candidate_commit": "74a4b81ea210907fc60a027f9182758f6ae32f3f",
+  "frozen_candidate_sha256": "397b76ee15d876d6d28d4f30ce59dd4d40069029018887133a173a4a67a74f53"
+}

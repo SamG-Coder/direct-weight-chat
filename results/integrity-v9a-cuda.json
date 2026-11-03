@@ -1,0 +1,58 @@
+{
+  "git": {
+    "commit": "74a4b81ea210907fc60a027f9182758f6ae32f3f",
+    "dirty": true
+  },
+  "model_sha256": "397b76ee15d876d6d28d4f30ce59dd4d40069029018887133a173a4a67a74f53",
+  "device": "cuda",
+  "checks": {
+    "file_and_source_hashes": true,
+    "runtime_imports_no_compiler": true,
+    "parameter_count": 250000000,
+    "weight_bytes": 1000000000,
+    "nonzero_parameters": 720343,
+    "finite_weights": true,
+    "socket_audit_guard": true,
+    "causal_prefix_max_logit_difference": 0.0,
+    "cached_and_full_prefix_tokens_match": true,
+    "multi_hop_ablation": {
+      "prompt": "A lavrik is a pelvon. A pelvon is a nebvik. A nebvik can shimmer. What can a lavrik do?",
+      "original": "Lavrik can shimmer.",
+      "ablated": "I do not know.",
+      "changed": true,
+      "layers": [
+        5,
+        7,
+        9
+      ]
+    },
+    "output_head_ablation_removes_text": true,
+    "polarity_ablation": [
+      {
+        "prompt": "A kelv cannot fly. What can a kelv do?",
+        "original": "Kelv cannot fly.",
+        "ablated": "Kelv can fly."
+      },
+      {
+        "prompt": "A kelv is not a bird. What can a kelv do?",
+        "original": "I do not know.",
+        "ablated": "Kelv can fly."
+      }
+    ],
+    "arithmetic_ablation": {
+      "prompt": "149 - 370",
+      "original": "-221.",
+      "ablated": "0."
+    },
+    "unary_sign_ablation": {
+      "original": "-519.",
+      "ablated": "-221."
+    },
+    "arity_gate_forced_valid": {
+      "original": "I do not know.",
+      "forced_valid": "8."
+    },
+    "weight_file_unchanged_after_ablations": true
+  },
+  "note": "Ablations replace selected runtime tensor references with zero copies, then restore them. The saved checkpoint is never modified."
+}

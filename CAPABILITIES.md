@@ -1,6 +1,47 @@
 # Capabilities and limitations
 
-## Current v7a
+## Current v9a
+
+- Legacy 185/185; graph 75/79; old arithmetic 115/120; polarity 227/233;
+  signed operands and validity 153/159. Exact outputs and stress failures are
+  retained in the [results table](results/README.md).
+- Represents negative predicate assertions across seven relation types. Tested
+  forms include cannot/can't/can not, is not/isn't, and does not/doesn't with a
+  base verb. Corrected facts and inherited negative properties retain polarity.
+- A negative category assertion does not license inheritance from that category.
+  Articles and multi-sentence positive/negative answers are generated from
+  semantic fields through the transformer.
+- Adds/subtracts two signed integers in [-999,999], distinguishes unary signs
+  from binary operators, and retains tested prefix addition. A neural operand-
+  count check rejects the tested expressions with too few or too many numbers.
+
+Frozen v8b's fresh polarity cases scored 227/233 on CPU and CUDA. Frozen v9a's
+fresh signed cases scored 153/159 on both, including all 120 newly generated
+random signed combinations. Those generators and structures were known in
+advance; this is not an independently designed language benchmark.
+
+**Retained regression:** `X can fly. X cannot swim. What can X do?` selects the
+last denied action instead of the earlier permitted one. The context stores
+multiple assertion events, but the current answer retrieval selects one object
+per predicate. v7a accidentally passed this case by ignoring the denial. Explicit
+yes/no queries, query/instruction negation and double negation still fail.
+
+**Remaining arithmetic errors:** malformed expressions such as `5 + * 3` and
+`Calculate 3 4.` still produce numbers. Operand-count rejection is not a complete
+syntax validator. Multiplication, division, parentheses, arbitrary precision and
+multi-step evaluation remain unimplemented. A chained mathematical-answer test
+still fails even when the model now abstains correctly in a separate validity test.
+
+Creative writing, program generation, natural open-ended conversation, broad
+world knowledge and general logical reasoning remain unachieved. The earlier
+pointer/context/grammar limits still apply. No research milestone is declared
+complete from these narrow scores.
+
+v9a has 250,000,000 float32 parameters / 1,000,000,000 bytes; **720,343 parameters
+(0.2881372%)** are nonzero. Raw weight SHA-256:
+`397b76ee15d876d6d28d4f30ce59dd4d40069029018887133a173a4a67a74f53`.
+
+## Historical v7a
 
 - Legacy regression: 185/185. Graph development: 74/79. Arithmetic: 114/120.
 - Follows up to three unfamiliar class links to a terminal property, across

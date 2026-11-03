@@ -18,17 +18,24 @@ def main():
     p.add_argument('--original-root', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--report', type=Path, required=True)
+    p.add_argument('--versions', nargs='+', default=['v0','v1','v2','v3','v4','v5','v6a','v6b','v6c','v7a'])
+    p.add_argument('--current', default='v7a', help='Version whose archive extracts to the default model directory')
     a = p.parse_args()
     root = Path(__file__).resolve().parents[1]
     a.output.mkdir(parents=True, exist_ok=True)
-    checkpoints = [('selector-v0', a.original_root / 'chat1gb' / 'model', 'chat1gb/model')]
-    for v in range(1, 6):
-        name = f'model-v{v}' if v < 5 else 'model'
-        checkpoints.append((f'autoregressive-v{v}', a.original_root / 'chat1gb_autoregressive' / name,
-                            f'versions/autoregressive_v{v}/model'))
-    for v in ('v6a', 'v6b', 'v6c', 'v7a'):
-        target = 'chat1gb_autoregressive/model' if v == 'v7a' else f'versions/autoregressive_{v}/model'
-        checkpoints.append((f'autoregressive-{v}', root / 'build' / v, target))
+    checkpoints = []
+    for v in a.versions:
+        if v == 'v0':
+            checkpoints.append(('selector-v0', a.original_root / 'chat1gb' / 'model', 'chat1gb/model'))
+            continue
+        if not (root / 'versions' / ('autoregressive_' + v)).is_dir():
+            raise SystemExit(f'Unknown frozen version {v}')
+        if v in ('v1','v2','v3','v4','v5'):
+            source = a.original_root / 'chat1gb_autoregressive' / ('model' if v == 'v5' else 'model-' + v)
+        else:
+            source = root / 'build' / v
+        target = 'chat1gb_autoregressive/model' if v == a.current else f'versions/autoregressive_{v}/model'
+        checkpoints.append((f'autoregressive-{v}', source, target))
     records = []
     for name, source, prefix in checkpoints:
         archive = a.output / (name + '.zip')

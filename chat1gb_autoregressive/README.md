@@ -1,7 +1,7 @@
 # Historical v5 report
 
 This document preserves the original v5 description and test results. The current
-model is v7a; see the [root README](../README.md), [capabilities](../CAPABILITIES.md)
+model is v9a; see the [root README](../README.md), [capabilities](../CAPABILITIES.md)
 and [version table](../results/README.md) for current behavior. Commands below
 that refer to the default model now load the current release. Use
 `--model-dir versions/autoregressive_v5/model` to run the archived v5 checkpoint.

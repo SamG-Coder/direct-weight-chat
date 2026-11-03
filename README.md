@@ -15,21 +15,24 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
-The current frozen version is **v7a**. It adds bounded traversal through unfamiliar
-class relationships and subtraction with signed results. Tests and failed
+The current frozen version is **v9a**, available in the [v0.2 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.2.0-experiment). It adds negative facts and signed operands
+to bounded traversal through unfamiliar class relationships. Tests and failed
 intermediate versions are public; see the [version table](results/README.md).
 
-| Development suite | v5 | Current v7a |
+| Development suite | v7a | Current v9a |
 |---|---:|---:|
 | Original narrow cases | 185/185 | 185/185 |
-| Graph composition and stress | 12/79 | 74/79 |
-| Arithmetic and stress | Not run | 114/120 |
+| Graph composition and stress | 74/79 | 75/79 |
+| Arithmetic and stress | 114/120 | 115/120 |
+| Fact polarity and scope stress | 53/233 | 227/233 |
+| Signed operands and validity stress | Not run | 153/159 |
 
-The arithmetic baseline was v6c at 22/120. After freezing the candidates,
-fresh-seed graph and arithmetic evaluations reproduced 74/79 and 114/120 on
-CUDA and CPU. Their structures were already known; these are fresh combinations,
-not independent evidence of broad intelligence. The failing stress cases remain
-part of every score.
+The signed-operand baseline was v8b at 46/159. After freezing the candidates,
+fresh-seed polarity and signed-operand evaluations reproduced 227/233 and
+153/159 on CUDA and CPU. Their structures were already known; these are fresh
+combinations, not independent evidence of broad intelligence. Failing stress
+cases remain in every score. One multiple-action case regressed when polarity
+was added; its exact before/after outputs are retained.
 
 ## Run offline
 
@@ -43,14 +46,15 @@ python -m chat1gb_autoregressive.chat --model-dir build/current --device auto
 python -m benchmarks.evaluate --model build/current --suite tests/legacy-185.json --output results/local-current.json --version current --device auto
 ```
 
-For a historical build, replace `current` with `v1`–`v5`, `v6a`, `v6b`, `v6c` or `v7a`.
+For a historical build, replace `current` with an archived version such as `v5`,
+`v6c`, `v7a`, `v8a`, `v8b` or `v9a`.
 `v0` builds the separate response-selector prototype. Builders refuse to overwrite
 an existing directory. The archived source bytes and checkpoint hashes are
 preserved. Raw weight files are excluded from Git; compressed checkpoints are
 published as release assets.
 
 To run a downloaded checkpoint, extract its ZIP in the repository root.
-The v7a archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
+The v9a archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
 `python -m chat1gb_autoregressive.chat`. Historical archives use
 `versions/autoregressive_VERSION/model`; select that directory with `--model-dir`.
 Check archive SHA-256 against `SHA256SUMS.txt` and raw weight SHA-256 against the
@@ -60,7 +64,9 @@ checkpoint still has exactly 1,000,000,000 parameter bytes.
 ```powershell
 python -m benchmarks.evaluate --model build/current --suite tests/graph-development.json --output results/local-graph.json --version current
 python -m benchmarks.evaluate --model build/current --suite tests/math-development.json --output results/local-math.json --version current
-python -m benchmarks.integrity --model build/current --source versions/autoregressive_v7a --output results/local-integrity.json
+python -m benchmarks.evaluate --model build/current --suite tests/polarity-development.json --output results/local-polarity.json --version current
+python -m benchmarks.evaluate --model build/current --suite tests/signed-development.json --output results/local-signed.json --version current
+python -m benchmarks.integrity --model build/current --source versions/autoregressive_v9a --output results/local-integrity.json --arithmetic --arithmetic-layer 10 --polarity --signed-operands
 ```
 
 ## Evidence and research
@@ -75,7 +81,7 @@ python -m benchmarks.integrity --model build/current --source versions/autoregre
 
 The original v5 passed 185/185 restricted tests and 39/39 shorter CPU tests, while
 failing the broad requests for poetry, code, negation and general reasoning. The
-current model improves bounded relationship composition and subtraction, but
+current model improves bounded relationship composition, fact negation and signed arithmetic, but
 still fails open-ended conversation, creative writing and code generation. The
 185-case suite was evaluated retrospectively on earlier versions. It is a
 development suite, not an independent general intelligence benchmark. All

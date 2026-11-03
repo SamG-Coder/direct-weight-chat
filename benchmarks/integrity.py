@@ -18,6 +18,8 @@ def main():
     p.add_argument('--device', default='auto', choices=['auto', 'cpu', 'cuda'])
     p.add_argument('--arithmetic', action='store_true', help='Also ablate the v7 signed arithmetic accumulator')
     p.add_argument('--polarity', action='store_true', help='Also ablate the v8 fact-polarity register')
+    p.add_argument('--arithmetic-layer', type=int, choices=[10, 11], default=11)
+    p.add_argument('--signed-operands', action='store_true', help='Ablate unary sign and operand-count validity in v9')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -113,7 +115,7 @@ def main():
         original_math = m.generate('149 - 370')
         # Logical accumulator 5 is paired in physical rows 10 and 11. This is
         # a diagnostic intervention, not an alternate inference path.
-        name = 'blocks.11.mlp.down.weight'
+        name = f'blocks.{a.arithmetic_layer}.mlp.down.weight'
         saved_math = m.w[name]
         try:
             m.w[name] = saved_math.clone()
@@ -125,6 +127,34 @@ def main():
         checks['arithmetic_ablation'] = dict(prompt='149 - 370', original=original_math['text'],
                                             ablated=ablated_math['text'])
         assert original_math['text'] == '-221.' and ablated_math['text'] != original_math['text']
+    if a.signed_operands:
+        m.reset()
+        original_sign = m.generate('-149 - 370')
+        name = 'blocks.0.mlp.down.weight'
+        saved = m.w[name]
+        try:
+            m.w[name] = saved.clone()
+            m.w[name][48:50] = 0  # Unary sign writes the numeric-value feature 24.
+            m.reset()
+            ablated_sign = m.generate('-149 - 370')
+        finally:
+            m.w[name] = saved
+        assert original_sign['text'] == '-519.' and ablated_sign['text'] == '-221.'
+        checks['unary_sign_ablation'] = dict(original=original_sign['text'], ablated=ablated_sign['text'])
+        m.reset()
+        original_arity = m.generate('10 - 3 - 2')
+        weight_name, bias_name = 'blocks.10.mlp.down.weight', 'blocks.10.mlp.down.bias'
+        saved_w, saved_b = m.w[weight_name], m.w[bias_name]
+        try:
+            m.w[weight_name], m.w[bias_name] = saved_w.clone(), saved_b.clone()
+            m.w[weight_name][936:938] = 0  # Validity feature 468 at decode time.
+            m.w[bias_name][936], m.w[bias_name][937] = 1, -1
+            m.reset()
+            forced_arity = m.generate('10 - 3 - 2')
+        finally:
+            m.w[weight_name], m.w[bias_name] = saved_w, saved_b
+        assert original_arity['text'] == 'I do not know.' and forced_arity['text'] == '8.'
+        checks['arity_gate_forced_valid'] = dict(original=original_arity['text'], forced_valid=forced_arity['text'])
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,
