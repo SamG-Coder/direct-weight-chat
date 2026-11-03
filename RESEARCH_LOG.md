@@ -409,3 +409,21 @@ subjects/predicates, active requests, modified arithmetic and abstention.
 Next priority: parse compound assertions and mixed-operator expressions into
 composable structure, while retaining the malformed-input and framing failures.
 The long-term goal of useful flexible conversation remains unachieved.
+
+## 2026-11-04: v0.4 publication and fresh-download verification
+
+Published v12a and v12b under `v0.4.0-experiment`, source commit `10fc451`.
+GitHub reports all three assets uploaded; archive sizes/digests match the local
+packaging report. The downloaded v12b ZIP and checksum file match their remote
+digests. A fresh clone/extraction preserves a clean source tree and passes raw
+and source hashes, exact size, finite values, causal/cache checks, offline guard
+and every graph/arithmetic/polarity/truth/composition intervention.
+
+The 16-turn fresh-download conversation scores 16/16 on both CUDA and CPU.
+It exercises compound truth, unknown evidence, correction, inheritance, distinct
+subjects/predicates, active request changes, transparent modifiers and arithmetic.
+Creative and program requests correctly abstain in these checks; no generation
+capability is inferred from that. Publication evidence is recorded in
+`results/publication-v0.4.json` and `results/release-validation-v0.4/`.
+The research goal remains active, with all structural failures and historical
+regressions preserved.
