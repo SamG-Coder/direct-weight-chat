@@ -1,6 +1,6 @@
 # Capabilities and limitations
 
-## v15a candidate
+## Current v15a
 
 - The new 136-case binding development suite passes on CPU and CUDA. Frozen
   v14b scores 133/136 CPU and 136/136 CUDA. The three CPU repairs include two
@@ -23,6 +23,11 @@
   selects the newer subject with its expected 40-point recency advantage.
   Archived source reproduces the exact raw/config hashes. The candidate is
   committed before selecting a new binding seed.
+- After freeze commit `a583d2b`, binding seed 192095465 passes 136/136 on CPU
+  and CUDA. These are new names/combinations and eight random offsets from a
+  known generator. The fixed offsets and language structures repeat; this is
+  not independent evidence of general understanding. No frozen source or
+  weights were retuned after the fresh results.
 
 This is a numerical reliability improvement to the controlled grammar. It does
 not add conditional-rule reasoning, disjunctive assertions, mixed-precedence

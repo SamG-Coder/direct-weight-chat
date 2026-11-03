@@ -10744,6 +10744,1081 @@
           "dirty": true
         },
         "model_sha256": "61deda2326ad355a3b2921e608e37de3e47e7949f445753cb8a0b78ad7288646"
+      },
+      {
+        "path": "results/binding-positions-v14b-baseline-cpu.json",
+        "summary": {
+          "changed_subject_positive": {
+            "passed": 48,
+            "total": 49,
+            "success_rate": 0.9795918367346939,
+            "median_response_ms": 2500.408799998695
+          },
+          "changed_subject_negative": {
+            "passed": 49,
+            "total": 49,
+            "success_rate": 1.0,
+            "median_response_ms": 2509.372699976666
+          },
+          "wrong_subject_isolation": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 4503.982900001574
+          },
+          "single_subject_control": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 4239.967200002866
+          },
+          "random_offset_binding": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 2388.574399999925
+          },
+          "random_offset_correction": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 2309.066649992019
+          },
+          "long_conversation": {
+            "passed": 6,
+            "total": 8,
+            "success_rate": 0.75,
+            "median_response_ms": 2488.577800017083
+          },
+          "all": {
+            "passed": 133,
+            "total": 136,
+            "success_rate": 0.9779411764705882,
+            "median_response_ms": 2531.5288999991026
+          }
+        },
+        "execution_git": {
+          "commit": "60c9352ecec6f77bd997d0045cd11626ac0224ff",
+          "dirty": true
+        },
+        "model_sha256": "61deda2326ad355a3b2921e608e37de3e47e7949f445753cb8a0b78ad7288646"
+      }
+    ]
+  },
+  {
+    "version": "v15a",
+    "source_commit": "a583d2b49325d3ec66c937c32f06c43fa0b19ac4",
+    "source_path": "versions/autoregressive_v15a",
+    "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81",
+    "source_sha256": {
+      "build.py": "39159ae8a634d190bf202a5fafbeb5300506d1e3be1b65f75765b62d15d78e77",
+      "spec.py": "c77f3700a683f78141e9277648ea408ba33526c814fe2292969e529a2d65b564",
+      "knowledge.py": "b7cd8bd0c584d36c11c068266016d24a92f3259816dcc94bcfb4b45f5ea4c4fd",
+      "offline.py": "61d7321c6c08717b53fb5627a48ff9c243e59ee4719845d4f974cd0e6384cc57"
+    },
+    "parameter_count": 250000000,
+    "weight_bytes": 1000000000,
+    "nonzero_parameters": 961697,
+    "development_reports": [
+      {
+        "path": "results/legacy-v15a-cuda.json",
+        "summary": {
+          "functional": {
+            "passed": 15,
+            "total": 15,
+            "success_rate": 1.0,
+            "median_response_ms": 13.426599995000288
+          },
+          "novel_composition": {
+            "passed": 40,
+            "total": 40,
+            "success_rate": 1.0,
+            "median_response_ms": 26.792550008394755
+          },
+          "unseen_arithmetic": {
+            "passed": 120,
+            "total": 120,
+            "success_rate": 1.0,
+            "median_response_ms": 7.635000016307458
+          },
+          "multi_turn_arithmetic": {
+            "passed": 5,
+            "total": 5,
+            "success_rate": 1.0,
+            "median_response_ms": 8.585999981733039
+          },
+          "multi_turn_facts": {
+            "passed": 5,
+            "total": 5,
+            "success_rate": 1.0,
+            "median_response_ms": 17.243799986317754
+          },
+          "all": {
+            "passed": 185,
+            "total": 185,
+            "success_rate": 1.0,
+            "median_response_ms": 7.881899975473061
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/graph-v15a-cuda.json",
+        "summary": {
+          "chain_depth_1": {
+            "passed": 16,
+            "total": 16,
+            "success_rate": 1.0,
+            "median_response_ms": 13.720949995331466
+          },
+          "chain_depth_2": {
+            "passed": 16,
+            "total": 16,
+            "success_rate": 1.0,
+            "median_response_ms": 14.07525000104215
+          },
+          "chain_depth_3": {
+            "passed": 16,
+            "total": 16,
+            "success_rate": 1.0,
+            "median_response_ms": 14.945900009479374
+          },
+          "depth_stress": {
+            "passed": 0,
+            "total": 3,
+            "success_rate": 0.0,
+            "median_response_ms": 17.898799997055903
+          },
+          "nearest_override": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 14.211750007234514
+          },
+          "latest_ancestor_fact": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 14.064549992326647
+          },
+          "authored_leaf": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 13.598749996162951
+          },
+          "cycle_without_fact": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 16.15164999384433
+          },
+          "missing_link": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 15.955099996062927
+          },
+          "conversation": {
+            "passed": 2,
+            "total": 2,
+            "success_rate": 1.0,
+            "median_response_ms": 14.19309999619145
+          },
+          "paraphrase_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.758499997900799
+          },
+          "negation_stress": {
+            "passed": 1,
+            "total": 1,
+            "success_rate": 1.0,
+            "median_response_ms": 13.548299990361556
+          },
+          "all": {
+            "passed": 75,
+            "total": 79,
+            "success_rate": 0.9493670886075949,
+            "median_response_ms": 14.301299990620464
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/math-v15a-cuda.json",
+        "summary": {
+          "subtraction_boundary": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 8.97475000238046
+          },
+          "subtraction_random": {
+            "passed": 80,
+            "total": 80,
+            "success_rate": 1.0,
+            "median_response_ms": 8.116950004477985
+          },
+          "addition_regression": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 7.524699976784177
+          },
+          "mixed_conversation": {
+            "passed": 6,
+            "total": 6,
+            "success_rate": 1.0,
+            "median_response_ms": 9.675299996160902
+          },
+          "range_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 14.795600000070408
+          },
+          "negative_operand_stress": {
+            "passed": 1,
+            "total": 1,
+            "success_rate": 1.0,
+            "median_response_ms": 10.479199991095811
+          },
+          "multiplication_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 14.882199990097433
+          },
+          "division_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.286099980585277
+          },
+          "multi_step_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.127999999094754
+          },
+          "paraphrase_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.753800020320341
+          },
+          "all": {
+            "passed": 115,
+            "total": 120,
+            "success_rate": 0.9583333333333334,
+            "median_response_ms": 7.949700011522509
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/polarity-v15a-cuda.json",
+        "summary": {
+          "direct_negative": {
+            "passed": 42,
+            "total": 42,
+            "success_rate": 1.0,
+            "median_response_ms": 18.292399996425956
+          },
+          "positive_to_negative": {
+            "passed": 42,
+            "total": 42,
+            "success_rate": 1.0,
+            "median_response_ms": 18.732049997197464
+          },
+          "negative_to_positive": {
+            "passed": 42,
+            "total": 42,
+            "success_rate": 1.0,
+            "median_response_ms": 13.892649993067607
+          },
+          "distractor": {
+            "passed": 42,
+            "total": 42,
+            "success_rate": 1.0,
+            "median_response_ms": 18.78075000422541
+          },
+          "inherited_negative": {
+            "passed": 36,
+            "total": 36,
+            "success_rate": 1.0,
+            "median_response_ms": 18.787850000080653
+          },
+          "negative_class_blocks_inheritance": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 16.204599989578128
+          },
+          "multi_sentence": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 27.420049998909235
+          },
+          "article_choice": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 18.47979999729432
+          },
+          "conversation": {
+            "passed": 3,
+            "total": 3,
+            "success_rate": 1.0,
+            "median_response_ms": 14.272500004153699
+          },
+          "multi_value_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 14.255699992645532
+          },
+          "yes_no_stress": {
+            "passed": 2,
+            "total": 2,
+            "success_rate": 1.0,
+            "median_response_ms": 7.869100008974783
+          },
+          "query_scope_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 13.25429999269545
+          },
+          "instruction_scope_stress": {
+            "passed": 1,
+            "total": 1,
+            "success_rate": 1.0,
+            "median_response_ms": 15.133999986574054
+          },
+          "double_negation_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 16.322100011166185
+          },
+          "all": {
+            "passed": 230,
+            "total": 233,
+            "success_rate": 0.9871244635193133,
+            "median_response_ms": 18.199800018919632
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/signed-v15a-cuda.json",
+        "summary": {
+          "signed_boundary": {
+            "passed": 10,
+            "total": 10,
+            "success_rate": 1.0,
+            "median_response_ms": 8.252699990407564
+          },
+          "signed_random": {
+            "passed": 120,
+            "total": 120,
+            "success_rate": 1.0,
+            "median_response_ms": 9.858399993390776
+          },
+          "unary_and_prefix": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 7.846200023777783
+          },
+          "signed_dialogue": {
+            "passed": 6,
+            "total": 6,
+            "success_rate": 1.0,
+            "median_response_ms": 9.967199992388487
+          },
+          "unsupported_arity_abstention": {
+            "passed": 6,
+            "total": 6,
+            "success_rate": 1.0,
+            "median_response_ms": 15.49469999736175
+          },
+          "range_abstention": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 15.606199973262846
+          },
+          "syntax_stress": {
+            "passed": 0,
+            "total": 3,
+            "success_rate": 0.0,
+            "median_response_ms": 7.3466999747324735
+          },
+          "multiplication_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.473499981453642
+          },
+          "division_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.487900003790855
+          },
+          "parentheses_stress": {
+            "passed": 0,
+            "total": 1,
+            "success_rate": 0.0,
+            "median_response_ms": 15.769499994348735
+          },
+          "all": {
+            "passed": 153,
+            "total": 159,
+            "success_rate": 0.9622641509433962,
+            "median_response_ms": 9.964099997887388
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/truth-v15a-cuda.json",
+        "summary": {
+          "direct_positive": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.016899999347515
+          },
+          "direct_negative": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.194999987608753
+          },
+          "latest_denial": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.5288499831222
+          },
+          "latest_affirmation": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.562699993490241
+          },
+          "different_object_denial": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.51169999805279
+          },
+          "different_object_affirmation": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.511250009178184
+          },
+          "unknown_object": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 15.72275000216905
+          },
+          "unknown_subject": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 15.75014999252744
+          },
+          "subject_binding": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.501050004269928
+          },
+          "inherited_truth": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 8.569400000851601
+          },
+          "question_is_not_assertion": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 15.716050009359606
+          },
+          "authored_and_context_facts": {
+            "passed": 11,
+            "total": 11,
+            "success_rate": 1.0,
+            "median_response_ms": 7.751199998892844
+          },
+          "conversation": {
+            "passed": 6,
+            "total": 6,
+            "success_rate": 1.0,
+            "median_response_ms": 11.906900006579235
+          },
+          "boundaries": {
+            "passed": 3,
+            "total": 3,
+            "success_rate": 1.0,
+            "median_response_ms": 8.113000018056482
+          },
+          "composition_and_scope_stress": {
+            "passed": 8,
+            "total": 11,
+            "success_rate": 0.7272727272727273,
+            "median_response_ms": 8.184000005712733
+          },
+          "all": {
+            "passed": 236,
+            "total": 239,
+            "success_rate": 0.9874476987447699,
+            "median_response_ms": 8.56079999357462
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/query-scope-v15a-cuda.json",
+        "summary": {
+          "positive_fact_positive_query": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 7.983399991644546
+          },
+          "negative_fact_positive_query": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 8.069599978625774
+          },
+          "positive_fact_negative_query": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 8.105199987767264
+          },
+          "negative_fact_negative_query": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 8.247300022048876
+          },
+          "unknown_is_not_false": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 15.861199994105846
+          },
+          "correction_before_negated_query": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 8.557199995266274
+          },
+          "inherited_query_negation": {
+            "passed": 35,
+            "total": 35,
+            "success_rate": 1.0,
+            "median_response_ms": 8.643999986816198
+          },
+          "authored_and_negative_membership": {
+            "passed": 9,
+            "total": 9,
+            "success_rate": 1.0,
+            "median_response_ms": 7.983099989360198
+          },
+          "conversation": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 10.247700003674254
+          },
+          "composition_and_scope_stress": {
+            "passed": 4,
+            "total": 8,
+            "success_rate": 0.5,
+            "median_response_ms": 15.314899996155873
+          },
+          "all": {
+            "passed": 265,
+            "total": 269,
+            "success_rate": 0.9851301115241635,
+            "median_response_ms": 8.436999982222915
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/composition-v15a-cuda.json",
+        "summary": {
+          "and_truth_table": {
+            "passed": 126,
+            "total": 126,
+            "success_rate": 1.0,
+            "median_response_ms": 8.773449997534044
+          },
+          "or_truth_table": {
+            "passed": 126,
+            "total": 126,
+            "success_rate": 1.0,
+            "median_response_ms": 8.73929999943357
+          },
+          "nary_and": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 8.835849992465228
+          },
+          "nary_or": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 9.033649999764748
+          },
+          "inherited_composition": {
+            "passed": 24,
+            "total": 24,
+            "success_rate": 1.0,
+            "median_response_ms": 9.19275000342168
+          },
+          "mixed_subject_predicate": {
+            "passed": 18,
+            "total": 18,
+            "success_rate": 1.0,
+            "median_response_ms": 8.796699985396117
+          },
+          "shared_subject_predicate_change": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 8.72370001161471
+          },
+          "active_request_scope": {
+            "passed": 54,
+            "total": 54,
+            "success_rate": 1.0,
+            "median_response_ms": 13.896949996706098
+          },
+          "unsupported_request_after_negative_fact": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 16.095900005893782
+          },
+          "conversation": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 12.559400012833066
+          },
+          "structure_and_scope_stress": {
+            "passed": 3,
+            "total": 9,
+            "success_rate": 0.3333333333333333,
+            "median_response_ms": 13.948300009360537
+          },
+          "all": {
+            "passed": 398,
+            "total": 404,
+            "success_rate": 0.9851485148514851,
+            "median_response_ms": 8.899799984646961
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/request-modifiers-v15a-cuda.json",
+        "summary": {
+          "modified_arithmetic": {
+            "passed": 20,
+            "total": 20,
+            "success_rate": 1.0,
+            "median_response_ms": 9.299649987951852
+          },
+          "modified_request_kind": {
+            "passed": 32,
+            "total": 32,
+            "success_rate": 1.0,
+            "median_response_ms": 10.423050000099465
+          },
+          "later_modified_request": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 10.624300004565157
+          },
+          "two_modifiers": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 10.4097000148613
+          },
+          "modifier_structure_stress": {
+            "passed": 2,
+            "total": 5,
+            "success_rate": 0.4,
+            "median_response_ms": 15.646599989850074
+          },
+          "all": {
+            "passed": 78,
+            "total": 81,
+            "success_rate": 0.9629629629629629,
+            "median_response_ms": 10.319900000467896
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/assertions-v15a-cuda.json",
+        "summary": {
+          "shared_positive": {
+            "passed": 49,
+            "total": 49,
+            "success_rate": 1.0,
+            "median_response_ms": 8.282900002086535
+          },
+          "compound_query_of_compound_fact": {
+            "passed": 42,
+            "total": 42,
+            "success_rate": 1.0,
+            "median_response_ms": 8.509099992807023
+          },
+          "subject_isolation": {
+            "passed": 42,
+            "total": 42,
+            "success_rate": 1.0,
+            "median_response_ms": 16.117899998789653
+          },
+          "shared_negative": {
+            "passed": 49,
+            "total": 49,
+            "success_rate": 1.0,
+            "median_response_ms": 8.477399998810142
+          },
+          "predicate_polarity_and_subject_changes": {
+            "passed": 112,
+            "total": 112,
+            "success_rate": 1.0,
+            "median_response_ms": 8.61915000132285
+          },
+          "object_correction": {
+            "passed": 16,
+            "total": 16,
+            "success_rate": 1.0,
+            "median_response_ms": 8.582750000641681
+          },
+          "object_determiners": {
+            "passed": 24,
+            "total": 24,
+            "success_rate": 1.0,
+            "median_response_ms": 8.48509999923408
+          },
+          "inherited_compound_properties": {
+            "passed": 15,
+            "total": 15,
+            "success_rate": 1.0,
+            "median_response_ms": 8.830999984638765
+          },
+          "question_is_not_assertion": {
+            "passed": 16,
+            "total": 16,
+            "success_rate": 1.0,
+            "median_response_ms": 15.498699984163977
+          },
+          "conversation": {
+            "passed": 16,
+            "total": 16,
+            "success_rate": 1.0,
+            "median_response_ms": 9.728499993798323
+          },
+          "assertion_structure_stress": {
+            "passed": 1,
+            "total": 9,
+            "success_rate": 0.1111111111111111,
+            "median_response_ms": 15.963300014846027
+          },
+          "all": {
+            "passed": 382,
+            "total": 390,
+            "success_rate": 0.9794871794871794,
+            "median_response_ms": 8.619799991720356
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/assertion-boundaries-v15a-cuda.json",
+        "summary": {
+          "new_subject_is_not_an_object": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 16.061750007793307
+          },
+          "new_subject_positive_control": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 8.373549993848428
+          },
+          "indirect_question_scope": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 15.140850009629503
+          },
+          "indirect_question_memory": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 16.080250003142282
+          },
+          "clause_frame_isolation": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 15.527600000496022
+          },
+          "predicate_control": {
+            "passed": 4,
+            "total": 4,
+            "success_rate": 1.0,
+            "median_response_ms": 8.235599991166964
+          },
+          "context_shared_object": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 35.754899989115074
+          },
+          "context_subject_change": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 35.8948000066448
+          },
+          "context_clause_isolation": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 49.465599993709475
+          },
+          "context_polarity_change": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 36.18500000447966
+          },
+          "all": {
+            "passed": 76,
+            "total": 76,
+            "success_rate": 1.0,
+            "median_response_ms": 15.972050008713268
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/context-v15a-cuda.json",
+        "summary": {
+          "static_generation": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 77.56069999595638
+          },
+          "signed_arithmetic": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 44.97065002215095
+          },
+          "late_compound_fact": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 42.479249997995794
+          },
+          "distant_compound_fact": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 42.317749990615994
+          },
+          "unknown_generation": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 57.82885001099203
+          },
+          "negative_fact_and_query": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 42.57209999195766
+          },
+          "distinct_subject_binding": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 42.30045000440441
+          },
+          "distant_three_hop_inheritance": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 42.875199986156076
+          },
+          "distant_correction": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 113.95529999572318
+          },
+          "active_question_scope": {
+            "passed": 12,
+            "total": 12,
+            "success_rate": 1.0,
+            "median_response_ms": 142.67415000358596
+          },
+          "near_capacity_greeting": {
+            "passed": 3,
+            "total": 3,
+            "success_rate": 1.0,
+            "median_response_ms": 170.98900000564754
+          },
+          "near_capacity_generation": {
+            "passed": 3,
+            "total": 3,
+            "success_rate": 1.0,
+            "median_response_ms": 260.5409000243526
+          },
+          "all": {
+            "passed": 126,
+            "total": 126,
+            "success_rate": 1.0,
+            "median_response_ms": 65.59130000823643
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
+      },
+      {
+        "path": "results/binding-positions-v15a-cpu.json",
+        "summary": {
+          "changed_subject_positive": {
+            "passed": 49,
+            "total": 49,
+            "success_rate": 1.0,
+            "median_response_ms": 2528.332300018519
+          },
+          "changed_subject_negative": {
+            "passed": 49,
+            "total": 49,
+            "success_rate": 1.0,
+            "median_response_ms": 2532.360899989726
+          },
+          "wrong_subject_isolation": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 4440.560499991989
+          },
+          "single_subject_control": {
+            "passed": 7,
+            "total": 7,
+            "success_rate": 1.0,
+            "median_response_ms": 4289.3893999862485
+          },
+          "random_offset_binding": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 2344.912899992778
+          },
+          "random_offset_correction": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 2283.585800003493
+          },
+          "long_conversation": {
+            "passed": 8,
+            "total": 8,
+            "success_rate": 1.0,
+            "median_response_ms": 2550.5283499951474
+          },
+          "all": {
+            "passed": 136,
+            "total": 136,
+            "success_rate": 1.0,
+            "median_response_ms": 2562.587349995738
+          }
+        },
+        "execution_git": {
+          "commit": "0dd126669353e3cae496c92351bd3dbcb334a2f5",
+          "dirty": true
+        },
+        "model_sha256": "6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81"
       }
     ]
   }

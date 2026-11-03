@@ -769,3 +769,20 @@ water fact scores 103215.9721 versus 103175.9721 for the older wings fact. Claus
 rounding no longer competes with that 40-point recency gap. Archived source
 reproduces exact raw/config hashes. The candidate is committed before any new
 binding seed is selected; no general-conversation success is claimed.
+
+## 2026-11-04: frozen v15a fresh combinations
+
+After commit `a583d2b49325d3ec66c937c32f06c43fa0b19ac4`, selected seed 192095465.
+The fresh binding suite scores 136/136 on CUDA and CPU. It varies unfamiliar
+names, combinations and eight random offsets, while the seven fixed offsets,
+controlled language structures and expected answer types are already known.
+These are combination checks, not independent evidence of broad intelligence.
+Frozen source and checkpoint bytes were not tuned after the results.
+
+The default local model now references v15a; the frozen v14b raw hash remains
+unchanged. The v0.7 archive passes streamed raw/config hash and ZIP CRC checks.
+A 23-turn publication conversation adds three-subject binding, wrong-subject
+isolation and correction to the previous long conversation, still following
+3,000 tokens of declarative distractors. It is a post-freeze author-designed
+smoke check, not an independent language benchmark.
+The local CUDA run passes 23/23 before publication.
