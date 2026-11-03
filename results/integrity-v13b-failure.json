@@ -1,0 +1,35 @@
+{
+  "version": "v13b",
+  "status": "failed",
+  "git": {
+    "commit": "ae14f38c484c8db80c8fa76f37cc1fd313d06f1f",
+    "dirty": true
+  },
+  "model_sha256": "a9e0528b8f698db8e39caa696e3871c5d31c4ed3a19522f12f573c115c6ca724",
+  "command": [
+    "D:/LittleBit/.venv/Scripts/python.exe",
+    "-m",
+    "benchmarks.integrity",
+    "--model",
+    "build/v13b",
+    "--source",
+    "versions/autoregressive_v13b",
+    "--output",
+    "results/integrity-v13b-cuda.json",
+    "--device",
+    "cuda",
+    "--arithmetic",
+    "--arithmetic-layer",
+    "10",
+    "--polarity",
+    "--signed-operands",
+    "--truth",
+    "--query-negation",
+    "--composition",
+    "--compound-facts"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"D:\\TestAIWeightsFromScratch\\publish\\direct-weight-chat\\benchmarks\\integrity.py\", line 350, in <module>\n    main()\n  File \"D:\\TestAIWeightsFromScratch\\publish\\direct-weight-chat\\benchmarks\\integrity.py\", line 323, in main\n    assert original[-1]['text'] == expected and ablated[-1]['text'] == changed, (intervention, original[-1]['text'], ablated[-1]['text'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('remove_continuation_validity', 'I do not know.', 'I do not know.')\n",
+  "note": "The integrity run aborted at a failed assertion. This is not a completed integrity pass."
+}

@@ -1,0 +1,6151 @@
+{
+  "version": "v13b",
+  "suite": "query-predicate-and-negation",
+  "evaluation_status": "post-freeze known-generator combinations",
+  "created_utc": "2026-11-03T15:06:41.512735+00:00",
+  "git": {
+    "commit": "ae14f38c484c8db80c8fa76f37cc1fd313d06f1f",
+    "dirty": true
+  },
+  "model_sha256": "a9e0528b8f698db8e39caa696e3871c5d31c4ed3a19522f12f573c115c6ca724",
+  "suite_sha256": "c5472e3e9189cde17a8900a21eb213dbd1e501f4b638acc22fa5810a4b15ea5f",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 929381,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "A omzkrfgd is a vehicle. Is omzkrfgd a vehicle?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008972000010544434,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-000",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzkrfgd is not a vehicle. Is omzkrfgd a vehicle?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008316599996760488,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-001",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzkrfgd is a vehicle. Is omzkrfgd not a vehicle?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008004700008314103,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-002",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzkrfgd is not a vehicle. Is omzkrfgd not a vehicle?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008019200002308935,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-003",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgmkhkv is a vehicle. Is omzkrfgd not a vehicle?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01600450000842102,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-004",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzkrfgd is a vehicle. A omzkrfgd is not a vehicle. Is omzkrfgd not a vehicle?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009695099986856803,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-005",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfbwvgg is a vehicle. A omzkrfgd is a velfbwvgg. Is omzkrfgd not a vehicle?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008924399997340515,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-006",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrlpzfb is a machine. Is a omrlpzfb a machine?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0080422000028193,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-007",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrlpzfb is not a machine. Is a omrlpzfb a machine?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008319999993545935,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-008",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrlpzfb is a machine. Is a omrlpzfb not a machine?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007884600025136024,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-009",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrlpzfb is not a machine. Is a omrlpzfb not a machine?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008612200006609783,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-010",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwlbzbv is a machine. Is a omrlpzfb not a machine?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01576710000517778,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-011",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrlpzfb is a machine. A omrlpzfb is not a machine. Is a omrlpzfb not a machine?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008734399976674467,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-012",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrlpzfb is a velgdhlnk. A velgdhlnk is a omszkktz. A omszkktz is not a machine. Is a omrlpzfb not a machine?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009259600017685443,
+      "device": "cuda",
+      "prefix_tokens": 29,
+      "id": "query-scope-013",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltbrncf is a omtbtdkt. Is veltbrncf a omtbtdkt?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007838499994250014,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-014",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltbrncf is not a omtbtdkt. Is veltbrncf a omtbtdkt?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007871199981309474,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-015",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltbrncf is a omtbtdkt. Is veltbrncf not a omtbtdkt?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008258699992438778,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-016",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltbrncf is not a omtbtdkt. Is veltbrncf not a omtbtdkt?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008109799993690103,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-017",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrcrgzk is a omtbtdkt. Is veltbrncf not a omtbtdkt?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015553400007775053,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-018",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltbrncf is a omtbtdkt. A veltbrncf is not a omtbtdkt. Is veltbrncf not a omtbtdkt?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008738199976505712,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-019",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsrtmdf is a omtbtdkt. A velbrfbpw is a omllvpvf. A omllvpvf is a velsrtmdf. A veltbrncf is a velbrfbpw. Is veltbrncf not a omtbtdkt?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009487900009844452,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "query-scope-020",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsbtvgm is a ombprrct. Is a velsbtvgm a ombprrct?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00805999999283813,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-021",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsbtvgm is not a ombprrct. Is a velsbtvgm a ombprrct?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007806000008713454,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-022",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsbtvgm is a ombprrct. Is a velsbtvgm not a ombprrct?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008340500004123896,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-023",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsbtvgm is not a ombprrct. Is a velsbtvgm not a ombprrct?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008347200026037171,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-024",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwlsmvt is a ombprrct. Is a velsbtvgm not a ombprrct?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015304300002753735,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-025",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsbtvgm is a ombprrct. A velsbtvgm is not a ombprrct. Is a velsbtvgm not a ombprrct?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008727200009161606,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-026",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsbtvgm is a omldrnlw. A omldrnlw is not a ombprrct. Is a velsbtvgm not a ombprrct?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008605299983173609,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-027",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnkfpvp is a omfpnmtd. Is omnkfpvp a omfpnmtd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007635899994056672,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-028",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnkfpvp is not a omfpnmtd. Is omnkfpvp a omfpnmtd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008548700017854571,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-029",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnkfpvp is a omfpnmtd. Is omnkfpvp not a omfpnmtd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007941199990455061,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-030",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnkfpvp is not a omfpnmtd. Is omnkfpvp not a omfpnmtd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008342599991010502,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-031",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdzftdc is a omfpnmtd. Is omnkfpvp not a omfpnmtd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01533299998845905,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-032",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnkfpvp is a omfpnmtd. A omnkfpvp is not a omfpnmtd. Is omnkfpvp not a omfpnmtd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008786199992755428,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-033",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdvtvrb is a omfpnmtd. A velwpnssw is a omdvtvrb. A omnkfpvp is a velwpnssw. Is omnkfpvp not a omfpnmtd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008550700003979728,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "query-scope-034",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omscwmrw can fly. Can omscwmrw fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007548299996415153,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-035",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omscwmrw cannot fly. Can omscwmrw fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007908600004157051,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-036",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omscwmrw can fly. Can omscwmrw not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007824799977242947,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-037",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omscwmrw cannot fly. Can omscwmrw not fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00827920000301674,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-038",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommvgzps can fly. Can omscwmrw not fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015471499995328486,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-039",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omscwmrw can fly. A omscwmrw cannot fly. Can omscwmrw not fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00848370001767762,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "query-scope-040",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwsrgzm can fly. A omscwmrw is a velwsrgzm. Can omscwmrw not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008546299999579787,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-041",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrsknhc can swim. Can a omrsknhc swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00786589999916032,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-042",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrsknhc cannot swim. Can a omrsknhc swim?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007754399994155392,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-043",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrsknhc can swim. Can a omrsknhc not swim?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008184200007235631,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-044",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrsknhc cannot swim. Can a omrsknhc not swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007721700007095933,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-045",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommnwbht can swim. Can a omrsknhc not swim?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015394899994134903,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-046",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrsknhc can swim. A omrsknhc cannot swim. Can a omrsknhc not swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00855779999983497,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-047",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrsknhc is a omttglhp. A omttglhp is a ombgzhrz. A ombgzhrz cannot swim. Can a omrsknhc not swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00861549997352995,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "query-scope-048",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfmzhnr can velkkmwzd. Can velfmzhnr velkkmwzd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00827469999785535,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-049",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfmzhnr cannot velkkmwzd. Can velfmzhnr velkkmwzd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007698300003539771,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-050",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfmzhnr can velkkmwzd. Can velfmzhnr not velkkmwzd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00821120000910014,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-051",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfmzhnr cannot velkkmwzd. Can velfmzhnr not velkkmwzd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007913000008556992,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-052",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ompmhnsz can velkkmwzd. Can velfmzhnr not velkkmwzd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015460399998119101,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-053",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfmzhnr can velkkmwzd. A velfmzhnr cannot velkkmwzd. Can velfmzhnr not velkkmwzd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00873549998505041,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "query-scope-054",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ombkrmlk is a velcmrdkt. A velfmzhnr is a velrmbtmr. A velcmrdkt can velkkmwzd. A velrmbtmr is a ombkrmlk. Can velfmzhnr not velkkmwzd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008443900005659088,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "id": "query-scope-055",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omshhgmc can velsdktmm. Can a omshhgmc velsdktmm?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008001100010005757,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-056",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omshhgmc cannot velsdktmm. Can a omshhgmc velsdktmm?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008122300001559779,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-057",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omshhgmc can velsdktmm. Can a omshhgmc not velsdktmm?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008006799995200709,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-058",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omshhgmc cannot velsdktmm. Can a omshhgmc not velsdktmm?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008508099999744445,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-059",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrplscz can velsdktmm. Can a omshhgmc not velsdktmm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015409000014187768,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-060",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omshhgmc can velsdktmm. A omshhgmc cannot velsdktmm. Can a omshhgmc not velsdktmm?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008350200019776821,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-061",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omssclnm cannot velsdktmm. A omshhgmc is a omssclnm. Can a omshhgmc not velsdktmm?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008759599993936718,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-062",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommlgvcs can velsmfzgc. Can ommlgvcs velsmfzgc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007535600016126409,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-063",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommlgvcs cannot velsmfzgc. Can ommlgvcs velsmfzgc?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008200499985832721,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-064",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommlgvcs can velsmfzgc. Can ommlgvcs not velsmfzgc?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007953099993756041,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-065",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommlgvcs cannot velsmfzgc. Can ommlgvcs not velsmfzgc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008497500006342307,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-066",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omvtbhnc can velsmfzgc. Can ommlgvcs not velsmfzgc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01567540000542067,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-067",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommlgvcs can velsmfzgc. A ommlgvcs cannot velsmfzgc. Can ommlgvcs not velsmfzgc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008850799989886582,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "query-scope-068",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommlgvcs is a ombgkdcw. A ommcchmd can velsmfzgc. A ombgkdcw is a ommcchmd. Can ommlgvcs not velsmfzgc?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008770699991146103,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "query-scope-069",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfnrvbs needs water. Does velfnrvbs need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008650599978864193,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-070",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfnrvbs does not need water. Does velfnrvbs need water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008198700001230463,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-071",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfnrvbs needs water. Does velfnrvbs not need water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008285799995064735,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-072",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfnrvbs does not need water. Does velfnrvbs not need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008103599975584075,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-073",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omkfhzbv needs water. Does velfnrvbs not need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015237699990393594,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-074",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfnrvbs needs water. A velfnrvbs does not need water. Does velfnrvbs not need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008682499988935888,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-075",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfnrvbs is a velkfsfdf. A velkfsfdf needs water. Does velfnrvbs not need water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00829850000445731,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-076",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdmgsh needs fuel. Does a veltdmgsh need fuel?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007909800013294443,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-077",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdmgsh does not need fuel. Does a veltdmgsh need fuel?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007882300007622689,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-078",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdmgsh needs fuel. Does a veltdmgsh not need fuel?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00823179999133572,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-079",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdmgsh does not need fuel. Does a veltdmgsh not need fuel?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008294700004626065,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-080",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommnmtlp needs fuel. Does a veltdmgsh not need fuel?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01521599999978207,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-081",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdmgsh needs fuel. A veltdmgsh does not need fuel. Does a veltdmgsh not need fuel?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008753100002650172,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-082",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdmgsh is a omdrbbtm. A veltbfhrr does not need fuel. A omdrbbtm is a veltbfhrr. Does a veltdmgsh not need fuel?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008757600007811561,
+      "device": "cuda",
+      "prefix_tokens": 29,
+      "id": "query-scope-083",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwmtpkm needs omtlglmk. Does omwmtpkm need omtlglmk?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007721400004811585,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-084",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwmtpkm does not need omtlglmk. Does omwmtpkm need omtlglmk?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008026700001209974,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-085",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwmtpkm needs omtlglmk. Does omwmtpkm not need omtlglmk?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007838499994250014,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-086",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwmtpkm does not need omtlglmk. Does omwmtpkm not need omtlglmk?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008362599997781217,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-087",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzztfpn needs omtlglmk. Does omwmtpkm not need omtlglmk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015040399972349405,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-088",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwmtpkm needs omtlglmk. A omwmtpkm does not need omtlglmk. Does omwmtpkm not need omtlglmk?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008416600001510233,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-089",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgskgrd needs omtlglmk. A omwmtpkm is a omdlmzpn. A omdlmzpn is a veldtswfl. A veldtswfl is a omgskgrd. Does omwmtpkm not need omtlglmk?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008901099994545802,
+      "device": "cuda",
+      "prefix_tokens": 32,
+      "id": "query-scope-090",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbgzrnp needs omszrgzl. Does a velbgzrnp need omszrgzl?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007595600007334724,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-091",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbgzrnp does not need omszrgzl. Does a velbgzrnp need omszrgzl?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008285700023407117,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-092",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbgzrnp needs omszrgzl. Does a velbgzrnp not need omszrgzl?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008014199993340299,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-093",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbgzrnp does not need omszrgzl. Does a velbgzrnp not need omszrgzl?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008563400013372302,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-094",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkspgnn needs omszrgzl. Does a velbgzrnp not need omszrgzl?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015553300007013604,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-095",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbgzrnp needs omszrgzl. A velbgzrnp does not need omszrgzl. Does a velbgzrnp not need omszrgzl?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008748599997488782,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-096",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwkrfrm does not need omszrgzl. A velbgzrnp is a velwkrfrm. Does a velbgzrnp not need omszrgzl?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00836659999913536,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-097",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnhbkll needs velhvvfrn. Does velnhbkll need velhvvfrn?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00809990000561811,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-098",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnhbkll does not need velhvvfrn. Does velnhbkll need velhvvfrn?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008156800002325326,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-099",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnhbkll needs velhvvfrn. Does velnhbkll not need velhvvfrn?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008424800005741417,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-100",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnhbkll does not need velhvvfrn. Does velnhbkll not need velhvvfrn?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008024100010516122,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-101",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgvzcmz needs velhvvfrn. Does velnhbkll not need velhvvfrn?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015619700017850846,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-102",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnhbkll needs velhvvfrn. A velnhbkll does not need velhvvfrn. Does velnhbkll not need velhvvfrn?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008818300004350021,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-103",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrvgvgr needs velhvvfrn. A omcvlkvb is a omrvgvgr. A velnhbkll is a omcvlkvb. Does velnhbkll not need velhvvfrn?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00850310001987964,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "query-scope-104",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsmmcwv has wings. Does omsmmcwv have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008689999987836927,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-105",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsmmcwv does not have wings. Does omsmmcwv have wings?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00861709998571314,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-106",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsmmcwv has wings. Does omsmmcwv not have wings?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00932370001100935,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-107",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsmmcwv does not have wings. Does omsmmcwv not have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008458700001938269,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-108",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvghmzw has wings. Does omsmmcwv not have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01649760000873357,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-109",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsmmcwv has wings. A omsmmcwv does not have wings. Does omsmmcwv not have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008600100001785904,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-110",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkthdfk has wings. A omsmmcwv is a velkthdfk. Does omsmmcwv not have wings?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00875639999867417,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-111",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcrggbc has sensors. Does a velcrggbc have sensors?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007720299996435642,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-112",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcrggbc does not have sensors. Does a velcrggbc have sensors?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008043100009672344,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-113",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcrggbc has sensors. Does a velcrggbc not have sensors?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008141199999954551,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-114",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcrggbc does not have sensors. Does a velcrggbc not have sensors?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008321500004967675,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-115",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhvztbk has sensors. Does a velcrggbc not have sensors?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015441600000485778,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-116",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcrggbc has sensors. A velcrggbc does not have sensors. Does a velcrggbc not have sensors?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008901199995307252,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-117",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhvpzpw is a omvdstvh. A velcrggbc is a omhvpzpw. A omvdstvh does not have sensors. Does a velcrggbc not have sensors?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008544900018023327,
+      "device": "cuda",
+      "prefix_tokens": 29,
+      "id": "query-scope-118",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrmpsms has omhfldcg. Does omrmpsms have omhfldcg?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00813390000257641,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-119",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrmpsms does not have omhfldcg. Does omrmpsms have omhfldcg?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00793550000526011,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-120",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrmpsms has omhfldcg. Does omrmpsms not have omhfldcg?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00788520000060089,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-121",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrmpsms does not have omhfldcg. Does omrmpsms not have omhfldcg?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00801409999257885,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-122",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommstgzr has omhfldcg. Does omrmpsms not have omhfldcg?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015035999997053295,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-123",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrmpsms has omhfldcg. A omrmpsms does not have omhfldcg. Does omrmpsms not have omhfldcg?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008502499986207113,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-124",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdbrtdw is a velftlfdt. A vellhvmzb has omhfldcg. A velftlfdt is a vellhvmzb. A omrmpsms is a omdbrtdw. Does omrmpsms not have omhfldcg?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008429999987129122,
+      "device": "cuda",
+      "prefix_tokens": 32,
+      "id": "query-scope-125",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwgcrnn has velkrlpww. Does a velwgcrnn have velkrlpww?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007890200009569526,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-126",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwgcrnn does not have velkrlpww. Does a velwgcrnn have velkrlpww?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007798099977662787,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-127",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwgcrnn has velkrlpww. Does a velwgcrnn not have velkrlpww?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008312499994644895,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-128",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwgcrnn does not have velkrlpww. Does a velwgcrnn not have velkrlpww?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00865250002243556,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-129",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velpngkkn has velkrlpww. Does a velwgcrnn not have velkrlpww?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015146999998250976,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-130",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwgcrnn has velkrlpww. A velwgcrnn does not have velkrlpww. Does a velwgcrnn not have velkrlpww?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008587699994677678,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-131",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ombbkfgv does not have velkrlpww. A velwgcrnn is a ombbkfgv. Does a velwgcrnn not have velkrlpww?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008616000006441027,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-132",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellhdhzl has velcfhkfn. Does vellhdhzl have velcfhkfn?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007961700001033023,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-133",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellhdhzl does not have velcfhkfn. Does vellhdhzl have velcfhkfn?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008202900004107505,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-134",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellhdhzl has velcfhkfn. Does vellhdhzl not have velcfhkfn?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007855700008803979,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-135",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellhdhzl does not have velcfhkfn. Does vellhdhzl not have velcfhkfn?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008258599991677329,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-136",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrvskrn has velcfhkfn. Does vellhdhzl not have velcfhkfn?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015399500000057742,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-137",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellhdhzl has velcfhkfn. A vellhdhzl does not have velcfhkfn. Does vellhdhzl not have velcfhkfn?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008319400018081069,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-138",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellhdhzl is a omwhgbgs. A omwhgbgs is a omhbrmzs. A omhbrmzs has velcfhkfn. Does vellhdhzl not have velcfhkfn?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008632699988083914,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "query-scope-139",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzhmrrf produces heat. Does omzhmrrf produce heat?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007790800009388477,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-140",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzhmrrf does not produce heat. Does omzhmrrf produce heat?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008144799998262897,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-141",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzhmrrf produces heat. Does omzhmrrf not produce heat?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008071399992331862,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-142",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzhmrrf does not produce heat. Does omzhmrrf not produce heat?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00796519999857992,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-143",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommprwrz produces heat. Does omzhmrrf not produce heat?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015440100018167868,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-144",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzhmrrf produces heat. A omzhmrrf does not produce heat. Does omzhmrrf not produce heat?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00856079999357462,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-145",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzhmrrf is a velcrmmnp. A velcrmmnp produces heat. Does omzhmrrf not produce heat?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008653400000184774,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-146",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnpkgzk produces oxygen. Does a omnpkgzk produce oxygen?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008365699992282316,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-147",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnpkgzk does not produce oxygen. Does a omnpkgzk produce oxygen?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007974499982083216,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-148",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnpkgzk produces oxygen. Does a omnpkgzk not produce oxygen?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008367100002942607,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-149",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnpkgzk does not produce oxygen. Does a omnpkgzk not produce oxygen?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008369899995159358,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-150",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velntzlwv produces oxygen. Does a omnpkgzk not produce oxygen?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016594699991401285,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-151",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnpkgzk produces oxygen. A omnpkgzk does not produce oxygen. Does a omnpkgzk not produce oxygen?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009073499997612089,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-152",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ombgwczh does not produce oxygen. A velblmlkp is a ombgwczh. A omnpkgzk is a velblmlkp. Does a omnpkgzk not produce oxygen?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008885400020517409,
+      "device": "cuda",
+      "prefix_tokens": 29,
+      "id": "query-scope-153",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkfmzmn produces omlsnzln. Does velkfmzmn produce omlsnzln?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077606000122614205,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-154",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkfmzmn does not produce omlsnzln. Does velkfmzmn produce omlsnzln?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008195100002922118,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-155",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkfmzmn produces omlsnzln. Does velkfmzmn not produce omlsnzln?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007638499984750524,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-156",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkfmzmn does not produce omlsnzln. Does velkfmzmn not produce omlsnzln?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00818719997187145,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-157",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzrfccp produces omlsnzln. Does velkfmzmn not produce omlsnzln?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015443799988133833,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-158",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkfmzmn produces omlsnzln. A velkfmzmn does not produce omlsnzln. Does velkfmzmn not produce omlsnzln?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008202400000300258,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-159",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcsnkrh is a velnhdbcc. A velkfmzmn is a velcsnkrh. A omrpptpd produces omlsnzln. A velnhdbcc is a omrpptpd. Does velkfmzmn not produce omlsnzln?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009029299981193617,
+      "device": "cuda",
+      "prefix_tokens": 32,
+      "id": "query-scope-160",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omggmcsc produces omfcsdwp. Does a omggmcsc produce omfcsdwp?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007736100000329316,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-161",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omggmcsc does not produce omfcsdwp. Does a omggmcsc produce omfcsdwp?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008408900001086295,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-162",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omggmcsc produces omfcsdwp. Does a omggmcsc not produce omfcsdwp?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007999399997061118,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-163",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omggmcsc does not produce omfcsdwp. Does a omggmcsc not produce omfcsdwp?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010816599999088794,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-164",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velthztts produces omfcsdwp. Does a omggmcsc not produce omfcsdwp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016011400002753362,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-165",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omggmcsc produces omfcsdwp. A omggmcsc does not produce omfcsdwp. Does a omggmcsc not produce omfcsdwp?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00901700000395067,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-166",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omggmcsc is a velhzrffv. A velhzrffv does not produce omfcsdwp. Does a omggmcsc not produce omfcsdwp?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008483299985527992,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-167",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngbcmb produces omwlhzdw. Does velngbcmb produce omwlhzdw?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008258999994723126,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-168",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngbcmb does not produce omwlhzdw. Does velngbcmb produce omwlhzdw?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008363899978576228,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-169",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngbcmb produces omwlhzdw. Does velngbcmb not produce omwlhzdw?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008254199987277389,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-170",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngbcmb does not produce omwlhzdw. Does velngbcmb not produce omwlhzdw?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008418300014454871,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-171",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfbdbzv produces omwlhzdw. Does velngbcmb not produce omwlhzdw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01559239998459816,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-172",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngbcmb produces omwlhzdw. A velngbcmb does not produce omwlhzdw. Does velngbcmb not produce omwlhzdw?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0084169999754522,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-173",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellmnphz produces omwlhzdw. A velngbcmb is a velmwdzhs. A velmwdzhs is a vellmnphz. Does velngbcmb not produce omwlhzdw?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008598999993409961,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "query-scope-174",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgpzvvf is cold. Is omgpzvvf cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007476800004951656,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-175",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgpzvvf is not cold. Is omgpzvvf cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008309400000143796,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-176",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgpzvvf is cold. Is omgpzvvf not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00774290002300404,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-177",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgpzvvf is not cold. Is omgpzvvf not cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008077400008914992,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-178",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omltzznv is cold. Is omgpzvvf not cold?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014958899992052466,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-179",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgpzvvf is cold. A omgpzvvf is not cold. Is omgpzvvf not cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008445799991022795,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-180",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbvfgpc is cold. A omgpzvvf is a velbvfgpc. Is omgpzvvf not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008555200009141117,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-181",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnftbkd is green. Is a velnftbkd green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007609199994476512,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-182",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnftbkd is not green. Is a velnftbkd green?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008136199990985915,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-183",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnftbkd is green. Is a velnftbkd not green?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007697099994402379,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-184",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnftbkd is not green. Is a velnftbkd not green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008391100011067465,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-185",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veldnbbtd is green. Is a velnftbkd not green?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015204600000288337,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-186",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnftbkd is green. A velnftbkd is not green. Is a velnftbkd not green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00844070001039654,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-187",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnftbkd is a veldlnhnz. A veldlnhnz is a omrwdgcd. A omrwdgcd is not green. Is a velnftbkd not green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008406999986618757,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "query-scope-188",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omppwzfh is cold. Is omppwzfh cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00767769999220036,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-189",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omppwzfh is not cold. Is omppwzfh cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007831299997633323,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-190",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omppwzfh is cold. Is omppwzfh not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008051200013142079,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-191",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omppwzfh is not cold. Is omppwzfh not cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007683500007260591,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-192",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrdvtsf is cold. Is omppwzfh not cold?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01520279998658225,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-193",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omppwzfh is cold. A omppwzfh is not cold. Is omppwzfh not cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00863620001473464,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-194",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrrhnss is cold. A veltcfrhc is a velvfpllz. A omppwzfh is a veltcfrhc. A velvfpllz is a omrrhnss. Is omppwzfh not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008421200007433072,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "id": "query-scope-195",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellvvlmg is green. Is a vellvvlmg green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008141199999954551,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-196",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellvvlmg is not green. Is a vellvvlmg green?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007747900002868846,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-197",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellvvlmg is green. Is a vellvvlmg not green?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008415000018430874,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-198",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellvvlmg is not green. Is a vellvvlmg not green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007789800001773983,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-199",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwbwvvh is green. Is a vellvvlmg not green?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015780100016854703,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-200",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellvvlmg is green. A vellvvlmg is not green. Is a vellvvlmg not green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008503599994583055,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-201",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzwlpsb is not green. A vellvvlmg is a velzwlpsb. Is a vellvvlmg not green?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008279400004539639,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-202",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommsgcnv is cold. Is ommsgcnv cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0076538999855984,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "query-scope-203",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommsgcnv is not cold. Is ommsgcnv cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00759030002518557,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-204",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommsgcnv is cold. Is ommsgcnv not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007961299997987226,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-205",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommsgcnv is not cold. Is ommsgcnv not cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00813249999191612,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-206",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltsccdm is cold. Is ommsgcnv not cold?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015253399993525818,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-207",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommsgcnv is cold. A ommsgcnv is not cold. Is ommsgcnv not cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00832219998119399,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-208",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommsgcnv is a velwwdtfn. A velwwdtfn is a velrllhwc. A velrllhwc is cold. Is ommsgcnv not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008883300004526973,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "query-scope-209",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgzzznd exists in water. Is omgzzznd in water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007654999993974343,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-210",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgzzznd is not in water. Is omgzzznd in water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008528599981218576,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-211",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgzzznd exists in water. Is omgzzznd not in water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007920999982161447,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-212",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgzzznd is not in water. Is omgzzznd not in water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008417999983066693,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-213",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velddvfld exists in water. Is omgzzznd not in water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01594630000181496,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-214",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgzzznd exists in water. A omgzzznd is not in water. Is omgzzznd not in water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008372799988137558,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-215",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnsnbsb exists in water. A omgzzznd is a velnsnbsb. Is omgzzznd not in water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008746100007556379,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "query-scope-216",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngvpdd exists in space. Is a velngvpdd in space?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008046899980399758,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-217",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngvpdd is not in space. Is a velngvpdd in space?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007943300006445497,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-218",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngvpdd exists in space. Is a velngvpdd not in space?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008017399988602847,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-219",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngvpdd is not in space. Is a velngvpdd not in space?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008432900009211153,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-220",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmcbtww exists in space. Is a velngvpdd not in space?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015845500020077452,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-221",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velngvpdd exists in space. A velngvpdd is not in space. Is a velngvpdd not in space?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008817400026600808,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-222",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsnglgv is not in space. A velhlpnvc is a velsnglgv. A velngvpdd is a velhlpnvc. Is a velngvpdd not in space?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008436500007519498,
+      "device": "cuda",
+      "prefix_tokens": 29,
+      "id": "query-scope-223",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclsbwc exists in velnpvwfk. Is omclsbwc in velnpvwfk?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008321800007252023,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-224",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclsbwc is not in velnpvwfk. Is omclsbwc in velnpvwfk?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007920200005173683,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-225",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclsbwc exists in velnpvwfk. Is omclsbwc not in velnpvwfk?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00849249999737367,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-226",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclsbwc is not in velnpvwfk. Is omclsbwc not in velnpvwfk?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007908600004157051,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-227",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvphcpp exists in velnpvwfk. Is omclsbwc not in velnpvwfk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015543899993645027,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-228",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclsbwc exists in velnpvwfk. A omclsbwc is not in velnpvwfk. Is omclsbwc not in velnpvwfk?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008885700022801757,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-229",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnvvlfh exists in velnpvwfk. A velmlgwws is a omnvvlfh. A omclsbwc is a omvzcrkr. A omvzcrkr is a velmlgwws. Is omclsbwc not in velnpvwfk?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00964230002136901,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "query-scope-230",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velghmrpf exists in omhhschc. Is a velghmrpf in omhhschc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007966000004671514,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-231",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velghmrpf is not in omhhschc. Is a velghmrpf in omhhschc?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008467699983157218,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-232",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velghmrpf exists in omhhschc. Is a velghmrpf not in omhhschc?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007907599996542558,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-233",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velghmrpf is not in omhhschc. Is a velghmrpf not in omhhschc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008768600004259497,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-234",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velpsnwmk exists in omhhschc. Is a velghmrpf not in omhhschc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015852200012886897,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-235",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velghmrpf exists in omhhschc. A velghmrpf is not in omhhschc. Is a velghmrpf not in omhhschc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008423500024946406,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-236",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velghmrpf is a velrbtrhw. A velrbtrhw is not in omhhschc. Is a velghmrpf not in omhhschc?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008716799988178536,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "query-scope-237",
+      "category": "inherited_query_negation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzvlbm exists in ommlwpzd. Is omlzvlbm in ommlwpzd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007702899980358779,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-238",
+      "category": "positive_fact_positive_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzvlbm is not in ommlwpzd. Is omlzvlbm in ommlwpzd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008326300012413412,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-239",
+      "category": "negative_fact_positive_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzvlbm exists in ommlwpzd. Is omlzvlbm not in ommlwpzd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008297299995319918,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-240",
+      "category": "positive_fact_negative_query",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzvlbm is not in ommlwpzd. Is omlzvlbm not in ommlwpzd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007978900015586987,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-241",
+      "category": "negative_fact_negative_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrslbpp exists in ommlwpzd. Is omlzvlbm not in ommlwpzd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015731999999843538,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-242",
+      "category": "unknown_is_not_false",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzvlbm exists in ommlwpzd. A omlzvlbm is not in ommlwpzd. Is omlzvlbm not in ommlwpzd?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008880999987013638,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "query-scope-243",
+      "category": "correction_before_negated_query",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzvlbm is a velgzrmkd. A velvsspzd exists in ommlwpzd. A velgzrmkd is a velvsspzd. Is omlzvlbm not in ommlwpzd?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008582599984947592,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "query-scope-244",
+      "category": "inherited_query_negation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is a bird an animal?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008091299998341128,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "query-scope-245",
+      "category": "authored_and_negative_membership",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is a bird not an animal?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007492200005799532,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "query-scope-246",
+      "category": "authored_and_negative_membership",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is ice cold?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008188599982531741,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "query-scope-247",
+      "category": "authored_and_negative_membership",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is ice not cold?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007561100006569177,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "query-scope-248",
+      "category": "authored_and_negative_membership",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is a fish in water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008066700014751405,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "query-scope-249",
+      "category": "authored_and_negative_membership",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is a fish not in water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007523200009018183,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "query-scope-250",
+      "category": "authored_and_negative_membership",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Is a bird not a vehicle?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015114999987417832,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "query-scope-251",
+      "category": "authored_and_negative_membership",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A zelm is not a bird. Is a zelm not a bird?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010309999983292073,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "query-scope-252",
+      "category": "authored_and_negative_membership",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A zelm is not a bird. Can a zelm not fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016385399998398498,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-253",
+      "category": "authored_and_negative_membership",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfhknbb needs water. Does omfhknbb not need water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008477299998048693,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-254",
+      "category": "conversation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Does omfhknbb need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008668299997225404,
+      "device": "cuda",
+      "prefix_tokens": 24,
+      "id": "query-scope-255",
+      "category": "conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A omfhknbb does not need water. Does omfhknbb not need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010388499998953193,
+      "device": "cuda",
+      "prefix_tokens": 42,
+      "id": "query-scope-256",
+      "category": "conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "17 + -3",
+      "text": "14.",
+      "token_ids": [
+        512,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009870700014289469,
+      "device": "cuda",
+      "prefix_tokens": 51,
+      "id": "query-scope-257",
+      "category": "conversation",
+      "expected": "14.",
+      "acceptable": [
+        "14."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "What does omfhknbb need?",
+      "text": "Omfhknbb does not need water.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.021085599990328774,
+      "device": "cuda",
+      "prefix_tokens": 61,
+      "id": "query-scope-258",
+      "category": "conversation",
+      "expected": "Omfhknbb does not need water.",
+      "acceptable": [
+        "Omfhknbb does not need water."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Is omfhknbb cold?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01980000000912696,
+      "device": "cuda",
+      "prefix_tokens": 74,
+      "id": "query-scope-259",
+      "category": "conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Describe omfhknbb.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.018858299998100847,
+      "device": "cuda",
+      "prefix_tokens": 85,
+      "id": "query-scope-260",
+      "category": "conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A omfhknbb can fly. Can omfhknbb not not fly?",
+      "text": "Omfhknbb can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013127699989126995,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "query-scope-261",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfhknbb can fly. A omfhknbb cannot swim. Can omfhknbb fly and swim?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0083398999995552,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "query-scope-262",
+      "category": "composition_and_scope_stress",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfhknbb cannot fly. A omfhknbb can swim. Can omfhknbb not fly and swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00895190000301227,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "query-scope-263",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfhknbb is cold. Is it not cold?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01569920001202263,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-264",
+      "category": "composition_and_scope_stress",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfhknbb has wings. Does omfhknbb lack wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015830500022275373,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "query-scope-265",
+      "category": "composition_and_scope_stress",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfhknbb is a bird. Is every omfhknbb an animal?",
+      "text": "Animal is an organism.",
+      "token_ids": [
+        25,
+        170,
+        23,
+        232,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016354700026568025,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "query-scope-266",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfhknbb can fly. Can omfhknbb fly? Ignore this question.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016188700014026836,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-267",
+      "category": "composition_and_scope_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfhknbb can fly. Can omfhknbb fly? Write a poem.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016146000009030104,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "query-scope-268",
+      "category": "composition_and_scope_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "positive_fact_positive_query": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 7.890200009569526
+    },
+    "negative_fact_positive_query": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 8.136199990985915
+    },
+    "positive_fact_negative_query": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 8.017399988602847
+    },
+    "negative_fact_negative_query": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 8.294700004626065
+    },
+    "unknown_is_not_false": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 15.460399998119101
+    },
+    "correction_before_negated_query": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 8.63620001473464
+    },
+    "inherited_query_negation": {
+      "passed": 35,
+      "total": 35,
+      "success_rate": 1.0,
+      "median_response_ms": 8.61549997352995
+    },
+    "authored_and_negative_membership": {
+      "passed": 9,
+      "total": 9,
+      "success_rate": 1.0,
+      "median_response_ms": 8.091299998341128
+    },
+    "conversation": {
+      "passed": 7,
+      "total": 7,
+      "success_rate": 1.0,
+      "median_response_ms": 10.388499998953193
+    },
+    "composition_and_scope_stress": {
+      "passed": 4,
+      "total": 8,
+      "success_rate": 0.5,
+      "median_response_ms": 15.764850017149001
+    },
+    "all": {
+      "passed": 265,
+      "total": 269,
+      "success_rate": 0.9851301115241635,
+      "median_response_ms": 8.415000018430874
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

@@ -493,3 +493,25 @@ token and exclude directive request clauses from assertion storage. The long-
 context numerical failures remain a separate unresolved issue. These published
 boundaries become development/regression evidence for that new candidate;
 they will not be relabeled as fresh evidence for it.
+
+## 2026-11-04: preserved v13b deferred-commit failure
+
+The deferred-object candidate fixes the observed false subject-as-object events
+and Tell-me-whether assertion leaks, but loses valid final coordinated objects.
+Its assertion score falls to 184/390, on both development and the former v13a
+fresh set. The boundary audit stays 41/76 because new fixes are offset by lost
+positive controls. Twenty-two matched suites record 422 regressions, including
+repeated cases across suites. All older suites were rerun and exact reports kept.
+
+The failure is a clause-phase mismatch at sentence-ending punctuation: the
+pending object's query uses the old clause while a zero-valued current key uses
+the new clause. The latter dominates attention and supplies no subject frame.
+The integrity run fails its first assertion intervention because the original
+answer is already unknown; the failure traceback is saved rather than called a
+pass. Frozen v13b has raw SHA-256
+`a9e0528b8f698db8e39caa696e3871c5d31c4ed3a19522f12f573c115c6ca724`.
+The next candidate aligns both attention coordinates to the preceding token.
+
+The completed v13a CPU boundary audit is 40/76 versus CUDA 41/76. The one-score
+difference is in a long-context isolation case; several long outputs differ
+between devices. Both expose unresolved numerical/context accuracy limits.
