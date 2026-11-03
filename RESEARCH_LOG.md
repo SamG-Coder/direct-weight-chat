@@ -220,3 +220,14 @@ passed source/raw hashes, exact size, finite values, causal/cache checks, all
 five circuit interventions and six CPU/CUDA smoke cases. The working release
 uses the current default v9a checkpoint. The research goal is still active;
 useful general-purpose conversation has not been achieved.
+
+## 2026-11-04: object-specific truth baseline before implementation
+
+Defined a three-valued proposition query: exact subject/relation/object evidence
+returns yes or no according to its latest polarity; absence remains unknown.
+The 239-case development suite was generated before compiler changes. It covers
+four relation families, unfamiliar subjects and objects, per-object corrections,
+distractors, inherited facts, question/assertion separation and dialogue. Eleven
+composition/scope stresses preserve broader syntax and multiple-value limits.
+Frozen v9a passes 45/239; most passes are existing abstentions. Exact baseline
+outputs and timings are in `results/truth-v9a-baseline-cuda.json`.

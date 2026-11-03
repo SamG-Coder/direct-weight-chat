@@ -1,0 +1,6010 @@
+{
+  "version": "v9a",
+  "suite": "object-specific-truth",
+  "evaluation_status": "development-before-implementation",
+  "created_utc": "2026-11-03T13:25:27.308120+00:00",
+  "git": {
+    "commit": "64c9c34f0fd06f964a3bd422848411c694e6c45b",
+    "dirty": true
+  },
+  "model_sha256": "397b76ee15d876d6d28d4f30ce59dd4d40069029018887133a173a4a67a74f53",
+  "suite_sha256": "a56c42a79e6d75c95f994ef3b1548d1afca5d4df2cb6b0935959c6379496f981",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 720343,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "A velprwbls can fly. Can velprwbls fly?",
+      "text": "Velprwbls can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013383799989242107,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-000",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls cannot fly. Can velprwbls fly?",
+      "text": "Velprwbls cannot fly.",
+      "token_ids": [
+        434,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012652199977310374,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-001",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls can fly. A velprwbls cannot fly. Can velprwbls fly?",
+      "text": "Velprwbls cannot fly.",
+      "token_ids": [
+        434,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.015031100017949939,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-002",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls cannot fly. A velprwbls can fly. Can velprwbls fly?",
+      "text": "Velprwbls can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014001000003190711,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-003",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls can fly. A velprwbls cannot swim. Can velprwbls fly?",
+      "text": "Velprwbls cannot swim.",
+      "token_ids": [
+        434,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013603900006273761,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-004",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls cannot fly. A velprwbls can swim. Can velprwbls fly?",
+      "text": "Velprwbls can swim.",
+      "token_ids": [
+        434,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013862899999367073,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-005",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls can fly. Can velprwbls omzwzwsv?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015514800004893914,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-006",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlfnnkf can fly. Can velprwbls fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016169400012586266,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-007",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velprwbls cannot fly. A omlfnnkf can fly. Can velprwbls fly?",
+      "text": "Velprwbls cannot fly.",
+      "token_ids": [
+        434,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013642800011439249,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-008",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velprwbls is a omhtkglc. A omhtkglc can fly. Can velprwbls fly?",
+      "text": "Velprwbls can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013737700006458908,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-009",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws can swim. Can a omzbzrws swim?",
+      "text": "Omzbzrws can swim.",
+      "token_ids": [
+        370,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012564500008011237,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-010",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws cannot swim. Can a omzbzrws swim?",
+      "text": "Omzbzrws cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013077699986752123,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-011",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws can swim. A omzbzrws cannot swim. Can a omzbzrws swim?",
+      "text": "Omzbzrws cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013742799987085164,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-012",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws cannot swim. A omzbzrws can swim. Can a omzbzrws swim?",
+      "text": "Omzbzrws can swim.",
+      "token_ids": [
+        370,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013518299994757399,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-013",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws can swim. A omzbzrws cannot fly. Can a omzbzrws swim?",
+      "text": "Omzbzrws cannot fly.",
+      "token_ids": [
+        370,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013910400011809543,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-014",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws cannot swim. A omzbzrws can fly. Can a omzbzrws swim?",
+      "text": "Omzbzrws can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01350619998993352,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-015",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzbzrws can swim. Can a omzbzrws omtgbmrd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015237600018735975,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-016",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velntcfzf can swim. Can a omzbzrws swim?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01583659998141229,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-017",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzbzrws cannot swim. A velntcfzf can swim. Can a omzbzrws swim?",
+      "text": "Omzbzrws cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013139900023816153,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-018",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A veldrntlv is a velhfnlsd. A omzbzrws is a veldrntlv. A velhfnlsd cannot swim. Can a omzbzrws swim?",
+      "text": "Omzbzrws cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013957500021206215,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "truth-019",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn can ombcmvvm. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015536899998551235,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-020",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn cannot ombcmvvm. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015492400008952245,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-021",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn can ombcmvvm. A omfmftkn cannot ombcmvvm. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015873299998929724,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-022",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn cannot ombcmvvm. A omfmftkn can ombcmvvm. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015935299976263195,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-023",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn can ombcmvvm. A omfmftkn cannot swim. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016205199994146824,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-024",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn cannot ombcmvvm. A omfmftkn can swim. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01606209998135455,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-025",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omfmftkn can ombcmvvm. Can omfmftkn velsnnhbg?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015231600002152845,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-026",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhbnbwh can ombcmvvm. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014888200006680563,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-027",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfmftkn cannot ombcmvvm. A velhbnbwh can ombcmvvm. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016490699985297397,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-028",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvrklb can ombcmvvm. A omtdbnkr is a velmvrklb. A omgfvsmh is a omtdbnkr. A omfmftkn is a omgfvsmh. Can omfmftkn ombcmvvm?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016830700013088062,
+      "device": "cuda",
+      "prefix_tokens": 30,
+      "id": "truth-029",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp can ombgbhmp. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015297800011467189,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-030",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp cannot ombgbhmp. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015704399993410334,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-031",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp can ombgbhmp. A ombkkfkp cannot ombgbhmp. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01569329999620095,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-032",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp cannot ombgbhmp. A ombkkfkp can ombgbhmp. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016076200001407415,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-033",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp can ombgbhmp. A ombkkfkp cannot fly. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015990600018994883,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-034",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp cannot ombgbhmp. A ombkkfkp can fly. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016009899991331622,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-035",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombkkfkp can ombgbhmp. Can a ombkkfkp omkdkglc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01566360000288114,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-036",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omvtdzpl can ombgbhmp. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015450700011570007,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-037",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ombkkfkp cannot ombgbhmp. A omvtdzpl can ombgbhmp. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016234800015809014,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-038",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsbrhbz cannot ombgbhmp. A ombkkfkp is a omsbrhbz. Can a ombkkfkp ombgbhmp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015910700021777302,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "truth-039",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc can omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015462900017155334,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-040",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc cannot omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014811200002441183,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-041",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc can omwcmklb. A velgrmvcc cannot omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01578809999045916,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-042",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc cannot omwcmklb. A velgrmvcc can omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015720099996542558,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-043",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc can omwcmklb. A velgrmvcc cannot swim. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016019699978642166,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-044",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc cannot omwcmklb. A velgrmvcc can swim. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016660899971611798,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-045",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velgrmvcc can omwcmklb. Can velgrmvcc velwnrlrv?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01562669998384081,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-046",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veldlwlnv can omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015054500021506101,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-047",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgrmvcc cannot omwcmklb. A veldlwlnv can omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01596560000325553,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-048",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velkcfhft is a omclbwmf. A velgrmvcc is a velkcfhft. A omclbwmf can omwcmklb. Can velgrmvcc omwcmklb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01587830000789836,
+      "device": "cuda",
+      "prefix_tokens": 24,
+      "id": "truth-049",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Can a velkrvgmv velmklfdd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015243600006215274,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "truth-050",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "What can a velkrvgmv do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016300199989927933,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "truth-051",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A omtlmrns needs water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015770500001963228,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-052",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns does not need water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015643099992303178,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-053",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns needs water. A omtlmrns does not need water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016485000000102445,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-054",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns does not need water. A omtlmrns needs water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016620299982605502,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-055",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns needs water. A omtlmrns does not need fuel. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016414099984103814,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-056",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns does not need water. A omtlmrns needs fuel. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01666039999690838,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-057",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns needs water. Does omtlmrns need velhcpkpb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015383699996164069,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-058",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsfmsmm needs water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015250700002070516,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-059",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtlmrns does not need water. A velsfmsmm needs water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015939800010528415,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-060",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omtlmrns is a ombdgwzd. A ombdgwzd needs water. Does omtlmrns need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015998700022464618,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "truth-061",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb needs fuel. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013702800002647564,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-062",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb does not need fuel. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01351380001869984,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "truth-063",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb needs fuel. A velmvskfb does not need fuel. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.015310100017813966,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-064",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb does not need fuel. A velmvskfb needs fuel. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01777030000812374,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-065",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb needs fuel. A velmvskfb does not need water. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.015092900022864342,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-066",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb does not need fuel. A velmvskfb needs water. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.016073600010713562,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-067",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb needs fuel. Does a velmvskfb need veldmmrrf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017719300027238205,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-068",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfgnkcv needs fuel. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013549399998737499,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-069",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmvskfb does not need fuel. A omfgnkcv needs fuel. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014117400016402826,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-070",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omrmrlnd does not need fuel. A velzmmkbs is a omrmrlnd. A velmvskfb is a velzmmkbs. Does a velmvskfb need fuel?",
+      "text": "Velmvskfb needs fuel.",
+      "token_ids": [
+        435,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014552700013155118,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "truth-071",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd needs velvvdpgs. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015688099985709414,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-072",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd does not need velvvdpgs. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015778500004671514,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-073",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd needs velvvdpgs. A velfskfdd does not need velvvdpgs. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016553199995541945,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-074",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd does not need velvvdpgs. A velfskfdd needs velvvdpgs. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016984200017759576,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-075",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd needs velvvdpgs. A velfskfdd does not need fuel. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016830600012326613,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-076",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd does not need velvvdpgs. A velfskfdd needs fuel. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016426999995019287,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-077",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velfskfdd needs velvvdpgs. Does velfskfdd need velttstgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016480999998748302,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-078",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velklctrl needs velvvdpgs. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01694050000514835,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-079",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfskfdd does not need velvvdpgs. A velklctrl needs velvvdpgs. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016314399981638417,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-080",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmrwtfb is a omvltzdl. A velkzbksw needs velvvdpgs. A omvltzdl is a velkzbksw. A velfskfdd is a velmrwtfb. Does velfskfdd need velvvdpgs?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01960589998634532,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "id": "truth-081",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh needs velvhgmnr. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016621099988697097,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-082",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh does not need velvhgmnr. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01863100001355633,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "truth-083",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh needs velvhgmnr. A omsmcmvh does not need velvhgmnr. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01729180000256747,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-084",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh does not need velvhgmnr. A omsmcmvh needs velvhgmnr. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.019796299980953336,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-085",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh needs velvhgmnr. A omsmcmvh does not need water. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016175800003111362,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-086",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh does not need velvhgmnr. A omsmcmvh needs water. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01663239998742938,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-087",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omsmcmvh needs velvhgmnr. Does a omsmcmvh need vellthnsr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015895299991825595,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-088",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omncdtlb needs velvhgmnr. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015622999984771013,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-089",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsmcmvh does not need velvhgmnr. A omncdtlb needs velvhgmnr. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01684310002019629,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-090",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmpkndf does not need velvhgmnr. A omsmcmvh is a velmpkndf. Does a omsmcmvh need velvhgmnr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016093699989141896,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "truth-091",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk needs omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015812500001629815,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-092",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk does not need omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015904400002909824,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-093",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk needs omkhdcwf. A velwpbvrk does not need omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01623369997832924,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-094",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk does not need omkhdcwf. A velwpbvrk needs omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016190599999390543,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-095",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk needs omkhdcwf. A velwpbvrk does not need fuel. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016226900013862178,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-096",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk does not need omkhdcwf. A velwpbvrk needs fuel. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015872999996645376,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-097",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwpbvrk needs omkhdcwf. Does velwpbvrk need velhfgctg?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01522950001526624,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-098",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkmwztz needs omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015651199995772913,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-099",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwpbvrk does not need omkhdcwf. A velkmwztz needs omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01617160000023432,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-100",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omwctszt is a omwhglvb. A velwpbvrk is a omwctszt. A omwhglvb needs omkhdcwf. Does velwpbvrk need omkhdcwf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015754699998069555,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "truth-101",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Does a ompwbfcm need omhdglzd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015184199990471825,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "truth-102",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "What does a ompwbfcm need?",
+      "text": "Ompwbfcm needs omhdglzd.",
+      "token_ids": [
+        370,
+        216,
+        371,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014149700000416487,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "truth-103",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt has wings. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012932299985550344,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-104",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt does not have wings. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013245200010715052,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-105",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt has wings. A omvggbnt does not have wings. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013764400006039068,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-106",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt does not have wings. A omvggbnt has wings. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013724999997066334,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-107",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt has wings. A omvggbnt does not have sensors. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013098399998852983,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-108",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt does not have wings. A omvggbnt has sensors. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013529099989682436,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-109",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt has wings. Does omvggbnt have velprwtsc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01526490002288483,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-110",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhgwdtn has wings. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        371,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013439000002108514,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-111",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omvggbnt does not have wings. A omhgwdtn has wings. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01347070001065731,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-112",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velstrkmk has wings. A omvggbnt is a velstrkmk. Does omvggbnt have wings?",
+      "text": "Omvggbnt has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013345999992452562,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "truth-113",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv has sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014549699990311638,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-114",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv does not have sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01421150000533089,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "truth-115",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv has sensors. A velhpgvgv does not have sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013774999999441206,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-116",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv does not have sensors. A velhpgvgv has sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013731799990637228,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-117",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv has sensors. A velhpgvgv does not have wings. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013571199990110472,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-118",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv does not have sensors. A velhpgvgv has wings. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014200100005837157,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-119",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv has sensors. Does a velhpgvgv have ompgdkkh?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016108599986182526,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-120",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veldnfffs has sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        435,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013012500014156103,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-121",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv does not have sensors. A veldnfffs has sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01416109999991022,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-122",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velhpgvgv is a omgmrmnv. A omgmrmnv is a ombwtwhn. A ombwtwhn does not have sensors. Does a velhpgvgv have sensors?",
+      "text": "Velhpgvgv has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014186599990352988,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "truth-123",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr has velwsdhzc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0163851999968756,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-124",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr does not have velwsdhzc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01564709999365732,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-125",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr has velwsdhzc. A omdsnlsr does not have velwsdhzc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016228899999987334,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-126",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr does not have velwsdhzc. A omdsnlsr has velwsdhzc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01677459999336861,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-127",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr has velwsdhzc. A omdsnlsr does not have sensors. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016079199995147064,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-128",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr does not have velwsdhzc. A omdsnlsr has sensors. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016295699984766543,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-129",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdsnlsr has velwsdhzc. Does omdsnlsr have velckbphr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01634040000499226,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-130",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwpdzmh has velwsdhzc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01606630001333542,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-131",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdsnlsr does not have velwsdhzc. A omwpdzmh has velwsdhzc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016323499992722645,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-132",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velpzgcwc is a omgccvks. A omgccvks has velwsdhzc. A omdsnlsr is a velczkvfb. A velczkvfb is a velpzgcwc. Does omdsnlsr have velwsdhzc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017191699997056276,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "id": "truth-133",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv has velnbfwnb. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01695560000371188,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-134",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv does not have velnbfwnb. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015879099984886125,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "truth-135",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv has velnbfwnb. A velvnhzhv does not have velnbfwnb. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016064600000390783,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-136",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv does not have velnbfwnb. A velvnhzhv has velnbfwnb. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01611710002180189,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-137",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv has velnbfwnb. A velvnhzhv does not have wings. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016256699978839606,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-138",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv does not have velnbfwnb. A velvnhzhv has wings. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016187399975024164,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-139",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velvnhzhv has velnbfwnb. Does a velvnhzhv have omfzhhkd?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015243100002408028,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-140",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkhvmzv has velnbfwnb. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015421799995237961,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-141",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvnhzhv does not have velnbfwnb. A velkhvmzv has velnbfwnb. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016298200003802776,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-142",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A vellzwbzm does not have velnbfwnb. A velvnhzhv is a vellzwbzm. Does a velvnhzhv have velnbfwnb?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0160250999906566,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "truth-143",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl has omvlshvk. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015436399989994243,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-144",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl does not have omvlshvk. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015455899992957711,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-145",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl has omvlshvk. A velwhmhcl does not have omvlshvk. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0158147000183817,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-146",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl does not have omvlshvk. A velwhmhcl has omvlshvk. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015967600018484518,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-147",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl has omvlshvk. A velwhmhcl does not have sensors. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01611249998677522,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-148",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl does not have omvlshvk. A velwhmhcl has sensors. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01641889999154955,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-149",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velwhmhcl has omvlshvk. Does velwhmhcl have omnrlcnw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014825699996436015,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-150",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veldsnzgr has omvlshvk. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015461700008017942,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-151",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwhmhcl does not have omvlshvk. A veldsnzgr has omvlshvk. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016502599988598377,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-152",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A velmsklcm is a omhstzbl. A omhstzbl has omvlshvk. A velwhmhcl is a velmsklcm. Does velwhmhcl have omvlshvk?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017780299996957183,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "truth-153",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Does a velwzrmwm have omnfzszc?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01529760000994429,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "truth-154",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "What does a velwzrmwm have?",
+      "text": "Velwzrmwm has omnfzszc.",
+      "token_ids": [
+        434,
+        144,
+        370,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013850799994543195,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "truth-155",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp produces heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013030500005697832,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-156",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp does not produce heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013834299985319376,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-157",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp produces heat. A omkclshp does not produce heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013796999992337078,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-158",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp does not produce heat. A omkclshp produces heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014232799992896616,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-159",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp produces heat. A omkclshp does not produce oxygen. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014078599982894957,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-160",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp does not produce heat. A omkclshp produces oxygen. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014041600021300837,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-161",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp produces heat. Does omkclshp produce velrtrzld?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015903799998341128,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-162",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwccrnt produces heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        371,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013314400013769045,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-163",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp does not produce heat. A omwccrnt produces heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013947300001746044,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-164",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkclshp is a omrwksgc. A omrwksgc produces heat. Does omkclshp produce heat?",
+      "text": "Omkclshp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013146600016625598,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "truth-165",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb produces oxygen. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013371200009714812,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-166",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb does not produce oxygen. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01390049999463372,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "truth-167",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb produces oxygen. A omzrfccb does not produce oxygen. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014433199976338074,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-168",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb does not produce oxygen. A omzrfccb produces oxygen. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013927400024840608,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-169",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb produces oxygen. A omzrfccb does not produce heat. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014094200014369562,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-170",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb does not produce oxygen. A omzrfccb produces heat. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014316099986899644,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-171",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb produces oxygen. Does a omzrfccb produce omfdwmst?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015693599998485297,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-172",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcctpkd produces oxygen. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013931000023148954,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-173",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omzrfccb does not produce oxygen. A velcctpkd produces oxygen. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01337749999947846,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-174",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkgrhrh is a veldgcvwh. A veldgcvwh does not produce oxygen. A omzrfccb is a omkgrhrh. Does a omzrfccb produce oxygen?",
+      "text": "Omzrfccb produces oxygen.",
+      "token_ids": [
+        371,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013819599989801645,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "truth-175",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv produces velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.019401300000026822,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-176",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv does not produce velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016503999999258667,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-177",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv produces velnvbdcw. A omdlgvdv does not produce velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016373899998143315,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-178",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv does not produce velnvbdcw. A omdlgvdv produces velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.018579800002044067,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-179",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv produces velnvbdcw. A omdlgvdv does not produce oxygen. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01664739998523146,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-180",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv does not produce velnvbdcw. A omdlgvdv produces oxygen. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017012699972838163,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-181",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omdlgvdv produces velnvbdcw. Does omdlgvdv produce velrlsvdp?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017200500005856156,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-182",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdbwhfk produces velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016807700012577698,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-183",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdlgvdv does not produce velnvbdcw. A omdbwhfk produces velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016542500001378357,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-184",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omnbdrmd is a velvcnnrr. A velvcnnrr is a velhknmvf. A omdlgvdv is a omnbdrmd. A velhknmvf produces velnvbdcw. Does omdlgvdv produce velnvbdcw?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017640800011577085,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "id": "truth-185",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg produces omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016487900022184476,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-186",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg does not produce omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01748569999472238,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "truth-187",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg produces omlprndf. A ombdbdfg does not produce omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017039199999999255,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-188",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg does not produce omlprndf. A ombdbdfg produces omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016533999994862825,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-189",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg produces omlprndf. A ombdbdfg does not produce heat. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016711499978555366,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-190",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg does not produce omlprndf. A ombdbdfg produces heat. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01693050001631491,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-191",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg produces omlprndf. Does a ombdbdfg produce velfmmshn?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0155821000225842,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-192",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsrtstc produces omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01669640000909567,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-193",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ombdbdfg does not produce omlprndf. A omsrtstc produces omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017504399991594255,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "truth-194",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A ombdbdfg is a velkzhsbl. A velkzhsbl does not produce omlprndf. Does a ombdbdfg produce omlprndf?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01808470001560636,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "truth-195",
+      "category": "inherited_truth",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc produces velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016110600001411512,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-196",
+      "category": "direct_positive",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc does not produce velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0167821999930311,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-197",
+      "category": "direct_negative",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc produces velgtphmr. A omkltclc does not produce velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016933000006247312,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-198",
+      "category": "latest_denial",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc does not produce velgtphmr. A omkltclc produces velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01627520000329241,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-199",
+      "category": "latest_affirmation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc produces velgtphmr. A omkltclc does not produce oxygen. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016378100001020357,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-200",
+      "category": "different_object_denial",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc does not produce velgtphmr. A omkltclc produces oxygen. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016716399986762553,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-201",
+      "category": "different_object_affirmation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omkltclc produces velgtphmr. Does omkltclc produce omgpndvh?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016150000010384247,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-202",
+      "category": "unknown_object",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtwlpkp produces velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015980099997250363,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-203",
+      "category": "unknown_subject",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omkltclc does not produce velgtphmr. A omtwlpkp produces velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01632130000507459,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "truth-204",
+      "category": "subject_binding",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A vellkgzvc is a velnwmldb. A omkltclc is a vellkgzvc. A velnwmldb produces velgtphmr. Does omkltclc produce velgtphmr?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01644709997344762,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "truth-205",
+      "category": "inherited_truth",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Does a velrhzskh produce ommtgrbh?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015118000010261312,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "truth-206",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "What does a velrhzskh produce?",
+      "text": "Velrhzskh produces ommtgrbh.",
+      "token_ids": [
+        434,
+        250,
+        370,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01347949999035336,
+      "device": "cuda",
+      "prefix_tokens": 23,
+      "id": "truth-207",
+      "category": "question_is_not_assertion",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "Can a bird fly?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01290629999130033,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "truth-208",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Can a fish swim?",
+      "text": "Fish can swim.",
+      "token_ids": [
+        121,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01299950000247918,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "truth-209",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Does a robot have sensors?",
+      "text": "Robot has sensors.",
+      "token_ids": [
+        267,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012913899990962818,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "truth-210",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Does a tree produce oxygen?",
+      "text": "Tree produces oxygen.",
+      "token_ids": [
+        330,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012247800012119114,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "truth-211",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Does a fire need fuel?",
+      "text": "Fire needs fuel.",
+      "token_ids": [
+        119,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012818599992897362,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "truth-212",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Can a bird swim?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014238599978853017,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "truth-213",
+      "category": "authored_and_context_facts",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A bird cannot fly. Can a bird fly?",
+      "text": "Bird cannot fly.",
+      "token_ids": [
+        46,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013256600010208786,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-214",
+      "category": "authored_and_context_facts",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A bird cannot swim. Can a bird fly?",
+      "text": "Bird cannot swim.",
+      "token_ids": [
+        46,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013639099983265623,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-215",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A zelm is a bird. Can a zelm fly?",
+      "text": "Zelm can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014355799998156726,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-216",
+      "category": "authored_and_context_facts",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A zelm is not a bird. Can a zelm fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015874700009590015,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "truth-217",
+      "category": "authored_and_context_facts",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A zelm is a bird. A zelm cannot fly. Can a zelm fly?",
+      "text": "Zelm cannot fly.",
+      "token_ids": [
+        434,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013722000003326684,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "truth-218",
+      "category": "authored_and_context_facts",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can a omclnsks fly?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013082399993436411,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-219",
+      "category": "conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Can a omclnsks swim?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013751699996646494,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "truth-220",
+      "category": "conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks cannot fly. Can a omclnsks fly?",
+      "text": "Omclnsks cannot fly.",
+      "token_ids": [
+        370,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01577170001110062,
+      "device": "cuda",
+      "prefix_tokens": 42,
+      "id": "truth-221",
+      "category": "conversation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "-149 - 370",
+      "text": "-519.",
+      "token_ids": [
+        8,
+        1017,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.013485299976309761,
+      "device": "cuda",
+      "prefix_tokens": 53,
+      "id": "truth-222",
+      "category": "conversation",
+      "expected": "-519.",
+      "acceptable": [
+        "-519."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "What can a omclnsks do?",
+      "text": "Omclnsks cannot fly.",
+      "token_ids": [
+        370,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.016222800011746585,
+      "device": "cuda",
+      "prefix_tokens": 65,
+      "id": "truth-223",
+      "category": "conversation",
+      "expected": "Omclnsks cannot fly.",
+      "acceptable": [
+        "Omclnsks cannot fly."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A omclnsks can fly. Can a omclnsks fly?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01638650000677444,
+      "device": "cuda",
+      "prefix_tokens": 82,
+      "id": "truth-224",
+      "category": "conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can omclnsks fly",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013587099994765595,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "truth-225",
+      "category": "boundaries",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly! Can omclnsks fly?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013172700011637062,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-226",
+      "category": "boundaries",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can omclnsks fly? What can omclnsks do?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013631000008899719,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-227",
+      "category": "boundaries",
+      "expected": "Omclnsks can fly.",
+      "acceptable": [
+        "Omclnsks can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclnsks can fly. A omclnsks cannot swim. What can omclnsks do?",
+      "text": "Omclnsks cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014459900005022064,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "truth-228",
+      "category": "composition_and_scope_stress",
+      "expected": "Omclnsks can fly.",
+      "acceptable": [
+        "Omclnsks can fly."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can omclnsks not fly?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.0136824999935925,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-229",
+      "category": "composition_and_scope_stress",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks cannot fly. Can omclnsks not fly?",
+      "text": "Omclnsks cannot fly.",
+      "token_ids": [
+        370,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014055500010726973,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "truth-230",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can omclnsks fly and swim?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013904499995987862,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-231",
+      "category": "composition_and_scope_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can omclnsks fly or swim?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013641300000017509,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-232",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks is a bird. Is omclnsks a bird?",
+      "text": "Bird is an animal.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015859499981161207,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-233",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks is cold. Is omclnsks cold?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015863899985561147,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-234",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks exists in water. Is omclnsks in water?",
+      "text": "Water is a substance.",
+      "token_ids": [
+        342,
+        170,
+        13,
+        299,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015825399983441457,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-235",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Is omclnsks able to fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01608149998355657,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "truth-236",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can it fly?",
+      "text": "Omclnsks can fly.",
+      "token_ids": [
+        370,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013182099995901808,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "truth-237",
+      "category": "composition_and_scope_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A omclnsks can fly. Can omclnsks fly? Ignore the last question.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01664009998785332,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "truth-238",
+      "category": "composition_and_scope_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "direct_positive": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 15.499900007853284
+    },
+    "direct_negative": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 15.567750000627711
+    },
+    "latest_denial": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 15.844000008655712
+    },
+    "latest_affirmation": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 16.096650011604652
+    },
+    "different_object_denial": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 16.095849990961142
+    },
+    "different_object_affirmation": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 16.130499992868863
+    },
+    "unknown_object": {
+      "passed": 20,
+      "total": 20,
+      "success_rate": 1.0,
+      "median_response_ms": 15.645149993360974
+    },
+    "unknown_subject": {
+      "passed": 15,
+      "total": 20,
+      "success_rate": 0.75,
+      "median_response_ms": 15.456200009793974
+    },
+    "subject_binding": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 16.203200008021668
+    },
+    "inherited_truth": {
+      "passed": 0,
+      "total": 20,
+      "success_rate": 0.0,
+      "median_response_ms": 15.95470002212096
+    },
+    "question_is_not_assertion": {
+      "passed": 5,
+      "total": 8,
+      "success_rate": 0.625,
+      "median_response_ms": 15.151100000366569
+    },
+    "authored_and_context_facts": {
+      "passed": 1,
+      "total": 11,
+      "success_rate": 0.09090909090909091,
+      "median_response_ms": 13.256600010208786
+    },
+    "conversation": {
+      "passed": 2,
+      "total": 6,
+      "success_rate": 0.3333333333333333,
+      "median_response_ms": 14.761700003873557
+    },
+    "boundaries": {
+      "passed": 1,
+      "total": 3,
+      "success_rate": 0.3333333333333333,
+      "median_response_ms": 13.587099994765595
+    },
+    "composition_and_scope_stress": {
+      "passed": 1,
+      "total": 11,
+      "success_rate": 0.09090909090909091,
+      "median_response_ms": 14.459900005022064
+    },
+    "all": {
+      "passed": 45,
+      "total": 239,
+      "success_rate": 0.18828451882845187,
+      "median_response_ms": 15.704399993410334
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}
