@@ -118,6 +118,8 @@ The generators and language structures were known before freezing. These are fre
 
 - After freeze `a583d2b`, binding seed 192095465 scores [136/136 CPU](binding-positions-v15a-postfreeze-cpu.json) and [136/136 CUDA](binding-positions-v15a-postfreeze-cuda.json). New names, combinations and eight random offsets use a known generator; fixed offsets and structures repeat. No frozen weights were retuned. [v0.7 packaging](release-assets-v0.7.json) verifies the decompressed checkpoint hash and ZIP CRC.
 
+- [v0.7 publication verification](publication-v0.7.json) confirms the downloaded archive digest/size, checksum, raw/config hashes, CRC and source manifest. Fresh tagged-checkout integrity and all interventions pass on both devices. The 23-turn conversation, including three-subject binding, isolation and correction after long distractors, scores [23/23 CUDA](release-validation-v0.7/fresh-smoke-cuda.json) and [23/23 CPU](release-validation-v0.7/fresh-smoke-cpu.json). These remain controlled-grammar checks, not general chat evidence.
+
 ## Provenance and timing
 
 [experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.

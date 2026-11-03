@@ -786,3 +786,24 @@ isolation and correction to the previous long conversation, still following
 3,000 tokens of declarative distractors. It is a post-freeze author-designed
 smoke check, not an independent language benchmark.
 The local CUDA run passes 23/23 before publication.
+
+## 2026-11-04: v0.7 public release and fresh-checkout validation
+
+Published v0.7.0-experiment at `afb8241c50d59cdfc405292aaf89024d631585de`.
+The downloaded v15a ZIP and SHA256SUMS match public digests/sizes and the local
+package report. Streamed decompression checks raw/config hashes and CRC; the
+manifest/compiler hashes match a fresh tagged clone. Extraction leaves the
+source tree clean. The checkpoint remains exactly 1 GB of float32 parameters.
+
+Fresh-checkout integrity and every intervention pass on CPU and CUDA. The long
+23-turn conversation scores 23/23 on each device, including new three-subject
+binding, isolation and correction. Raw weight bytes remain unchanged. Evidence
+is in `results/publication-v0.7.json` and `results/release-validation-v0.7/`.
+
+The numerical subject-binding failures motivating this iteration are repaired
+across development, older regressions, fresh known-generator combinations and
+publication checks. This does not prove arbitrary language or context behavior.
+The next capability experiment should address actual conditional-rule inference:
+distinguish a rule from an asserted conclusion and require its premise, including
+missing and negative premises. Useful flexible conversation remains unachieved;
+the full research goal stays active.

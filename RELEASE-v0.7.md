@@ -44,6 +44,12 @@ the frozen v15a source reproduces the exact raw and config hashes.
 A local 23-turn CUDA publication smoke passes after 3,000 tokens of declarative
 distractors, including new three-subject binding, isolation and correction checks.
 
+Fresh-download verification confirms the published archive size/digest, checksum
+entry, raw/config hashes, ZIP CRC and frozen-source manifest. From the clean
+tagged checkout, **CPU and CUDA each pass all integrity/intervention checks and
+23/23 long-conversation turns**. The saved checkpoint remains unchanged. Exact
+outputs and timings are in the [publication evidence](https://github.com/SamG-Coder/direct-weight-chat/blob/main/results/publication-v0.7.json).
+
 The initial two-subject recency intervention left its answer unchanged. That
 ineffective probe and the stopped integrity attempt remain documented. Additional
 three-subject controls expose missed facts and false cross-subject assertions

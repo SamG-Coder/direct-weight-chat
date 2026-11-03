@@ -28,6 +28,11 @@
   known generator. The fixed offsets and language structures repeat; this is
   not independent evidence of general understanding. No frozen source or
   weights were retuned after the fresh results.
+- The published v0.7 checkpoint passes download/checksum/source/raw/CRC
+  verification. From a clean tagged checkout, CPU and CUDA each pass integrity,
+  all interventions and a 23-turn long conversation with three-subject binding,
+  isolation and correction. [Publication evidence](results/publication-v0.7.json)
+  preserves all exact outputs and timings.
 
 This is a numerical reliability improvement to the controlled grammar. It does
 not add conditional-rule reasoning, disjunctive assertions, mixed-precedence

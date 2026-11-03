@@ -15,7 +15,7 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
-The current frozen version is **v15a**, packaged for the
+The current frozen version is **v15a**, available in the
 [v0.7 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.7.0-experiment).
 It repairs demonstrated CPU subject-binding errors in long conversations.
 Attention selects the latest valid event, then neural gates check that it belongs
@@ -111,7 +111,7 @@ python -m benchmarks.integrity --model build/current --source versions/autoregre
 - [Research log](RESEARCH_LOG.md): experiments, failures and next steps.
 - [Capabilities](CAPABILITIES.md): measured abilities and limits.
 - [Architecture](ARCHITECTURE.md): mathematical construction and runtime boundary.
-- [v0.7 checkpoint packaging](results/release-assets-v0.7.json): the decompressed checkpoint passes raw/config hash and ZIP CRC checks.
+- [v0.7 release verification](results/publication-v0.7.json): the downloaded archive matches public/local checksums, frozen source and decompressed hashes. Fresh tagged-checkout integrity and all interventions pass on CPU/CUDA; its 23-turn long conversation passes on both devices.
 - [Earlier v0.6 release verification](results/publication-v0.6.json): the archived CPU failure remains public, alongside exact downloaded checkpoint checks.
 - `tests/`: frozen development cases and separately identified post-freeze cases.
 - `benchmarks/`: external evaluators; expected answers are never passed to inference.
