@@ -70,3 +70,13 @@ candidates and their original evidence remain available.
 
 Raw weight SHA-256:
 `5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2`.
+
+Fresh-download validation verifies the public archive/checksum digests,
+decompressed raw/config hashes, ZIP CRC and frozen source against a clean
+tagged checkout. CPU and CUDA each pass the **31/31 conversation replay**,
+matching every local output, plus 27 integrity check groups, eight conditional
+interventions and 220 phase-perturbation checks. Restoring the old context gate
+again recreates the CPU failure. All saved weights remain unchanged.
+[Publication evidence](https://github.com/SamG-Coder/direct-weight-chat/blob/main/results/publication-v0.9.json)
+records the downloaded-byte checks and measured outputs. Broader capability
+failures remain in their separate reports; the research objective stays active.

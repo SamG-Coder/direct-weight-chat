@@ -1022,3 +1022,19 @@ It is not implemented. Any runtime-mask change must remain generic tensor
 execution, retain old checkpoint compatibility, and be tested for cache parity,
 role isolation, corrections, direct-fact precedence and conflicting proofs.
 The 104-case baseline and all older suites must be rerun on any new candidate.
+
+### v0.9 published and independently downloaded
+
+Published tag `v0.9.0-experiment` at
+`7f8d500021d3260a09a014408774ce17e7c9ab46`. The 1,649,878-byte ZIP expands to
+the exact 1 GB raw model. Public asset/checksum digests, raw/config hashes,
+ZIP CRC and frozen source all match a clean tagged clone. Extraction and
+the subsequent tests leave that source checkout clean.
+
+The downloaded model reproduces 31/31 long-conversation turns on CPU and CUDA,
+with every output/token sequence matching the local result. Both devices pass
+27 integrity check groups, eight conditional interventions and 220 phase
+perturbation checks. Replacing only the context gate with its old unsaturated
+form recreates the CPU failure. `results/publication-v0.9.json` is derived from
+those reports and retains the broader semantic limits. No frozen source or
+weights changed after the fresh seed or publication checks.

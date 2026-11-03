@@ -69,6 +69,13 @@ scores **29/104 on CPU and CUDA**. It tests whether a valid proof can be found
 among multiple rules and mixed branches. No improvement has been implemented
 for that suite yet; all 75 failures remain recorded.
 
+[Fresh-download verification](results/publication-v0.9.json) checks the public
+archive digest, checksum file, decompressed raw/config hashes, ZIP CRC and
+frozen compiler source against a clean tagged checkout. The downloaded model
+passes the 31-turn conversation on CPU and CUDA, with exactly the local outputs.
+Both devices also pass integrity, eight conditional interventions and 220 phase
+checks. Restoring the old context gate reproduces the CPU failure again.
+
 ## Run offline
 
 Use a Python environment with NumPy for construction and PyTorch for inference

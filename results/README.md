@@ -144,6 +144,8 @@ v16c: [33 matched CUDA suites](regressions-v16c.json) score 5,499/5,619 with 130
 
 - The next capability baseline, alternative proof search, scores [29/104 CPU](proof-search-v17a-cpu.json) and [29/104 CUDA](proof-search-v17a-cuda.json). It tests multiple alternatives, mixed branches, rule order, corrections and dialogue. These author-designed development tests were created after v17a froze and before a new implementation; they are not held-out language evidence. All 75 failures remain recorded.
 
+- [v0.9 publication verification](publication-v0.9.json) checks the downloaded archive/checksum/raw/config hashes, CRC and frozen source in a clean tagged checkout. The conversation reproduces 31/31 on CPU and CUDA with exact local-output parity. Both devices pass 27 integrity groups, eight conditional interventions and 220 phase checks. Restoring only the old context gate recreates the CPU failure; saved weights remain unchanged.
+
 [experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.
 
 Response timings include token generation and formatting, exclude one warm-up, and depend on prompt/output length and machine load. They are not a comparison against trained language models. Exact per-case timings and hardware are in each JSON. CUDA and CPU evaluations were run separately.

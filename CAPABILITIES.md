@@ -28,6 +28,11 @@
   It includes two to eight alternatives, mixed branches, declaration order,
   corrections and dialogue. This is a baseline for the next capability,
   authored after v17a froze; it is not a held-out language score.
+- Public v0.9 fresh-download validation matches the archive/checksum/raw/config
+  hashes, CRC and frozen source. A clean tagged checkout reproduces 31/31
+  conversation turns on both devices, plus 27 integrity groups, eight conditional
+  interventions and 220 phase checks per device. The old-gate intervention
+  reproduces the CPU failure. See `results/publication-v0.9.json` for evidence.
 
 The repair improves measured numerical reliability. It does not add proof
 search, deeper reasoning, variable binding, compound rule premises, open
