@@ -23,6 +23,7 @@ def main():
     p.add_argument('--truth', action='store_true', help='Ablate proposition retrieval and its object identity in v10')
     p.add_argument('--query-negation', action='store_true', help='Ablate the separate v11 query-polarity bit')
     p.add_argument('--composition', action='store_true', help='Use v12 truth layout and ablate connectives, unknown truth and clause scope')
+    p.add_argument('--compound-facts', action='store_true', help='Use v13 assertion layout and ablate continuation, predicate, and question/clause binding')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -102,15 +103,16 @@ def main():
         for prompt, expected in probes:
             m.reset()
             original = m.generate(prompt)
-            name = 'blocks.2.mlp.down.weight'
-            saved = m.w[name]
+            names = ['blocks.1.mlp.down.weight', 'blocks.2.mlp.down.weight'] if a.compound_facts else ['blocks.2.mlp.down.weight']
+            saved = {name: m.w[name] for name in names}
             try:
-                m.w[name] = saved.clone()
-                m.w[name][952:954] = 0  # Fact polarity is logical feature 476.
+                for name in names:
+                    m.w[name] = saved[name].clone()
+                    m.w[name][952:954] = 0  # Fact polarity is logical feature 476.
                 m.reset()
                 ablated = m.generate(prompt)
             finally:
-                m.w[name] = saved
+                m.w.update(saved)
             assert original['text'] == expected and ablated['text'] != expected
             checks['polarity_ablation'].append(dict(prompt=prompt, original=original['text'], ablated=ablated['text']))
     if a.arithmetic:
@@ -273,6 +275,44 @@ def main():
                 break
             logits, cache, _ = m.forward([token], cache)
         checks['compound_unknown_cached_and_full_prefix_tokens_match'] = True
+    if a.compound_facts:
+        checks['assertion_ablations'] = []
+        probes = [
+            ('remove_continuation_validity', ['A kelv has wings and sensors. Does kelv have sensors?'], 'Yes.', 'I do not know.'),
+            ('remove_predicate_binding', ['A kelv can fly and has wings and sensors. Does kelv have sensors?'], 'Yes.', 'I do not know.'),
+            ('remove_question_exclusion', ['Does kelv need water and lavrik has wings?', 'Does lavrik have wings?'], 'I do not know.', 'Yes.'),
+            ('remove_assertion_clause_scope', ['A kelv can fly. And swim. Can kelv swim?'], 'I do not know.', 'Yes.'),
+        ]
+        for intervention, prompts, expected, changed in probes:
+            m.reset()
+            original = [m.generate(prompt, trace=True) for prompt in prompts]
+            saved = {}
+
+            def clone(name):
+                if name not in saved:
+                    saved[name] = m.w[name]
+                    m.w[name] = saved[name].clone()
+                return m.w[name]
+
+            try:
+                if intervention == 'remove_continuation_validity':
+                    clone('blocks.2.mlp.down.weight')[950:952] = 0
+                elif intervention == 'remove_predicate_binding':
+                    clone('blocks.1.attn.out.weight')[:, 9 * 64:10 * 64] = 0
+                elif intervention == 'remove_question_exclusion':
+                    clone('blocks.1.attn.out.weight')[1012:1014, 8 * 64:9 * 64] = 0
+                else:
+                    # Remove the group-ID key in both lexical-predicate and
+                    # full-subject attention. The query offset is common to
+                    # all keys, so older valid clauses now become selectable.
+                    clone('blocks.1.attn.qkv.weight')[1024 + 9 * 64, 828:830] = 0
+                    clone('blocks.2.attn.qkv.weight')[1024 + 1 * 64, 48:50] = 0
+                m.reset()
+                ablated = [m.generate(prompt, trace=True) for prompt in prompts]
+            finally:
+                m.w.update(saved)
+            assert original[-1]['text'] == expected and ablated[-1]['text'] == changed, (intervention, original[-1]['text'], ablated[-1]['text'])
+            checks['assertion_ablations'].append(dict(intervention=intervention, original=original, ablated=ablated))
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,

@@ -210,3 +210,51 @@ values, test strings or answer entries. Grammar alternatives compile to Boolean
 ReLU identity conjunctions. A broad paraphrase beginning Please tell me whether
 still returns an incomplete factual answer; the extra incorrect abstention pass
 in v12a is not retained as a claimed capability.
+
+## v13a: coordinated assertion binding
+
+The generic inference runtime and 250M-parameter tensor layout are unchanged.
+The compiler now produces two kinds of causal event: a lexical predicate event
+in block 0, and a full assertion event in block 1. The latter holds a subject,
+predicate, object, polarity and validity. Moving full assertions one block
+earlier makes their subject available to a shared-object continuation in block 2.
+
+A lexical predicate event records an explicit verb, copular negation or location
+preposition. One block-1 attention head retrieves the latest such event within
+the current clause. A continuation inherits that predicate and its polarity;
+an explicit replacement verb changes the shared register. Thus `X cannot fly
+and can swim and glimmer` gives swim/glimmer the positive can predicate. A local
+`and not OBJECT` negates only its object and does not rewrite the shared predicate.
+Copular objects use the existing adjective flag to separate trait from class.
+
+Boolean lexical/category conjunctions identify fourteen bounded coordination
+layouts (bare objects, articles, prepositions, explicit verbs and negation).
+They write provisional metadata in block 1. A separate block-2 attention head
+retrieves the newest full assertion's subject within that clause. Only a valid
+subject frame can validate the provisional object event; the object's identity
+comes from its token code. No entity, object combination or full output sentence
+is embedded as an answer. Full-assertion parsing also accepts the tested object
+determiners within its existing four-token lookback.
+
+Both attention heads use a causal clause penalty. With boundary position `g`,
+token position `p` and Boolean validity `v`, their relative score is
+`131072 * (g_key - g_query) + 65536 * v + 8 * p`. Clause IDs never decrease in
+causal attention. A previous clause therefore loses more than any validity plus
+recency advantage in the 5,048-token window. A current-clause zero event is the
+fallback when no matching predicate or subject exists. This is a weight-defined
+attention rule, not a host-maintained conversation dictionary.
+
+The old unused vowel embedding coordinate now marks lexical question heads and
+`if`; article generation already uses a later object-code classifier. Existing
+clause-head attention retrieves this marker after transparent modifiers. The
+full-assertion and continuation gates exclude such clauses, preventing a question
+fragment from becoming evidence. Rejecting an if-clause is only premise isolation;
+conditional-rule reasoning is not implemented. Disjunctive assertions also
+remain unsupported and can incorrectly assert their first alternative.
+
+Diagnostic interventions remove continuation validity, predicate attention,
+question exclusion or clause binding independently. Their expected behavioral
+changes are checked externally, and the original runtime tensors are restored.
+Raw checkpoint bytes remain unchanged. Most parameters remain zero; the added
+circuits expand a controlled grammar rather than establishing natural-language
+understanding or useful open-ended chat.

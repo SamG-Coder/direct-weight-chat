@@ -89,12 +89,15 @@ class Compiler:
             expression[feature] = expression.get(feature, 0) - 2
         self.unit(layer, expression, targets, threshold=S.CODE_BITS + 2 * len(positive) - 1)
 
-    def pattern(self, layer, words, targets, positive=(), negative=()):
+    def pattern(self, layer, words, targets, positive=(), negative=(), any_of=()):
         """Conjoin lexical identities and Boolean flags into one ReLU gate."""
         expression = expr(*({start + i: bit for i, bit in enumerate(S.code(self.ids[word]))}
                             for start, word in words),
-                          *({f: 2} for f in positive), *({f: -2} for f in negative))
-        self.unit(layer, expression, targets, threshold=S.CODE_BITS * len(words) + 2 * len(positive) - 1)
+                          *({f: 2} for f in positive), *({f: -2} for f in negative),
+                          *({f: 2 for f in group} for group in any_of))
+        # Each any_of group is a one-hot lexical category, so its sum is Boolean.
+        self.unit(layer, expression, targets,
+                  threshold=S.CODE_BITS * len(words) + 2 * (len(positive) + len(any_of)) - 1)
 
     def copy(self, layer, source, gate, destination, count=1, scale=1):
         for i in range(count):
@@ -139,6 +142,18 @@ class Compiler:
     def latest(self, layer, head, candidate, sources, destinations, first=False):
         self.attention(layer, head, [{S.ONE: 8}],
                        [{candidate: 65536, S.POS: (-1 if first else 1) * 8 * 128}], sources, destinations)
+
+    def latest_in_clause(self, layer, head, candidate, group, group_scale, sources, destinations):
+        """Prefer an event in this causal clause, otherwise its zero sentinel.
+
+        Group IDs are nondecreasing boundary positions. A one-position older
+        group loses more score than any validity/recency bonus can supply.
+        Cancel the query's common group offset before adding token recency.
+        """
+        penalty = 131072 * group_scale
+        self.attention(layer, head, [{S.ONE: 8}, {group: -8 * penalty}, {S.ONE: 8}],
+                       [{group: penalty}, {S.ONE: 1}, {candidate: 65536, S.POS: 8 * 128}],
+                       sources, destinations)
 
 
 def shapes():
@@ -195,6 +210,7 @@ def main():
     object_words = set(FACTS) | {value for facts in FACTS.values() for value in facts.values()}
     request_introducers = set(('what where describe explain tell about color colour more '
                               'hello hi hey add plus sum calculate a an can does is + -').split())
+    nonassertive_heads = set('what who where when why how which can does is are could would should will may if'.split())
     for tid, label in enumerate(labels):
         row = tensors["token_embedding"][tid]
         put_pair(row, S.ANCHOR, S.ANCHOR_VALUE)
@@ -231,13 +247,12 @@ def main():
             put_pair(row, S.PREPOSITION, 1)
         if label in adjectives:
             put_pair(row, S.ADJECTIVE, 1)
-        put_pair(row, S.VOWEL, float(label[0] in "aeiou"))
+        if label in nonassertive_heads:
+            put_pair(row, S.QUESTION_HEAD_WORD, 1)
         if label in FACTS or dynamic_start <= tid < number_start:
             put_pair(row, S.ENTITY, 1)
         if label in object_words or tid >= dynamic_start:
             put_pair(row, S.OBJECT_ALLOWED, 1)
-        if dynamic_start <= tid < number_start:
-            put_pair(row, S.VOWEL, float(tid - dynamic_start < 64))
         if tid >= number_start:
             put_pair(row, S.NUMBER, 1)
             put_pair(row, S.NUMBER_VALUE, (tid - number_start) / 1000)
@@ -278,6 +293,23 @@ def main():
     for src, dst in ((S.ENTITY, S.LIVE_ENTITY), (S.QUERY_CANDIDATE, S.LIVE_QUERY), (S.NUMBER, S.LIVE_NUMBER)):
         c.gate(0, [src, S.USER_STATE], targets={dst: 1})
     p1, p2, p3, p4 = S.PREV
+    c.linear(0, {S.QUESTION_HEAD_WORD: 1}, {S.QUESTION_HEAD_TEMP: 1})
+    # Predicate events are separate from object events. A later coordinated
+    # object can inherit an explicitly changed predicate even when its subject
+    # is omitted. A local 'and not OBJECT' does not change this shared register.
+    for relation in range(7):
+        flag = S.REL_FLAGS + relation
+        c.gate(0, [flag, S.USER_STATE], targets={S.LEXICAL_RELATION + relation: 1, S.LEXICAL_VALID: 1})
+        c.gate(0, [flag, S.USER_STATE, S.NEGATION], targets={S.LEXICAL_NEGATIVE: 1})
+        c.word(0, 'not', {S.LEXICAL_RELATION + relation: 1, S.LEXICAL_VALID: 1, S.LEXICAL_NEGATIVE: 1},
+               positive=[p1 + 15 + relation, S.USER_STATE])
+        if relation in (2, 3, 4):
+            c.gate(0, [flag, S.USER_STATE, p1 + 24], targets={S.LEXICAL_NEGATIVE: 1})
+    c.gate(0, [S.PREPOSITION, S.USER_STATE], targets={S.LEXICAL_RELATION + 6: 1, S.LEXICAL_VALID: 1})
+    c.gate(0, [S.PREPOSITION, S.USER_STATE, p1 + 24], targets={S.LEXICAL_NEGATIVE: 1})
+    for relation in (0, 6):
+        c.gate(0, [S.PREPOSITION, S.USER_STATE, p1 + 15 + relation, p2 + 24],
+               [p1 + 24], {S.LEXICAL_NEGATIVE: 1})
     for boundary in ("<user>", ".", "?", "!"):
         c.word(0, boundary, {S.CLAUSE_FIRST: 1}, start=p1, positive=[S.USER_STATE])
     # Transparent modifiers do not choose the request kind. Read the lexical
@@ -346,7 +378,11 @@ def main():
                     [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS], list(destinations))
     # Temporary read into Q_EVENT_VALID; its old contents are cleared in this
     # MLP before the query parser writes the actual event-validity bit.
-    c.latest(1, 8, S.CLAUSE_FIRST, [S.LEXICAL_REQUEST], [S.Q_EVENT_VALID])
+    c.latest(1, 8, S.CLAUSE_FIRST, [S.LEXICAL_REQUEST, S.QUESTION_HEAD_TEMP],
+             [S.Q_EVENT_VALID, S.QUESTION_CLAUSE])
+    c.latest_in_clause(1, 9, S.LEXICAL_VALID, S.CLAUSE_START, 128,
+                       list(range(S.LEXICAL_RELATION, S.LEXICAL_RELATION + 7)) + [S.LEXICAL_NEGATIVE, S.LEXICAL_VALID],
+                       list(range(S.PREDICATE_CONTEXT, S.PREDICATE_CONTEXT + 7)) + [S.PREDICATE_NEGATIVE, S.PREDICATE_VALID])
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
     c.clear(1, list(range(25, 51)) + [52, 54, 55, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS])
@@ -357,6 +393,7 @@ def main():
     c.linear(1, {S.ADJECTIVE: 1}, {S.LOCAL_ADJECTIVE: 1})
     c.linear(1, {S.CLAUSE_FIRST: 1}, {S.Q_EVENT_CANDIDATE: 1})
     c.clear(1, [S.CLAUSE_FIRST, S.LEXICAL_REQUEST])
+    c.clear(1, [S.QUESTION_HEAD_TEMP, S.QUESTION_CLAUSE] + list(range(S.LEXICAL_RELATION, S.LEXICAL_NEGATIVE + 1)))
     for offset, destination in zip(S.PREV[:3], S.Q_PREV_JOIN):
         for word in ("and", "or"):
             c.word(1, word, {destination: 1}, start=offset)
@@ -416,28 +453,72 @@ def main():
               (6, p3, [p1 + 23, p2 + 15, p3 + 14, S.USER_STATE], [], p2 + 24),
               (0, p4, [p1 + 22, p2 + 24, p3 + 15, p4 + 14, S.USER_STATE], [p2 + 25], None),
               (6, p4, [p1 + 23, p2 + 24, p3 + 15, p4 + 14, S.USER_STATE], [p2 + 25], None)]
-    # Compile syntax alternatives into shared relation/subject/polarity gates,
-    # rather than allocating one semantic register per surface pattern.
+    for relation in (2, 3, 4):
+        cases += [(relation, p3, [p1 + 22, p2 + 15 + relation, p3 + 14, S.USER_STATE], [], p2 + 24),
+                  (relation, p4, [p1 + 22, p2 + 24, p3 + 15 + relation, p4 + 14, S.USER_STATE], [p2 + 25], None),
+                  (relation, p4, [p1 + 22, p2 + 15 + relation, p3 + 24, p3 + 25, p4 + 14, S.USER_STATE], [], None)]
+    for relation in (0, 6):
+        cases.append((6, p4, [p1 + 22, p2 + 23, p3 + 15 + relation, p4 + 14, S.USER_STATE], [], p3 + 24))
+    # Full assertions are ready after block 1. Block 2 can retrieve their
+    # subject for coordinated objects instead of following the most recent
+    # entity token (which might be an object or a later question subject).
     for relation, subject, pos, neg, polarity_source in cases:
-        # Auxiliary inversion is a question, not new positive evidence.
-        neg = neg + [S.Q_PREV2[1]]
-        subject_gate = S.GATES + 7 + (p2, p3, p4).index(subject)
-        targets = {S.GATES + relation: 1, subject_gate: 1, S.GATES + 21: 1}
+        pos = pos + [S.OBJECT_ALLOWED]
+        neg = neg + [S.Q_PREV2[1], S.QUESTION_CLAUSE]
+        targets = {S.FACT_RELATION + relation: 1, S.FACT_VALID: 1}
         if polarity_source is None:
-            targets[S.GATES + 20] = 1
-        c.gate(1, pos + [S.OBJECT_ALLOWED], neg, targets)
+            targets[S.FACT_NEGATIVE] = 1
+        c.gate(1, pos, neg, targets)
+        c.copy_when(1, subject, S.FACT_SUBJECT, pos, neg, count=14)
+        c.copy_when(1, S.CODE, S.FACT_OBJECT, pos, neg, count=14)
         if polarity_source is not None:
-            c.gate(1, pos + [S.OBJECT_ALLOWED, polarity_source], neg, {S.GATES + 20: 1})
+            c.gate(1, pos + [polarity_source], neg, {S.FACT_NEGATIVE: 1})
+
+    # Shared-object syntax produces provisional metadata, not an independently
+    # valid fact. Its subject and validity must come from a full assertion in
+    # this same clause at block 2. Each layout is a reusable lexical/category
+    # conjunction, independent of entity identities or expected test answers.
+    rels = lambda offset: tuple(range(offset + 15, offset + 22))
+    layouts = [
+        (p1, [], [], (), False),                              # and OBJECT
+        (p2, [p1 + 24], [p1 + 25] + list(rels(p1)), (), True), # and not OBJECT
+        (p2, [p1 + 22], [], (), False),                       # and a OBJECT
+        (p2, [p1 + 23], [], (), False),                       # and in OBJECT
+        (p3, [p2 + 24, p1 + 22], [p2 + 25] + list(rels(p2)), (), True),
+        (p3, [p2 + 24, p1 + 23], [p2 + 25] + list(rels(p2)), (), True),
+        (p2, [], [], (rels(p1),), False),                     # and REL OBJECT
+        (p3, [p2 + 24], [p2 + 25] + list(rels(p2)), (rels(p1),), False),
+        (p3, [p2 + 25], [], (rels(p1),), False),               # and doesn't REL OBJECT
+        (p4, [p3 + 25, p2 + 24], [p2 + 25], (rels(p1),), False),
+        (p3, [p1 + 22], [], (rels(p2),), False),
+        (p3, [p1 + 23], [], (rels(p2),), False),
+        (p4, [p2 + 24, p1 + 22], [p2 + 25], (rels(p3),), False),
+        (p4, [p2 + 24, p1 + 23], [p2 + 25], (rels(p3),), False),
+    ]
+    for join_at, positive, negative, any_of, local_negative in layouts:
+        for lexical_relation in (0, 1, 2, 3, 4, 6):
+            for relation in ((0, 5) if lexical_relation == 0 else (lexical_relation,)):
+                pos = positive + [S.PREDICATE_CONTEXT + lexical_relation, S.PREDICATE_VALID, S.OBJECT_ALLOWED, S.USER_STATE]
+                neg = negative + [S.QUESTION_CLAUSE]
+                if lexical_relation == 0:
+                    (pos if relation == 5 else neg).append(S.ADJECTIVE)
+                targets = {S.ASSERTION_CONTINUATION: 1, S.FACT_RELATION + relation: 1}
+                if local_negative:
+                    targets[S.FACT_NEGATIVE] = 1
+                c.pattern(1, [(join_at, 'and')], targets, pos, neg, any_of)
+                if not local_negative:
+                    c.pattern(1, [(join_at, 'and')], {S.FACT_NEGATIVE: 1},
+                              pos + [S.PREDICATE_NEGATIVE], neg, any_of)
     c.latest(2, 0, S.Q_EVENT_CANDIDATE,
              list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_EVENT_NEGATIVE, S.Q_EVENT_GROUP],
              list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP) + [S.Q_QUERY_NEGATIVE, S.Q_GROUP])
-    for i, subject in enumerate((p2, p3, p4)):
-        c.copy(2, subject, S.GATES + 7 + i, S.FACT_SUBJECT, 14)
-    c.copy(2, S.CODE, S.GATES + 21, S.FACT_OBJECT, 14)
-    for relation in range(7):
-        c.linear(2, {S.GATES + relation: 1}, {S.FACT_RELATION + relation: 1})
-    c.linear(2, {S.GATES + 21: 1}, {S.FACT_VALID: 1})
-    c.linear(2, {S.GATES + 20: 1}, {S.FACT_NEGATIVE: 1})
+    c.latest_in_clause(2, 1, S.FACT_VALID, S.Q_EVENT_GROUP, 8192,
+                       list(range(S.FACT_SUBJECT, S.FACT_SUBJECT + 14)) + [S.FACT_VALID],
+                       list(range(S.CURRENT, S.CURRENT + 14)) + [S.ASSERTION_FRAME_VALID])
+    continuation = [S.ASSERTION_CONTINUATION, S.ASSERTION_FRAME_VALID]
+    c.copy_when(2, S.CURRENT, S.FACT_SUBJECT, continuation, [S.Q_MODE], count=14)
+    c.copy_when(2, S.CODE, S.FACT_OBJECT, continuation, [S.Q_MODE], count=14)
+    c.gate(2, continuation, [S.Q_MODE], {S.FACT_VALID: 1})
 
     # Release local parsing scratch and initialize a neural graph cursor.
     # All writes within this MLP read its pre-MLP input, so clearing the old
@@ -487,7 +568,7 @@ def main():
     c.gate(2, [S.LOCAL_OR, S.Q_MODE], targets={S.Q_JOIN_OR: 1})
     c.clear(2, list(S.Q_SUBJECT_TEMP) + list(S.Q_BIND_TEMP))
     # Preserve the grammar's previous-token predicates before recycling PREV.
-    # GATES[0:10] belong to fact parsing; [10:19] are free until block 11.
+    # GATES[0:10] held lexical predicate/frame reads; [10:19] now hold grammar.
     previous_words = ("<assistant>", "a", "an", "can", "needs", "has", "produces", "in", "is")
     for i, word in enumerate(previous_words):
         c.word(2, word, {S.GATES + 10 + i: 1}, start=p1)
@@ -776,6 +857,8 @@ def main():
                         "Arithmetic circuit is intended for two signed operands with magnitudes no greater than 999.",
                         "Object-specific truth questions and logical negation support seven predicates under a limited inversion grammar.",
                         "Proposition composition uses three-valued reductions for homogeneous AND or OR; mixed-operator syntax and arbitrary requests remain unsupported.",
+                        "Shared AND assertion objects use clause-local neural subject/predicate/polarity binding with a bounded grammar.",
+                        "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }
     (MODEL / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

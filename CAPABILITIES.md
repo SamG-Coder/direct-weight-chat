@@ -1,6 +1,39 @@
 # Capabilities and limitations
 
-## Current v12b
+## Current v13a
+
+- Coordinated assertions improve from v12b's 158/390 to 382/390, including
+  all 381 cases within the targeted grammar and 1/9 broader structural stresses.
+- Shared positive/negative predicates work across all seven relations. Explicit
+  verb changes replace the predicate and polarity; local not negates one object.
+  Subject changes, object correction, object determiners, up to three inherited
+  class links and multi-turn combinations pass the new development cases.
+- Question clauses are excluded from assertion storage, including declarative
+  fragments following AND. This repairs all four observed question-memory errors.
+  It is bounded clause-head recognition, not general intent understanding.
+- All nineteen other existing suites were rerun. Legacy remains 185/185; graph
+  75/79; arithmetic 115/120; polarity 230/233; signed 153/159; truth 236/239;
+  query scope 265/269; modifiers 78/81. Composition improves to 398/404.
+- Nineteen matched v12b/v13a reports contain one regression: a conditional with
+  its premise now abstains instead of accidentally asserting its conclusion.
+  The matching no-premise case is repaired. Conditional reasoning itself remains
+  unsupported. Exact changes are in [the comparison](results/regressions-v13a.json).
+- Integrity, causal/cache parity, offline guard and all earlier interventions
+  pass. Four new ablations show the roles of continuation validity, predicate
+  binding, question exclusion and clause isolation. The runtime is unchanged.
+
+Disjunctive assertions can still incorrectly assert their first alternative.
+Conditional rules, multiple class parents, comma lists, longer negation forms,
+double negation and open wh-answers listing multiple values remain failures.
+Mixed query AND/OR precedence, pronouns, broader instruction scope and all
+previous arithmetic/depth limits remain. Useful flexible conversation, creative
+writing and code generation are unachieved.
+
+v13a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **928,135
+nonzero parameters (0.371254%)**. Raw weight SHA-256:
+`dcd4cdeff8c750fc95a9071e3de833a8849b4874d8dfda984dceb885197858af`.
+
+## Historical v12b
 
 - Legacy 185/185; graph 75/79; arithmetic 115/120; polarity 230/233;
   signed operands 153/159; truth 236/239; query scope 265/269;

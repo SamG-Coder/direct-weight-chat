@@ -444,3 +444,32 @@ generation. These score 1/9. The intended next circuit binds coordinated objects
 to clause-local subject/predicate/polarity registers while rejecting question
 clauses as assertions. The suite and exact baseline are committed before that
 compiler change; this is development evidence, not independent generalization.
+
+## 2026-11-04: v13a clause-local coordinated assertions
+
+Moved full assertion events to block 1 and added separate lexical-predicate and
+subject-frame attention. Fourteen bounded coordination layouts compile into
+provisional object events; a valid same-clause subject frame completes them in
+block 2. Predicate replacement and local negation have separate lifetimes.
+Question-head exclusion prevents declarative fragments inside questions from
+being stored as evidence. The inference runtime remains byte-for-byte unchanged.
+
+Assertion development improves 158/390 -> 382/390 (381/381 targeted grammar,
+1/9 stress). Replayed all nineteen other suites. All earlier passes are retained;
+composition improves 397/404 -> 398/404 on both development and former fresh sets.
+The nineteen matched comparisons retain one new-suite regression: a conditional
+with a satisfied premise now abstains. Its previous Yes also appeared without
+the premise, so it was not conditional reasoning. The no-premise case is repaired;
+the rule-solving case remains failed rather than receiving a changed expectation.
+
+Hash/layout/finite/causal/cache/offline checks and prior interventions pass.
+Removing continuation validity or predicate binding changes a coordinated-fact
+Yes to unknown. Removing question exclusion recreates a false remembered fact;
+removing both clause bindings leaks an earlier subject/predicate into a bare
+later continuation. These interventions affect runtime copies only.
+
+v13a has 928,135 nonzero parameters; raw SHA-256 is
+`dcd4cdeff8c750fc95a9071e3de833a8849b4874d8dfda984dceb885197858af`.
+This candidate is frozen and committed before drawing a fresh assertion seed.
+Disjunction, conditional application, multiple-parent traversal, open-list
+generation and mixed Boolean precedence remain unresolved.

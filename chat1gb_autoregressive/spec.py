@@ -24,6 +24,7 @@ QUERY_CANDIDATE, QUERY_FLAGS = 29, 30
 ARTICLE, PREPOSITION = 40, 41
 REL_FLAGS = 42
 ADJECTIVE, VOWEL = 49, 50
+QUESTION_HEAD_WORD = 50  # Replaces the unused lexical vowel bit in v13.
 USER_START = 51
 FACTS = 64  # Seven slots of [14 object-code bits, present, negative-polarity].
 USER_STATE, PHASE_STATE = 52, 53
@@ -74,6 +75,12 @@ Q_EVENT_GROUP, Q_GROUP = 24, 3  # Numeric value and position square are dead.
 Q_JOIN_AND, Q_JOIN_OR = 7, 24
 Q_PREV_JOIN = (284, 287, 61)
 Q_BIND_TEMP = tuple(range(GATES, GATES + 10)) + (GATES + 20, GATES + 21) + Q_REL_TEMP + (52, 56, 59, 60)
+# v13 parsing lifetimes: block 0 uses the future fact metadata coordinates for
+# lexical predicate events; block 1 replaces them with actual assertion events.
+LEXICAL_RELATION, LEXICAL_VALID, LEXICAL_NEGATIVE = FACT_RELATION, FACT_VALID, FACT_NEGATIVE
+PREDICATE_CONTEXT, PREDICATE_NEGATIVE, PREDICATE_VALID = GATES, GATES + 7, GATES + 8
+ASSERTION_FRAME_VALID, ASSERTION_CONTINUATION = GATES + 9, GATES + 20
+QUESTION_HEAD_TEMP, QUESTION_CLAUSE = GATES + 21, GATES + 22
 ATOM_TRUE, ATOM_FALSE, ATOM_UNKNOWN = 64, 65, 66
 ANY_TRUE, ANY_FALSE, ANY_UNKNOWN, ANY_AND, ANY_OR, COMPOSED_KNOWN = range(67, 73)
 

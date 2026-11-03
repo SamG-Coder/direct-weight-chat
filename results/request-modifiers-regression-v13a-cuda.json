@@ -1,0 +1,1959 @@
+{
+  "version": "v13a",
+  "suite": "active-request-modifiers",
+  "evaluation_status": "post-freeze known-generator combinations",
+  "created_utc": "2026-11-03T14:55:44.786130+00:00",
+  "git": {
+    "commit": "859e2a89afb3cad17a45ffee688b82fb68bd39c7",
+    "dirty": true
+  },
+  "model_sha256": "dcd4cdeff8c750fc95a9071e3de833a8849b4874d8dfda984dceb885197858af",
+  "suite_sha256": "1441dd63fe558d2b051746868a85ee0526138f9e99e0eb829aaad2180dffae32",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 928135,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "Please calculate 330 - 190.",
+      "text": "140.",
+      "token_ids": [
+        638,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008779600000707433,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-000",
+      "category": "modified_arithmetic",
+      "expected": "140.",
+      "acceptable": [
+        "140."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -95 - 117.",
+      "text": "-212.",
+      "token_ids": [
+        8,
+        710,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010157200013054535,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-001",
+      "category": "modified_arithmetic",
+      "expected": "-212.",
+      "acceptable": [
+        "-212."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 218 - 676.",
+      "text": "-458.",
+      "token_ids": [
+        8,
+        956,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010450000001583248,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-002",
+      "category": "modified_arithmetic",
+      "expected": "-458.",
+      "acceptable": [
+        "-458."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 741 + -204.",
+      "text": "537.",
+      "token_ids": [
+        1035,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008544200012693182,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-003",
+      "category": "modified_arithmetic",
+      "expected": "537.",
+      "acceptable": [
+        "537."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -295 + -932.",
+      "text": "-1227.",
+      "token_ids": [
+        8,
+        1725,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.0102484000090044,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-004",
+      "category": "modified_arithmetic",
+      "expected": "-1227.",
+      "acceptable": [
+        "-1227."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Can a bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007963800017023459,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-005",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007631899992702529,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-006",
+      "category": "modified_request_kind",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Does a bird have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00790879997657612,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-007",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Is a bird an animal?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007626000005984679,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-008",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please What can a bird do?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012969300005352125,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-009",
+      "category": "modified_request_kind",
+      "expected": "Bird can fly.",
+      "acceptable": [
+        "Bird can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Explain a bird.",
+      "text": "Bird is an animal. It can fly.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.026108499994734302,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "modifier-010",
+      "category": "modified_request_kind",
+      "expected": "Bird is an animal. It can fly.",
+      "acceptable": [
+        "Bird is an animal. It can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01567670001531951,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-011",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please Ignore the last question.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015545700007351115,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-012",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Please write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016371400008210912,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-013",
+      "category": "later_modified_request",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Please calculate -149 - 370.",
+      "text": "-519.",
+      "token_ids": [
+        8,
+        1017,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.011062399978982285,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-014",
+      "category": "later_modified_request",
+      "expected": "-519.",
+      "acceptable": [
+        "-519."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Please can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008154000010108575,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-015",
+      "category": "later_modified_request",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly calculate 715 + 619.",
+      "text": "1334.",
+      "token_ids": [
+        1832,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008056799997575581,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-016",
+      "category": "modified_arithmetic",
+      "expected": "1334.",
+      "acceptable": [
+        "1334."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly calculate 869 + 643.",
+      "text": "1512.",
+      "token_ids": [
+        2010,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0076898999977856874,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-017",
+      "category": "modified_arithmetic",
+      "expected": "1512.",
+      "acceptable": [
+        "1512."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly calculate 952 + -60.",
+      "text": "892.",
+      "token_ids": [
+        1390,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008214400004362687,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-018",
+      "category": "modified_arithmetic",
+      "expected": "892.",
+      "acceptable": [
+        "892."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly calculate 142 - -261.",
+      "text": "403.",
+      "token_ids": [
+        901,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007564600004116073,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-019",
+      "category": "modified_arithmetic",
+      "expected": "403.",
+      "acceptable": [
+        "403."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly calculate 822 + -801.",
+      "text": "21.",
+      "token_ids": [
+        519,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007903799996711314,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-020",
+      "category": "modified_arithmetic",
+      "expected": "21.",
+      "acceptable": [
+        "21."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Can a bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007564400002593175,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-021",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00774279999313876,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-022",
+      "category": "modified_request_kind",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Does a bird have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007425300020258874,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-023",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Is a bird an animal?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007739399996353313,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-024",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly What can a bird do?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012771599984262139,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-025",
+      "category": "modified_request_kind",
+      "expected": "Bird can fly.",
+      "acceptable": [
+        "Bird can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Explain a bird.",
+      "text": "Bird is an animal. It can fly.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02591349999420345,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "modifier-026",
+      "category": "modified_request_kind",
+      "expected": "Bird is an animal. It can fly.",
+      "acceptable": [
+        "Bird is an animal. It can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015195100015262142,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-027",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Briefly Ignore the last question.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01527679999708198,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-028",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Please write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01603979998617433,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-029",
+      "category": "later_modified_request",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Briefly calculate -149 - 370.",
+      "text": "-519.",
+      "token_ids": [
+        8,
+        1017,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010850399994524196,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-030",
+      "category": "later_modified_request",
+      "expected": "-519.",
+      "acceptable": [
+        "-519."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Briefly can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008126400003675371,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-031",
+      "category": "later_modified_request",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply calculate -608 + -22.",
+      "text": "-630.",
+      "token_ids": [
+        8,
+        1128,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010323299997253343,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-032",
+      "category": "modified_arithmetic",
+      "expected": "-630.",
+      "acceptable": [
+        "-630."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply calculate 90 - -927.",
+      "text": "1017.",
+      "token_ids": [
+        1515,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007962700008647516,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-033",
+      "category": "modified_arithmetic",
+      "expected": "1017.",
+      "acceptable": [
+        "1017."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply calculate -94 + -67.",
+      "text": "-161.",
+      "token_ids": [
+        8,
+        659,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010377600003266707,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-034",
+      "category": "modified_arithmetic",
+      "expected": "-161.",
+      "acceptable": [
+        "-161."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply calculate -947 - -741.",
+      "text": "-206.",
+      "token_ids": [
+        8,
+        704,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010592600010568276,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-035",
+      "category": "modified_arithmetic",
+      "expected": "-206.",
+      "acceptable": [
+        "-206."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply calculate 454 - -440.",
+      "text": "894.",
+      "token_ids": [
+        1392,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007874000002630055,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-036",
+      "category": "modified_arithmetic",
+      "expected": "894.",
+      "acceptable": [
+        "894."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Can a bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007609599997522309,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-037",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007909200008725747,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-038",
+      "category": "modified_request_kind",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Does a bird have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007560800004284829,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-039",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Is a bird an animal?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007977600005688146,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-040",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply What can a bird do?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01261289999820292,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-041",
+      "category": "modified_request_kind",
+      "expected": "Bird can fly.",
+      "acceptable": [
+        "Bird can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Explain a bird.",
+      "text": "Bird is an animal. It can fly.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02508359999046661,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "modifier-042",
+      "category": "modified_request_kind",
+      "expected": "Bird is an animal. It can fly.",
+      "acceptable": [
+        "Bird is an animal. It can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01527250002254732,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-043",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Simply Ignore the last question.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015809800010174513,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-044",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Please write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01591990000451915,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-045",
+      "category": "later_modified_request",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Simply calculate -149 - 370.",
+      "text": "-519.",
+      "token_ids": [
+        8,
+        1017,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.011970999999903142,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-046",
+      "category": "later_modified_request",
+      "expected": "-519.",
+      "acceptable": [
+        "-519."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Simply can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010150099988095462,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-047",
+      "category": "later_modified_request",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just calculate -771 + -533.",
+      "text": "-1304.",
+      "token_ids": [
+        8,
+        1802,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010529399994993582,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-048",
+      "category": "modified_arithmetic",
+      "expected": "-1304.",
+      "acceptable": [
+        "-1304."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just calculate 648 + 961.",
+      "text": "1609.",
+      "token_ids": [
+        2107,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007608399988384917,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-049",
+      "category": "modified_arithmetic",
+      "expected": "1609.",
+      "acceptable": [
+        "1609."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just calculate 124 + 315.",
+      "text": "439.",
+      "token_ids": [
+        937,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007520799990743399,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-050",
+      "category": "modified_arithmetic",
+      "expected": "439.",
+      "acceptable": [
+        "439."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just calculate -392 + -288.",
+      "text": "-680.",
+      "token_ids": [
+        8,
+        1178,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010659899999154732,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-051",
+      "category": "modified_arithmetic",
+      "expected": "-680.",
+      "acceptable": [
+        "-680."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just calculate 813 + 920.",
+      "text": "1733.",
+      "token_ids": [
+        2231,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007532299990998581,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-052",
+      "category": "modified_arithmetic",
+      "expected": "1733.",
+      "acceptable": [
+        "1733."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Can a bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00783340001362376,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-053",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00756359999650158,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-054",
+      "category": "modified_request_kind",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Does a bird have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00789690000237897,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-055",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Is a bird an animal?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007692899991525337,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-056",
+      "category": "modified_request_kind",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just What can a bird do?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013192399987019598,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-057",
+      "category": "modified_request_kind",
+      "expected": "Bird can fly.",
+      "acceptable": [
+        "Bird can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Explain a bird.",
+      "text": "Bird is an animal. It can fly.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.025625100010074675,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "modifier-058",
+      "category": "modified_request_kind",
+      "expected": "Bird is an animal. It can fly.",
+      "acceptable": [
+        "Bird is an animal. It can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014730399998370558,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-059",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just Ignore the last question.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014915500010829419,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-060",
+      "category": "modified_request_kind",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Please write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0158886999997776,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-061",
+      "category": "later_modified_request",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Just calculate -149 - 370.",
+      "text": "-519.",
+      "token_ids": [
+        8,
+        1017,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010553000000072643,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-062",
+      "category": "later_modified_request",
+      "expected": "-519.",
+      "acceptable": [
+        "-519."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can a fish swim? Just can a bird not fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00844359997427091,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "modifier-063",
+      "category": "later_modified_request",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please briefly calculate 149 - 370.",
+      "text": "-221.",
+      "token_ids": [
+        8,
+        719,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010465200000908226,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-064",
+      "category": "two_modifiers",
+      "expected": "-221.",
+      "acceptable": [
+        "-221."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please briefly can bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007456299994373694,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-065",
+      "category": "two_modifiers",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please briefly write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015342800004873425,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-066",
+      "category": "two_modifiers",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please simply calculate 149 - 370.",
+      "text": "-221.",
+      "token_ids": [
+        8,
+        719,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010636199993314222,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-067",
+      "category": "two_modifiers",
+      "expected": "-221.",
+      "acceptable": [
+        "-221."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please simply can bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0075488000002224,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-068",
+      "category": "two_modifiers",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please simply write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015495700004976243,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-069",
+      "category": "two_modifiers",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just briefly calculate 149 - 370.",
+      "text": "-221.",
+      "token_ids": [
+        8,
+        719,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010339500004192814,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-070",
+      "category": "two_modifiers",
+      "expected": "-221.",
+      "acceptable": [
+        "-221."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just briefly can bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007522899977630004,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-071",
+      "category": "two_modifiers",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Just briefly write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015514300001086667,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-072",
+      "category": "two_modifiers",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please just calculate 149 - 370.",
+      "text": "-221.",
+      "token_ids": [
+        8,
+        719,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009970800019800663,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-073",
+      "category": "two_modifiers",
+      "expected": "-221.",
+      "acceptable": [
+        "-221."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please just can bird fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007932200009236112,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "modifier-074",
+      "category": "two_modifiers",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please just write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01584429998183623,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-075",
+      "category": "two_modifiers",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please briefly can a bird fly?",
+      "text": "Bird can fly.",
+      "token_ids": [
+        46,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012567699974169955,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-076",
+      "category": "modifier_structure_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please just briefly calculate 149 - 370.",
+      "text": "-221.",
+      "token_ids": [
+        8,
+        719,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010638500010827556,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-077",
+      "category": "modifier_structure_stress",
+      "expected": "-221.",
+      "acceptable": [
+        "-221."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Could you please calculate 149 - 370?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0157836000144016,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "modifier-078",
+      "category": "modifier_structure_stress",
+      "expected": "-221.",
+      "acceptable": [
+        "-221."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Would you tell me whether a bird can fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01598930000909604,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "modifier-079",
+      "category": "modifier_structure_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Please do not explain a bird.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015390299988212064,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "modifier-080",
+      "category": "modifier_structure_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "modified_arithmetic": {
+      "passed": 20,
+      "total": 20,
+      "success_rate": 1.0,
+      "median_response_ms": 8.379300008527935
+    },
+    "modified_request_kind": {
+      "passed": 32,
+      "total": 32,
+      "success_rate": 1.0,
+      "median_response_ms": 10.295250001945533
+    },
+    "later_modified_request": {
+      "passed": 12,
+      "total": 12,
+      "success_rate": 1.0,
+      "median_response_ms": 10.95639998675324
+    },
+    "two_modifiers": {
+      "passed": 12,
+      "total": 12,
+      "success_rate": 1.0,
+      "median_response_ms": 10.40235000255052
+    },
+    "modifier_structure_stress": {
+      "passed": 2,
+      "total": 5,
+      "success_rate": 0.4,
+      "median_response_ms": 15.390299988212064
+    },
+    "all": {
+      "passed": 78,
+      "total": 81,
+      "success_rate": 0.9629629629629629,
+      "median_response_ms": 10.339500004192814
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

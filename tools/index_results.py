@@ -10,15 +10,15 @@ def main():
     versions = sorted([p.name.removeprefix('autoregressive_') for p in (root / 'versions').glob('autoregressive_*')], key=lambda v: (int(re.search(r'v([0-9]+)', v).group(1)), v))
     rows = ['# Version results', '',
             'Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.', '',
-            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Nonzero parameters | Source commit |',
-            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
+            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Nonzero parameters | Source commit |',
+            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
     index = []
     for v in versions:
         source = Path('versions') / ('autoregressive_' + v)
         m = json.loads((root / source / 'model' / 'manifest.json').read_text(encoding='utf-8'))
         commit = subprocess.check_output(['git', 'log', '--diff-filter=A', '--format=%H', '--', str(source / 'build.py')], cwd=root, text=True).strip().splitlines()[-1]
         scores, reports = [], []
-        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers'):
+        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions'):
             p = root / 'results' / f'{suite}-{v}-cuda.json'
             if not p.exists():
                 p = root / 'results' / f'{suite}-{v}-baseline-cuda.json'
@@ -68,6 +68,10 @@ def main():
              '- After freeze commit `49dd2ea`, composition seed 1676552291 reproduced 397/404 on [CUDA](composition-v12b-postfreeze-cuda.json) and [CPU](composition-v12b-postfreeze-cpu.json). Modifier seed 973315925 reproduced 78/81 on [CUDA](request-modifiers-v12b-postfreeze-cuda.json) and [CPU](request-modifiers-v12b-postfreeze-cpu.json). The latter adds 20 fresh arithmetic combinations; its 61 structural cases repeat. Both generators were known before freezing.',
              '- [Reproduction](reproduction-v12b.json) compares exact raw/config hashes from the archived v12b compiler; [v0.4 packaging](release-assets-v0.4.json) verifies both archived checkpoints after decompression.', '',
              '- [v0.4 publication verification](publication-v0.4.json): both uploaded archive sizes/digests match. A fresh clone/download passed integrity and all interventions; its 16-turn smoke conversation scored 16/16 on [CUDA](release-validation-v0.4/fresh-smoke-cuda.json) and [CPU](release-validation-v0.4/fresh-smoke-cpu.json). Creative/code-request abstentions are not claims of generation capability.', '',
+             '## Coordinated assertions', '',
+             '- v13a adds clause-local subject/predicate/polarity binding for shared assertion objects. Assertion development improves from v12b 158/390 to 382/390, including 381/381 targeted cases and 1/9 structural stresses. Question clauses no longer add the observed declarative fragments as facts. Existing composition improves to 398/404.',
+             '- [Matched comparisons](regressions-v13a.json) cover nineteen suites and retain one conditional-stress regression: the model now abstains on a rule with a satisfied premise. The previous Yes also appeared without the premise and was not rule application. Conditional reasoning, disjunction, multiple parents and open-list generation remain failures.',
+             '- [v13a integrity and interventions](integrity-v13a-cuda.json) include continuation validity, predicate binding, question exclusion and clause isolation, plus all older checks. The inference runtime remains unchanged.', '',
              '## Provenance and timing', '',
              '[experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.', '',
              'Response timings include token generation and formatting, exclude one warm-up, and depend on prompt/output length and machine load. They are not a comparison against trained language models. Exact per-case timings and hardware are in each JSON. CUDA and CPU evaluations were run separately.', '',
