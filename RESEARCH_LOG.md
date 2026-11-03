@@ -329,3 +329,14 @@ fall.` instead of the expected abstention. Local and freshly downloaded runs
 agree. The failed check is preserved, not counted as success. Evidence is in
 `results/publication-v0.3.json` and `results/release-validation-v0.3/`.
 The research goal remains active and useful open-ended conversation is unachieved.
+
+## 2026-11-04: proposition composition and request-scope baseline
+
+Created 404 development cases before changing the compiler. They include full
+three-valued two-proposition AND/OR tables across seven predicates, n-ary
+reductions, independent query negation, mixed subjects and predicates, inherited
+properties, dialogue, and later requests. Unsupported mixed operators, malformed
+structures and paraphrases remain explicit stress cases. Frozen v11a scores
+243/404; many passes come from using only one conjunct, so the truth-table
+contrasts are essential. The next experiment will evaluate proposition events
+in parallel, reduce their truth values neurally, and keep active clauses separate.
