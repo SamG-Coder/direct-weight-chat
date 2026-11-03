@@ -837,3 +837,28 @@ attention on open-answer requests. The candidate and exact repeated-token
 outputs are retained. The correction must gate both rule attention and proof
 acceptance explicitly by the binary-question mode, not just by a state field
 that serves a different purpose in open-answer generation.
+
+### v16b isolation correction and retained static-fact failure
+
+v16b retains 269/293 conditional development cases and repairs the open-answer
+field collision. All 33 saved suites were run on CUDA for both candidates
+(the 36 guard cases were added after the first run began). The guards score
+19/36 on v15a, 27/36 on v16a and 29/36 on v16b. They expose unsupported
+paraphrases being treated as unconditional assertions, compound rules being
+rejected and rule-derived open answers remaining unavailable.
+
+The full v16b run still loses one truth case in each of two suites: `Does a
+robot have sensors?` becomes unknown. The read-only activation trace finds a
+spurious rule validity of about 493 at the robot token after block 2. Atomic
+fact bits share the temporary rule-coordinate bank; a +1 static bit is
+misread as a clause coordinate, adding +512 to the scope expression even
+though the token is not a rule terminator. Saturation then makes it look like
+a valid rule and static truth attention excludes it. This requires a general
+record-type guard, not an exception for robot or sensors.
+
+Six of seven conditional interventions pass. Removing only the object-match
+dot product also removes its 14-point match reward, so the BOS sentinel wins
+even on the intended ablated path. That ineffective intervention is preserved
+in `conditional-integrity-v16b-cuda.json`. A corrected diagnostic must retain
+the maximum object reward while removing dependence on the object's identity.
+The model itself will not be changed to make an intervention pass.

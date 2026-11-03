@@ -1,0 +1,281 @@
+{
+  "version": "v16b",
+  "device": "cuda",
+  "git": {
+    "commit": "c2e611c356fc5c57a9bf8a420a47462d61f2d5f0",
+    "dirty": true
+  },
+  "model_sha256": "47eb532c55317ef57d99a97f98b25d5e4a2a3cbcd623e8150cbbdfa4826ce5c7",
+  "interventions": [
+    {
+      "name": "rule_link_1",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have fins?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.13924310001311824,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have fins?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.01734829999622889,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "expected": "Yes.",
+      "ablated_expected": "I do not know.",
+      "passed": true
+    },
+    {
+      "name": "rule_link_2",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does tal need water?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.009618799987947568,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does tal need water?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.01730370000586845,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "expected": "Yes.",
+      "ablated_expected": "I do not know.",
+      "passed": true
+    },
+    {
+      "name": "rule_link_3",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Can pel glow?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.00957270001526922,
+        "device": "cuda",
+        "prefix_tokens": 38
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Can pel glow?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.017817099986132234,
+        "device": "cuda",
+        "prefix_tokens": 38
+      },
+      "expected": "Yes.",
+      "ablated_expected": "I do not know.",
+      "passed": true
+    },
+    {
+      "name": "premise_evidence_attention",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have fins?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.00956080001196824,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have fins?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.017521200003102422,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "expected": "Yes.",
+      "ablated_expected": "I do not know.",
+      "passed": true
+    },
+    {
+      "name": "rule_record_validity",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have fins?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.009454799990635365,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have fins?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.017600400024093688,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "expected": "Yes.",
+      "ablated_expected": "I do not know.",
+      "passed": true
+    },
+    {
+      "name": "consequent_object_identity",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have scales?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.017126799997640774,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv can shimmer then zor has fins. If zor has fins then tal needs water. If tal needs water then pel can glow. Does zor have scales?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.017599499988136813,
+        "device": "cuda",
+        "prefix_tokens": 39
+      },
+      "expected": "I do not know.",
+      "ablated_expected": "Yes.",
+      "passed": false
+    },
+    {
+      "name": "signed_premise",
+      "original": {
+        "prompt": "Kelv can shimmer. If kelv cannot shimmer then zor has fins. Does zor have fins?",
+        "text": "I do not know.",
+        "token_ids": [
+          158,
+          89,
+          220,
+          175,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 6,
+        "seconds": 0.01638080002157949,
+        "device": "cuda",
+        "prefix_tokens": 21
+      },
+      "ablated": {
+        "prompt": "Kelv can shimmer. If kelv cannot shimmer then zor has fins. Does zor have fins?",
+        "text": "Yes.",
+        "token_ids": [
+          366,
+          9,
+          0
+        ],
+        "stopped_on_eos": true,
+        "generated_tokens": 3,
+        "seconds": 0.008997299999464303,
+        "device": "cuda",
+        "prefix_tokens": 21
+      },
+      "expected": "I do not know.",
+      "ablated_expected": "Yes.",
+      "passed": true
+    }
+  ],
+  "cached_full_tokens_match": true,
+  "cached_generated_tokens": [
+    366,
+    9,
+    0
+  ],
+  "weights_unchanged": true,
+  "note": "Only temporary runtime tensor copies are ablated; saved weights and the normal generic inference code are unchanged. Expected text is used only for external scoring."
+}

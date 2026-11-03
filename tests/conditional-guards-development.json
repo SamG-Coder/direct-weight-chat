@@ -1,0 +1,259 @@
+{
+  "name": "conditional-scope-and-dialogue-guards",
+  "status": "development-author-designed-after-v16a",
+  "cases": [
+    {
+      "id": "rule-guard-000",
+      "prompt": "Bird can fly. If bird can fly then kelv has fins. Does kelv have fins?",
+      "expected": "Yes.",
+      "category": "atomic_premise_and_override",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-001",
+      "prompt": "Bird cannot fly. If bird can fly then kelv has fins. Does kelv have fins?",
+      "expected": "I do not know.",
+      "category": "atomic_premise_and_override",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-002",
+      "prompt": " If bird can fly then kelv has fins. Does kelv have fins?",
+      "expected": "Yes.",
+      "category": "atomic_premise_and_override",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-003",
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings? Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "scope_or_unsupported_compound",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-004",
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings and tal has scales. Does zor have wings?",
+      "expected": "Yes.",
+      "category": "scope_or_unsupported_compound",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-005",
+      "prompt": "Kelv can fly. If kelv can fly or kelv can swim then zor has wings. Does zor have wings?",
+      "expected": "Yes.",
+      "category": "scope_or_unsupported_compound",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-006",
+      "prompt": "If kelv can fly then zor has wings? Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "scope_or_unsupported_compound",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-007",
+      "prompt": "If kelv can fly then zor has wings and tal has scales. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "scope_or_unsupported_compound",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-008",
+      "prompt": "If kelv can fly or kelv can swim then zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "scope_or_unsupported_compound",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-009",
+      "prompt": "Kelv can fly implies zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "unsupported_paraphrase_missing_premise",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-010",
+      "prompt": "Kelv cannot fly. Kelv can fly implies zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "unsupported_paraphrase_false_premise",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-011",
+      "prompt": "Whenever kelv can fly, zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "unsupported_paraphrase_missing_premise",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-012",
+      "prompt": "Kelv cannot fly. Whenever kelv can fly, zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "unsupported_paraphrase_false_premise",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-013",
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings. Does zor have scales?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-014",
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings. Does tal have wings?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-015",
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings. Does zor need wings?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-016",
+      "prompt": "Kelv can swim. If kelv can fly then zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-017",
+      "prompt": "Tal can fly. If kelv can fly then zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-018",
+      "prompt": "Kelv needs fly. If kelv can fly then zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-019",
+      "prompt": "Kelv cannot fly. If kelv cannot fly then zor does not have wings. Does zor have wings?",
+      "expected": "No.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-020",
+      "prompt": "Kelv can fly. If kelv cannot fly then zor has wings. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "literal_field_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-021",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does tal need water?",
+      "expected": "Yes.",
+      "category": "multi_turn_correction",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-022",
+      "prompt": "Kelv cannot fly. Does tal need water?",
+      "expected": "I do not know.",
+      "category": "multi_turn_correction",
+      "reset": false
+    },
+    {
+      "id": "rule-guard-023",
+      "prompt": "Kelv can fly. Does tal need water?",
+      "expected": "Yes.",
+      "category": "multi_turn_correction",
+      "reset": false
+    },
+    {
+      "id": "rule-guard-024",
+      "prompt": "Tal does not need water. Does tal need water?",
+      "expected": "No.",
+      "category": "multi_turn_correction",
+      "reset": false
+    },
+    {
+      "id": "rule-guard-025",
+      "prompt": "Does zor have wings?",
+      "expected": "Yes.",
+      "category": "multi_turn_correction",
+      "reset": false
+    },
+    {
+      "id": "rule-guard-026",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor have wings and does tal need water?",
+      "expected": "Yes.",
+      "category": "query_composition",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-027",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor have scales or does tal need water?",
+      "expected": "Yes.",
+      "category": "query_composition",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-028",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor have scales and does tal need water?",
+      "expected": "I do not know.",
+      "category": "query_composition",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-029",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor not have wings?",
+      "expected": "No.",
+      "category": "query_composition",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-030",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. What does a computer have?",
+      "expected": "Computer has processor.",
+      "category": "open_request_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-031",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Explain a computer.",
+      "expected": "Computer is a machine. It can calculate.",
+      "category": "open_request_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-032",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Explain a bird.",
+      "expected": "Bird is an animal. It can fly.",
+      "category": "open_request_isolation",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-033",
+      "prompt": "If kelv can fly then zor has wings. Kelv can fly. What does zor have?",
+      "expected": "Zor has wings.",
+      "category": "open_rule_answer_stress",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-034",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then kelv can fly. Does zor have wings?",
+      "expected": "I do not know.",
+      "category": "cyclic_unknown",
+      "reset": true
+    },
+    {
+      "id": "rule-guard-035",
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then kelv can fly. Kelv can fly. Does zor have wings?",
+      "expected": "Yes.",
+      "category": "cyclic_grounded",
+      "reset": true
+    }
+  ],
+  "objective": "Additional author-designed diagnostics for conditional scope and dialogue.\n\nWritten after the first candidate; these are development checks, not held-out\nevidence. Positive unsupported paraphrases need negative controls to distinguish\ninference from accidental unconditional assertion.\n"
+}

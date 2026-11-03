@@ -805,7 +805,7 @@ def main():
             queries = ([{S.RULE_GOAL + bit: 8 * 8192} for bit in range(28)] +
                        [{S.RULE_GOAL + 28 + r: 8 * 8192 * 4} for r in range(7)] +
                        [{S.ONE: 8 * 8192}, {S.ONE: 8},
-                        {S.ONE: 8 * 1_000_000, S.RULE_ACTIVE: -8 * 1_000_000}])
+                        {S.ONE: 8 * 2_000_000, S.RULE_ACTIVE: -8 * 1_000_000, S.Q_MODE: -8 * 1_000_000}])
             keys = ([{S.RULE_CONCLUSION + bit: 1} for bit in range(28)] +
                     [{S.RULE_CONCLUSION + 28 + r: 1} for r in range(7)] +
                     [{S.RULE_VALID: 4, S.BOS_FLAG: 35 if layer == 4 else 37},
@@ -829,7 +829,7 @@ def main():
             queries = ([{S.RULE_GOAL + bit: 8 * 8192} for bit in range(28)] +
                        [{S.RULE_GOAL + 28 + r: 8 * 8192 * 4} for r in range(7)] +
                        [{S.ONE: 8 * 8192}, {S.ONE: 8},
-                        {S.ONE: 8 * 1_000_000, S.RULE_ACTIVE: -8 * 1_000_000}])
+                        {S.ONE: 8 * 2_000_000, S.RULE_ACTIVE: -8 * 1_000_000, S.Q_MODE: -8 * 1_000_000}])
             keys = ([{S.FACT_SUBJECT + bit: 1} for bit in range(28)] +
                     [{S.FACT_RELATION + r: 1} for r in range(7)] +
                     [{S.FACT_VALID: 4, S.BOS_FLAG: 35}, {S.POS: 128}, {S.BOS_FLAG: 1}])
@@ -840,7 +840,7 @@ def main():
                 queries = ([{S.RULE_GOAL + bit: 8 * 8192} for bit in range(14)] +
                            [{S.RULE_GOAL + 14 + bit: 8 * 8192} for bit in range(14)] +
                            [{S.RULE_GOAL + 28 + relation: 8 * 8192}, {S.ONE: 8 * 8192},
-                            {S.ONE: 8 * 1_000_000, S.RULE_ACTIVE: -8 * 1_000_000}])
+                            {S.ONE: 8 * 2_000_000, S.RULE_ACTIVE: -8 * 1_000_000, S.Q_MODE: -8 * 1_000_000}])
                 keys = ([{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids['<bos>'])[bit]} for bit in range(14)] +
                         [{slot + bit: 1} for bit in range(14)] +
                         [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.RULE_VALID: -64, S.BOS_FLAG: 32},
@@ -850,6 +850,7 @@ def main():
                            ([S.RULE_ACTIVE, S.RULE_FACT_FOUND, S.RULE_GOAL + 35, S.RULE_FACT_NEGATIVE], [S.Q_FOUND]),
                            ([S.RULE_ACTIVE, S.RULE_STATIC_FOUND], [S.Q_FOUND, S.RULE_GOAL + 35, S.RULE_FACT_FOUND])]
             for positive, negative in proof_cases:
+                positive = [S.Q_MODE] + positive
                 c.gate(layer, positive, negative, {S.Q_FOUND: 1})
                 c.copy_when(layer, S.RULE_ROOT_NEGATIVE, S.Q_NEGATIVE, positive, negative)
             c.copy(layer, S.RULE_FACT_FOUND, S.Q_MODE, S.RULE_FACT_FOUND, 3, scale=-1)

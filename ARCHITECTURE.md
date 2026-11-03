@@ -249,7 +249,7 @@ The old unused vowel embedding coordinate now marks lexical question heads and
 clause-head attention retrieves this marker after transparent modifiers. The
 full-assertion and continuation gates exclude such clauses, preventing a question
 fragment from becoming evidence. Rejecting an if-clause is only premise isolation;
-conditional-rule reasoning is not implemented. Disjunctive assertions also
+conditional-rule reasoning was not implemented in v13. Disjunctive assertions also
 remain unsupported and can incorrectly assert their first alternative.
 
 Diagnostic interventions remove continuation validity, predicate attention,
@@ -407,3 +407,68 @@ frame, so that ineffective probe is preserved alongside three-subject controls
 that expose both a missed fact and a false cross-subject assertion. Ablation
 effects are measured externally; no saved weights or normal runtime operations
 are changed. This is a general numerical repair, not an added answer rule.
+
+## v16: signed ground implications through backward attention
+
+This extends the same 18-layer, 250-million-parameter decoder. Inference still
+imports no compiler, knowledge dictionary, rule interpreter or evaluation
+oracle. The added code constructs matrix entries; the unchanged runtime applies
+ordinary causal attention, LayerNorm, affine maps and ReLU.
+
+A literal is 36 logical coordinates: 14 subject identity bits, 14 object bits,
+seven predicate indicators, and a negative-polarity bit. A ground rule stores
+two literals plus a validity bit. It has explicit subjects, not variables.
+The intended syntax is `If SUBJECT PREDICATE OBJECT then SUBJECT PREDICATE
+OBJECT.` with the existing signed predicate grammar. This is a bounded language
+parser encoded in weights; it does not infer unrestricted English syntax.
+
+In block 0, three attention heads retrieve the latest `if`, `then`, and
+conjunction positions. A BOS sentinel wins when no marker exists. Differences
+against the current clause and `if` position pass through the clipped ramp
+`ReLU(d)-ReLU(d-1)`, producing phase flags. Block 1 temporarily parses each
+literal through the existing assertion circuit. Block 2 selects the most recent
+premise and consequent in their respective phases, validates both clause IDs,
+and copies them into a typed rule record at declarative punctuation. Questions
+and compound `and`/`or` rules are excluded by those gates. The conditional's
+temporary assertion fields are erased, so the rule itself supplies no fact.
+
+The rule bank shares coordinates 64–175 with static atomic fact vectors.
+Record validity distinguishes rule rows at punctuation from atomic rows at
+entity tokens. Temporary parsing attention uses part of this bank; block 2
+restores each original atomic vector by token identity before writing a rule.
+Block 3 saturates the bounded fields. Static proposition heads explicitly
+exclude rule rows. All of this storage is per-position neural activation and
+KV state, not a Python fact database or a weight update.
+
+Binary questions reuse the open-answer context bank as a proof state. Block 3
+initializes the goal tuple. Blocks 4, 6 and 8 retrieve a rule whose consequent
+matches that goal and replace the goal with the retrieved premise. Blocks 5,
+7 and 9 check the premise against the most recent exact assertion and the
+authored atomic facts. A known matching sign proves the root conclusion;
+missing or opposite evidence does not. Subsequent rule links must match the
+requested premise polarity. Explicit direct answers already found by block 4
+take precedence over derived answers. Existing query negation and three-valued
+AND/OR reduction operate after this proof step.
+
+Identity retrieval uses signed code dot products. Subject and object contribute
+14 each; the predicate contributes 4 and validity contributes 4. An exact rule
+scores 36 before recency, with a sentinel threshold of 35; one wrong identity
+bit reduces the score by 2. Subsequent signed matching adds 2 with threshold
+37. The 8,192 scale keeps the maximum context-position term below an identity
+margin. Recency selects the latest matching rule. These score margins are an
+analytic design; device-specific tests remain necessary.
+
+The first candidate v16a failed to gate all proof attention and acceptance by
+binary-question mode. Ordinary fact codes occupying the same bank could
+activate the proof path and corrupt open answers. v16b forces the BOS sentinel
+whenever either question mode or proof activity is absent, and includes mode
+in every proof gate. This is a shared field-lifetime correction; no entity or
+test-prompt exceptions were added.
+
+The algorithm follows at most three rules along one selected path. It does
+not search earlier alternative rules when the latest one has no proof, bind
+variables, accept compound premises, generate open answers from rules, or
+establish general conditional-language understanding. Cycles without base
+evidence remain unknown. Tests preserve failures beyond these bounds rather
+than removing them. Ablations separately remove rule selection, premise
+evidence, record validity, object matching and signed-premise handling.
