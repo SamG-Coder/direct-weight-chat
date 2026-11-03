@@ -121,3 +121,13 @@ and SHA-256 match the local packaging report. A fresh clone of release commit
 `33952a6` and a fresh downloaded v7a ZIP passed raw/config hash checks, 39/39
 quick verification cases, and four graph/subtraction smoke checks across CUDA
 and CPU. Evidence is in `results/publication.json` and `results/release-validation/`.
+
+## 2026-11-03: polarity baseline before implementation
+
+Defined fact polarity as a reusable field in subject/predicate/object memories.
+Created 233 development cases before modifying the compiler: seven relations,
+negative grammar variants, corrections in both directions, distractors, inherited
+denials, negative membership, multi-sentence output, articles and dialogue.
+Multiple values, yes/no questions, query/instruction scope and double negation
+remain explicit stress tests. No test strings are supplied to construction.
+The baseline outputs are in `results/polarity-v7a-baseline-cuda.json`.
