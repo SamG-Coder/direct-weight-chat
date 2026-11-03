@@ -193,3 +193,20 @@ inference runtime is unchanged and the raw checkpoint is never modified.
 The first request-head filter is too strict: it treats a leading Please as an
 unsupported request instead of reading the following verb. v12a is preserved
 with this regression before a separate modifier-grammar correction.
+
+## v12b: transparent request modifiers
+
+A reusable lexical-conjunction compiler identifies the request head after a
+bounded prefix of please, briefly, simply or just. The modifier itself does not
+make a request supported: the following lexical head still determines that flag.
+The same prefix grammar is applied to inverted-question subject binding.
+Within the four-token lookback, request heads support up to three modifiers;
+inverted binding supports two without an article or one with an article. More
+complex framing remains unsupported and scored as failure.
+
+This restores the Please calculate arithmetic behavior without allowing Please
+write a poem to inherit a previous fact query. It adds no runtime parser, learned
+values, test strings or answer entries. Grammar alternatives compile to Boolean
+ReLU identity conjunctions. A broad paraphrase beginning Please tell me whether
+still returns an incomplete factual answer; the extra incorrect abstention pass
+in v12a is not retained as a claimed capability.

@@ -10,6 +10,7 @@ import json
 import math
 import time
 from datetime import datetime, timezone
+from itertools import product
 from pathlib import Path
 
 import numpy as np
@@ -87,6 +88,13 @@ class Compiler:
         for feature in negative:
             expression[feature] = expression.get(feature, 0) - 2
         self.unit(layer, expression, targets, threshold=S.CODE_BITS + 2 * len(positive) - 1)
+
+    def pattern(self, layer, words, targets, positive=(), negative=()):
+        """Conjoin lexical identities and Boolean flags into one ReLU gate."""
+        expression = expr(*({start + i: bit for i, bit in enumerate(S.code(self.ids[word]))}
+                            for start, word in words),
+                          *({f: 2} for f in positive), *({f: -2} for f in negative))
+        self.unit(layer, expression, targets, threshold=S.CODE_BITS * len(words) + 2 * len(positive) - 1)
 
     def copy(self, layer, source, gate, destination, count=1, scale=1):
         for i in range(count):
@@ -272,6 +280,15 @@ def main():
     p1, p2, p3, p4 = S.PREV
     for boundary in ("<user>", ".", "?", "!"):
         c.word(0, boundary, {S.CLAUSE_FIRST: 1}, start=p1, positive=[S.USER_STATE])
+    # Transparent modifiers do not choose the request kind. Read the lexical
+    # head after a bounded modifier prefix, including unsupported commands.
+    # Enumerating this grammar compiles identity conjunctions, not responses.
+    modifiers = ("please", "briefly", "simply", "just")
+    for length in range(1, len(S.PREV)):
+        for prefix in product(modifiers, repeat=length):
+            for boundary in ("<user>", ".", "?", "!"):
+                words = list(zip(S.PREV[:length], reversed(prefix))) + [(S.PREV[length], boundary)]
+                c.pattern(0, words, {S.CLAUSE_FIRST: 1}, positive=[S.USER_STATE])
     c.word(0, "and", {S.LOCAL_AND: 1}, positive=[S.USER_STATE])
     c.word(0, "or", {S.LOCAL_OR: 1}, positive=[S.USER_STATE])
     # A +/- token immediately after a number is binary. Other occurrences
@@ -297,6 +314,15 @@ def main():
                                   {boundary_at + i: bit for i, bit in enumerate(S.code(ids[boundary]))},
                                   *({f: 2} for f in conditions))
                 c.unit(0, expression, {marker: 1}, threshold=28 + 2 * len(conditions) - 1)
+            verb_index = 1 if article else 0
+            for length in range(1, len(S.PREV) - verb_index - 1):
+                for prefix in product(modifiers, repeat=length):
+                    for boundary in ("<user>", ".", "?", "!", "and", "or"):
+                        words = ([(S.PREV[verb_index], verb)] +
+                                 list(zip(S.PREV[verb_index + 1:verb_index + 1 + length], reversed(prefix))) +
+                                 [(S.PREV[verb_index + 1 + length], boundary)])
+                        conditions = [S.ENTITY, S.USER_STATE] + ([p1 + 22] if article else [])
+                        c.pattern(0, words, {marker: 1}, positive=conditions)
     # These embedding features have already been consumed by block-0 readers.
     c.clear(0, list(range(25, 30)) + list(range(40, 49)) + [50, S.CLAUSE_BOUNDARY])
 

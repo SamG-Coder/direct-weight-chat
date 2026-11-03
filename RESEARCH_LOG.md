@@ -368,3 +368,25 @@ supported and unsupported requests, later clauses, two-modifier forms and
 longer framing stresses. Frozen v12a scores 17/81. The correction will identify
 the request head after transparent modifiers instead of labeling every modified
 command as supported.
+
+## 2026-11-04: v12b request-head modifiers and restored arithmetic
+
+Compiled a bounded transparent-modifier grammar that reads the actual request
+head and also binds modified inverted questions. Unsupported commands remain
+unsupported after a modifier. Modifier development improves 17/81 -> 78/81.
+Arithmetic returns to 115/120 and signed operands to 153/159; all 106 arithmetic
+regressions across the four matched reports are repaired. Legacy remains 185/185,
+graph 75/79, polarity 230/233, truth 236/239 and query scope 265/269.
+
+Composition is 397/404. The corrected prefix handling exposes an unsupported
+Please tell me whether paraphrase that v12a had rejected, losing one accidental
+abstention pass. Three composition regressions against v11a remain: mixed
+operator precedence, compound fact assertions and a request to answer only the
+first part. They are retained as failures despite v11a's partial-answer passes.
+The 30 adjacent-version comparisons and 14 direct v11a-to-v12b comparisons are
+both recorded; no arithmetic regression is concealed by the aggregate gains.
+
+All prior suites, the earlier release smoke suite and integrity/ablation checks
+were rerun. v12b has 873,633 nonzero parameters; raw SHA-256 is
+`07349cb626864c4ea77e32300af5670a6de69ee612662ec5e9d2d2cdba43cea5`.
+The candidate is frozen before selecting fresh composition and modifier seeds.
