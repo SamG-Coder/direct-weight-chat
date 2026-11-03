@@ -1,0 +1,416 @@
+{
+  "version": "v17a",
+  "suite": "v12b-release-smoke",
+  "evaluation_status": "regression-on-previously-published-suite",
+  "created_utc": "2026-11-03T17:58:54.194194+00:00",
+  "git": {
+    "commit": "3757a817baa43c926f69d2e062340e3b55a650fd",
+    "dirty": true
+  },
+  "model_sha256": "5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2",
+  "suite_sha256": "c872657a69f15fafbfa4322d2ea0cc5bee080dfda8bd34e064623d7339333ed8",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 995905,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "A nelv can fly. A nelv cannot swim. Can nelv fly and swim?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.01033849999657832,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "smoke-00",
+      "category": "compound_conversation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Can nelv fly or swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009749400021973997,
+      "device": "cuda",
+      "prefix_tokens": 30,
+      "id": "smoke-01",
+      "category": "compound_conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can nelv fly and glimmer?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.017734499997459352,
+      "device": "cuda",
+      "prefix_tokens": 41,
+      "id": "smoke-02",
+      "category": "compound_conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can nelv fly or glimmer?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010587800003122538,
+      "device": "cuda",
+      "prefix_tokens": 55,
+      "id": "smoke-03",
+      "category": "compound_conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A nelv can swim. Can nelv fly and swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.011335000017425045,
+      "device": "cuda",
+      "prefix_tokens": 71,
+      "id": "smoke-04",
+      "category": "compound_conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A zelm is a nelv. Can zelm fly and swim?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010782299999846146,
+      "device": "cuda",
+      "prefix_tokens": 88,
+      "id": "smoke-05",
+      "category": "compound_conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A nelv does not need water. Can zelm fly and does nelv need water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.01196400000480935,
+      "device": "cuda",
+      "prefix_tokens": 109,
+      "id": "smoke-06",
+      "category": "compound_conversation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can zelm fly? Please write a poem about rain.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.020458999992115423,
+      "device": "cuda",
+      "prefix_tokens": 125,
+      "id": "smoke-07",
+      "category": "compound_conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -321 - -456.",
+      "text": "135.",
+      "token_ids": [
+        633,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.012764799990691245,
+      "device": "cuda",
+      "prefix_tokens": 141,
+      "id": "smoke-08",
+      "category": "compound_conversation",
+      "expected": "135.",
+      "acceptable": [
+        "135."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can zelm fly? Can nelv not swim?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.011595399992074817,
+      "device": "cuda",
+      "prefix_tokens": 155,
+      "id": "smoke-09",
+      "category": "compound_conversation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can zelm glimmer or fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.011853500007418916,
+      "device": "cuda",
+      "prefix_tokens": 166,
+      "id": "smoke-10",
+      "category": "compound_conversation",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can zelm glimmer and fly?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.022126600000774488,
+      "device": "cuda",
+      "prefix_tokens": 177,
+      "id": "smoke-11",
+      "category": "compound_conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Write an original Python program.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.020957999979145825,
+      "device": "cuda",
+      "prefix_tokens": 191,
+      "id": "smoke-12",
+      "category": "compound_conversation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "What can nelv do?",
+      "text": "Nelv can swim.",
+      "token_ids": [
+        434,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01942090000375174,
+      "device": "cuda",
+      "prefix_tokens": 204,
+      "id": "smoke-13",
+      "category": "compound_conversation",
+      "expected": "Nelv can swim.",
+      "acceptable": [
+        "Nelv can swim."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Please explain a bird.",
+      "text": "Bird is an animal. It can fly.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.03348740001092665,
+      "device": "cuda",
+      "prefix_tokens": 216,
+      "id": "smoke-14",
+      "category": "compound_conversation",
+      "expected": "Bird is an animal. It can fly.",
+      "acceptable": [
+        "Bird is an animal. It can fly."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Can a bird fly? Hello.",
+      "text": "Hello.",
+      "token_ids": [
+        149,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.014764799998374656,
+      "device": "cuda",
+      "prefix_tokens": 235,
+      "id": "smoke-15",
+      "category": "compound_conversation",
+      "expected": "Hello.",
+      "acceptable": [
+        "Hello."
+      ],
+      "reset": false,
+      "correct": true
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "compound_conversation": {
+      "passed": 16,
+      "total": 16,
+      "success_rate": 1.0,
+      "median_response_ms": 12.364399997750297
+    },
+    "all": {
+      "passed": 16,
+      "total": 16,
+      "success_rate": 1.0,
+      "median_response_ms": 12.364399997750297
+    }
+  },
+  "regressions": [],
+  "improvements": [],
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

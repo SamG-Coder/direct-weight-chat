@@ -961,3 +961,19 @@ v16c passes 164/220 on both devices, with a maximum output error of 0.5.
 The test performs no conversational inference or parameter update; expected
 Booleans score the tensor output externally. These baseline reports precede
 the proposed shared saturating Boolean gate in the weight compiler.
+
+### v17a candidate and CUDA regressions
+
+Compiled the shared two-ReLU Boolean gate and applied it to the four rule-phase
+flags before block-2 ranking. The flat zero/one intervals cover the intended
+one/two-input gates with independent errors up to 1/8 in real arithmetic.
+The actual tensor diagnostic passes 220/220 on CPU and CUDA; measured maximum
+error is below 0.000001. This adds two ReLU units and 24 nonzero parameters,
+without changing the tensor layout, token vocabulary or inference runtime.
+
+All 36 matched CUDA suites have identical outputs to v16c: 5,959/6,105 with
+zero regressions. Historical suites repeat structures; the remaining semantic
+failures are retained. The archived source rebuild reproduces raw SHA-256
+`5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2`
+and the unchanged config hash. CPU position/conversation validation is still
+running. The source is committed before selecting any fresh rule-position seed.

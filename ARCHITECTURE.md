@@ -488,3 +488,38 @@ BOS sentinel and left its negative control unchanged. The corrected diagnostic
 substitutes a constant maximum +14 reward on valid rules while removing object
 identity dependence. This preserves the intended retrieval margin and exposes
 false matching; neither diagnostic changes the saved checkpoint.
+
+## v17a: saturate Boolean phase values before ranking literals
+
+The v16c long CPU trace shows why a logical flag must not retain an analog
+amplitude before high-gain attention. An intended true context flag becomes
+0.9990235567 at a newer literal while the older literal retains 1.0. Multiplying
+by 131,072 gives the older literal about 127.98 score advantage, larger than
+the newer literal's 72-point recency advantage. The subsequent clause guard
+rejects the wrong literal; a whole rule is consequently missing.
+
+v17a constructs a shared Boolean conjunction using two ReLU units. For n
+positive conditions and optional negative conditions, define
+
+`s = 4*sum(positive) - 4*sum(negative) - (4*n - 3)`
+
+and emit `ReLU(s) - ReLU(s - 1)`. Exact satisfying inputs give s=3, while one
+unsatisfied condition gives s<=-1. For the one/two-input uses here, independent
+input errors up to 1/8 leave a satisfied input at s>=2 and an unsatisfied
+input at s<=0. The output therefore stays on a flat zero/one region in real
+arithmetic. Floating-point output accuracy is measured separately.
+
+The compiler applies this primitive to current context, previous context,
+then-phase and compound-rule flags in block 1. It replaces two unbounded
+conjunctions and two linear copies; net cost is two additional ReLU units and
+24 nonzero weights. Block-2 candidate ranking, scope validation and the rest
+of the model are unchanged. No entity, position, prompt or expected answer is
+compiled into the correction. The generic inference runtime and tensor layout
+remain identical, with exactly 250,000,000 float32 parameters.
+
+The external 220-probe diagnostic runs the actual compiled norm/MLP on
+synthetic paired residuals, including nonzero old field values to test erasure.
+v16c passes 164/220; v17a passes 220/220 on both devices, with maximum measured
+output error below 0.000001. A separate intervention restores only the old
+current-context gate in temporary tensor copies to test its effect on a full
+position-varied conversation case. Neither diagnostic is imported by inference.

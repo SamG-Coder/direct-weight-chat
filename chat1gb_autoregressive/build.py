@@ -81,6 +81,20 @@ class Compiler:
             expression[feature] = expression.get(feature, 0) - 2
         self.unit(layer, expr(expression, extra or {}), targets or {}, threshold=2 * len(positive) - 1)
 
+    def boolean_gate(self, layer, positive=(), negative=(), targets=None):
+        """Conjunction with flat zero/one neighborhoods for bounded flags.
+
+        With s = 4*sum(positive)-4*sum(negative)-(4*n-3), return
+        ReLU(s)-ReLU(s-1). Intended true inputs give s=3; a missing
+        condition gives s<=-1. The one/two-input rule-phase uses therefore
+        tolerate independent errors of up to 1/8 without amplitude ranking.
+        """
+        expression = expr(*({f: 4} for f in positive), *({f: -4} for f in negative))
+        targets = targets or {}
+        threshold = 4 * len(positive) - 3
+        self.unit(layer, expression, targets, threshold=threshold)
+        self.unit(layer, expression, {f: -v for f, v in targets.items()}, threshold=threshold + 1)
+
     def word(self, layer, word, targets, start=S.CODE, positive=(), negative=()):
         expression = {start + i: bit for i, bit in enumerate(S.code(self.ids[word]))}
         for feature in positive:
@@ -426,9 +440,9 @@ def main():
     c.previous(1, 10, 1, [S.CLAUSE_START, S.IF_ACTIVE, S.USER_STATE],
                [S.ASSERTION_GROUP_TEMP, S.IF_PREVIOUS, S.IF_PREVIOUS_USER])
     c.clear(1, [S.RULE_CONTEXT, S.RULE_AFTER_THEN, S.RULE_PREVIOUS_CONTEXT])
-    c.gate(1, [S.IF_ACTIVE, S.USER_STATE], targets={S.RULE_CONTEXT: 1})
-    c.linear(1, {S.THEN_ACTIVE: 1}, {S.RULE_AFTER_THEN: 1})
-    c.gate(1, [S.IF_PREVIOUS, S.IF_PREVIOUS_USER], targets={S.RULE_PREVIOUS_CONTEXT: 1})
+    c.boolean_gate(1, [S.IF_ACTIVE, S.USER_STATE], targets={S.RULE_CONTEXT: 1})
+    c.boolean_gate(1, [S.THEN_ACTIVE], targets={S.RULE_AFTER_THEN: 1})
+    c.boolean_gate(1, [S.IF_PREVIOUS, S.IF_PREVIOUS_USER], targets={S.RULE_PREVIOUS_CONTEXT: 1})
     c.clear(1, [S.IF_ACTIVE, S.THEN_ACTIVE, S.IF_PREVIOUS, S.IF_PREVIOUS_USER, S.IF_JOINED])
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
@@ -444,7 +458,7 @@ def main():
     # Only the first two old lexical buffers are read by block 2. Reuse the
     # remaining ones for a delayed event and its previous-clause address.
     c.clear(1, range(S.PREV[2], S.PREV[3] + 27))
-    c.linear(1, {S.IF_JOINED: 1}, {S.RULE_HAS_JOIN: 1})
+    c.boolean_gate(1, [S.IF_JOINED], targets={S.RULE_HAS_JOIN: 1})
     for terminator in ('.', '!', '<user>', '<assistant>'):
         c.word(1, terminator, {S.RULE_TERMINATOR: 1})
     # Preserve the natural position/128 scale. Dividing by another 64 before
@@ -1054,6 +1068,7 @@ def main():
                         "Fact coordinates are saturated before proposition retrieval to reduce numeric magnitude bias between assertion paths.",
                         "Assertion subject/predicate retrieval separates recency selection from neural clause validation to limit coordinate-error amplification.",
                         "Ground single-premise implications support at most three backward links through the latest matching rule; alternate proof search and variables are unsupported.",
+                        "Rule-phase flags use saturating Boolean gates before high-gain candidate ranking; arbitrary numeric/context robustness is not established.",
                         "Compound conditional premises, disjunctive assertions, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }
