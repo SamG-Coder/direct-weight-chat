@@ -277,29 +277,51 @@ def main():
         c.copy(2, S.VOWEL, gate, S.FACT_VOWEL)
         c.unit(2, {gate: 1}, {S.FACT_VALID: 1, S.FACT_RELATION + relation: 1})
 
-    # Blocks 3-9: retrieve exact subject/relation facts from preceding user text.
-    # A BOS sentinel defeats nonmatching memories instead of guessing a nearest fact.
-    for relation in range(7):
-        layer = 3 + relation
-        queries = [{S.SUBJECT + bit: 8 * 8192} for bit in range(14)] + [{S.ONE: 8 * 8192}, {S.ONE: 8}]
-        keys = [{S.FACT_SUBJECT + bit: 1} for bit in range(14)] + [
-            {S.FACT_RELATION + relation: 4, S.FACT_VALID: 1, S.BOS_FLAG: 18.5}, {S.POS: 128}]
-        c.attention(layer, 0, queries, keys, list(range(S.FACT_OBJECT, S.FACT_OBJECT + 14)) + [S.FACT_VALID, S.FACT_VOWEL], list(range(S.RETURN, S.RETURN + 16)))
-        destination = S.slot(S.CONTEXT_FACTS, relation)
-        if relation:
-            inherited_keys = [{S.FACT_SUBJECT + bit: 1} for bit in range(14)] + [
-                {S.FACT_RELATION: 4, S.FACT_VALID: 1, S.BOS_FLAG: 18.5}, {S.POS: 128}]
-            c.attention(layer, 1, queries, inherited_keys,
-                        list(range(S.slot(S.FACTS, relation), S.slot(S.FACTS, relation) + 16)),
-                        list(range(S.INHERITED, S.INHERITED + 16)))
-            c.copy_unless(layer, destination, S.INHERITED + 14, S.RETURN + 14, destination, 16, scale=-1)
-            c.copy_unless(layer, S.INHERITED, S.INHERITED + 14, S.RETURN + 14, destination, 16)
-        c.copy(layer, destination, S.RETURN + 14, destination, 16, scale=-1)
-        for i in range(16):
-            c.linear(layer, {S.RETURN + i: 1}, {destination + i: 1, S.RETURN + i: -1})
-        # Clear the old two-token lookback before the first inheritance head,
-        # and the temporary inheritance value after every subsequent head.
-        c.clear(layer, range(S.INHERITED, S.INHERITED + 16))
+    # Release local parsing scratch and initialize a neural graph cursor.
+    # All writes within this MLP read its pre-MLP input, so clearing the old
+    # lookbacks here does not interfere with the fact copies above.
+    c.clear(2, range(S.RETURN, S.RETURN + 112))
+    for bit in range(14):
+        c.linear(2, {S.SUBJECT + bit: 1}, {S.CURRENT + bit: 1})
+
+    # Blocks 3,5,7,9: parallel associative lookup of seven predicates for the
+    # current graph node, then follow its class edge. Four lookups support an
+    # explicit terminal property after up to three unfamiliar class links.
+    # Blocks 4,6,8: consult permanent atomic properties of the new cursor.
+    # No prompt order or entity identity is compiled into this algorithm.
+    for layer in range(3, 10):
+        queries = [{S.CURRENT + bit: 8 * 8192} for bit in range(14)] + [{S.ONE: 8 * 8192}, {S.ONE: 8}]
+        if layer % 2:
+            for relation in range(7):
+                scratch = S.slot(S.RETURN, relation)
+                keys = [{S.FACT_SUBJECT + bit: 1} for bit in range(14)] + [
+                    {S.FACT_RELATION + relation: 4, S.FACT_VALID: 1, S.BOS_FLAG: 18.5}, {S.POS: 128}]
+                c.attention(layer, relation, queries, keys,
+                            list(range(S.FACT_OBJECT, S.FACT_OBJECT + 14)) + [S.FACT_VALID, S.FACT_VOWEL],
+                            list(range(scratch, scratch + 16)))
+                destination = S.slot(S.CONTEXT_FACTS, relation)
+                if layer == 3:
+                    # A direct prompt assertion overrides the same subject's
+                    # permanent fact. Later ancestors fill missing properties.
+                    c.copy(layer, destination, scratch + 14, destination, 16, scale=-1)
+                    for i in range(16):
+                        c.linear(layer, {scratch + i: 1}, {destination + i: 1})
+                else:
+                    c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
+            c.clear(layer, range(S.CURRENT, S.CURRENT + 14))
+            c.copy(layer, S.RETURN, S.RETURN + 14, S.CURRENT, 14)
+        else:
+            keys = [{S.CODE + bit: 1} for bit in range(14)] + [{S.BOS_FLAG: 13}, {S.POS: 128}]
+            for chunk in range(2):
+                begin, end = chunk * 64, min(112, (chunk + 1) * 64)
+                c.attention(layer, chunk, queries, keys,
+                            list(range(S.FACTS + begin, S.FACTS + end)),
+                            list(range(S.RETURN + begin, S.RETURN + end)))
+            # The answer's class remains the closest class, not a distant one.
+            for relation in range(1, 7):
+                scratch, destination = S.slot(S.RETURN, relation), S.slot(S.CONTEXT_FACTS, relation)
+                c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
+        c.clear(layer, range(S.RETURN, S.RETURN + 112))
 
     # Block 10: current/previous word detectors and valid arithmetic bounds.
     c.clear(10, range(S.STATES, S.STATES + 37))
