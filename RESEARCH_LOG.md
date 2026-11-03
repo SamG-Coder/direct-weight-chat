@@ -390,3 +390,22 @@ All prior suites, the earlier release smoke suite and integrity/ablation checks
 were rerun. v12b has 873,633 nonzero parameters; raw SHA-256 is
 `07349cb626864c4ea77e32300af5670a6de69ee612662ec5e9d2d2cdba43cea5`.
 The candidate is frozen before selecting fresh composition and modifier seeds.
+
+## 2026-11-04: v12b fresh evaluation and v0.4 preparation
+
+After freeze commit `49dd2ea`, composition seed 1676552291 scored 397/404 on
+CUDA and CPU. Modifier seed 973315925 scored 78/81 on both; it adds 20 fresh
+arithmetic combinations while the 61 structural cases repeat. The composition
+generator also retains known syntax and truth-table structure. No frozen weights
+were tuned after these runs, and independent generalization is not claimed.
+
+The archived v12b compiler reproduces raw weight and config hashes exactly.
+The default local model now references v12b; the former v11a raw file was hashed
+afterward and is unchanged. Prepared v12a and v12b ZIPs for `v0.4.0-experiment`
+and verified streamed decompression hashes/CRC. A 16-turn smoke conversation
+passes locally, combining AND/OR, unknowns, corrections, inheritance, distinct
+subjects/predicates, active requests, modified arithmetic and abstention.
+
+Next priority: parse compound assertions and mixed-operator expressions into
+composable structure, while retaining the malformed-input and framing failures.
+The long-term goal of useful flexible conversation remains unachieved.

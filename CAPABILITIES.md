@@ -1,6 +1,44 @@
 # Capabilities and limitations
 
-## Current v11a
+## Current v12b
+
+- Legacy 185/185; graph 75/79; arithmetic 115/120; polarity 230/233;
+  signed operands 153/159; truth 236/239; query scope 265/269;
+  composition 397/404; request modifiers 78/81.
+- Applies strong three-valued AND/OR to independently evaluated propositions.
+  False decides an AND expression; true decides an OR expression; unknown
+  evidence is otherwise retained. Tested homogeneous sequences contain two
+  through five atoms, including independent negation and unknown properties.
+- Supports shared or distinct subjects and predicates, inherited properties,
+  corrections and dialogue within the existing controlled grammar. This is
+  query composition; compound fact assertions are still unsupported.
+- Clause IDs isolate the active request. Recognized request heads can follow
+  bounded please/briefly/simply/just prefixes. An unsupported head stays
+  unsupported after a modifier. These are lexical grammar rules, not general
+  intent understanding or arbitrary instruction following.
+- Fresh seeds selected after the v12b source freeze reproduce composition
+  397/404 and modifiers 78/81 on CPU and CUDA. These use known generators;
+  modifier evaluation adds 20 new arithmetic inputs while its 61 structural
+  cases repeat. No frozen candidate was tuned after those runs.
+- v12a's Please calculate regression is preserved in its reports. v12b repairs
+  all 106 affected cases across four arithmetic reports. Three composition
+  regressions against v11a remain: mixed precedence, compound assertions and
+  partial-question instructions. Their earlier partial-answer passes are not
+  evidence of those capabilities. All exact outputs are retained.
+
+Remaining failures include mixed AND/OR precedence, malformed trailing
+connectives, repeated negation, general pronouns, compound assertions, unsupported
+framing and requests to answer only part of a question. The original open
+wh-question multiple-action bug remains. Longer graph chains and the earlier
+arithmetic limits remain. Correct abstention on a creative request does not
+demonstrate creative writing; useful flexible conversation and code generation
+are still unachieved.
+
+v12b has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **873,633
+nonzero parameters (0.3494532%)**. Raw weight SHA-256:
+`07349cb626864c4ea77e32300af5670a6de69ee612662ec5e9d2d2cdba43cea5`.
+
+## Historical v11a
 
 - Legacy 185/185; graph 75/79; arithmetic 115/120; polarity 229/233;
   signed operands 153/159; object-specific truth 234/239; query scope 262/269.

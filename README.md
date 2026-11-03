@@ -15,30 +15,39 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
-The current frozen version is **v11a**, available with v10a in the
-[v0.3 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.3.0-experiment).
-It adds object-specific truth queries across seven predicates and explicit
-logical negation of the queried proposition. Multiple objects and their separate
-corrections can be queried; missing evidence stays unknown. Tests and failed
-intermediate versions are public in the [version table](results/README.md).
+The current frozen version is **v12b**, available with the failed v12a candidate
+in the [v0.4 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.4.0-experiment).
+It composes true, false and unknown propositions with AND/OR, binds different
+subjects and predicates, and separates the active clause from older questions.
+Tests and failed intermediate versions are public in the [version table](results/README.md).
 
-| Development suite | v9a | v10a | Current v11a |
+| Development suite | v11a | v12a | Current v12b |
 |---|---:|---:|---:|
 | Original narrow cases | 185/185 | 185/185 | 185/185 |
 | Graph composition and stress | 75/79 | 75/79 | 75/79 |
-| Arithmetic and stress | 115/120 | 115/120 | 115/120 |
-| Fact polarity and scope stress | 227/233 | 229/233 | 229/233 |
-| Signed operands and validity stress | 153/159 | 153/159 | 153/159 |
-| Object-specific truth and stress | 45/239 | 229/239 | 234/239 |
-| Query predicates, negation and stress | Not run | 80/269 | 262/269 |
+| Arithmetic and stress | 115/120 | 88/120 | 115/120 |
+| Fact polarity and scope stress | 229/233 | 230/233 | 230/233 |
+| Signed operands and validity stress | 153/159 | 121/159 | 153/159 |
+| Object-specific truth and stress | 234/239 | 236/239 | 236/239 |
+| Query predicates, negation and stress | 262/269 | 265/269 | 265/269 |
+| Proposition composition and scope | 243/404 | 398/404 | 397/404 |
+| Request modifiers and stress | Not run | 17/81 | 78/81 |
 
-Fresh seeds selected after candidate freezes reproduced v10a's 229/239 truth
-score and v11a's 262/269 query-scope score on CUDA and CPU. Their structures were
-already known; these are fresh combinations, not independent evidence of broad
-intelligence. Failed stress cases remain in every score. The earlier open-question
-multiple-action bug remains, and v10a introduced a later-instruction scope
-regression. Exact before/after outputs are retained; v11a introduces no additional
-pass/fail regressions across its matched suites.
+v12a's overly strict request filter broke Please calculate prompts. v12b repairs
+all 106 affected cases across the four arithmetic reports. Its modifier grammar
+also exposes an unsupported paraphrase that v12a had rejected. Three composition
+regressions against v11a remain recorded: mixed-operator precedence, compound
+assertions and a request to answer only part of a question. Earlier partial-answer
+passes are not evidence that those structures were understood. All failures and
+exact before/after outputs remain in the reports.
+
+Fresh-seed tests use generators and structures already known before freezing.
+They vary combinations and inputs; they are not independently designed evidence
+of broad intelligence. After freezing v12b, composition seed 1676552291 reproduced
+397/404 and modifier seed 973315925 reproduced 78/81 on both CUDA and CPU.
+The model still fails useful open-ended conversation,
+creative writing and code generation. Correct abstention on a poem request does
+not demonstrate poetry generation.
 
 ## Run offline
 
@@ -53,14 +62,14 @@ python -m benchmarks.evaluate --model build/current --suite tests/legacy-185.jso
 ```
 
 For a historical build, replace `current` with an archived version such as `v5`,
-`v6c`, `v7a`, `v8a`, `v8b`, `v9a`, `v10a` or `v11a`.
+`v6c`, `v7a`, `v8a`, `v8b`, `v9a`, `v10a`, `v11a`, `v12a` or `v12b`.
 `v0` builds the separate response-selector prototype. Builders refuse to overwrite
 an existing directory. The archived source bytes and checkpoint hashes are
 preserved. Raw weight files are excluded from Git; compressed checkpoints are
 published as release assets.
 
 To run a downloaded checkpoint, extract its ZIP in the repository root.
-The v11a archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
+The v12b archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
 `python -m chat1gb_autoregressive.chat`. Historical archives use
 `versions/autoregressive_VERSION/model`; select that directory with `--model-dir`.
 Check archive SHA-256 against `SHA256SUMS.txt` and raw weight SHA-256 against the
@@ -74,7 +83,9 @@ python -m benchmarks.evaluate --model build/current --suite tests/polarity-devel
 python -m benchmarks.evaluate --model build/current --suite tests/signed-development.json --output results/local-signed.json --version current
 python -m benchmarks.evaluate --model build/current --suite tests/truth-development.json --output results/local-truth.json --version current
 python -m benchmarks.evaluate --model build/current --suite tests/query-scope-development.json --output results/local-query-scope.json --version current
-python -m benchmarks.integrity --model build/current --source versions/autoregressive_v11a --output results/local-integrity.json --arithmetic --arithmetic-layer 10 --polarity --signed-operands --truth --query-negation
+python -m benchmarks.evaluate --model build/current --suite tests/composition-development.json --output results/local-composition.json --version current
+python -m benchmarks.evaluate --model build/current --suite tests/request-modifiers-development.json --output results/local-modifiers.json --version current
+python -m benchmarks.integrity --model build/current --source versions/autoregressive_v12b --output results/local-integrity.json --arithmetic --arithmetic-layer 10 --polarity --signed-operands --truth --query-negation --composition
 ```
 
 ## Evidence and research
@@ -89,7 +100,7 @@ python -m benchmarks.integrity --model build/current --source versions/autoregre
 
 The original v5 passed 185/185 restricted tests and 39/39 shorter CPU tests, while
 failing the broad requests for poetry, code, negation and general reasoning. The
-current model improves bounded relationship composition, fact/query negation and signed arithmetic, but
+current model improves bounded relationship composition, fact/query negation, Boolean composition and signed arithmetic, but
 still fails open-ended conversation, creative writing and code generation. The
 185-case suite was evaluated retrospectively on earlier versions. It is a
 development suite, not an independent general intelligence benchmark. All
