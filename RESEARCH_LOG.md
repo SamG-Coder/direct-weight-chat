@@ -254,3 +254,18 @@ Other graph, polarity and arithmetic interventions retain their effects. Frozen
 v10a has 732,615 nonzero parameters; raw SHA-256 is
 `1734f1e0ed9bac539f5148e676dfc9b9792ccd881b848e5220c06b134208362f`.
 This candidate is archived before choosing a fresh truth-suite seed.
+
+## 2026-11-04: v10a fresh evaluation and query-negation baseline
+
+After freeze commit `6bb1736`, truth seed 34865453 produced 229/239 on both CUDA
+and CPU. The 200 main combinations vary subject/object bindings, corrections
+and inheritance; the grammar was known before freezing. These are fresh
+combinations, not an independent test design, and no v10a weights were adjusted.
+
+Created 269 query-scope cases before another compiler change. They test all seven
+existing predicates and positive/negative queries against positive, negative or
+absent evidence. In this controlled grammar, query `not` negates the proposition;
+that does not cover every pragmatic reading of negative English questions.
+Frozen v10a baseline is 80/269. All eight new broader composition/scope stresses
+remain in the score. The next candidate will reuse the proposition lookup while
+extending predicate binding and applying a shared truth-negation operation.

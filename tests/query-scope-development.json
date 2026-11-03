@@ -1,0 +1,1891 @@
+{
+  "name": "query-predicate-and-negation",
+  "status": "development-before-implementation",
+  "seed": 202611041,
+  "cases": [
+    {
+      "id": "query-scope-000",
+      "prompt": "A omcsvwwv is a vehicle. Is omcsvwwv a vehicle?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-001",
+      "prompt": "A omcsvwwv is not a vehicle. Is omcsvwwv a vehicle?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-002",
+      "prompt": "A omcsvwwv is a vehicle. Is omcsvwwv not a vehicle?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-003",
+      "prompt": "A omcsvwwv is not a vehicle. Is omcsvwwv not a vehicle?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-004",
+      "prompt": "A veltkncnk is a vehicle. Is omcsvwwv not a vehicle?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-005",
+      "prompt": "A omcsvwwv is a vehicle. A omcsvwwv is not a vehicle. Is omcsvwwv not a vehicle?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-006",
+      "prompt": "A omffdtml is a vehicle. A omcsvwwv is a omffdtml. Is omcsvwwv not a vehicle?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-007",
+      "prompt": "A velgtwzmh is a machine. Is a velgtwzmh a machine?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-008",
+      "prompt": "A velgtwzmh is not a machine. Is a velgtwzmh a machine?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-009",
+      "prompt": "A velgtwzmh is a machine. Is a velgtwzmh not a machine?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-010",
+      "prompt": "A velgtwzmh is not a machine. Is a velgtwzmh not a machine?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-011",
+      "prompt": "A omhzwrsn is a machine. Is a velgtwzmh not a machine?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-012",
+      "prompt": "A velgtwzmh is a machine. A velgtwzmh is not a machine. Is a velgtwzmh not a machine?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-013",
+      "prompt": "A velkpfcfg is not a machine. A omlgzhgv is a velkpfcfg. A velgtwzmh is a omlgzhgv. Is a velgtwzmh not a machine?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-014",
+      "prompt": "A velrsmdcz is a velvlchpb. Is velrsmdcz a velvlchpb?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-015",
+      "prompt": "A velrsmdcz is not a velvlchpb. Is velrsmdcz a velvlchpb?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-016",
+      "prompt": "A velrsmdcz is a velvlchpb. Is velrsmdcz not a velvlchpb?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-017",
+      "prompt": "A velrsmdcz is not a velvlchpb. Is velrsmdcz not a velvlchpb?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-018",
+      "prompt": "A omnsnzrg is a velvlchpb. Is velrsmdcz not a velvlchpb?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-019",
+      "prompt": "A velrsmdcz is a velvlchpb. A velrsmdcz is not a velvlchpb. Is velrsmdcz not a velvlchpb?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-020",
+      "prompt": "A omfnmtpg is a omhklmrf. A omclbtbz is a velvlchpb. A velrsmdcz is a omfnmtpg. A omhklmrf is a omclbtbz. Is velrsmdcz not a velvlchpb?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-021",
+      "prompt": "A omvmbtlk is a omshvmcd. Is a omvmbtlk a omshvmcd?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-022",
+      "prompt": "A omvmbtlk is not a omshvmcd. Is a omvmbtlk a omshvmcd?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-023",
+      "prompt": "A omvmbtlk is a omshvmcd. Is a omvmbtlk not a omshvmcd?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-024",
+      "prompt": "A omvmbtlk is not a omshvmcd. Is a omvmbtlk not a omshvmcd?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-025",
+      "prompt": "A velfspwct is a omshvmcd. Is a omvmbtlk not a omshvmcd?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-026",
+      "prompt": "A omvmbtlk is a omshvmcd. A omvmbtlk is not a omshvmcd. Is a omvmbtlk not a omshvmcd?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-027",
+      "prompt": "A omvmbtlk is a ommbmbmd. A ommbmbmd is not a omshvmcd. Is a omvmbtlk not a omshvmcd?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-028",
+      "prompt": "A omgsrtsd is a omfmfrlh. Is omgsrtsd a omfmfrlh?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-029",
+      "prompt": "A omgsrtsd is not a omfmfrlh. Is omgsrtsd a omfmfrlh?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-030",
+      "prompt": "A omgsrtsd is a omfmfrlh. Is omgsrtsd not a omfmfrlh?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-031",
+      "prompt": "A omgsrtsd is not a omfmfrlh. Is omgsrtsd not a omfmfrlh?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-032",
+      "prompt": "A velkgglnf is a omfmfrlh. Is omgsrtsd not a omfmfrlh?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-033",
+      "prompt": "A omgsrtsd is a omfmfrlh. A omgsrtsd is not a omfmfrlh. Is omgsrtsd not a omfmfrlh?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-034",
+      "prompt": "A omgsrtsd is a velpnmcvn. A veldghtlk is a omfmfrlh. A velpnmcvn is a veldghtlk. Is omgsrtsd not a omfmfrlh?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-035",
+      "prompt": "A omzvtbtg can fly. Can omzvtbtg fly?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-036",
+      "prompt": "A omzvtbtg cannot fly. Can omzvtbtg fly?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-037",
+      "prompt": "A omzvtbtg can fly. Can omzvtbtg not fly?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-038",
+      "prompt": "A omzvtbtg cannot fly. Can omzvtbtg not fly?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-039",
+      "prompt": "A omzgfdzc can fly. Can omzvtbtg not fly?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-040",
+      "prompt": "A omzvtbtg can fly. A omzvtbtg cannot fly. Can omzvtbtg not fly?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-041",
+      "prompt": "A omzvtbtg is a ombdfkzg. A ombdfkzg can fly. Can omzvtbtg not fly?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-042",
+      "prompt": "A ompdvslg can swim. Can a ompdvslg swim?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-043",
+      "prompt": "A ompdvslg cannot swim. Can a ompdvslg swim?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-044",
+      "prompt": "A ompdvslg can swim. Can a ompdvslg not swim?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-045",
+      "prompt": "A ompdvslg cannot swim. Can a ompdvslg not swim?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-046",
+      "prompt": "A omgzkmcn can swim. Can a ompdvslg not swim?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-047",
+      "prompt": "A ompdvslg can swim. A ompdvslg cannot swim. Can a ompdvslg not swim?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-048",
+      "prompt": "A ompdvslg is a omtrmllw. A velzsllhz cannot swim. A omtrmllw is a velzsllhz. Can a ompdvslg not swim?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-049",
+      "prompt": "A velzvhwwr can ompbzkdc. Can velzvhwwr ompbzkdc?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-050",
+      "prompt": "A velzvhwwr cannot ompbzkdc. Can velzvhwwr ompbzkdc?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-051",
+      "prompt": "A velzvhwwr can ompbzkdc. Can velzvhwwr not ompbzkdc?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-052",
+      "prompt": "A velzvhwwr cannot ompbzkdc. Can velzvhwwr not ompbzkdc?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-053",
+      "prompt": "A omlwvrkp can ompbzkdc. Can velzvhwwr not ompbzkdc?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-054",
+      "prompt": "A velzvhwwr can ompbzkdc. A velzvhwwr cannot ompbzkdc. Can velzvhwwr not ompbzkdc?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-055",
+      "prompt": "A velwrgnmp can ompbzkdc. A omsfzwfm is a velpgtbdd. A velpgtbdd is a velwrgnmp. A velzvhwwr is a omsfzwfm. Can velzvhwwr not ompbzkdc?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-056",
+      "prompt": "A velwrcmdg can omsnddcc. Can a velwrcmdg omsnddcc?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-057",
+      "prompt": "A velwrcmdg cannot omsnddcc. Can a velwrcmdg omsnddcc?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-058",
+      "prompt": "A velwrcmdg can omsnddcc. Can a velwrcmdg not omsnddcc?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-059",
+      "prompt": "A velwrcmdg cannot omsnddcc. Can a velwrcmdg not omsnddcc?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-060",
+      "prompt": "A omtbtkvl can omsnddcc. Can a velwrcmdg not omsnddcc?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-061",
+      "prompt": "A velwrcmdg can omsnddcc. A velwrcmdg cannot omsnddcc. Can a velwrcmdg not omsnddcc?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-062",
+      "prompt": "A veldgwnzp cannot omsnddcc. A velwrcmdg is a veldgwnzp. Can a velwrcmdg not omsnddcc?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-063",
+      "prompt": "A veldkhtps can omfcnnlw. Can veldkhtps omfcnnlw?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-064",
+      "prompt": "A veldkhtps cannot omfcnnlw. Can veldkhtps omfcnnlw?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-065",
+      "prompt": "A veldkhtps can omfcnnlw. Can veldkhtps not omfcnnlw?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-066",
+      "prompt": "A veldkhtps cannot omfcnnlw. Can veldkhtps not omfcnnlw?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-067",
+      "prompt": "A omgsvcwm can omfcnnlw. Can veldkhtps not omfcnnlw?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-068",
+      "prompt": "A veldkhtps can omfcnnlw. A veldkhtps cannot omfcnnlw. Can veldkhtps not omfcnnlw?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-069",
+      "prompt": "A veldkmvll is a omsgbdkc. A veldkhtps is a veldkmvll. A omsgbdkc can omfcnnlw. Can veldkhtps not omfcnnlw?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-070",
+      "prompt": "A velfznvzh needs water. Does velfznvzh need water?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-071",
+      "prompt": "A velfznvzh does not need water. Does velfznvzh need water?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-072",
+      "prompt": "A velfznvzh needs water. Does velfznvzh not need water?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-073",
+      "prompt": "A velfznvzh does not need water. Does velfznvzh not need water?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-074",
+      "prompt": "A ommtddrf needs water. Does velfznvzh not need water?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-075",
+      "prompt": "A velfznvzh needs water. A velfznvzh does not need water. Does velfznvzh not need water?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-076",
+      "prompt": "A velfznvzh is a omcpzcwd. A omcpzcwd needs water. Does velfznvzh not need water?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-077",
+      "prompt": "A velpvfspb needs fuel. Does a velpvfspb need fuel?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-078",
+      "prompt": "A velpvfspb does not need fuel. Does a velpvfspb need fuel?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-079",
+      "prompt": "A velpvfspb needs fuel. Does a velpvfspb not need fuel?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-080",
+      "prompt": "A velpvfspb does not need fuel. Does a velpvfspb not need fuel?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-081",
+      "prompt": "A velftnnzt needs fuel. Does a velpvfspb not need fuel?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-082",
+      "prompt": "A velpvfspb needs fuel. A velpvfspb does not need fuel. Does a velpvfspb not need fuel?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-083",
+      "prompt": "A omdvsrft is a velckgshl. A velpvfspb is a omdvsrft. A velckgshl does not need fuel. Does a velpvfspb not need fuel?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-084",
+      "prompt": "A omgvsvmf needs omkckpft. Does omgvsvmf need omkckpft?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-085",
+      "prompt": "A omgvsvmf does not need omkckpft. Does omgvsvmf need omkckpft?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-086",
+      "prompt": "A omgvsvmf needs omkckpft. Does omgvsvmf not need omkckpft?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-087",
+      "prompt": "A omgvsvmf does not need omkckpft. Does omgvsvmf not need omkckpft?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-088",
+      "prompt": "A velrwztkm needs omkckpft. Does omgvsvmf not need omkckpft?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-089",
+      "prompt": "A omgvsvmf needs omkckpft. A omgvsvmf does not need omkckpft. Does omgvsvmf not need omkckpft?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-090",
+      "prompt": "A omgvsvmf is a omcdlrcd. A omcdlrcd is a ommblvlc. A ommblvlc is a velmbwwwc. A velmbwwwc needs omkckpft. Does omgvsvmf not need omkckpft?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-091",
+      "prompt": "A omvrfpdf needs ommkflsv. Does a omvrfpdf need ommkflsv?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-092",
+      "prompt": "A omvrfpdf does not need ommkflsv. Does a omvrfpdf need ommkflsv?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-093",
+      "prompt": "A omvrfpdf needs ommkflsv. Does a omvrfpdf not need ommkflsv?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-094",
+      "prompt": "A omvrfpdf does not need ommkflsv. Does a omvrfpdf not need ommkflsv?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-095",
+      "prompt": "A veltbnswb needs ommkflsv. Does a omvrfpdf not need ommkflsv?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-096",
+      "prompt": "A omvrfpdf needs ommkflsv. A omvrfpdf does not need ommkflsv. Does a omvrfpdf not need ommkflsv?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-097",
+      "prompt": "A omsgzklr does not need ommkflsv. A omvrfpdf is a omsgzklr. Does a omvrfpdf not need ommkflsv?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-098",
+      "prompt": "A velfghphf needs omlhlnzs. Does velfghphf need omlhlnzs?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-099",
+      "prompt": "A velfghphf does not need omlhlnzs. Does velfghphf need omlhlnzs?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-100",
+      "prompt": "A velfghphf needs omlhlnzs. Does velfghphf not need omlhlnzs?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-101",
+      "prompt": "A velfghphf does not need omlhlnzs. Does velfghphf not need omlhlnzs?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-102",
+      "prompt": "A velchgskd needs omlhlnzs. Does velfghphf not need omlhlnzs?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-103",
+      "prompt": "A velfghphf needs omlhlnzs. A velfghphf does not need omlhlnzs. Does velfghphf not need omlhlnzs?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-104",
+      "prompt": "A velfghphf is a velwvlgrb. A velkbfgsl needs omlhlnzs. A velwvlgrb is a velkbfgsl. Does velfghphf not need omlhlnzs?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-105",
+      "prompt": "A velgpptgs has wings. Does velgpptgs have wings?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-106",
+      "prompt": "A velgpptgs does not have wings. Does velgpptgs have wings?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-107",
+      "prompt": "A velgpptgs has wings. Does velgpptgs not have wings?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-108",
+      "prompt": "A velgpptgs does not have wings. Does velgpptgs not have wings?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-109",
+      "prompt": "A velhwbgnb has wings. Does velgpptgs not have wings?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-110",
+      "prompt": "A velgpptgs has wings. A velgpptgs does not have wings. Does velgpptgs not have wings?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-111",
+      "prompt": "A velgpptgs is a velrnhhdh. A velrnhhdh has wings. Does velgpptgs not have wings?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-112",
+      "prompt": "A velvnswpr has sensors. Does a velvnswpr have sensors?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-113",
+      "prompt": "A velvnswpr does not have sensors. Does a velvnswpr have sensors?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-114",
+      "prompt": "A velvnswpr has sensors. Does a velvnswpr not have sensors?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-115",
+      "prompt": "A velvnswpr does not have sensors. Does a velvnswpr not have sensors?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-116",
+      "prompt": "A omgfvrbp has sensors. Does a velvnswpr not have sensors?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-117",
+      "prompt": "A velvnswpr has sensors. A velvnswpr does not have sensors. Does a velvnswpr not have sensors?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-118",
+      "prompt": "A velnnnvrl is a velrpthhd. A velrpthhd does not have sensors. A velvnswpr is a velnnnvrl. Does a velvnswpr not have sensors?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-119",
+      "prompt": "A velvdsmwt has omhwshvc. Does velvdsmwt have omhwshvc?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-120",
+      "prompt": "A velvdsmwt does not have omhwshvc. Does velvdsmwt have omhwshvc?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-121",
+      "prompt": "A velvdsmwt has omhwshvc. Does velvdsmwt not have omhwshvc?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-122",
+      "prompt": "A velvdsmwt does not have omhwshvc. Does velvdsmwt not have omhwshvc?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-123",
+      "prompt": "A omsgmpnn has omhwshvc. Does velvdsmwt not have omhwshvc?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-124",
+      "prompt": "A velvdsmwt has omhwshvc. A velvdsmwt does not have omhwshvc. Does velvdsmwt not have omhwshvc?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-125",
+      "prompt": "A velvdsmwt is a velmltdss. A velmltdss is a velpvvtzr. A velrnkhbc has omhwshvc. A velpvvtzr is a velrnkhbc. Does velvdsmwt not have omhwshvc?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-126",
+      "prompt": "A omfstdpg has omkspsmt. Does a omfstdpg have omkspsmt?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-127",
+      "prompt": "A omfstdpg does not have omkspsmt. Does a omfstdpg have omkspsmt?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-128",
+      "prompt": "A omfstdpg has omkspsmt. Does a omfstdpg not have omkspsmt?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-129",
+      "prompt": "A omfstdpg does not have omkspsmt. Does a omfstdpg not have omkspsmt?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-130",
+      "prompt": "A omlrlstz has omkspsmt. Does a omfstdpg not have omkspsmt?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-131",
+      "prompt": "A omfstdpg has omkspsmt. A omfstdpg does not have omkspsmt. Does a omfstdpg not have omkspsmt?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-132",
+      "prompt": "A ompkpgpm does not have omkspsmt. A omfstdpg is a ompkpgpm. Does a omfstdpg not have omkspsmt?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-133",
+      "prompt": "A ommsggkd has omncbwkv. Does ommsggkd have omncbwkv?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-134",
+      "prompt": "A ommsggkd does not have omncbwkv. Does ommsggkd have omncbwkv?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-135",
+      "prompt": "A ommsggkd has omncbwkv. Does ommsggkd not have omncbwkv?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-136",
+      "prompt": "A ommsggkd does not have omncbwkv. Does ommsggkd not have omncbwkv?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-137",
+      "prompt": "A omrrlkst has omncbwkv. Does ommsggkd not have omncbwkv?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-138",
+      "prompt": "A ommsggkd has omncbwkv. A ommsggkd does not have omncbwkv. Does ommsggkd not have omncbwkv?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-139",
+      "prompt": "A ommhshsm is a omrzvhhz. A ommsggkd is a ommhshsm. A omrzvhhz has omncbwkv. Does ommsggkd not have omncbwkv?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-140",
+      "prompt": "A velctzflb produces heat. Does velctzflb produce heat?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-141",
+      "prompt": "A velctzflb does not produce heat. Does velctzflb produce heat?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-142",
+      "prompt": "A velctzflb produces heat. Does velctzflb not produce heat?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-143",
+      "prompt": "A velctzflb does not produce heat. Does velctzflb not produce heat?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-144",
+      "prompt": "A omgdllss produces heat. Does velctzflb not produce heat?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-145",
+      "prompt": "A velctzflb produces heat. A velctzflb does not produce heat. Does velctzflb not produce heat?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-146",
+      "prompt": "A velmszgzv produces heat. A velctzflb is a velmszgzv. Does velctzflb not produce heat?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-147",
+      "prompt": "A velwclwst produces oxygen. Does a velwclwst produce oxygen?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-148",
+      "prompt": "A velwclwst does not produce oxygen. Does a velwclwst produce oxygen?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-149",
+      "prompt": "A velwclwst produces oxygen. Does a velwclwst not produce oxygen?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-150",
+      "prompt": "A velwclwst does not produce oxygen. Does a velwclwst not produce oxygen?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-151",
+      "prompt": "A omgrhdzp produces oxygen. Does a velwclwst not produce oxygen?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-152",
+      "prompt": "A velwclwst produces oxygen. A velwclwst does not produce oxygen. Does a velwclwst not produce oxygen?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-153",
+      "prompt": "A velwclwst is a velrdrcsf. A velphsmgt does not produce oxygen. A velrdrcsf is a velphsmgt. Does a velwclwst not produce oxygen?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-154",
+      "prompt": "A omzllmbw produces velsgfbbv. Does omzllmbw produce velsgfbbv?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-155",
+      "prompt": "A omzllmbw does not produce velsgfbbv. Does omzllmbw produce velsgfbbv?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-156",
+      "prompt": "A omzllmbw produces velsgfbbv. Does omzllmbw not produce velsgfbbv?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-157",
+      "prompt": "A omzllmbw does not produce velsgfbbv. Does omzllmbw not produce velsgfbbv?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-158",
+      "prompt": "A omhvzkgc produces velsgfbbv. Does omzllmbw not produce velsgfbbv?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-159",
+      "prompt": "A omzllmbw produces velsgfbbv. A omzllmbw does not produce velsgfbbv. Does omzllmbw not produce velsgfbbv?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-160",
+      "prompt": "A omzllmbw is a omwhbhwh. A velpsntgg is a velbfgcvg. A velbfgcvg produces velsgfbbv. A omwhbhwh is a velpsntgg. Does omzllmbw not produce velsgfbbv?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-161",
+      "prompt": "A velrdswhc produces veltsppgp. Does a velrdswhc produce veltsppgp?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-162",
+      "prompt": "A velrdswhc does not produce veltsppgp. Does a velrdswhc produce veltsppgp?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-163",
+      "prompt": "A velrdswhc produces veltsppgp. Does a velrdswhc not produce veltsppgp?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-164",
+      "prompt": "A velrdswhc does not produce veltsppgp. Does a velrdswhc not produce veltsppgp?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-165",
+      "prompt": "A veldmhpzt produces veltsppgp. Does a velrdswhc not produce veltsppgp?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-166",
+      "prompt": "A velrdswhc produces veltsppgp. A velrdswhc does not produce veltsppgp. Does a velrdswhc not produce veltsppgp?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-167",
+      "prompt": "A velrdswhc is a ommnnwkl. A ommnnwkl does not produce veltsppgp. Does a velrdswhc not produce veltsppgp?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-168",
+      "prompt": "A velwsdgzf produces omfvkrbp. Does velwsdgzf produce omfvkrbp?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-169",
+      "prompt": "A velwsdgzf does not produce omfvkrbp. Does velwsdgzf produce omfvkrbp?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-170",
+      "prompt": "A velwsdgzf produces omfvkrbp. Does velwsdgzf not produce omfvkrbp?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-171",
+      "prompt": "A velwsdgzf does not produce omfvkrbp. Does velwsdgzf not produce omfvkrbp?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-172",
+      "prompt": "A velgnskvh produces omfvkrbp. Does velwsdgzf not produce omfvkrbp?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-173",
+      "prompt": "A velwsdgzf produces omfvkrbp. A velwsdgzf does not produce omfvkrbp. Does velwsdgzf not produce omfvkrbp?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-174",
+      "prompt": "A velwsdgzf is a veldtkbfr. A veldtkbfr is a velgvzmnz. A velgvzmnz produces omfvkrbp. Does velwsdgzf not produce omfvkrbp?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-175",
+      "prompt": "A omkmtkdw is cold. Is omkmtkdw cold?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-176",
+      "prompt": "A omkmtkdw is not cold. Is omkmtkdw cold?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-177",
+      "prompt": "A omkmtkdw is cold. Is omkmtkdw not cold?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-178",
+      "prompt": "A omkmtkdw is not cold. Is omkmtkdw not cold?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-179",
+      "prompt": "A omppdhvw is cold. Is omkmtkdw not cold?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-180",
+      "prompt": "A omkmtkdw is cold. A omkmtkdw is not cold. Is omkmtkdw not cold?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-181",
+      "prompt": "A omdwgsdz is cold. A omkmtkdw is a omdwgsdz. Is omkmtkdw not cold?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-182",
+      "prompt": "A omldpnnk is green. Is a omldpnnk green?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-183",
+      "prompt": "A omldpnnk is not green. Is a omldpnnk green?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-184",
+      "prompt": "A omldpnnk is green. Is a omldpnnk not green?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-185",
+      "prompt": "A omldpnnk is not green. Is a omldpnnk not green?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-186",
+      "prompt": "A omczskfn is green. Is a omldpnnk not green?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-187",
+      "prompt": "A omldpnnk is green. A omldpnnk is not green. Is a omldpnnk not green?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-188",
+      "prompt": "A omldpnnk is a veldtcgfn. A omnssfrw is not green. A veldtcgfn is a omnssfrw. Is a omldpnnk not green?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-189",
+      "prompt": "A velkdfrrz is cold. Is velkdfrrz cold?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-190",
+      "prompt": "A velkdfrrz is not cold. Is velkdfrrz cold?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-191",
+      "prompt": "A velkdfrrz is cold. Is velkdfrrz not cold?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-192",
+      "prompt": "A velkdfrrz is not cold. Is velkdfrrz not cold?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-193",
+      "prompt": "A velnklflg is cold. Is velkdfrrz not cold?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-194",
+      "prompt": "A velkdfrrz is cold. A velkdfrrz is not cold. Is velkdfrrz not cold?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-195",
+      "prompt": "A velrmbrgw is cold. A velkdfrrz is a veldhvrfw. A veldhvrfw is a omnrcmms. A omnrcmms is a velrmbrgw. Is velkdfrrz not cold?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-196",
+      "prompt": "A veldhkvdw is green. Is a veldhkvdw green?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-197",
+      "prompt": "A veldhkvdw is not green. Is a veldhkvdw green?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-198",
+      "prompt": "A veldhkvdw is green. Is a veldhkvdw not green?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-199",
+      "prompt": "A veldhkvdw is not green. Is a veldhkvdw not green?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-200",
+      "prompt": "A ompgnbkf is green. Is a veldhkvdw not green?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-201",
+      "prompt": "A veldhkvdw is green. A veldhkvdw is not green. Is a veldhkvdw not green?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-202",
+      "prompt": "A veldhkvdw is a veltnwtht. A veltnwtht is not green. Is a veldhkvdw not green?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-203",
+      "prompt": "A velnfbfzn is cold. Is velnfbfzn cold?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-204",
+      "prompt": "A velnfbfzn is not cold. Is velnfbfzn cold?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-205",
+      "prompt": "A velnfbfzn is cold. Is velnfbfzn not cold?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-206",
+      "prompt": "A velnfbfzn is not cold. Is velnfbfzn not cold?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-207",
+      "prompt": "A omlwnltw is cold. Is velnfbfzn not cold?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-208",
+      "prompt": "A velnfbfzn is cold. A velnfbfzn is not cold. Is velnfbfzn not cold?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-209",
+      "prompt": "A velcdddpn is a omwtpngz. A velnfbfzn is a velcdddpn. A omwtpngz is cold. Is velnfbfzn not cold?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-210",
+      "prompt": "A veltrkhmv exists in water. Is veltrkhmv in water?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-211",
+      "prompt": "A veltrkhmv is not in water. Is veltrkhmv in water?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-212",
+      "prompt": "A veltrkhmv exists in water. Is veltrkhmv not in water?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-213",
+      "prompt": "A veltrkhmv is not in water. Is veltrkhmv not in water?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-214",
+      "prompt": "A omslfzzm exists in water. Is veltrkhmv not in water?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-215",
+      "prompt": "A veltrkhmv exists in water. A veltrkhmv is not in water. Is veltrkhmv not in water?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-216",
+      "prompt": "A velbmktfv exists in water. A veltrkhmv is a velbmktfv. Is veltrkhmv not in water?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-217",
+      "prompt": "A velttfccc exists in space. Is a velttfccc in space?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-218",
+      "prompt": "A velttfccc is not in space. Is a velttfccc in space?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-219",
+      "prompt": "A velttfccc exists in space. Is a velttfccc not in space?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-220",
+      "prompt": "A velttfccc is not in space. Is a velttfccc not in space?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-221",
+      "prompt": "A omwswfvk exists in space. Is a velttfccc not in space?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-222",
+      "prompt": "A velttfccc exists in space. A velttfccc is not in space. Is a velttfccc not in space?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-223",
+      "prompt": "A velttfccc is a velspbscz. A velspbscz is a omncrhfh. A omncrhfh is not in space. Is a velttfccc not in space?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-224",
+      "prompt": "A omfklzll exists in omzhstkr. Is omfklzll in omzhstkr?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-225",
+      "prompt": "A omfklzll is not in omzhstkr. Is omfklzll in omzhstkr?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-226",
+      "prompt": "A omfklzll exists in omzhstkr. Is omfklzll not in omzhstkr?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-227",
+      "prompt": "A omfklzll is not in omzhstkr. Is omfklzll not in omzhstkr?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-228",
+      "prompt": "A omgvdtzz exists in omzhstkr. Is omfklzll not in omzhstkr?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-229",
+      "prompt": "A omfklzll exists in omzhstkr. A omfklzll is not in omzhstkr. Is omfklzll not in omzhstkr?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-230",
+      "prompt": "A omfklzll is a velchnpwn. A velchnpwn is a omcpwczt. A omcpwczt is a omdmblft. A omdmblft exists in omzhstkr. Is omfklzll not in omzhstkr?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-231",
+      "prompt": "A omvtkhrb exists in velsrhhff. Is a omvtkhrb in velsrhhff?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-232",
+      "prompt": "A omvtkhrb is not in velsrhhff. Is a omvtkhrb in velsrhhff?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-233",
+      "prompt": "A omvtkhrb exists in velsrhhff. Is a omvtkhrb not in velsrhhff?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-234",
+      "prompt": "A omvtkhrb is not in velsrhhff. Is a omvtkhrb not in velsrhhff?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-235",
+      "prompt": "A omnsvbrc exists in velsrhhff. Is a omvtkhrb not in velsrhhff?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-236",
+      "prompt": "A omvtkhrb exists in velsrhhff. A omvtkhrb is not in velsrhhff. Is a omvtkhrb not in velsrhhff?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-237",
+      "prompt": "A omvtkhrb is a velhtbtnf. A velhtbtnf is not in velsrhhff. Is a omvtkhrb not in velsrhhff?",
+      "expected": "Yes.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-238",
+      "prompt": "A velkfmdpb exists in velmcpbdc. Is velkfmdpb in velmcpbdc?",
+      "expected": "Yes.",
+      "category": "positive_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-239",
+      "prompt": "A velkfmdpb is not in velmcpbdc. Is velkfmdpb in velmcpbdc?",
+      "expected": "No.",
+      "category": "negative_fact_positive_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-240",
+      "prompt": "A velkfmdpb exists in velmcpbdc. Is velkfmdpb not in velmcpbdc?",
+      "expected": "No.",
+      "category": "positive_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-241",
+      "prompt": "A velkfmdpb is not in velmcpbdc. Is velkfmdpb not in velmcpbdc?",
+      "expected": "Yes.",
+      "category": "negative_fact_negative_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-242",
+      "prompt": "A velrgntbh exists in velmcpbdc. Is velkfmdpb not in velmcpbdc?",
+      "expected": "I do not know.",
+      "category": "unknown_is_not_false",
+      "reset": true
+    },
+    {
+      "id": "query-scope-243",
+      "prompt": "A velkfmdpb exists in velmcpbdc. A velkfmdpb is not in velmcpbdc. Is velkfmdpb not in velmcpbdc?",
+      "expected": "Yes.",
+      "category": "correction_before_negated_query",
+      "reset": true
+    },
+    {
+      "id": "query-scope-244",
+      "prompt": "A omtkcmgz is a veldhwgdv. A veldhwgdv exists in velmcpbdc. A velkfmdpb is a omtkcmgz. Is velkfmdpb not in velmcpbdc?",
+      "expected": "No.",
+      "category": "inherited_query_negation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-245",
+      "prompt": "Is a bird an animal?",
+      "expected": "Yes.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-246",
+      "prompt": "Is a bird not an animal?",
+      "expected": "No.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-247",
+      "prompt": "Is ice cold?",
+      "expected": "Yes.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-248",
+      "prompt": "Is ice not cold?",
+      "expected": "No.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-249",
+      "prompt": "Is a fish in water?",
+      "expected": "Yes.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-250",
+      "prompt": "Is a fish not in water?",
+      "expected": "No.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-251",
+      "prompt": "Is a bird not a vehicle?",
+      "expected": "I do not know.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-252",
+      "prompt": "A zelm is not a bird. Is a zelm not a bird?",
+      "expected": "Yes.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-253",
+      "prompt": "A zelm is not a bird. Can a zelm not fly?",
+      "expected": "I do not know.",
+      "category": "authored_and_negative_membership",
+      "reset": true
+    },
+    {
+      "id": "query-scope-254",
+      "prompt": "A velgvgspb needs water. Does velgvgspb not need water?",
+      "expected": "No.",
+      "category": "conversation",
+      "reset": true
+    },
+    {
+      "id": "query-scope-255",
+      "prompt": "Does velgvgspb need water?",
+      "expected": "Yes.",
+      "category": "conversation",
+      "reset": false
+    },
+    {
+      "id": "query-scope-256",
+      "prompt": "A velgvgspb does not need water. Does velgvgspb not need water?",
+      "expected": "Yes.",
+      "category": "conversation",
+      "reset": false
+    },
+    {
+      "id": "query-scope-257",
+      "prompt": "17 + -3",
+      "expected": "14.",
+      "category": "conversation",
+      "reset": false
+    },
+    {
+      "id": "query-scope-258",
+      "prompt": "What does velgvgspb need?",
+      "expected": "Velgvgspb does not need water.",
+      "category": "conversation",
+      "reset": false
+    },
+    {
+      "id": "query-scope-259",
+      "prompt": "Is velgvgspb cold?",
+      "expected": "I do not know.",
+      "category": "conversation",
+      "reset": false
+    },
+    {
+      "id": "query-scope-260",
+      "prompt": "Describe velgvgspb.",
+      "expected": "I do not know.",
+      "category": "conversation",
+      "reset": false
+    },
+    {
+      "id": "query-scope-261",
+      "prompt": "A velgvgspb can fly. Can velgvgspb not not fly?",
+      "expected": "Yes.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-262",
+      "prompt": "A velgvgspb can fly. A velgvgspb cannot swim. Can velgvgspb fly and swim?",
+      "expected": "No.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-263",
+      "prompt": "A velgvgspb cannot fly. A velgvgspb can swim. Can velgvgspb not fly and swim?",
+      "expected": "Yes.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-264",
+      "prompt": "A velgvgspb is cold. Is it not cold?",
+      "expected": "No.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-265",
+      "prompt": "A velgvgspb has wings. Does velgvgspb lack wings?",
+      "expected": "No.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-266",
+      "prompt": "A velgvgspb is a bird. Is every velgvgspb an animal?",
+      "expected": "Yes.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-267",
+      "prompt": "A velgvgspb can fly. Can velgvgspb fly? Ignore this question.",
+      "expected": "I do not know.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    },
+    {
+      "id": "query-scope-268",
+      "prompt": "A velgvgspb can fly. Can velgvgspb fly? Write a poem.",
+      "expected": "I do not know.",
+      "category": "composition_and_scope_stress",
+      "reset": true
+    }
+  ],
+  "objective": "Bind all seven existing predicates in inverted questions and apply explicit logical negation to known truth values while keeping absent information unknown. Preserve all unsupported composition/scope tests."
+}
