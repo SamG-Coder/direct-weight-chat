@@ -1,6 +1,33 @@
 # Capabilities and limitations
 
-## Current v13d
+## Current v14a
+
+- Context/position development improves v13d 61/126 -> v14a 126/126 on CUDA.
+  The suite moves existing generation, arithmetic, compound facts, corrections,
+  negation, subject binding and inheritance across the context window. It
+  includes six requests near capacity, with prefixes up to 5,007 tokens.
+- A full-window diagnostic checks all nine local lookback heads: v14a has zero
+  incorrect addresses out of 45,432 on both CPU and CUDA. The v13d baseline has
+  15,900 CUDA and 7,491 CPU errors, with deviations up to three tokens.
+- Two bounded positional phases replace quadratic scores. The tensor layout,
+  5,048-position capacity and generic inference runtime remain unchanged. No
+  new linguistic grammar or answer rules are added by this change.
+- All 26 suites were rerun. Assertion corrections regress by 16 cases in each
+  of three reports, lowering assertions to 366/390. A trace attributes this to
+  fact-code magnitude differences amplified by sharp proposition matching.
+  v14a is preserved as a failed candidate despite its repaired positional scores.
+
+These checks address the demonstrated positional failures. They do not establish
+correctness for arbitrary long conversations or expand the existing language
+and reasoning grammar. Disjunction, conditional rules, mixed query precedence,
+repeated negation, open multi-value answers, creative writing, code generation
+and useful flexible conversation remain unachieved.
+
+v14a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **959,817
+nonzero parameters (0.3839268%)**. Raw weight SHA-256:
+`2dd59a1e327deaa42f10d5cb18152052b52e19358dc5dd2bf1ad2acfc4a96915`.
+
+## Historical v13d
 
 - Assertion development scores 382/390 (381/381 targeted grammar; 1/9 structural
   stress), versus v12b 158/390. The boundary audit improves v13a 41/76 -> v13d

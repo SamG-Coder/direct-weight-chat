@@ -303,3 +303,38 @@ ideal real-arithmetic score is unchanged. The larger stored coordinate reduces
 cancellation error at the residual write. This is a numerical representation
 change, not a new grammar case or answer rule. It does not address every source
 of long-context error in the existing positional lookbacks and output circuits.
+
+## v14a: bounded positional lookbacks
+
+The old local pointer score used a quadratic positional expression. At long
+positions, large intermediate dot products lost the small differences that
+distinguish neighboring tokens. A direct audit found wrong addresses in all
+nine lookback heads, not only in the final sentence-generation circuit.
+
+v14a replaces those scores with two sine/cosine pairs, at periods 64 and 8192.
+For desired lookback `s`, a fixed linear rotation of the query phase produces
+the score
+
+`32768 * [cos(2*pi*(k-p+s)/64) + cos(2*pi*(k-p+s)/8192)]`.
+
+The fast phase distinguishes adjacent positions. The slow phase distinguishes
+64-token aliases of the fast phase. Over the 5,048-position window, a nonzero
+address difference has a score gap of at least
+`32768 * (1-cos(2*pi/128)) > 39`. The basis values stay in [-1,1] and the score
+does not grow quadratically with absolute position. The causal mask supplies
+the existing BOS fallback for a lookback before the start of the sequence.
+
+The four positional coordinates reuse arithmetic, sign, second-number and
+article fields that have no readers until later blocks. They survive through
+block-2 attention, then are cleared before those fields receive their later
+meanings. The old position-square embedding and its delayed copy are removed.
+No context reduction, host attention rule, special prompt handling or runtime
+change is required; the normal positional-embedding and Q/K tensors contain the
+entire representation.
+
+The external address diagnostic captures actual Q/K activations from a full
+forward pass, then uses a separate attention call with synthetic position-index
+values. All 45,432 addresses match on CPU and CUDA for v14a. This is evidence
+about address selection, not general language understanding. Semantic position-
+shift tests separately cover generation, arithmetic, facts, correction and
+inheritance, including requests near the window's capacity.

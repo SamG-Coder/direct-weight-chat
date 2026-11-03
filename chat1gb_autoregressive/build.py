@@ -143,6 +143,24 @@ class Compiler:
         self.attention(layer, head, [{S.ONE: 8}],
                        [{candidate: 65536, S.POS: (-1 if first else 1) * 8 * 128}], sources, destinations)
 
+    def previous(self, layer, head, shift, sources, destinations):
+        """Address p-shift using two bounded sinusoidal phases.
+
+        The fast phase separates adjacent tokens; the slow phase separates
+        its 64-token aliases. Within this context, every nonzero address error
+        has a score gap of at least 32768*(1-cos(2*pi/128)) > 39. Neither the
+        features nor the scores grow quadratically with absolute position.
+        """
+        queries, keys = [], []
+        for i, period in enumerate(S.LOOKBACK_PERIODS):
+            cosine, sine = S.LOOKBACK_POSITION[2*i:2*i+2]
+            angle = 2 * math.pi * shift / period
+            a = 8 * S.LOOKBACK_SHARPNESS * math.cos(angle)
+            b = 8 * S.LOOKBACK_SHARPNESS * math.sin(angle)
+            queries += [{cosine: a, sine: b}, {cosine: -b, sine: a}]
+            keys += [{cosine: 1}, {sine: 1}]
+        self.attention(layer, head, queries, keys, sources, destinations)
+
     def latest_in_clause(self, layer, head, candidate, group, group_scale, sources, destinations, query_group=None):
         """Prefer an event in this causal clause, otherwise its zero sentinel.
 
@@ -271,7 +289,10 @@ def main():
     for position in range(S.CONTEXT):
         row = tensors["position_embedding"][position]
         put_pair(row, S.POS, position / 128)
-        put_pair(row, S.POS_SQ, (position / 128) ** 2)
+        for i, period in enumerate(S.LOOKBACK_PERIODS):
+            angle = 2 * math.pi * position / period
+            put_pair(row, S.LOOKBACK_POSITION[2*i], math.cos(angle))
+            put_pair(row, S.LOOKBACK_POSITION[2*i+1], math.sin(angle))
     for tid in range(S.VOCAB):
         add_reader(tensors["lm_head.weight"][tid], {S.OUTPUT + i: 8 * bit for i, bit in enumerate(S.code(tid))})
     # Valid token codes have an exact nearest-neighbor margin of 16 logits.
@@ -285,10 +306,7 @@ def main():
     c.latest(0, 1, S.PHASE_CANDIDATE, [S.PHASE_VALUE], [S.PHASE_STATE])
     sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.REL_FLAGS, S.REL_FLAGS + 7)) + [S.ARTICLE, S.PREPOSITION, S.NEGATION, S.AUXILIARY, S.NUMBER]
     for shift, destination in enumerate(S.PREV, 1):
-        sharpness = 16
-        queries = [{S.POS: 8 * 2 * sharpness * 128 ** 2, S.ONE: -8 * 2 * sharpness * shift * 128},
-                   {S.ONE: -8 * sharpness * 128 ** 2}]
-        c.attention(0, shift + 1, queries, [{S.POS: 1}, {S.POS_SQ: 1}], sources, list(range(destination, destination + 27)))
+        c.previous(0, shift + 1, shift, sources, list(range(destination, destination + 27)))
     c.latest(0, 6, S.ROLE_USER, [S.POS], [S.USER_START])
     c.latest(0, 7, S.CLAUSE_BOUNDARY, [S.POS], [S.CLAUSE_START])
     for src, dst in ((S.ENTITY, S.LIVE_ENTITY), (S.QUERY_CANDIDATE, S.LIVE_QUERY), (S.NUMBER, S.LIVE_NUMBER)):
@@ -372,11 +390,7 @@ def main():
                 [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_FIRST, S.NUM_FIRST_POS, S.NUM_FIRST_PRESENT])
     c.latest(1, 4, S.LIVE_NUMBER, [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_LAST, S.NUM_LAST_POS, S.NUM_LAST_PRESENT])
     for shift, destinations in ((1, S.Q_PREV1), (2, S.Q_PREV2), (3, S.Q_PREV3)):
-        sharpness = 16
-        queries = [{S.POS: 8 * 2 * sharpness * 128 ** 2, S.ONE: -8 * 2 * sharpness * shift * 128},
-                   {S.ONE: -8 * sharpness * 128 ** 2}]
-        c.attention(1, 4 + shift, queries, [{S.POS: 1}, {S.POS_SQ: 1}],
-                    [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS], list(destinations))
+        c.previous(1, 4 + shift, shift, [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS], list(destinations))
     # Temporary read into Q_EVENT_VALID; its old contents are cleared in this
     # MLP before the query parser writes the actual event-validity bit.
     c.latest(1, 8, S.CLAUSE_FIRST, [S.LEXICAL_REQUEST, S.QUESTION_HEAD_TEMP],
@@ -386,9 +400,7 @@ def main():
                        list(range(S.PREDICATE_CONTEXT, S.PREDICATE_CONTEXT + 7)) + [S.PREDICATE_NEGATIVE, S.PREDICATE_VALID])
     # The clause of the preceding token remains available at a punctuation
     # boundary, where the current token already begins a new clause ID.
-    c.attention(1, 10, [{S.POS: 8 * 2 * 16 * 128 ** 2, S.ONE: -8 * 2 * 16 * 128},
-                        {S.ONE: -8 * 16 * 128 ** 2}],
-                [{S.POS: 1}, {S.POS_SQ: 1}], [S.CLAUSE_START], [S.ASSERTION_GROUP_TEMP])
+    c.previous(1, 10, 1, [S.CLAUSE_START], [S.ASSERTION_GROUP_TEMP])
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
     c.clear(1, list(range(25, 51)) + [52, 54, 55, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS])
@@ -403,7 +415,6 @@ def main():
     # Only the first two old lexical buffers are read by block 2. Reuse the
     # remaining ones for a delayed event and its previous-clause address.
     c.clear(1, range(S.PREV[2], S.PREV[3] + 27))
-    c.linear(1, {S.POS_SQ: 1}, {S.ASSERTION_POSITION_SQ: 1})
     # Preserve the natural position/128 scale. Dividing by another 64 before
     # writing over a +/-1 residual loses low bits in float32 cancellation;
     # multiplying that error by a clause penalty can overwhelm recency.
@@ -540,9 +551,7 @@ def main():
     # In 'X has wings and Y needs water', Y is followed by a verb and must not
     # be committed as X's object. This delay is causal and uses generic tensor
     # lookback; no Python lookahead, answer correction or fact dictionary.
-    c.attention(2, 2, [{S.POS: 8 * 2 * 16 * 128 ** 2, S.ONE: -8 * 2 * 16 * 128},
-                       {S.ONE: -8 * 16 * 128 ** 2}],
-                [{S.POS: 1}, {S.ASSERTION_POSITION_SQ: 1}],
+    c.previous(2, 2, 1,
                 [S.ASSERTION_CONTINUATION] + list(range(S.FACT_RELATION, S.FACT_RELATION + 7)) +
                 [S.FACT_NEGATIVE] + list(range(S.CODE, S.CODE + 14)),
                 list(range(S.ASSERTION_PREVIOUS, S.ASSERTION_PREVIOUS + 23)))
@@ -557,6 +566,7 @@ def main():
     # All writes within this MLP read its pre-MLP input, so clearing the old
     # lookbacks here does not interfere with the fact copies above.
     c.clear(2, range(S.RETURN, S.RETURN + 112))
+    c.clear(2, S.LOOKBACK_POSITION)
     c.clear(2, range(S.CURRENT, S.CURRENT + 14))
     c.copy_unless(2, S.SUBJECT, S.ONE, S.Q_MODE, S.CURRENT, 14)
     c.copy(2, S.SUBJECT, S.Q_MODE, S.SUBJECT, 14, scale=-1)
@@ -892,6 +902,7 @@ def main():
                         "Proposition composition uses three-valued reductions for homogeneous AND or OR; mixed-operator syntax and arbitrary requests remain unsupported.",
                         "Shared AND assertion objects use clause-local neural subject/predicate/polarity binding with a bounded grammar.",
                         "Coordinated objects are committed at a following boundary token; question/directive clauses are excluded from assertions.",
+                        "Local lookbacks use bounded periodic address features; broader semantic accuracy still requires separate context tests.",
                         "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }

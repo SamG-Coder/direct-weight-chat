@@ -25,6 +25,7 @@ def main():
     p.add_argument('--composition', action='store_true', help='Use v12 truth layout and ablate connectives, unknown truth and clause scope')
     p.add_argument('--compound-facts', action='store_true', help='Use v13 assertion layout and ablate continuation, predicate, and question/clause binding')
     p.add_argument('--deferred-assertions', action='store_true', help='Use v13c delayed-clause layout and ablate following-token validation')
+    p.add_argument('--periodic-lookbacks', action='store_true', help='Ablate the two v14 positional phases and check long-prefix cache parity')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -338,6 +339,42 @@ def main():
                 logits, cache, _ = m.forward([token], cache)
             assert m.tokenizer.decode(generated) == 'Yes.'
             checks['deferred_assertion_cached_and_full_prefix_tokens_match'] = True
+    if a.periodic_lookbacks:
+        prompt = 'Hello. ' * 128 + 'A kelv can fly and swim. Can kelv swim?'
+        heads = [(0, h) for h in (2, 3, 4, 5)] + [(1, h) for h in (5, 6, 7, 10)] + [(2, 2)]
+        checks['periodic_position_ablations'] = []
+        for phase, first in [('fast', 0), ('slow', 2)]:
+            m.reset()
+            original = m.generate(prompt)
+            saved = {}
+            try:
+                for layer, head in heads:
+                    name = f'blocks.{layer}.attn.qkv.weight'
+                    if name not in saved:
+                        saved[name] = m.w[name]
+                        m.w[name] = saved[name].clone()
+                    m.w[name][head * 64 + first:head * 64 + first + 2] = 0
+                m.reset()
+                ablated = m.generate(prompt)
+            finally:
+                m.w.update(saved)
+            assert original['text'] == 'Yes.' and ablated['text'] != 'Yes.', (phase, original['text'], ablated['text'])
+            checks['periodic_position_ablations'].append(dict(removed_phase=phase, original=original, ablated=ablated))
+        m.reset()
+        prompt = 'Hello. ' * 1024 + 'Can kelv glimmer?'
+        prefix = [s['bos'], s['user']] + m.tokenizer.encode(prompt) + [s['assistant']]
+        logits, cache, _ = m.forward(prefix)
+        generated = []
+        for _ in range(12):
+            full, _, _ = m.forward(prefix + generated)
+            token = int(logits[-1].argmax().item())
+            assert token == int(full[-1].argmax().item())
+            generated.append(token)
+            if token == s['eos']:
+                break
+            logits, cache, _ = m.forward([token], cache)
+        assert m.tokenizer.decode(generated) == 'I do not know.'
+        checks['long_prefix_cached_and_full_tokens_match'] = dict(prefix_tokens=len(prefix), text=m.tokenizer.decode(generated))
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,

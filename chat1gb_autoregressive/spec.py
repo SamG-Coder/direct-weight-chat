@@ -87,6 +87,11 @@ ASSERTION_PREVIOUS = PREV[2]  # valid[1], predicate[7], polarity[1], object[14]
 ASSERTION_TERMINATOR = PREV[2] + 23
 ASSERTION_POSITION_SQ, ASSERTION_PREVIOUS_GROUP = PREV[3], PREV[3] + 1
 ASSERTION_GROUP_TEMP = GATES + 23
+# Bounded positional basis, live through block-2 attention. These four fields
+# have no arithmetic/article/second-number readers until later blocks.
+LOOKBACK_POSITION = (MATH_SUM, NEGATIVE_RESULT, NUM_SECOND_POS, CLASS_VOWEL)
+LOOKBACK_PERIODS = (64, 8192)
+LOOKBACK_SHARPNESS = 32768
 ATOM_TRUE, ATOM_FALSE, ATOM_UNKNOWN = 64, 65, 66
 ANY_TRUE, ANY_FALSE, ANY_UNKNOWN, ANY_AND, ANY_OR, COMPOSED_KNOWN = range(67, 73)
 

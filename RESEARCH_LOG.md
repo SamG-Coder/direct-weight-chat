@@ -610,3 +610,26 @@ token, with errors as large as three tokens. This diagnostic does not alter
 inference, weights or answers. The quadratic positional scores are large enough
 that float32 error changes address selection. Tests and baseline evidence are
 committed before replacing the representation with bounded positional features.
+
+## 2026-11-04: v14a bounded positions, repaired context and correction regression
+
+Replaced all nine local lookback scores with two bounded sinusoidal phases at
+periods 64 and 8192. Fixed query rotations address earlier tokens; the minimum
+ideal nonmatching score gap exceeds 39 across the complete window. Removed the
+quadratic embedding and its delayed copy. The layout, capacity and runtime are
+unchanged. The 45,432-address diagnostic has zero errors on both CPU and CUDA;
+the prior CPU baseline has 7,491 errors. Context development improves 61/126 to
+126/126, and both former boundary sets improve to 76/76 on CUDA.
+
+All 26 suites were rerun. Sixteen correction cases regress in each of three
+assertion reports (48 repeated regressions): assertion score falls to 366/390.
+An activation trace shows delayed assertion codes with magnitudes around
+1.000011 versus 1.000001 for a later direct correction. The sharp proposition
+match amplifies this difference, weakening the intended recency advantage and
+mixing opposite polarities. This is separate from positional addressing; the
+address audit and all current integrity/ablation checks still pass.
+
+The failed candidate is frozen with raw SHA-256
+`2dd59a1e327deaa42f10d5cb18152052b52e19358dc5dd2bf1ad2acfc4a96915`.
+The next candidate will canonicalize fact identity/metadata coordinates before
+proposition retrieval, rather than add a correction-specific answer rule.
