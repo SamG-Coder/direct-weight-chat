@@ -296,3 +296,20 @@ v11a has 744,215 nonzero parameters and raw SHA-256
 `f15e70fdeddf91f94bfac13a505b1f14157a9dae79bb4388febf1c62a2a637b4`.
 The candidate is archived before selecting a new query-scope seed. No broad
 language or general intelligence milestone is declared complete.
+
+## 2026-11-04: v11a fresh evaluation and release preparation
+
+Post-freeze query-scope seed 3050431372, selected after commit `55ab049`, scored
+262/269 on CUDA and CPU. The 245 main generated cases vary bindings, corrections
+and inheritance; 24 authored/conversation/stress cases retain the known structure.
+This remains a known-generator evaluation. No candidate weights were adjusted.
+Rebuilding the archived compiler reproduces raw weights and config byte for byte.
+The default local model now references v11a; the formerly linked v9a artifact was
+hashed afterward and remains unchanged.
+
+Prepared v10a and v11a archives for `v0.3.0-experiment`, with streamed CRC and
+decompressed SHA-256 verification. Earlier checkpoints and test failures remain
+preserved. The next priority is to represent the active request and compound
+scope so later instructions and conjunctions cannot silently use a partial
+question; the old open wh-question multiple-value selection also needs work.
+Useful flexible conversation remains an unfinished research goal.

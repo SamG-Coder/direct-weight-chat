@@ -106,7 +106,8 @@ Forcing that validity feature to true makes `10 - 3 - 2` produce the incorrect
 first/last-operand result `8.` instead of abstaining. Disabling unary sign
 changes `-149 - 370` from `-519.` to `-221.`. These interventions are recorded
 alongside graph, polarity and accumulator ablations.
-# v10a: object-specific proposition lookup
+
+## v10a: object-specific proposition lookup
 
 Clause-boundary and auxiliary-inversion detectors bind the subject of `Can X V?`
 and `Does X need/have/produce Y?`. Optional articles use the same subject code.
@@ -136,7 +137,7 @@ adjustment): the same prompt then mistakes a later denial of another action for
 the queried action and says `No.`. Open wh-questions still use the older one-value
 retrieval path; this experiment does not fix that separate multiple-action bug.
 
-# v11a: predicate binding and query negation
+## v11a: predicate binding and query negation
 
 Three local inversion markers (can, does, is) and three causal lookbacks compile
 questions into the existing seven-predicate representation. Article, preposition

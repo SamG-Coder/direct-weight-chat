@@ -1,6 +1,43 @@
 # Capabilities and limitations
 
-## Current v9a
+## Current v11a
+
+- Legacy 185/185; graph 75/79; arithmetic 115/120; polarity 229/233;
+  signed operands 153/159; object-specific truth 234/239; query scope 262/269.
+  Raw outputs, timings and preserved failures are in the [results table](results/README.md).
+- Queries individual subject/predicate/object propositions, distinguishing an
+  explicit positive fact, an explicit negative fact and absent evidence. The
+  latest correction for the same object wins without discarding another object.
+- Binds all seven existing predicates in a restricted inversion grammar:
+  can, need, have, produce, class, trait and location. Three causal lookbacks
+  support the tested article, preposition and not forms. Query `not` is treated
+  as logical proposition negation; missing information remains unknown.
+- Tested facts can be inherited through up to three unfamiliar class links.
+  A question is not added as an assertion. These behaviors compose with the
+  tested fact corrections and signed arithmetic across user turns.
+- v10a's post-freeze truth score is 229/239 on CPU and CUDA. v11a's post-freeze
+  query-scope score is 262/269 on both. Generators and syntax were known before
+  freezing; this is not an independently designed language/general-intelligence
+  evaluation. No frozen weights were adjusted after fresh-seed evaluation.
+
+**Remaining failures:** open wh-questions still select one value per relation,
+so the earlier permitted-action/denied-action regression remains. A subsequent
+instruction to ignore an already parsed question is disregarded (a v10a
+regression against a v9a abstention). Conjunctions, general pronouns, quantifiers,
+repeated negation and unsupported paraphrases fail. One compound test passes
+by ignoring part of the question; contrasting failures rule out a conjunction
+claim. No additional v11a regressions appear in the matched suites.
+
+The arithmetic limits and failures described below remain. Useful open-ended
+conversation, creative writing, program generation and broad general reasoning
+are unachieved. This is still a sparse, hand-compiled neural program with a small
+authored lexicon, not 1 GB of useful learned knowledge.
+
+v11a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **744,215
+nonzero parameters (0.297686%)**. Raw weight SHA-256:
+`f15e70fdeddf91f94bfac13a505b1f14157a9dae79bb4388febf1c62a2a637b4`.
+
+## Historical v9a
 
 - Legacy 185/185; graph 75/79; old arithmetic 115/120; polarity 227/233;
   signed operands and validity 153/159. Exact outputs and stress failures are

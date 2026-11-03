@@ -10,15 +10,15 @@ def main():
     versions = sorted([p.name.removeprefix('autoregressive_') for p in (root / 'versions').glob('autoregressive_*')], key=lambda v: (int(re.search(r'v([0-9]+)', v).group(1)), v))
     rows = ['# Version results', '',
             'Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.', '',
-            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Nonzero parameters | Source commit |',
-            '|---|---:|---:|---:|---:|---:|---:|---|']
+            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Nonzero parameters | Source commit |',
+            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---|']
     index = []
     for v in versions:
         source = Path('versions') / ('autoregressive_' + v)
         m = json.loads((root / source / 'model' / 'manifest.json').read_text(encoding='utf-8'))
         commit = subprocess.check_output(['git', 'log', '--diff-filter=A', '--format=%H', '--', str(source / 'build.py')], cwd=root, text=True).strip().splitlines()[-1]
         scores, reports = [], []
-        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed'):
+        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope'):
             p = root / 'results' / f'{suite}-{v}-cuda.json'
             if not p.exists():
                 p = root / 'results' / f'{suite}-{v}-baseline-cuda.json'
@@ -54,6 +54,12 @@ def main():
              '- v9a signed operands: [CUDA](signed-v9a-postfreeze-cuda.json) and [CPU](signed-v9a-postfreeze-cpu.json), 153/159 with seed 3220192550 selected after commit `74a4b81`. There are 120 fresh random combinations and 39 fixed cases.',
              '- [v9a integrity and ablations](integrity-v9a-cuda.json): polarity, unary sign, signed accumulator and operand-count interventions change the associated behavior. [Reproduction](reproduction-v9a.json) matches raw weight/config hashes.', '',
              '- [v0.2 publication](publication-v0.2.json): three uploaded archive hashes/sizes verified, then a fresh clone and download passed [integrity/ablations](release-validation-v0.2/integrity.json) and [six CPU/CUDA smoke cases](release-validation-v0.2/smoke.json).', '',
+             '## Object-specific queries', '',
+             '- v10a adds exact subject/predicate/object matching: truth 229/239 versus the frozen v9a baseline of 45/239. Its post-freeze seed 34865453 reproduced 229/239 on [CUDA](truth-v10a-postfreeze-cuda.json) and [CPU](truth-v10a-postfreeze-cpu.json), after source commit `6bb1736`.',
+             '- v11a extends predicate binding to all seven relations and applies query negation to known truth values. Missing evidence remains unknown. Truth scores 234/239 and query scope 262/269. After freeze commit `55ab049`, seed 3050431372 reproduced 262/269 on [CUDA](query-scope-v11a-postfreeze-cuda.json) and [CPU](query-scope-v11a-postfreeze-cpu.json). Unsupported conjunctions, pronouns and instruction scope remain in the score.',
+             '- [Matched-suite comparisons](regressions-v11a.json) record all output changes across v9a, v10a and v11a: 22 matched suites, one v10a regression on a later ignore-question instruction, and no further v11a regressions. The older open-question multiple-action regression also remains; object-specific queries do not fix the separate wh-answer selection path.',
+             '- [v10a ablations](integrity-v10a-cuda.json) and [v11a ablations](integrity-v11a-cuda.json) remove proposition retrieval, object identity or query negation. The corresponding answers change while the saved checkpoint stays unchanged.', '',
+             '- [v11a reproduction](reproduction-v11a.json) verifies identical raw weight/config hashes from the frozen source. [v0.3 packaging](release-assets-v0.3.json) records the two checkpoint archives and streamed decompression checks.', '',
              '## Provenance and timing', '',
              '[experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.', '',
              'Response timings include token generation and formatting, exclude one warm-up, and depend on prompt/output length and machine load. They are not a comparison against trained language models. Exact per-case timings and hardware are in each JSON. CUDA and CPU evaluations were run separately.', '',

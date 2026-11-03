@@ -2,20 +2,22 @@
 
 Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.
 
-| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Nonzero parameters | Source commit |
-|---|---:|---:|---:|---:|---:|---:|---|
-| v1 | [131/185](legacy-v1-cuda.json) | — | — | — | — | 674,640 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
-| v2 | [177/185](legacy-v2-cuda.json) | — | — | — | — | 691,848 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
-| v3 | [182/185](legacy-v3-cuda.json) | — | — | — | — | 697,264 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
-| v4 | [182/185](legacy-v4-cuda.json) | — | — | — | — | 697,392 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
-| v5 | [185/185](legacy-v5-cuda.json) | [12/79](graph-v5-baseline-cuda.json) | — | — | — | 697,392 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
-| v6a | [1/185](legacy-v6a-cuda.json) | [8/79](graph-v6a-cuda.json) | — | — | — | 716,888 | [1f7509f](https://github.com/SamG-Coder/direct-weight-chat/commit/1f7509f7a7e9251386c445c722dab5701fd591ef) |
-| v6b | [182/185](legacy-v6b-cuda.json) | [68/79](graph-v6b-cuda.json) | — | — | — | 716,960 | [ddfaa85](https://github.com/SamG-Coder/direct-weight-chat/commit/ddfaa85087e60339a058933b5aa09667f43906f1) |
-| v6c | [185/185](legacy-v6c-cuda.json) | [74/79](graph-v6c-cuda.json) | [22/120](math-v6c-baseline-cuda.json) | — | — | 717,352 | [95f9754](https://github.com/SamG-Coder/direct-weight-chat/commit/95f9754da6d5cccc8d4170dc767875a4867a8edb) |
-| v7a | [185/185](legacy-v7a-cuda.json) | [74/79](graph-v7a-cuda.json) | [114/120](math-v7a-cuda.json) | [53/233](polarity-v7a-baseline-cuda.json) | — | 717,554 | [60169ec](https://github.com/SamG-Coder/direct-weight-chat/commit/60169ec23186114b40069961c61c48dd01de51b9) |
-| v8a | [185/185](legacy-v8a-cuda.json) | [75/79](graph-v8a-cuda.json) | [114/120](math-v8a-cuda.json) | [226/233](polarity-v8a-cuda.json) | — | 720,110 | [b75234e](https://github.com/SamG-Coder/direct-weight-chat/commit/b75234e3f018db2b84031e2901c710589a7521b0) |
-| v8b | [185/185](legacy-v8b-cuda.json) | [75/79](graph-v8b-cuda.json) | [114/120](math-v8b-cuda.json) | [227/233](polarity-v8b-cuda.json) | [46/159](signed-v8b-baseline-cuda.json) | 720,111 | [0e52ba9](https://github.com/SamG-Coder/direct-weight-chat/commit/0e52ba9101e736e2d1340ead31b91ff054c0207f) |
-| v9a | [185/185](legacy-v9a-cuda.json) | [75/79](graph-v9a-cuda.json) | [115/120](math-v9a-cuda.json) | [227/233](polarity-v9a-cuda.json) | [153/159](signed-v9a-cuda.json) | 720,343 | [74a4b81](https://github.com/SamG-Coder/direct-weight-chat/commit/74a4b81ea210907fc60a027f9182758f6ae32f3f) |
+| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Nonzero parameters | Source commit |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| v1 | [131/185](legacy-v1-cuda.json) | — | — | — | — | — | — | 674,640 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
+| v2 | [177/185](legacy-v2-cuda.json) | — | — | — | — | — | — | 691,848 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
+| v3 | [182/185](legacy-v3-cuda.json) | — | — | — | — | — | — | 697,264 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
+| v4 | [182/185](legacy-v4-cuda.json) | — | — | — | — | — | — | 697,392 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
+| v5 | [185/185](legacy-v5-cuda.json) | [12/79](graph-v5-baseline-cuda.json) | — | — | — | — | — | 697,392 | [5be0768](https://github.com/SamG-Coder/direct-weight-chat/commit/5be0768f6e2d61c1bacd30950cf343cd79173b74) |
+| v6a | [1/185](legacy-v6a-cuda.json) | [8/79](graph-v6a-cuda.json) | — | — | — | — | — | 716,888 | [1f7509f](https://github.com/SamG-Coder/direct-weight-chat/commit/1f7509f7a7e9251386c445c722dab5701fd591ef) |
+| v6b | [182/185](legacy-v6b-cuda.json) | [68/79](graph-v6b-cuda.json) | — | — | — | — | — | 716,960 | [ddfaa85](https://github.com/SamG-Coder/direct-weight-chat/commit/ddfaa85087e60339a058933b5aa09667f43906f1) |
+| v6c | [185/185](legacy-v6c-cuda.json) | [74/79](graph-v6c-cuda.json) | [22/120](math-v6c-baseline-cuda.json) | — | — | — | — | 717,352 | [95f9754](https://github.com/SamG-Coder/direct-weight-chat/commit/95f9754da6d5cccc8d4170dc767875a4867a8edb) |
+| v7a | [185/185](legacy-v7a-cuda.json) | [74/79](graph-v7a-cuda.json) | [114/120](math-v7a-cuda.json) | [53/233](polarity-v7a-baseline-cuda.json) | — | — | — | 717,554 | [60169ec](https://github.com/SamG-Coder/direct-weight-chat/commit/60169ec23186114b40069961c61c48dd01de51b9) |
+| v8a | [185/185](legacy-v8a-cuda.json) | [75/79](graph-v8a-cuda.json) | [114/120](math-v8a-cuda.json) | [226/233](polarity-v8a-cuda.json) | — | — | — | 720,110 | [b75234e](https://github.com/SamG-Coder/direct-weight-chat/commit/b75234e3f018db2b84031e2901c710589a7521b0) |
+| v8b | [185/185](legacy-v8b-cuda.json) | [75/79](graph-v8b-cuda.json) | [114/120](math-v8b-cuda.json) | [227/233](polarity-v8b-cuda.json) | [46/159](signed-v8b-baseline-cuda.json) | — | — | 720,111 | [0e52ba9](https://github.com/SamG-Coder/direct-weight-chat/commit/0e52ba9101e736e2d1340ead31b91ff054c0207f) |
+| v9a | [185/185](legacy-v9a-cuda.json) | [75/79](graph-v9a-cuda.json) | [115/120](math-v9a-cuda.json) | [227/233](polarity-v9a-cuda.json) | [153/159](signed-v9a-cuda.json) | [45/239](truth-v9a-baseline-cuda.json) | — | 720,343 | [74a4b81](https://github.com/SamG-Coder/direct-weight-chat/commit/74a4b81ea210907fc60a027f9182758f6ae32f3f) |
+| v10a | [185/185](legacy-v10a-cuda.json) | [75/79](graph-v10a-cuda.json) | [115/120](math-v10a-cuda.json) | [229/233](polarity-v10a-cuda.json) | [153/159](signed-v10a-cuda.json) | [229/239](truth-v10a-cuda.json) | [80/269](query-scope-v10a-baseline-cuda.json) | 732,615 | [6bb1736](https://github.com/SamG-Coder/direct-weight-chat/commit/6bb1736abc175a14774c796f5540f4078f879bed) |
+| v11a | [185/185](legacy-v11a-cuda.json) | [75/79](graph-v11a-cuda.json) | [115/120](math-v11a-cuda.json) | [229/233](polarity-v11a-cuda.json) | [153/159](signed-v11a-cuda.json) | [234/239](truth-v11a-cuda.json) | [262/269](query-scope-v11a-cuda.json) | 744,215 | [55ab049](https://github.com/SamG-Coder/direct-weight-chat/commit/55ab049010292835bb6eb83b74647b50df0df9d4) |
 
 ## Interpretation
 
@@ -48,6 +50,15 @@ The generators and language structures were known before freezing. These are fre
 - [v9a integrity and ablations](integrity-v9a-cuda.json): polarity, unary sign, signed accumulator and operand-count interventions change the associated behavior. [Reproduction](reproduction-v9a.json) matches raw weight/config hashes.
 
 - [v0.2 publication](publication-v0.2.json): three uploaded archive hashes/sizes verified, then a fresh clone and download passed [integrity/ablations](release-validation-v0.2/integrity.json) and [six CPU/CUDA smoke cases](release-validation-v0.2/smoke.json).
+
+## Object-specific queries
+
+- v10a adds exact subject/predicate/object matching: truth 229/239 versus the frozen v9a baseline of 45/239. Its post-freeze seed 34865453 reproduced 229/239 on [CUDA](truth-v10a-postfreeze-cuda.json) and [CPU](truth-v10a-postfreeze-cpu.json), after source commit `6bb1736`.
+- v11a extends predicate binding to all seven relations and applies query negation to known truth values. Missing evidence remains unknown. Truth scores 234/239 and query scope 262/269. After freeze commit `55ab049`, seed 3050431372 reproduced 262/269 on [CUDA](query-scope-v11a-postfreeze-cuda.json) and [CPU](query-scope-v11a-postfreeze-cpu.json). Unsupported conjunctions, pronouns and instruction scope remain in the score.
+- [Matched-suite comparisons](regressions-v11a.json) record all output changes across v9a, v10a and v11a: 22 matched suites, one v10a regression on a later ignore-question instruction, and no further v11a regressions. The older open-question multiple-action regression also remains; object-specific queries do not fix the separate wh-answer selection path.
+- [v10a ablations](integrity-v10a-cuda.json) and [v11a ablations](integrity-v11a-cuda.json) remove proposition retrieval, object identity or query negation. The corresponding answers change while the saved checkpoint stays unchanged.
+
+- [v11a reproduction](reproduction-v11a.json) verifies identical raw weight/config hashes from the frozen source. [v0.3 packaging](release-assets-v0.3.json) records the two checkpoint archives and streamed decompression checks.
 
 ## Provenance and timing
 
