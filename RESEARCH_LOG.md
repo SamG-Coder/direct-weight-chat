@@ -313,3 +313,19 @@ preserved. The next priority is to represent the active request and compound
 scope so later instructions and conjunctions cannot silently use a partial
 question; the old open wh-question multiple-value selection also needs work.
 Useful flexible conversation remains an unfinished research goal.
+
+## 2026-11-04: v0.3 publication and fresh-download validation
+
+Published v10a and v11a under `v0.3.0-experiment`, release commit `11e2f62`.
+All three assets (two archives plus checksums) are uploaded; archive sizes and
+GitHub digests match the local packaging records. A fresh clone and downloaded
+v11a archive pass source/raw hashes, parameter layout, finite values, causal/cache
+checks, offline guard and all graph/arithmetic/polarity/truth interventions.
+
+Fresh CPU and CUDA smoke runs each score 11/12. All 11 mixed-turn fact, truth,
+negation, correction and arithmetic checks pass. The separately scored creative
+request fails: `Write a poem about rain.` returns `Rain is a precipitation. It can
+fall.` instead of the expected abstention. Local and freshly downloaded runs
+agree. The failed check is preserved, not counted as success. Evidence is in
+`results/publication-v0.3.json` and `results/release-validation-v0.3/`.
+The research goal remains active and useful open-ended conversation is unachieved.

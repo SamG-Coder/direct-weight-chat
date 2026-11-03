@@ -60,6 +60,8 @@ The generators and language structures were known before freezing. These are fre
 
 - [v11a reproduction](reproduction-v11a.json) verifies identical raw weight/config hashes from the frozen source. [v0.3 packaging](release-assets-v0.3.json) records the two checkpoint archives and streamed decompression checks.
 
+- [v0.3 publication verification](publication-v0.3.json): both uploaded archive hashes/sizes match. Fresh clone/download integrity and all interventions pass. [CUDA](release-validation-v0.3/fresh-smoke-cuda.json) and [CPU](release-validation-v0.3/fresh-smoke-cpu.json) each score 11/12: all 11 mixed-conversation checks pass; the creative-request abstention check fails, producing factual rain sentences instead of abstaining. It remains a failed check.
+
 ## Provenance and timing
 
 [experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.

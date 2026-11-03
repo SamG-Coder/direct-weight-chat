@@ -33,6 +33,11 @@ conversation, creative writing, program generation and broad general reasoning
 are unachieved. This is still a sparse, hand-compiled neural program with a small
 authored lexicon, not 1 GB of useful learned knowledge.
 
+Fresh-download CPU/CUDA validation each scores 11/12: all mixed-conversation
+checks pass, but `Write a poem about rain.` returns factual rain sentences
+instead of the expected abstention. This is preserved as a failed creative-
+request check in the publication evidence.
+
 v11a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **744,215
 nonzero parameters (0.297686%)**. Raw weight SHA-256:
 `f15e70fdeddf91f94bfac13a505b1f14157a9dae79bb4388febf1c62a2a637b4`.
