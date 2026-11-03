@@ -24,6 +24,7 @@ def main():
     p.add_argument('--query-negation', action='store_true', help='Ablate the separate v11 query-polarity bit')
     p.add_argument('--composition', action='store_true', help='Use v12 truth layout and ablate connectives, unknown truth and clause scope')
     p.add_argument('--compound-facts', action='store_true', help='Use v13 assertion layout and ablate continuation, predicate, and question/clause binding')
+    p.add_argument('--deferred-assertions', action='store_true', help='Use v13c delayed-clause layout and ablate following-token validation')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -283,6 +284,9 @@ def main():
             ('remove_question_exclusion', ['Does kelv need water and lavrik has wings?', 'Does lavrik have wings?'], 'I do not know.', 'Yes.'),
             ('remove_assertion_clause_scope', ['A kelv can fly. And swim. Can kelv swim?'], 'I do not know.', 'Yes.'),
         ]
+        if a.deferred_assertions:
+            probes.append(('force_following_token_valid', ['A kelv has wings and lavrik needs water. Does kelv have lavrik?'],
+                           'I do not know.', 'Yes.'))
         for intervention, prompts, expected, changed in probes:
             m.reset()
             original = [m.generate(prompt, trace=True) for prompt in prompts]
@@ -301,18 +305,39 @@ def main():
                     clone('blocks.1.attn.out.weight')[:, 9 * 64:10 * 64] = 0
                 elif intervention == 'remove_question_exclusion':
                     clone('blocks.1.attn.out.weight')[1012:1014, 8 * 64:9 * 64] = 0
+                elif intervention == 'force_following_token_valid':
+                    clone('blocks.1.mlp.down.weight')[506:508] = 0
+                    bias = clone('blocks.1.mlp.down.bias')
+                    bias[506], bias[507] = 1, -1  # Following-token validity feature 253.
                 else:
                     # Remove the group-ID key in both lexical-predicate and
                     # full-subject attention. The query offset is common to
                     # all keys, so older valid clauses now become selectable.
                     clone('blocks.1.attn.qkv.weight')[1024 + 9 * 64, 828:830] = 0
-                    clone('blocks.2.attn.qkv.weight')[1024 + 1 * 64, 48:50] = 0
+                    group = 258 if a.deferred_assertions else 24
+                    clone('blocks.2.attn.qkv.weight')[1024 + 1 * 64, 2 * group:2 * group + 2] = 0
                 m.reset()
                 ablated = [m.generate(prompt, trace=True) for prompt in prompts]
             finally:
                 m.w.update(saved)
             assert original[-1]['text'] == expected and ablated[-1]['text'] == changed, (intervention, original[-1]['text'], ablated[-1]['text'])
             checks['assertion_ablations'].append(dict(intervention=intervention, original=original, ablated=ablated))
+        if a.deferred_assertions:
+            m.reset()
+            prompt = 'A kelv cannot fly and can swim and glimmer. Can kelv swim and glimmer?'
+            prefix = [s['bos'], s['user']] + m.tokenizer.encode(prompt) + [s['assistant']]
+            logits, cache, _ = m.forward(prefix)
+            generated = []
+            for _ in range(12):
+                full, _, _ = m.forward(prefix + generated)
+                token = int(logits[-1].argmax().item())
+                assert token == int(full[-1].argmax().item())
+                generated.append(token)
+                if token == s['eos']:
+                    break
+                logits, cache, _ = m.forward([token], cache)
+            assert m.tokenizer.decode(generated) == 'Yes.'
+            checks['deferred_assertion_cached_and_full_prefix_tokens_match'] = True
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,

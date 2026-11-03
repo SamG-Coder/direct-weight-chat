@@ -143,7 +143,7 @@ class Compiler:
         self.attention(layer, head, [{S.ONE: 8}],
                        [{candidate: 65536, S.POS: (-1 if first else 1) * 8 * 128}], sources, destinations)
 
-    def latest_in_clause(self, layer, head, candidate, group, group_scale, sources, destinations):
+    def latest_in_clause(self, layer, head, candidate, group, group_scale, sources, destinations, query_group=None):
         """Prefer an event in this causal clause, otherwise its zero sentinel.
 
         Group IDs are nondecreasing boundary positions. A one-position older
@@ -151,7 +151,7 @@ class Compiler:
         Cancel the query's common group offset before adding token recency.
         """
         penalty = 131072 * group_scale
-        self.attention(layer, head, [{S.ONE: 8}, {group: -8 * penalty}, {S.ONE: 8}],
+        self.attention(layer, head, [{S.ONE: 8}, {group if query_group is None else query_group: -8 * penalty}, {S.ONE: 8}],
                        [{group: penalty}, {S.ONE: 1}, {candidate: 65536, S.POS: 8 * 128}],
                        sources, destinations)
 
@@ -210,7 +210,8 @@ def main():
     object_words = set(FACTS) | {value for facts in FACTS.values() for value in facts.values()}
     request_introducers = set(('what where describe explain tell about color colour more '
                               'hello hi hey add plus sum calculate a an can does is + -').split())
-    nonassertive_heads = set('what who where when why how which can does is are could would should will may if'.split())
+    nonassertive_heads = set(('what who where when why how which can does is are could would should will may if '
+                             'tell describe explain write compare calculate add sum').split())
     for tid, label in enumerate(labels):
         row = tensors["token_embedding"][tid]
         put_pair(row, S.ANCHOR, S.ANCHOR_VALUE)
@@ -383,6 +384,11 @@ def main():
     c.latest_in_clause(1, 9, S.LEXICAL_VALID, S.CLAUSE_START, 128,
                        list(range(S.LEXICAL_RELATION, S.LEXICAL_RELATION + 7)) + [S.LEXICAL_NEGATIVE, S.LEXICAL_VALID],
                        list(range(S.PREDICATE_CONTEXT, S.PREDICATE_CONTEXT + 7)) + [S.PREDICATE_NEGATIVE, S.PREDICATE_VALID])
+    # The clause of the preceding token remains available at a punctuation
+    # boundary, where the current token already begins a new clause ID.
+    c.attention(1, 10, [{S.POS: 8 * 2 * 16 * 128 ** 2, S.ONE: -8 * 2 * 16 * 128},
+                        {S.ONE: -8 * 16 * 128 ** 2}],
+                [{S.POS: 1}, {S.POS_SQ: 1}], [S.CLAUSE_START], [S.ASSERTION_GROUP_TEMP])
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
     c.clear(1, list(range(25, 51)) + [52, 54, 55, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS])
@@ -394,6 +400,14 @@ def main():
     c.linear(1, {S.CLAUSE_FIRST: 1}, {S.Q_EVENT_CANDIDATE: 1})
     c.clear(1, [S.CLAUSE_FIRST, S.LEXICAL_REQUEST])
     c.clear(1, [S.QUESTION_HEAD_TEMP, S.QUESTION_CLAUSE] + list(range(S.LEXICAL_RELATION, S.LEXICAL_NEGATIVE + 1)))
+    # Only the first two old lexical buffers are read by block 2. Reuse the
+    # remaining ones for a delayed event and its previous-clause address.
+    c.clear(1, range(S.PREV[2], S.PREV[3] + 27))
+    c.linear(1, {S.POS_SQ: 1}, {S.ASSERTION_POSITION_SQ: 1})
+    c.linear(1, {S.ASSERTION_GROUP_TEMP: 1 / 64}, {S.ASSERTION_PREVIOUS_GROUP: 1})
+    c.clear(1, [S.ASSERTION_GROUP_TEMP])
+    for terminator in ('and', 'or', 'but', '.', '?', '!', ',', '<user>', '<assistant>', '<eos>'):
+        c.word(1, terminator, {S.ASSERTION_TERMINATOR: 1})
     for offset, destination in zip(S.PREV[:3], S.Q_PREV_JOIN):
         for word in ("and", "or"):
             c.word(1, word, {destination: 1}, start=offset)
@@ -512,12 +526,28 @@ def main():
     c.latest(2, 0, S.Q_EVENT_CANDIDATE,
              list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_EVENT_NEGATIVE, S.Q_EVENT_GROUP],
              list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP) + [S.Q_QUERY_NEGATIVE, S.Q_GROUP])
-    c.latest_in_clause(2, 1, S.FACT_VALID, S.Q_EVENT_GROUP, 8192,
+    # Use the previous-token clause coordinate for both query and key. At a
+    # period the current clause ID has advanced, but its delayed object and
+    # its frame still belong to the clause just completed. Full fact events
+    # occur after a subject/verb, so their previous/current clause IDs agree.
+    c.latest_in_clause(2, 1, S.FACT_VALID, S.ASSERTION_PREVIOUS_GROUP, 8192,
                        list(range(S.FACT_SUBJECT, S.FACT_SUBJECT + 14)) + [S.FACT_VALID],
                        list(range(S.CURRENT, S.CURRENT + 14)) + [S.ASSERTION_FRAME_VALID])
-    continuation = [S.ASSERTION_CONTINUATION, S.ASSERTION_FRAME_VALID]
+    # The token after a provisional object decides whether it is complete.
+    # In 'X has wings and Y needs water', Y is followed by a verb and must not
+    # be committed as X's object. This delay is causal and uses generic tensor
+    # lookback; no Python lookahead, answer correction or fact dictionary.
+    c.attention(2, 2, [{S.POS: 8 * 2 * 16 * 128 ** 2, S.ONE: -8 * 2 * 16 * 128},
+                       {S.ONE: -8 * 16 * 128 ** 2}],
+                [{S.POS: 1}, {S.ASSERTION_POSITION_SQ: 1}],
+                [S.ASSERTION_CONTINUATION] + list(range(S.FACT_RELATION, S.FACT_RELATION + 7)) +
+                [S.FACT_NEGATIVE] + list(range(S.CODE, S.CODE + 14)),
+                list(range(S.ASSERTION_PREVIOUS, S.ASSERTION_PREVIOUS + 23)))
+    continuation = [S.ASSERTION_PREVIOUS, S.ASSERTION_FRAME_VALID, S.ASSERTION_TERMINATOR]
     c.copy_when(2, S.CURRENT, S.FACT_SUBJECT, continuation, [S.Q_MODE], count=14)
-    c.copy_when(2, S.CODE, S.FACT_OBJECT, continuation, [S.Q_MODE], count=14)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 9, S.FACT_OBJECT, continuation, [S.Q_MODE], count=14)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 1, S.FACT_RELATION, continuation, [S.Q_MODE], count=7)
+    c.copy_when(2, S.ASSERTION_PREVIOUS + 8, S.FACT_NEGATIVE, continuation, [S.Q_MODE])
     c.gate(2, continuation, [S.Q_MODE], {S.FACT_VALID: 1})
 
     # Release local parsing scratch and initialize a neural graph cursor.
@@ -858,6 +888,7 @@ def main():
                         "Object-specific truth questions and logical negation support seven predicates under a limited inversion grammar.",
                         "Proposition composition uses three-valued reductions for homogeneous AND or OR; mixed-operator syntax and arbitrary requests remain unsupported.",
                         "Shared AND assertion objects use clause-local neural subject/predicate/polarity binding with a bounded grammar.",
+                        "Coordinated objects are committed at a following boundary token; question/directive clauses are excluded from assertions.",
                         "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }

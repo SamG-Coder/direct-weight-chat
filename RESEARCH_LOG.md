@@ -515,3 +515,23 @@ The next candidate aligns both attention coordinates to the preceding token.
 The completed v13a CPU boundary audit is 40/76 versus CUDA 41/76. The one-score
 difference is in a long-context isolation case; several long outputs differ
 between devices. Both expose unresolved numerical/context accuracy limits.
+
+## 2026-11-04: v13c delayed-clause alignment and remaining precision error
+
+Aligning both subject-frame attention coordinates restores 382/390 assertions
+and improves the boundary suite to 61/76. The old suites are rerun; no additional
+failures appear there. All integrity checks and interventions pass, including a
+new intervention that forces following-token validity and recreates a spurious
+subject-as-object fact. Frozen source reproduces raw/config hashes exactly.
+
+Four boundary positive controls still regress against v13a when the new subject
+has an article. An external token-by-token activation trace shows that the fuel
+object binds to the earlier subject even though the later subject's full fact
+exists. The recycled clause coordinate is stored at position/8192 scale after
+clearing a +/-1 code; float32 cancellation changes its low bits, and the clause
+penalty amplifies that error above the recency bonus. This is a representation
+precision issue, not a missing article grammar rule. The candidate and diagnostic
+trace are preserved before changing the coordinate scale.
+
+v13c raw SHA-256:
+`af534471a28ef79649013f09d7c645561b01aef23288de7e07d39e687c897292`.
