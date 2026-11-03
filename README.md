@@ -64,6 +64,10 @@ unsupported. Some paraphrases, including `implies` and `whenever`, can be
 misread as unconditional assertions. Their false positives remain scored failures.
 v17a uses **995,905 nonzero parameters (0.398362%)** of the 250 million slots.
 Earlier releases preserve every failed checkpoint and its original results.
+The next capability baseline, [alternative proof search](results/proof-search-v17a-cpu.json),
+scores **29/104 on CPU and CUDA**. It tests whether a valid proof can be found
+among multiple rules and mixed branches. No improvement has been implemented
+for that suite yet; all 75 failures remain recorded.
 
 ## Run offline
 

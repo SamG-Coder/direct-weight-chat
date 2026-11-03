@@ -24,6 +24,10 @@
   2165866013 scores 160/162 on each device. The known generator supplies new
   combinations/offsets and repeated fixed structures. No frozen weights were
   retuned after these results; this is not independent language evaluation.
+- A new 104-case alternative-proof suite scores 29/104 on both devices.
+  It includes two to eight alternatives, mixed branches, declaration order,
+  corrections and dialogue. This is a baseline for the next capability,
+  authored after v17a froze; it is not a held-out language score.
 
 The repair improves measured numerical reliability. It does not add proof
 search, deeper reasoning, variable binding, compound rule premises, open

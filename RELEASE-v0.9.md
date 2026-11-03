@@ -51,6 +51,11 @@ Creative writing, code generation, broader mathematics and unrestricted English
 remain unsupported. Some paraphrases still produce false assertions. Passing
 these numerical tests does not prove reliability on every possible prompt.
 
+The next capability baseline scores **29/104 on CPU and CUDA** across
+alternative rules, mixed branches, ordering and corrections. These tests were
+authored after v17a froze, before any proof-search implementation. They are
+development evidence for the next experiment; all 75 failures remain recorded.
+
 Download `autoregressive-v17a.zip`, verify `SHA256SUMS.txt`, and extract into
 the repository root. The compressed size reflects sparse/repetitive weights;
 the raw parameter file is exactly 1 GB. With PyTorch already installed:

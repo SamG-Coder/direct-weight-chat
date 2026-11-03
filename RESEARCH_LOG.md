@@ -996,3 +996,29 @@ Fresh rule-position results are 160/162 on CPU and CUDA. A fourth rule link
 and an older successful alternative still fail. These are new combinations
 and offsets from the known generator, not independent language evidence.
 The frozen source and weights were not retuned after these results.
+
+## 2026-11-04: alternative-proof search baseline
+
+Added a separate 104-case development suite with seed 180001 before any
+implementation of the next capability. It tests two to eight alternative
+premises, every possible winning position, mixed old/new branches across two
+or three links, shuffled declarations, facts after rules, missing/opposite
+premises, direct-fact precedence, corrections and dialogue. Four/five-link
+and rule-derived class-inheritance cases retain their semantic expectations.
+Expected closure is computed only by the external evaluator generator.
+
+Frozen v17a scores 29/104 on both CPU and CUDA. Exact outputs and timings are
+in `results/proof-search-v17a-cpu.json` and `results/proof-search-v17a-cuda.json`.
+This baseline was designed after v17a froze; it is development evidence for
+the next capability, not a claimed held-out v17a generalization score.
+No compiler, runtime or frozen parameters were changed for these tests.
+
+The next hypothesis is to evaluate rule premises in parallel and propagate
+supported conclusions through shared neural memory across bounded rounds.
+This would avoid selecting one latest rule before checking whether it works.
+Facts after rules require attention across the supplied context, so a generic
+head-specific prefix-memory architecture is one candidate to investigate.
+It is not implemented. Any runtime-mask change must remain generic tensor
+execution, retain old checkpoint compatibility, and be tested for cache parity,
+role isolation, corrections, direct-fact precedence and conflicting proofs.
+The 104-case baseline and all older suites must be rerun on any new candidate.
