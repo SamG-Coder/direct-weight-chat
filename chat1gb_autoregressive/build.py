@@ -316,7 +316,9 @@ def main():
             c.clear(layer, range(S.CURRENT, S.CURRENT + 14))
             c.copy(layer, S.RETURN, S.RETURN + 14, S.CURRENT, 14)
         else:
-            keys = [{S.CODE + bit: 1} for bit in range(14)] + [{S.BOS_FLAG: 13}, {S.POS: 128}]
+            # A sentinel needs a zero identity code, or its own token bits
+            # add to the threshold and can defeat an exact memory match.
+            keys = [{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids["<bos>"])[bit]} for bit in range(14)] + [{S.BOS_FLAG: 13}, {S.POS: 128}]
             for chunk in range(2):
                 begin, end = chunk * 64, min(112, (chunk + 1) * 64)
                 c.attention(layer, chunk, queries, keys,
@@ -329,6 +331,10 @@ def main():
         c.clear(layer, range(S.RETURN, S.RETURN + 112))
 
     # Block 10: current/previous word detectors and valid arithmetic bounds.
+    # Reinitialize coordinates after scratch reuse so tiny roundoff cannot
+    # break the all-zero output code's deterministic EOS tie.
+    c.clear(10, range(S.OUTPUT, S.OUTPUT + 14))
+    c.clear(10, range(S.MATH_BITS, S.MATH_BITS + 14))
     c.clear(10, range(S.STATES, S.STATES + 37))
     for i, word in enumerate(S.STATE_WORDS):
         c.word(10, word, {S.STATES + i: 1})

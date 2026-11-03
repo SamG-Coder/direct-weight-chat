@@ -49,3 +49,14 @@ lookup sentinel's token identity incorrectly contributed to its score, defeating
 exact matches; tiny residuals in reused output coordinates caused two trait
 answers to repeat instead of terminating. Depth and language stress failures
 remain. This candidate is frozen before the next correction.
+
+## 2026-11-03: v6c bounded graph traversal
+
+Neutralized the BOS token identity in static lookup keys and reinitialized
+recycled output coordinates before decoding. Graph development: 74/79,
+including 48/48 one-to-three-link chains, all precedence/cycle/missing-link
+cases and all authored leaves. Legacy: 185/185, with no regressions.
+Five retained failures are longer-than-three-link chains, an unsupported
+paraphrase and negation. This candidate is frozen before selecting a new
+random evaluation seed. It is a bounded graph algorithm, not unrestricted
+reasoning or general conversation.
