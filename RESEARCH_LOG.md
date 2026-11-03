@@ -702,3 +702,32 @@ The next useful experiment should trace and stress numerical subject/frame
 binding across positions and devices. The general conversation objective remains
 active and unachieved; addressing arithmetic or language expansion alone would
 not resolve this demonstrated context reliability gap.
+
+## 2026-11-04: subject/frame binding baseline and activation evidence
+
+The previous goal turn made concrete progress: it froze and published v14a/v14b,
+verified downloads, and preserved two CPU failures. The new 136-case development
+suite tests changed subjects across all seven predicates, polarity, wrong-subject
+isolation, single-subject controls, random positions, corrections and dialogue.
+Before implementation, frozen v14b scores 136/136 CUDA and 133/136 CPU. CPU loses
+the second object's new subject in two cases, and assigns that object to the
+wrong subject in a follow-up (a false Yes, not just conservative abstention).
+
+A reusable external trace captures residual fields and actual attention outputs
+without modifying weights or inference. In original fresh case `context-086`,
+the CPU clause coordinate at the older `wings` fact is 36.7265625; the newer
+`water` fact is 36.7265586853. The difference is about 0.0000038. Multiplication
+by the clause penalty 16,777,216 creates a 64-point bias that outweighs the
+40-point recency advantage of the five-token-newer fact. At punctuation, block-2
+head 1 consequently retrieves subject token 370 instead of 371, and commits
+`fuel` under the old subject. Float64 score recomputation from the captured Q/K
+also favors the wrong fact: the error already exists in the coordinate/key,
+not only in the attention dot-product reduction. CUDA retains the right subject.
+
+The next candidate will separate latest-event selection from clause validation:
+attention retrieves the newest valid event with modest scores; neural gates
+reject a retrieved event from an older clause using a low-scale coordinate
+difference. This removes absolute clause precision from competition between
+valid subjects. The source tests, baselines and traces are committed before
+changing the compiler. v14b post-freeze cases become regression evidence for the
+new candidate; they are not new held-out tests for that candidate.
