@@ -47,6 +47,8 @@ The generators and language structures were known before freezing. These are fre
 - v9a signed operands: [CUDA](signed-v9a-postfreeze-cuda.json) and [CPU](signed-v9a-postfreeze-cpu.json), 153/159 with seed 3220192550 selected after commit `74a4b81`. There are 120 fresh random combinations and 39 fixed cases.
 - [v9a integrity and ablations](integrity-v9a-cuda.json): polarity, unary sign, signed accumulator and operand-count interventions change the associated behavior. [Reproduction](reproduction-v9a.json) matches raw weight/config hashes.
 
+- [v0.2 publication](publication-v0.2.json): three uploaded archive hashes/sizes verified, then a fresh clone and download passed [integrity/ablations](release-validation-v0.2/integrity.json) and [six CPU/CUDA smoke cases](release-validation-v0.2/smoke.json).
+
 ## Provenance and timing
 
 [experiments.json](experiments.json) maps each checkpoint to the commit containing its exact compiler bytes, model hash and measured counts. Each raw report also records the Git HEAD and dirty flag at execution time. A dirty execution tree is not a claim that HEAD alone contains the candidate; use the indexed frozen source commit and hashes. Original v1–v5 builds predate this repository, so their source commit is the import commit.

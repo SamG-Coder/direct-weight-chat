@@ -210,3 +210,13 @@ were streamed through CRC and decompressed SHA-256 verification. Earlier release
 assets remain preserved. The general conversational research objective remains
 incomplete. Next priority: object-specific truth queries and multi-value relation
 retrieval, then broader compositional language and mathematical algorithms.
+
+## 2026-11-03: v0.2 publication verified
+
+Published v8a, v8b and v9a as `v0.2.0-experiment`. All four assets (three model
+archives plus checksums) are uploaded; GitHub archive sizes/digests match local
+records. A fresh clone of release commit `16a9ddc` and downloaded v9a archive
+passed source/raw hashes, exact size, finite values, causal/cache checks, all
+five circuit interventions and six CPU/CUDA smoke cases. The working release
+uses the current default v9a checkpoint. The research goal is still active;
+useful general-purpose conversation has not been achieved.
