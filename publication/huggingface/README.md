@@ -16,6 +16,9 @@ model_name: direct-weight-chat v17a compact
 
 **Analytically constructed weights — no training**
 
+**[Try the live chat demo on Hugging Face](https://huggingface.co/spaces/SamGCoder/direct-weight-chat)**
+— no installation or API key. The same compact weights run in your browser.
+
 [Architecture and construction](https://github.com/SamG-Coder/direct-weight-chat/blob/main/ARCHITECTURE.md)
 · [Benchmark results for every version](https://github.com/SamG-Coder/direct-weight-chat/blob/main/results/README.md)
 · [Matching v17a source code](https://github.com/SamG-Coder/direct-weight-chat/tree/83a2f03afa98075286e7ec82b3e5c53f29cd4ceb/versions/autoregressive_v17a)
@@ -42,7 +45,7 @@ The parameters were written analytically through reusable neural-circuit
 compilation. There was no gradient training, pretrained tensor transfer,
 distillation or downloaded training dataset.
 
-The compact loader retains **12,952,916 bytes of weight tensors** after
+The Python compact loader retains **12,952,916 bytes of weight tensors** after
 inference and reconstructs one requested dense tensor at a time. Total RAM/VRAM is higher because
 Python/PyTorch, temporary tensors, activations and conversation state also need
 memory. The logical architecture and compute dimensions remain unchanged.
@@ -67,7 +70,20 @@ The `runtime.zip` in this model repository includes the matching Python runtime,
 compiler source, compact loader, local chat UI, verification code and license. It is provided here so that
 the model can be run without separately cloning GitHub. This is a **custom
 PyTorch runtime**, not a Transformers `AutoModel` checkpoint or a GGUF model.
-There is no hosted inference service attached to this upload.
+The [hosted chat demo](https://huggingface.co/spaces/SamGCoder/direct-weight-chat)
+is a free static Space: inference runs on the visitor's CPU in a browser Web
+Worker. Each tab has its own conversation; messages are not sent to a server.
+Its 1,024-token conversation cap keeps browser work bounded; the Python runtime
+retains the full 5,048-token logical context. It is not a server inference API.
+
+The browser backend reads the exact same compact weight archive and performs
+generic sparse transformer operations. Its double-precision accumulations and
+float32 activations are an independent numerical implementation. All **5,603
+retained cases within the demo limit** match the original text, token IDs and
+EOS decisions; 768 longer/dependent cases are explicitly excluded. Known wrong
+answers are preserved. See the
+[browser comparison report](https://github.com/SamG-Coder/direct-weight-chat/blob/main/publication/browser-suite-parity.json)
+and [browser source](https://github.com/SamG-Coder/direct-weight-chat/tree/main/hosting).
 
 ## What it can do in the tested grammar
 

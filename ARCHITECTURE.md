@@ -6,6 +6,16 @@ The [compact loader](chat1gb_autoregressive/compact_engine.py) reconstructs one
 requested tensor at a time and inherits the original forward/generation code.
 See [format, measured memory and output parity](publication/COMPACT.md).
 
+The [Hugging Face chat Space](https://huggingface.co/spaces/SamGCoder/direct-weight-chat)
+also runs these unchanged weights through an independent
+[JavaScript browser runtime](hosting/runtime.mjs). It evaluates the same layer
+operations, omits exact-zero matrix terms, accumulates dot products in double
+precision and stores float32 activations. The browser demo uses a 1,024-token
+context cap. Its [5,603-case comparison](publication/browser-suite-parity.json)
+matches all eligible reference text, token IDs and EOS decisions, including known
+failures; this does not establish bitwise activation equivalence to PyTorch.
+The Python loader and full logical architecture remain unchanged.
+
 All autoregressive versions use ordinary decoder transformer tensors: token and
 position embeddings, 18 causal self-attention blocks with 16 heads, residual
 connections, LayerNorm, ReLU feed-forward layers and a final vocabulary projection.

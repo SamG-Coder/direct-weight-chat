@@ -21,6 +21,12 @@ def main():
     a = p.parse_args()
     root = Path(__file__).resolve().parents[1]
     expected = json.loads((root / 'publication/compact-package.json').read_text(encoding='utf-8'))
+    # Release runtime/source hashes remain pinned; the current model card can
+    # gain deployment links independently without changing the frozen model.
+    card = root / 'publication/huggingface/README.md'
+    for entry in expected['files']:
+        if entry['name'] == 'README.md':
+            entry.update(bytes=card.stat().st_size, sha256=sha(card))
     repo = 'SamGCoder/direct-weight-chat-v17a'
     info = HfApi().model_info(repo, files_metadata=True)
     assert not info.private

@@ -1,7 +1,8 @@
 # Finished experiment: presentation artifacts
 
 The [X post](twitter-post.txt) is a **draft only**. No post was published to X.
-The intended attachment is `direct-weight-chat-v17a-compact.mp4`, a 105-second,
+The current post focuses on the live Hugging Face demo, with no video attachment.
+An optional previously prepared artifact is `direct-weight-chat-v17a-compact.mp4`, a 105-second,
 1920 x 1080, 30 fps H.264 video with no audio. It is rendered by
 `python -m publication.render_video --output build/showcase-compact` using Pillow
 and FFmpeg. The output is local; videos are not tracked in source control.
@@ -22,6 +23,12 @@ The [local UI](demo_ui/index.html) offers separately labelled captured replay
 and actual offline inference via `serve_demo.py` and `model_worker.py`. It
 does not synthesize, repair, choose or fall back to canned model responses.
 The transport layer forwards text to the frozen transformer runtime.
+
+The [public Hugging Face chat](https://huggingface.co/spaces/SamGCoder/direct-weight-chat)
+is a separate static app in [hosting/](../hosting/README.md). It runs the exact
+compact weights in each visitor's browser and keeps conversation state per tab.
+Its live responses are not a replay. The 1,024-token demo limit and failure to
+achieve useful general chat are visible or documented alongside the app.
 
 ![Live compact model using a supplied fact and a later correction](compact-ui.jpg)
 

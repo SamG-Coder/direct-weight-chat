@@ -109,7 +109,18 @@ python -m publication.serve_demo --python /path/to/python --model compact --port
 ```
 
 Open `http://127.0.0.1:8768/`. Context is shared by tabs connected to that one
-local server; Reset starts a fresh conversation. There is no hosted chat service.
+local server; Reset starts a fresh conversation.
+
+For chat without installing Python, use the free
+[Hugging Face Space](https://huggingface.co/spaces/SamGCoder/direct-weight-chat).
+Hugging Face serves static assets; a JavaScript Web Worker runs the same
+checksum-verified compact weights on the visitor's CPU. Each tab has its own
+conversation, capped at 1,024 tokens for responsiveness. No messages are sent to
+an inference server. This is a separate numerical backend; all 5,603 eligible
+reference cases have identical text, token IDs and EOS decisions, including
+known failures. See [browser parity](browser-suite-parity.json) and
+[hosting source](../hosting/README.md). The Python memory measurements above
+do not describe browser working memory.
 
 ## Reproduce packing and comparison offline
 

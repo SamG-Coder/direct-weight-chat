@@ -7,6 +7,11 @@
 
 **Analytically constructed weights — no training.**
 
+**[Try the live chat on Hugging Face](https://huggingface.co/spaces/SamGCoder/direct-weight-chat).**
+The free static Space runs the same compact weights on your browser's CPU,
+with a separate conversation per tab and a 1,024-token demo limit. No installation
+or API key is required. Messages stay in the tab; refresh clears the conversation.
+
 The final model is **v17a compact**, with an exact packed weight size of
 **1,528,592 bytes**. Its weights were written analytically, without training,
 pretrained parameters, downloaded datasets or network access during construction
@@ -23,7 +28,7 @@ prototype is retained only as a rejected historical baseline.
 
 The artifact stores **995,905 nonzero float32 coefficients** and their positions,
 preserving every weight bit, including six negative zeros. Its persistent
-runtime weight tensors occupy **12,952,916 bytes** after inference. Total
+Python runtime weight tensors occupy **12,952,916 bytes** after inference. Total
 application memory is higher because temporary tensors, activations and the
 Python/PyTorch runtime need additional memory. The loader materializes one
 requested tensor at a time.
@@ -35,6 +40,15 @@ requested tensor at a time.
 Both word/fact handling and arithmetic retain the same frozen circuits. This
 storage change adds no language or reasoning ability. File size is not a
 capability claim.
+
+The browser backend is an independent JavaScript implementation of the same
+transformer operations with sparse dot products. All **5,603 retained cases
+within its context limit** match the reference text, token IDs and end-of-sequence
+behavior, including existing failures. The other 768 cases exceed the browser
+limit or depend on an excluded turn. This is measured response parity, not
+bitwise activation equivalence or evidence of new capability. See
+[browser source and deployment details](hosting/README.md) and the
+[complete comparison](publication/browser-suite-parity.json).
 
 ## Final outcome
 
