@@ -175,7 +175,7 @@ def main():
     query_words = {"can": (1,), "need": (2,), "needs": (2,), "has": (3,), "have": (3,),
                    "produces": (4,), "produce": (4,), "describe": (5,), "color": (5,), "colour": (5,),
                    "where": (6,), "hello": (7,), "hi": (7,), "hey": (7,), "+": (8,), "plus": (8,),
-                   "add": (8,), "sum": (8,), "calculate": (8,), "explain": (0, 9), "about": (0, 9), "more": (1,)}
+                   "add": (8,), "sum": (8,), "calculate": (8,), "-": (8,), "explain": (0, 9), "about": (0, 9), "more": (1,)}
     adjectives = {fact["trait"] for fact in FACTS.values() if "trait" in fact}
     object_words = set(FACTS) | {value for facts in FACTS.values() for value in facts.values()}
     for tid, label in enumerate(labels):
@@ -198,6 +198,8 @@ def main():
                 put_pair(row, S.QUERY_FLAGS + q, 1)
         if label in relation_words:
             put_pair(row, S.REL_FLAGS + relation_words[label], 1)
+        if label == "-":
+            put_pair(row, S.TOKEN_SUBTRACT, 1)
         if label in ("a", "an"):
             put_pair(row, S.ARTICLE, 1)
         if label in ("in", "on"):
@@ -250,7 +252,8 @@ def main():
     destinations = list(range(S.SUBJECT, S.SUBJECT + 14)) + [S.SUBJECT_PRESENT] + list(range(S.CONTEXT_FACTS, S.CONTEXT_FACTS + 112))
     for chunk in range(2):
         c.latest(1, chunk, S.LIVE_ENTITY, sources[chunk * 64:(chunk + 1) * 64], destinations[chunk * 64:(chunk + 1) * 64])
-    c.latest(1, 2, S.LIVE_QUERY, list(range(S.QUERY_FLAGS, S.QUERY_FLAGS + 10)), list(range(S.REQUEST, S.REQUEST + 10)))
+    c.latest(1, 2, S.LIVE_QUERY, list(range(S.QUERY_FLAGS, S.QUERY_FLAGS + 10)) + [S.TOKEN_SUBTRACT],
+             list(range(S.REQUEST, S.REQUEST + 10)) + [S.REQUEST_SUBTRACT])
     # Prefer the newest user turn, then its earliest number. The role boundary
     # is itself retrieved by attention, not parsed into arithmetic by the host.
     c.attention(1, 3, [{S.ONE: 8}], [{S.LIVE_NUMBER: 65536, S.USER_START: 16384 * 128, S.POS: -8 * 128}],
@@ -288,6 +291,7 @@ def main():
     previous_words = ("<assistant>", "a", "an", "can", "needs", "has", "produces", "in", "is")
     for i, word in enumerate(previous_words):
         c.word(2, word, {S.GATES + 10 + i: 1}, start=p1)
+    c.word(2, "-", {S.GATES + 19: 1}, start=p1)
 
     # Blocks 3,5,7,9: parallel associative lookup of seven predicates for the
     # current graph node, then follow its class edge. Four lookups support an
@@ -340,6 +344,8 @@ def main():
         c.word(10, word, {S.STATES + i: 1})
     for i in range(len(previous_words)):
         c.linear(10, {S.GATES + 10 + i: 1}, {S.STATES + 17 + i: 1})
+    c.word(10, "-", {S.STATES + 29: 1})
+    c.linear(10, {S.GATES + 19: 1}, {S.STATES + 30: 1})
     for src, dst in ((S.NUM_FIRST, S.STATES + 26), (S.NUM_LAST, S.STATES + 27)):
         expression = {S.ONE: 1000, src: -1000}
         c.unit(10, expression, {dst: 1})
@@ -357,7 +363,16 @@ def main():
     c.emit(11, "hello", [state["<assistant>"], S.REQUEST + S.Q_HELLO])
     c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_ADD, S.STATES + 26, S.STATES + 27,
                 S.STATES + 28, S.NUM_FIRST_PRESENT, S.NUM_LAST_PRESENT], targets={S.GATES + 2: 1})
-    c.linear(11, {S.NUM_FIRST: 1000, S.NUM_LAST: 1000}, {S.MATH_SUM: 1})
+    # General bounded arithmetic: addition or |a-b|, plus a signed-result bit.
+    # No table of operand pairs is constructed. Numeric values arrive through
+    # attention and all operations below become matrix/ReLU tensor operations.
+    c.unit(11, {S.NUM_FIRST: 1000, S.NUM_LAST: 1000, S.REQUEST_SUBTRACT: -2000}, {S.MATH_SUM: 1})
+    for sign in (1, -1):
+        c.unit(11, {S.NUM_FIRST: sign * 1000, S.NUM_LAST: -sign * 1000, S.REQUEST_SUBTRACT: 2000},
+               {S.MATH_SUM: 1}, threshold=2000)
+    negative = {S.NUM_LAST: 1000, S.NUM_FIRST: -1000, S.REQUEST_SUBTRACT: 2000}
+    c.unit(11, negative, {S.NEGATIVE_RESULT: 1}, threshold=2000)
+    c.unit(11, negative, {S.NEGATIVE_RESULT: -1}, threshold=2001)
     for relation, word in enumerate(("is", "can", "needs", "has", "produces", "is", "exists")):
         c.emit(11, word, [S.STATES + 17, S.ENTITY, S.REQUEST + relation])
     for current, following in (("i", "do"), ("do", "not"), ("not", "know"), ("know", "."),
@@ -374,9 +389,15 @@ def main():
         c.emit(11, ".", [S.STATES + previous])
     c.emit(11, ".", [S.STATES + 25, S.REQUEST + S.Q_TRAIT])
     c.emit(11, ".", [S.NUMBER, S.STATES + 17])
+    c.emit(11, ".", [S.NUMBER, S.STATES + 30])
     c.emit(11, "it", [state["."], S.REQUEST + S.Q_MULTI, S.slot(S.CONTEXT_FACTS, 1) + 14], [S.PHASE_STATE])
 
     # Block 12: copy subject/object token codes into the output representation.
+    # A negative result emits the minus token, then its magnitude on the next
+    # forward pass. The host only formats the spacing of these generated tokens.
+    c.emit(12, "-", [S.GATES + 2, S.NEGATIVE_RESULT])
+    c.gate(12, [S.GATES + 2], [S.NEGATIVE_RESULT], {S.GATES + 21: 1})
+    c.gate(12, [S.STATES + 29, S.REQUEST + S.Q_ADD], targets={S.GATES + 21: 1})
     c.emit(12, "i", [state["<assistant>"]], [S.GATES, S.GATES + 1, S.GATES + 2])
     c.copy(12, S.SUBJECT, S.GATES, S.OUTPUT, 14)
     for relation in range(7):
@@ -393,7 +414,7 @@ def main():
         c.unit(14, {S.MATH_SUM: 1}, delta, threshold=boundary - 1)
         c.unit(14, {S.MATH_SUM: 1}, {k: -v for k, v in delta.items()}, threshold=boundary)
     c.clip(15, range(S.MATH_BITS, S.MATH_BITS + 14))
-    c.copy(16, S.MATH_BITS, S.GATES + 2, S.OUTPUT, 14)
+    c.copy(16, S.MATH_BITS, S.GATES + 21, S.OUTPUT, 14)
     c.clip(17, range(S.OUTPUT, S.OUTPUT + 14))
 
     storage.flush()

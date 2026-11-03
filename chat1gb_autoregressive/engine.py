@@ -58,6 +58,7 @@ class Tokenizer:
     def decode(self, tokens):
         text = " ".join(self.token_text(token) for token in tokens if token != self.config["special"]["eos"])
         text = re.sub(r"\s+([.,?!:;])", r"\1", text)
+        text = re.sub(r"(?<!\w)-\s+(?=\d)", "-", text)
         text = re.sub(r"\bi\b", "I", text)
         text = re.sub(r"(^|[.!?]\s+)([a-z])", lambda m: m.group(1) + m.group(2).upper(), text)
         return text

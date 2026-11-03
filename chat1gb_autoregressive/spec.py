@@ -29,6 +29,7 @@ FACTS = 64  # Seven slots of [14 object-code bits, present, starts-with-vowel].
 USER_STATE, PHASE_STATE = 52, 53
 PREV = (180, 204, 228)  # code[14], entity, relation[7], article, preposition
 LIVE_ENTITY, LIVE_QUERY = 54, 55
+TOKEN_SUBTRACT, REQUEST_SUBTRACT, NEGATIVE_RESULT = 56, 57, 58
 # Lifetimes matter: the three lookback buffers are dead after block 2 and become
 # a seven-relation scratch buffer. The subject and walk cursor are independent.
 RETURN = 176

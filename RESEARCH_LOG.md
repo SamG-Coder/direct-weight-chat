@@ -76,3 +76,18 @@ cases, addition regression, mixed turns and six unsupported-operation stresses.
 v6c passed 22/120 (only addition cases). The next circuit will compute a signed
 difference with ReLU arithmetic, reusing the existing integer decoder. The model
 will still accept only two nonnegative operands of at most 999.
+
+## 2026-11-03: v7a signed subtraction
+
+The compiler now routes the current turn's operator through attention, calculates
+absolute difference as ReLU(a-b)+ReLU(b-a), and derives a negative-result bit
+with a bounded ramp. A negative result emits the minus token, followed by the
+magnitude token. Python only removes the space between these generated tokens.
+No operand-pair lookup table or new training procedure was added.
+
+Development: 114/120 arithmetic (88/88 subtraction, 20/20 addition, 6/6 mixed
+turns); legacy 185/185; graph 74/79. Six unsupported arithmetic stresses remain
+failures, including negative operands and a chained expression that produce
+incorrect answers. These failures are retained. The existing integer-to-token
+piecewise decoder remains a limitation; this is not arbitrary-precision math.
+Candidate v7a is frozen before generating new arithmetic combinations.
