@@ -98,12 +98,12 @@ class Compiler:
             self.unit(layer, expr({source + i: 1}, {gate: 4}, {suppress: -4}), {destination + i: scale}, threshold=4)
             self.unit(layer, expr({source + i: -1}, {gate: 4}, {suppress: -4}), {destination + i: -scale}, threshold=4)
 
-    def copy_when(self, layer, source, destination, positive=(), negative=(), count=1):
+    def copy_when(self, layer, source, destination, positive=(), negative=(), count=1, scale=1):
         """Copy a bounded code under a conjunction, using two ReLUs per bit."""
         conditions = expr(*({f: 4} for f in positive), *({f: -4} for f in negative))
         for i in range(count):
-            self.unit(layer, expr({source + i: 1}, conditions), {destination + i: 1}, threshold=4 * len(positive))
-            self.unit(layer, expr({source + i: -1}, conditions), {destination + i: -1}, threshold=4 * len(positive))
+            self.unit(layer, expr({source + i: 1}, conditions), {destination + i: scale}, threshold=4 * len(positive))
+            self.unit(layer, expr({source + i: -1}, conditions), {destination + i: -scale}, threshold=4 * len(positive))
 
     def emit(self, layer, word, positive=(), negative=()):
         self.gate(layer, positive, negative, {S.OUTPUT + i: bit for i, bit in enumerate(S.code(self.ids[word]))})
@@ -277,7 +277,7 @@ def main():
     # Bind an inverted-question subject only after a clause boundary. Local
     # identity conjunctions distinguish "Can X ..." from "X can Y" without
     # host parsing. The same code works for any entity/pointer-token identity.
-    for verb, marker in (("can", S.Q_PREFIX_CAN), ("does", S.Q_PREFIX_DOES)):
+    for verb, marker in (("can", S.Q_PREFIX_CAN), ("does", S.Q_PREFIX_DOES), ("is", S.Q_PREFIX_IS)):
         for article in (False, True):
             verb_at, boundary_at = (p2, p3) if article else (p1, p2)
             for boundary in ("<user>", ".", "?", "!"):
@@ -301,21 +301,39 @@ def main():
     c.attention(1, 3, [{S.ONE: 8}], [{S.LIVE_NUMBER: 65536, S.USER_START: 16384 * 128, S.POS: -8 * 128}],
                 [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_FIRST, S.NUM_FIRST_POS, S.NUM_FIRST_PRESENT])
     c.latest(1, 4, S.LIVE_NUMBER, [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_LAST, S.NUM_LAST_POS, S.NUM_LAST_PRESENT])
-    for shift, destinations in ((1, S.Q_PREV1), (2, S.Q_PREV2)):
+    for shift, destinations in ((1, S.Q_PREV1), (2, S.Q_PREV2), (3, S.Q_PREV3)):
         sharpness = 16
         queries = [{S.POS: 8 * 2 * sharpness * 128 ** 2, S.ONE: -8 * 2 * sharpness * shift * 128},
                    {S.ONE: -8 * sharpness * 128 ** 2}]
         c.attention(1, 4 + shift, queries, [{S.POS: 1}, {S.POS_SQ: 1}],
-                    [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES], list(destinations))
+                    [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS], list(destinations))
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
-    c.clear(1, list(range(25, 30)) + list(range(30, 44)) + [S.Q_EVENT_CANDIDATE, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES])
-    query_cases = [(1, p1, [S.Q_PREV1[0]])]
-    query_cases += [(r, p2, [S.Q_PREV2[1], p1 + 15 + r]) for r in (2, 3, 4)]
-    for relation, subject, conditions in query_cases:
+    c.clear(1, list(range(25, 51)) + [52, 54, 55, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS])
+    # The same semantic predicate field serves affirmative and negative
+    # questions. Negation is an independent bit, not a separate answer rule.
+    query_cases = [(1, p1, [S.Q_PREV1[0]], [], False),
+                   (1, p2, [S.Q_PREV2[0], p1 + 24], [p1 + 25], True)]
+    for relation in (2, 3, 4):
+        query_cases += [(relation, p2, [S.Q_PREV2[1], p1 + 15 + relation], [], False),
+                        (relation, p3, [S.Q_PREV3[1], p1 + 15 + relation, p2 + 24], [p2 + 25], True)]
+    for relation in (0, 5):
+        adjective = [S.ADJECTIVE] if relation == 5 else []
+        not_adjective = [S.ADJECTIVE] if relation == 0 else []
+        query_cases += [(relation, p1, [S.Q_PREV1[2]] + adjective, not_adjective, False),
+                        (relation, p2, [S.Q_PREV2[2], p1 + 24] + adjective, not_adjective + [p1 + 25], True)]
+    query_cases += [(0, p2, [S.Q_PREV2[2], p1 + 22], [], False),
+                    (6, p2, [S.Q_PREV2[2], p1 + 23], [], False),
+                    (0, p3, [S.Q_PREV3[2], p1 + 22, p2 + 24], [p2 + 25], True),
+                    (6, p3, [S.Q_PREV3[2], p1 + 23, p2 + 24], [p2 + 25], True)]
+    for relation, subject, conditions, excluded, negated in query_cases:
         conditions += [S.OBJECT_ALLOWED, S.USER_STATE]
-        c.gate(1, conditions, targets={S.Q_EVENT_VALID: 1, S.Q_EVENT_CANDIDATE: 1, S.Q_EVENT_REL + relation - 1: 1})
-        c.copy_when(1, subject, S.CURRENT, positive=conditions, count=14)
+        targets = {S.Q_EVENT_VALID: 1, S.Q_EVENT_CANDIDATE: 1, S.REQUEST + relation: 1}
+        if negated:
+            targets[S.Q_EVENT_NEGATIVE] = 1
+        c.gate(1, conditions, excluded, targets)
+        c.copy_when(1, subject, S.CURRENT, positive=conditions, negative=excluded, count=14)
+        c.copy_when(1, S.REQUEST, S.REQUEST, positive=conditions, negative=excluded, count=10, scale=-1)
     for reset in ("<bos>", "<user>", "what", "where", "describe", "explain"):
         c.word(1, reset, {S.Q_EVENT_CANDIDATE: 1})
     # Mark user numbers after the turn's first number. The clipped ramp is
@@ -361,8 +379,8 @@ def main():
         if polarity_source is not None:
             c.gate(1, pos + [S.OBJECT_ALLOWED, polarity_source], neg, {S.GATES + 20: 1})
     c.latest(2, 0, S.Q_EVENT_CANDIDATE,
-             list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.Q_EVENT_REL, S.Q_EVENT_REL + 4)),
-             list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP))
+             list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_EVENT_NEGATIVE],
+             list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP) + [S.Q_QUERY_NEGATIVE])
     for i, subject in enumerate((p2, p3, p4)):
         c.copy(2, subject, S.GATES + 7 + i, S.FACT_SUBJECT, 14)
     c.copy(2, S.CODE, S.GATES + 21, S.FACT_OBJECT, 14)
@@ -383,7 +401,7 @@ def main():
         c.copy(2, source, S.Q_MODE, S.CURRENT + bit)
     c.copy(2, S.CONTEXT_FACTS, S.Q_MODE, S.CONTEXT_FACTS, 112, scale=-1)
     c.copy(2, S.REQUEST, S.Q_MODE, S.REQUEST, 10, scale=-1)
-    for relation, source in enumerate(S.Q_REL_TEMP, 1):
+    for relation, source in enumerate(S.Q_REL_TEMP):
         c.copy(2, source, S.Q_MODE, S.REQUEST + relation)
     c.clear(2, range(S.Q_OBJECT, S.Q_OBJECT + 14))
     c.copy(2, S.Q_OBJECT, S.Q_MODE, S.Q_OBJECT, 14)
@@ -525,8 +543,11 @@ def main():
     for relation in range(7):
         c.gate(11, [state["<assistant>"], S.REQUEST + relation, S.slot(S.CONTEXT_FACTS, relation) + 14], [S.Q_MODE], targets={S.GATES: 1})
     c.gate(11, [state["<assistant>"], S.Q_MODE, S.Q_FOUND], targets={S.GATES + 25: 1})
-    c.emit(11, "yes", [state["<assistant>"], S.Q_MODE, S.Q_FOUND], [S.Q_NEGATIVE])
-    c.emit(11, "no", [state["<assistant>"], S.Q_MODE, S.Q_FOUND, S.Q_NEGATIVE])
+    known_query = [state["<assistant>"], S.Q_MODE, S.Q_FOUND]
+    c.emit(11, "yes", known_query, [S.Q_NEGATIVE, S.Q_QUERY_NEGATIVE])
+    c.emit(11, "yes", known_query + [S.Q_NEGATIVE, S.Q_QUERY_NEGATIVE])
+    c.emit(11, "no", known_query + [S.Q_NEGATIVE], [S.Q_QUERY_NEGATIVE])
+    c.emit(11, "no", known_query + [S.Q_QUERY_NEGATIVE], [S.Q_NEGATIVE])
     for answer in ("yes", "no"):
         c.word(11, answer, {S.OUTPUT + i: bit for i, bit in enumerate(S.code(ids["."]))}, positive=[S.Q_MODE])
     c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_HELLO], targets={S.GATES + 1: 1})
@@ -629,7 +650,7 @@ def main():
                         "Small authored lexicon and fact vocabulary; general language understanding is unproven.",
                         "New input words are represented by fixed pointer-token slots.",
                         "Arithmetic circuit is intended for two signed operands with magnitudes no greater than 999.",
-                        "Object-specific truth questions support can/need/have/produce under a limited inversion grammar.",
+                        "Object-specific truth questions and logical negation support seven predicates under a limited inversion grammar.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }
     (MODEL / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

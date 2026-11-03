@@ -52,15 +52,16 @@ STATES = 440  # Reuses completed fact-event registers after retrieval layers.
 # Inverted questions reuse lexical/role fields after their last readers.
 # Block 0 writes two subject-prefix markers, block 1 compiles a query event,
 # and block 2 binds the newest event (or a request-reset sentinel).
-Q_PREFIX_CAN, Q_PREFIX_DOES = GATES + 25, GATES + 26
-Q_PREV1 = (25, 26)
-Q_PREV2 = (27, 28)
-Q_EVENT_CANDIDATE, Q_EVENT_VALID = 49, 477
-Q_EVENT_REL = 284  # Four predicates; inside RETURN, dead after block 2.
+Q_PREFIX_CAN, Q_PREFIX_DOES, Q_PREFIX_IS = GATES + 25, GATES + 26, GATES + 27
+Q_PREV1 = (25, 26, 27)
+Q_PREV2 = (28, 29, 50)
+Q_PREV3 = (42, 43, 44)
+Q_EVENT_CANDIDATE, Q_EVENT_VALID, Q_EVENT_NEGATIVE = 49, 477, 52
 Q_SUBJECT_TEMP = tuple(range(GATES + 10, GATES + 20)) + tuple(range(GATES + 22, GATES + 26))
 Q_OBJECT, Q_MODE, Q_FOUND, Q_NEGATIVE = 30, 44, 45, 46
 Q_EXPLICIT_FOUND, Q_EXPLICIT_NEGATIVE, Q_STATIC_FOUND = 47, 48, 49
-Q_REL_TEMP = (25, 26, 27, 28)
+Q_REL_TEMP = (25, 26, 27, 28, 29, 50, 54)
+Q_QUERY_NEGATIVE = 55
 
 RELATIONS = ("class", "can", "needs", "has", "produces", "trait", "location")
 Q_CLASS, Q_CAN, Q_NEEDS, Q_HAS, Q_PRODUCES, Q_TRAIT, Q_LOCATION, Q_HELLO, Q_ADD, Q_MULTI = range(10)

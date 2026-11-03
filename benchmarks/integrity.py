@@ -21,6 +21,7 @@ def main():
     p.add_argument('--arithmetic-layer', type=int, choices=[10, 11], default=11)
     p.add_argument('--signed-operands', action='store_true', help='Ablate unary sign and operand-count validity in v9')
     p.add_argument('--truth', action='store_true', help='Ablate proposition retrieval and its object identity in v10')
+    p.add_argument('--query-negation', action='store_true', help='Ablate the separate v11 query-polarity bit')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -204,6 +205,21 @@ def main():
                 break
             logits, cache, _ = m.forward([token], cache)
         checks['truth_cached_and_full_prefix_tokens_match'] = True
+    if a.query_negation:
+        prompt = 'A kelv cannot fly. Can a kelv not fly?'
+        m.reset()
+        original = m.generate(prompt)
+        name = 'blocks.2.attn.out.weight'
+        saved = m.w[name]
+        try:
+            m.w[name] = saved.clone()
+            m.w[name][110:112] = 0  # Query polarity is logical feature 55.
+            m.reset()
+            ablated = m.generate(prompt)
+        finally:
+            m.w[name] = saved
+        assert original['text'] == 'Yes.' and ablated['text'] == 'No.'
+        checks['query_negation_ablation'] = dict(prompt=prompt, original=original['text'], ablated=ablated['text'])
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,

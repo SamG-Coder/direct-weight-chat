@@ -269,3 +269,30 @@ that does not cover every pragmatic reading of negative English questions.
 Frozen v10a baseline is 80/269. All eight new broader composition/scope stresses
 remain in the score. The next candidate will reuse the proposition lookup while
 extending predicate binding and applying a shared truth-negation operation.
+
+## 2026-11-04: v11a predicate binding and proposition negation
+
+Extended the reusable question-event representation to all seven predicates.
+Query polarity is now separate from fact polarity; a shared equality/XOR circuit
+produces the affirmative/negative truth token only when evidence is found.
+Unknown remains unknown under negation. Three neural lookbacks support copular,
+article, prepositional and negative-auxiliary inversion without a host parser.
+
+Query scope improves 80/269 -> 262/269, including all 261 non-stress cases.
+The one passing compound stress is accidental: a contrasting conjunction still
+fails, so conjunction support is not claimed. Truth improves 229/239 -> 234/239;
+legacy 185/185, graph 75/79, arithmetic 115/120, polarity 229/233 and signed
+153/159 retain their scores. All five former post-freeze suites were rerun as
+regressions. No new v11a pass/fail regressions were found.
+
+The 22-suite matched comparison does reveal one v10a regression against v9a in
+the new truth suite: a later instruction to ignore the question is disregarded
+and the model returns yes. The earlier open-question multiple-action regression
+also remains. Exact before/after outputs are preserved, not removed from scores.
+
+All integrity checks and earlier interventions pass. Removing only the new
+query-polarity bit changes yes to no for a known negative proposition. Frozen
+v11a has 744,215 nonzero parameters and raw SHA-256
+`f15e70fdeddf91f94bfac13a505b1f14157a9dae79bb4388febf1c62a2a637b4`.
+The candidate is archived before selecting a new query-scope seed. No broad
+language or general intelligence milestone is declared complete.

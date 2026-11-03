@@ -1,0 +1,3700 @@
+{
+  "version": "v11a",
+  "suite": "signed-operands",
+  "evaluation_status": "development; created before signed-operand implementation",
+  "created_utc": "2026-11-03T13:35:41.799510+00:00",
+  "git": {
+    "commit": "47999dfa37fcd3d977b29f910426127daffc9b72",
+    "dirty": true
+  },
+  "model_sha256": "f15e70fdeddf91f94bfac13a505b1f14157a9dae79bb4388febf1c62a2a637b4",
+  "suite_sha256": "17cb92381a3b26d75a8d2932073138a85faf68967c72f7cd9388966c22139bae",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 744215,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "-999 + -999",
+      "text": "-1998.",
+      "token_ids": [
+        8,
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010514699999475852,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-000",
+      "category": "signed_boundary",
+      "expected": "-1998.",
+      "acceptable": [
+        "-1998."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-999 - 999",
+      "text": "-1998.",
+      "token_ids": [
+        8,
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.01040820000343956,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-001",
+      "category": "signed_boundary",
+      "expected": "-1998.",
+      "acceptable": [
+        "-1998."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "999 - -999",
+      "text": "1998.",
+      "token_ids": [
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007459300017217174,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-002",
+      "category": "signed_boundary",
+      "expected": "1998.",
+      "acceptable": [
+        "1998."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-999 + 999",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007864600018365309,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-003",
+      "category": "signed_boundary",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "0 - -1",
+      "text": "1.",
+      "token_ids": [
+        499,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007835700002033263,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-004",
+      "category": "signed_boundary",
+      "expected": "1.",
+      "acceptable": [
+        "1."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-1 + 0",
+      "text": "-1.",
+      "token_ids": [
+        8,
+        499,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009993999992730096,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-005",
+      "category": "signed_boundary",
+      "expected": "-1.",
+      "acceptable": [
+        "-1."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "0 + 0",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007948299986310303,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-006",
+      "category": "signed_boundary",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-1 - -1",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007444799994118512,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-007",
+      "category": "signed_boundary",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "1 - -2",
+      "text": "3.",
+      "token_ids": [
+        501,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007995699997991323,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-008",
+      "category": "signed_boundary",
+      "expected": "3.",
+      "acceptable": [
+        "3."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "1 + -2",
+      "text": "-1.",
+      "token_ids": [
+        8,
+        499,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009951099986210465,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-009",
+      "category": "signed_boundary",
+      "expected": "-1.",
+      "acceptable": [
+        "-1."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 105 - -757.",
+      "text": "862.",
+      "token_ids": [
+        1360,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008126699976855889,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-010",
+      "category": "signed_random",
+      "expected": "862.",
+      "acceptable": [
+        "862."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 604 - -539.",
+      "text": "1143.",
+      "token_ids": [
+        1641,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007504800014430657,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-011",
+      "category": "signed_random",
+      "expected": "1143.",
+      "acceptable": [
+        "1143."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "877--478",
+      "text": "1355.",
+      "token_ids": [
+        1853,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007870800007367507,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-012",
+      "category": "signed_random",
+      "expected": "1355.",
+      "acceptable": [
+        "1355."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -466 + -515.",
+      "text": "-981.",
+      "token_ids": [
+        8,
+        1479,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010543799988226965,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-013",
+      "category": "signed_random",
+      "expected": "-981.",
+      "acceptable": [
+        "-981."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 178 - -106.",
+      "text": "284.",
+      "token_ids": [
+        782,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007746800023596734,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-014",
+      "category": "signed_random",
+      "expected": "284.",
+      "acceptable": [
+        "284."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 386 + 753.",
+      "text": "1139.",
+      "token_ids": [
+        1637,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008079799998085946,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-015",
+      "category": "signed_random",
+      "expected": "1139.",
+      "acceptable": [
+        "1139."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 91 + 970.",
+      "text": "1061.",
+      "token_ids": [
+        1559,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007607600011397153,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-016",
+      "category": "signed_random",
+      "expected": "1061.",
+      "acceptable": [
+        "1061."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-546-861",
+      "text": "-1407.",
+      "token_ids": [
+        8,
+        1905,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010473300004377961,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-017",
+      "category": "signed_random",
+      "expected": "-1407.",
+      "acceptable": [
+        "-1407."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-865--421",
+      "text": "-444.",
+      "token_ids": [
+        8,
+        942,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010230699990643188,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-018",
+      "category": "signed_random",
+      "expected": "-444.",
+      "acceptable": [
+        "-444."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-834+-35",
+      "text": "-869.",
+      "token_ids": [
+        8,
+        1367,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010518600000068545,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-019",
+      "category": "signed_random",
+      "expected": "-869.",
+      "acceptable": [
+        "-869."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "65 + -693",
+      "text": "-628.",
+      "token_ids": [
+        8,
+        1126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010335400002077222,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-020",
+      "category": "signed_random",
+      "expected": "-628.",
+      "acceptable": [
+        "-628."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -950 + 196.",
+      "text": "-754.",
+      "token_ids": [
+        8,
+        1252,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010309599980246276,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-021",
+      "category": "signed_random",
+      "expected": "-754.",
+      "acceptable": [
+        "-754."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -463 + 390.",
+      "text": "-73.",
+      "token_ids": [
+        8,
+        571,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010162000020500273,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-022",
+      "category": "signed_random",
+      "expected": "-73.",
+      "acceptable": [
+        "-73."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-369 - -198",
+      "text": "-171.",
+      "token_ids": [
+        8,
+        669,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.01073119998909533,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-023",
+      "category": "signed_random",
+      "expected": "-171.",
+      "acceptable": [
+        "-171."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-626 + -552",
+      "text": "-1178.",
+      "token_ids": [
+        8,
+        1676,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010250899998936802,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-024",
+      "category": "signed_random",
+      "expected": "-1178.",
+      "acceptable": [
+        "-1178."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -844 + 776.",
+      "text": "-68.",
+      "token_ids": [
+        8,
+        566,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009897999989334494,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-025",
+      "category": "signed_random",
+      "expected": "-68.",
+      "acceptable": [
+        "-68."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 34 - 252.",
+      "text": "-218.",
+      "token_ids": [
+        8,
+        716,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010059599997475743,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-026",
+      "category": "signed_random",
+      "expected": "-218.",
+      "acceptable": [
+        "-218."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -297 - 90.",
+      "text": "-387.",
+      "token_ids": [
+        8,
+        885,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010002499999245629,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-027",
+      "category": "signed_random",
+      "expected": "-387.",
+      "acceptable": [
+        "-387."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-865+957",
+      "text": "92.",
+      "token_ids": [
+        590,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0075773999851662666,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-028",
+      "category": "signed_random",
+      "expected": "92.",
+      "acceptable": [
+        "92."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-832--940",
+      "text": "108.",
+      "token_ids": [
+        606,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007903099991381168,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-029",
+      "category": "signed_random",
+      "expected": "108.",
+      "acceptable": [
+        "108."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 165 - -873.",
+      "text": "1038.",
+      "token_ids": [
+        1536,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007470799988368526,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-030",
+      "category": "signed_random",
+      "expected": "1038.",
+      "acceptable": [
+        "1038."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "61-590",
+      "text": "-529.",
+      "token_ids": [
+        8,
+        1027,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010144400002900511,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-031",
+      "category": "signed_random",
+      "expected": "-529.",
+      "acceptable": [
+        "-529."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 585 - -936.",
+      "text": "1521.",
+      "token_ids": [
+        2019,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007399599999189377,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-032",
+      "category": "signed_random",
+      "expected": "1521.",
+      "acceptable": [
+        "1521."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 87 - -43.",
+      "text": "130.",
+      "token_ids": [
+        628,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008392800024012104,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-033",
+      "category": "signed_random",
+      "expected": "130.",
+      "acceptable": [
+        "130."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -806 - 428.",
+      "text": "-1234.",
+      "token_ids": [
+        8,
+        1732,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010346900002332404,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-034",
+      "category": "signed_random",
+      "expected": "-1234.",
+      "acceptable": [
+        "-1234."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "907-967",
+      "text": "-60.",
+      "token_ids": [
+        8,
+        558,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009735300001921132,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-035",
+      "category": "signed_random",
+      "expected": "-60.",
+      "acceptable": [
+        "-60."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "573 - -580",
+      "text": "1153.",
+      "token_ids": [
+        1651,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077957999892532825,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-036",
+      "category": "signed_random",
+      "expected": "1153.",
+      "acceptable": [
+        "1153."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -340 - 692.",
+      "text": "-1032.",
+      "token_ids": [
+        8,
+        1530,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.00973270001122728,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-037",
+      "category": "signed_random",
+      "expected": "-1032.",
+      "acceptable": [
+        "-1032."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 468 - -144.",
+      "text": "612.",
+      "token_ids": [
+        1110,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008095700002741069,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-038",
+      "category": "signed_random",
+      "expected": "612.",
+      "acceptable": [
+        "612."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 488 + -533.",
+      "text": "-45.",
+      "token_ids": [
+        8,
+        543,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009785699978237972,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-039",
+      "category": "signed_random",
+      "expected": "-45.",
+      "acceptable": [
+        "-45."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "229 + 116",
+      "text": "345.",
+      "token_ids": [
+        843,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007779000006848946,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-040",
+      "category": "signed_random",
+      "expected": "345.",
+      "acceptable": [
+        "345."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-364+-552",
+      "text": "-916.",
+      "token_ids": [
+        8,
+        1414,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010452099988469854,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-041",
+      "category": "signed_random",
+      "expected": "-916.",
+      "acceptable": [
+        "-916."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-135--178",
+      "text": "43.",
+      "token_ids": [
+        541,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007416999986162409,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-042",
+      "category": "signed_random",
+      "expected": "43.",
+      "acceptable": [
+        "43."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 892 + -964.",
+      "text": "-72.",
+      "token_ids": [
+        8,
+        570,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010345599992433563,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-043",
+      "category": "signed_random",
+      "expected": "-72.",
+      "acceptable": [
+        "-72."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-66--436",
+      "text": "370.",
+      "token_ids": [
+        868,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007341499993344769,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-044",
+      "category": "signed_random",
+      "expected": "370.",
+      "acceptable": [
+        "370."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -752 - 417.",
+      "text": "-1169.",
+      "token_ids": [
+        8,
+        1667,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010326099989470094,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-045",
+      "category": "signed_random",
+      "expected": "-1169.",
+      "acceptable": [
+        "-1169."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "823--909",
+      "text": "1732.",
+      "token_ids": [
+        2230,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00789540002006106,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-046",
+      "category": "signed_random",
+      "expected": "1732.",
+      "acceptable": [
+        "1732."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-626+666",
+      "text": "40.",
+      "token_ids": [
+        538,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007434600003762171,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-047",
+      "category": "signed_random",
+      "expected": "40.",
+      "acceptable": [
+        "40."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "42--413",
+      "text": "455.",
+      "token_ids": [
+        953,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007396899978630245,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-048",
+      "category": "signed_random",
+      "expected": "455.",
+      "acceptable": [
+        "455."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "222 - 744",
+      "text": "-522.",
+      "token_ids": [
+        8,
+        1020,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010115700017195195,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-049",
+      "category": "signed_random",
+      "expected": "-522.",
+      "acceptable": [
+        "-522."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "842-144",
+      "text": "698.",
+      "token_ids": [
+        1196,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007720899971900508,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-050",
+      "category": "signed_random",
+      "expected": "698.",
+      "acceptable": [
+        "698."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-802 - 219",
+      "text": "-1021.",
+      "token_ids": [
+        8,
+        1519,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010091399977682158,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-051",
+      "category": "signed_random",
+      "expected": "-1021.",
+      "acceptable": [
+        "-1021."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-832 + 496",
+      "text": "-336.",
+      "token_ids": [
+        8,
+        834,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010355400008847937,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-052",
+      "category": "signed_random",
+      "expected": "-336.",
+      "acceptable": [
+        "-336."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-784--133",
+      "text": "-651.",
+      "token_ids": [
+        8,
+        1149,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010365099995397031,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-053",
+      "category": "signed_random",
+      "expected": "-651.",
+      "acceptable": [
+        "-651."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 862 - 782.",
+      "text": "80.",
+      "token_ids": [
+        578,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00746719999006018,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-054",
+      "category": "signed_random",
+      "expected": "80.",
+      "acceptable": [
+        "80."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 374 + -576.",
+      "text": "-202.",
+      "token_ids": [
+        8,
+        700,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010184299986576661,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-055",
+      "category": "signed_random",
+      "expected": "-202.",
+      "acceptable": [
+        "-202."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -93 + 441.",
+      "text": "348.",
+      "token_ids": [
+        846,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007631000014953315,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-056",
+      "category": "signed_random",
+      "expected": "348.",
+      "acceptable": [
+        "348."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 737 + 460.",
+      "text": "1197.",
+      "token_ids": [
+        1695,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007799999992130324,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-057",
+      "category": "signed_random",
+      "expected": "1197.",
+      "acceptable": [
+        "1197."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -795 - 214.",
+      "text": "-1009.",
+      "token_ids": [
+        8,
+        1507,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010340000008000061,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-058",
+      "category": "signed_random",
+      "expected": "-1009.",
+      "acceptable": [
+        "-1009."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -702 - -291.",
+      "text": "-411.",
+      "token_ids": [
+        8,
+        909,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010336400009691715,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-059",
+      "category": "signed_random",
+      "expected": "-411.",
+      "acceptable": [
+        "-411."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-661-142",
+      "text": "-803.",
+      "token_ids": [
+        8,
+        1301,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010499299998627976,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-060",
+      "category": "signed_random",
+      "expected": "-803.",
+      "acceptable": [
+        "-803."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "376 + 28",
+      "text": "404.",
+      "token_ids": [
+        902,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007456399995135143,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-061",
+      "category": "signed_random",
+      "expected": "404.",
+      "acceptable": [
+        "404."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "637-909",
+      "text": "-272.",
+      "token_ids": [
+        8,
+        770,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010152700007893145,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-062",
+      "category": "signed_random",
+      "expected": "-272.",
+      "acceptable": [
+        "-272."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-444+-178",
+      "text": "-622.",
+      "token_ids": [
+        8,
+        1120,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010151800001040101,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-063",
+      "category": "signed_random",
+      "expected": "-622.",
+      "acceptable": [
+        "-622."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 708 + -204.",
+      "text": "504.",
+      "token_ids": [
+        1002,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007432300015352666,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-064",
+      "category": "signed_random",
+      "expected": "504.",
+      "acceptable": [
+        "504."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -750 + -90.",
+      "text": "-840.",
+      "token_ids": [
+        8,
+        1338,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010186900006374344,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-065",
+      "category": "signed_random",
+      "expected": "-840.",
+      "acceptable": [
+        "-840."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -242 - 368.",
+      "text": "-610.",
+      "token_ids": [
+        8,
+        1108,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010063599998829886,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-066",
+      "category": "signed_random",
+      "expected": "-610.",
+      "acceptable": [
+        "-610."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -787 + 123.",
+      "text": "-664.",
+      "token_ids": [
+        8,
+        1162,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009943699988070875,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-067",
+      "category": "signed_random",
+      "expected": "-664.",
+      "acceptable": [
+        "-664."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "744 + 274",
+      "text": "1018.",
+      "token_ids": [
+        1516,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007546000008005649,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-068",
+      "category": "signed_random",
+      "expected": "1018.",
+      "acceptable": [
+        "1018."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -645 - -317.",
+      "text": "-328.",
+      "token_ids": [
+        8,
+        826,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010024699993664399,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-069",
+      "category": "signed_random",
+      "expected": "-328.",
+      "acceptable": [
+        "-328."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-454 + -212",
+      "text": "-666.",
+      "token_ids": [
+        8,
+        1164,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.0100838000071235,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-070",
+      "category": "signed_random",
+      "expected": "-666.",
+      "acceptable": [
+        "-666."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "557 - 424",
+      "text": "133.",
+      "token_ids": [
+        631,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007083199976477772,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-071",
+      "category": "signed_random",
+      "expected": "133.",
+      "acceptable": [
+        "133."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "101 + 487",
+      "text": "588.",
+      "token_ids": [
+        1086,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007419500005198643,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-072",
+      "category": "signed_random",
+      "expected": "588.",
+      "acceptable": [
+        "588."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-529 - 392",
+      "text": "-921.",
+      "token_ids": [
+        8,
+        1419,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010310800018487498,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-073",
+      "category": "signed_random",
+      "expected": "-921.",
+      "acceptable": [
+        "-921."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-883 - 380",
+      "text": "-1263.",
+      "token_ids": [
+        8,
+        1761,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.00996690001920797,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-074",
+      "category": "signed_random",
+      "expected": "-1263.",
+      "acceptable": [
+        "-1263."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 88 + -727.",
+      "text": "-639.",
+      "token_ids": [
+        8,
+        1137,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010530400002608076,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-075",
+      "category": "signed_random",
+      "expected": "-639.",
+      "acceptable": [
+        "-639."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -451 - -271.",
+      "text": "-180.",
+      "token_ids": [
+        8,
+        678,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010265899996738881,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-076",
+      "category": "signed_random",
+      "expected": "-180.",
+      "acceptable": [
+        "-180."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 783 - 523.",
+      "text": "260.",
+      "token_ids": [
+        758,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007849999994505197,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-077",
+      "category": "signed_random",
+      "expected": "260.",
+      "acceptable": [
+        "260."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "591-174",
+      "text": "417.",
+      "token_ids": [
+        915,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007603900012327358,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-078",
+      "category": "signed_random",
+      "expected": "417.",
+      "acceptable": [
+        "417."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-991--390",
+      "text": "-601.",
+      "token_ids": [
+        8,
+        1099,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009912799985613674,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-079",
+      "category": "signed_random",
+      "expected": "-601.",
+      "acceptable": [
+        "-601."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -157 + 709.",
+      "text": "552.",
+      "token_ids": [
+        1050,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007977100001880899,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-080",
+      "category": "signed_random",
+      "expected": "552.",
+      "acceptable": [
+        "552."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-850+80",
+      "text": "-770.",
+      "token_ids": [
+        8,
+        1268,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009832999989157543,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-081",
+      "category": "signed_random",
+      "expected": "-770.",
+      "acceptable": [
+        "-770."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 124 - -781.",
+      "text": "905.",
+      "token_ids": [
+        1403,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00789700000314042,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-082",
+      "category": "signed_random",
+      "expected": "905.",
+      "acceptable": [
+        "905."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 23 - -132.",
+      "text": "155.",
+      "token_ids": [
+        653,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007615000009536743,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-083",
+      "category": "signed_random",
+      "expected": "155.",
+      "acceptable": [
+        "155."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -272 + 531.",
+      "text": "259.",
+      "token_ids": [
+        757,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007784199988236651,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-084",
+      "category": "signed_random",
+      "expected": "259.",
+      "acceptable": [
+        "259."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "902-566",
+      "text": "336.",
+      "token_ids": [
+        834,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007666499994229525,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-085",
+      "category": "signed_random",
+      "expected": "336.",
+      "acceptable": [
+        "336."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -80 - -850.",
+      "text": "770.",
+      "token_ids": [
+        1268,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007812399999238551,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-086",
+      "category": "signed_random",
+      "expected": "770.",
+      "acceptable": [
+        "770."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -857 - -658.",
+      "text": "-199.",
+      "token_ids": [
+        8,
+        697,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010527500009629875,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-087",
+      "category": "signed_random",
+      "expected": "-199.",
+      "acceptable": [
+        "-199."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-318--498",
+      "text": "180.",
+      "token_ids": [
+        678,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007752100005745888,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-088",
+      "category": "signed_random",
+      "expected": "180.",
+      "acceptable": [
+        "180."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "191 - 328",
+      "text": "-137.",
+      "token_ids": [
+        8,
+        635,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010360199987189844,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-089",
+      "category": "signed_random",
+      "expected": "-137.",
+      "acceptable": [
+        "-137."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -470 + -624.",
+      "text": "-1094.",
+      "token_ids": [
+        8,
+        1592,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010411900002509356,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-090",
+      "category": "signed_random",
+      "expected": "-1094.",
+      "acceptable": [
+        "-1094."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 62 - 291.",
+      "text": "-229.",
+      "token_ids": [
+        8,
+        727,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009860799997113645,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-091",
+      "category": "signed_random",
+      "expected": "-229.",
+      "acceptable": [
+        "-229."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "783 + -162",
+      "text": "621.",
+      "token_ids": [
+        1119,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00789099998655729,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-092",
+      "category": "signed_random",
+      "expected": "621.",
+      "acceptable": [
+        "621."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "254 - -137",
+      "text": "391.",
+      "token_ids": [
+        889,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0075369999976828694,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-093",
+      "category": "signed_random",
+      "expected": "391.",
+      "acceptable": [
+        "391."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -179 - 784.",
+      "text": "-963.",
+      "token_ids": [
+        8,
+        1461,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010259000002406538,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-094",
+      "category": "signed_random",
+      "expected": "-963.",
+      "acceptable": [
+        "-963."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "765-761",
+      "text": "4.",
+      "token_ids": [
+        502,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007147099997382611,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-095",
+      "category": "signed_random",
+      "expected": "4.",
+      "acceptable": [
+        "4."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 721 + 327.",
+      "text": "1048.",
+      "token_ids": [
+        1546,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007699500012677163,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-096",
+      "category": "signed_random",
+      "expected": "1048.",
+      "acceptable": [
+        "1048."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -534 - -153.",
+      "text": "-381.",
+      "token_ids": [
+        8,
+        879,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010225799982436001,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-097",
+      "category": "signed_random",
+      "expected": "-381.",
+      "acceptable": [
+        "-381."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-871+217",
+      "text": "-654.",
+      "token_ids": [
+        8,
+        1152,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010091800009831786,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-098",
+      "category": "signed_random",
+      "expected": "-654.",
+      "acceptable": [
+        "-654."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -508 + 155.",
+      "text": "-353.",
+      "token_ids": [
+        8,
+        851,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010367899987613782,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-099",
+      "category": "signed_random",
+      "expected": "-353.",
+      "acceptable": [
+        "-353."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-558-698",
+      "text": "-1256.",
+      "token_ids": [
+        8,
+        1754,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010328700009267777,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-100",
+      "category": "signed_random",
+      "expected": "-1256.",
+      "acceptable": [
+        "-1256."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 160 - 565.",
+      "text": "-405.",
+      "token_ids": [
+        8,
+        903,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010140600003069267,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-101",
+      "category": "signed_random",
+      "expected": "-405.",
+      "acceptable": [
+        "-405."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-555 + 961",
+      "text": "406.",
+      "token_ids": [
+        904,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007887799991294742,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-102",
+      "category": "signed_random",
+      "expected": "406.",
+      "acceptable": [
+        "406."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -943 + 495.",
+      "text": "-448.",
+      "token_ids": [
+        8,
+        946,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009875800024019554,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-103",
+      "category": "signed_random",
+      "expected": "-448.",
+      "acceptable": [
+        "-448."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "399+-53",
+      "text": "346.",
+      "token_ids": [
+        844,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007857799995690584,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-104",
+      "category": "signed_random",
+      "expected": "346.",
+      "acceptable": [
+        "346."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "595 + -180",
+      "text": "415.",
+      "token_ids": [
+        913,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007761599990772083,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-105",
+      "category": "signed_random",
+      "expected": "415.",
+      "acceptable": [
+        "415."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -500 - -4.",
+      "text": "-496.",
+      "token_ids": [
+        8,
+        994,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010184699989622459,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-106",
+      "category": "signed_random",
+      "expected": "-496.",
+      "acceptable": [
+        "-496."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "228 - -906",
+      "text": "1134.",
+      "token_ids": [
+        1632,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008045599999604747,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-107",
+      "category": "signed_random",
+      "expected": "1134.",
+      "acceptable": [
+        "1134."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 30 - 986.",
+      "text": "-956.",
+      "token_ids": [
+        8,
+        1454,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.009829699993133545,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-108",
+      "category": "signed_random",
+      "expected": "-956.",
+      "acceptable": [
+        "-956."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate -465 - 684.",
+      "text": "-1149.",
+      "token_ids": [
+        8,
+        1647,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010517200018512085,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-109",
+      "category": "signed_random",
+      "expected": "-1149.",
+      "acceptable": [
+        "-1149."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 94 - -900.",
+      "text": "994.",
+      "token_ids": [
+        1492,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0073816000076476485,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-110",
+      "category": "signed_random",
+      "expected": "994.",
+      "acceptable": [
+        "994."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "370 - 229",
+      "text": "141.",
+      "token_ids": [
+        639,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0072586000023875386,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-111",
+      "category": "signed_random",
+      "expected": "141.",
+      "acceptable": [
+        "141."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 804 - 548.",
+      "text": "256.",
+      "token_ids": [
+        754,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00757400001748465,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-112",
+      "category": "signed_random",
+      "expected": "256.",
+      "acceptable": [
+        "256."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "347+997",
+      "text": "1344.",
+      "token_ids": [
+        1842,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007552900002337992,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-113",
+      "category": "signed_random",
+      "expected": "1344.",
+      "acceptable": [
+        "1344."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "425 + 829",
+      "text": "1254.",
+      "token_ids": [
+        1752,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0071097000036388636,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-114",
+      "category": "signed_random",
+      "expected": "1254.",
+      "acceptable": [
+        "1254."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-246 - 300",
+      "text": "-546.",
+      "token_ids": [
+        8,
+        1044,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010021099995356053,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-115",
+      "category": "signed_random",
+      "expected": "-546.",
+      "acceptable": [
+        "-546."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "606--840",
+      "text": "1446.",
+      "token_ids": [
+        1944,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007768799987388775,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-116",
+      "category": "signed_random",
+      "expected": "1446.",
+      "acceptable": [
+        "1446."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-744 - -661",
+      "text": "-83.",
+      "token_ids": [
+        8,
+        581,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.00972219998948276,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-117",
+      "category": "signed_random",
+      "expected": "-83.",
+      "acceptable": [
+        "-83."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -468 - 754.",
+      "text": "-1222.",
+      "token_ids": [
+        8,
+        1720,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.01024229999165982,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-118",
+      "category": "signed_random",
+      "expected": "-1222.",
+      "acceptable": [
+        "-1222."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "989--925",
+      "text": "1914.",
+      "token_ids": [
+        2412,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007562500017229468,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-119",
+      "category": "signed_random",
+      "expected": "1914.",
+      "acceptable": [
+        "1914."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate -432 - -924.",
+      "text": "492.",
+      "token_ids": [
+        990,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007989699981408194,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-120",
+      "category": "signed_random",
+      "expected": "492.",
+      "acceptable": [
+        "492."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-38 + 604",
+      "text": "566.",
+      "token_ids": [
+        1064,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007591999979922548,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-121",
+      "category": "signed_random",
+      "expected": "566.",
+      "acceptable": [
+        "566."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "90 - 417",
+      "text": "-327.",
+      "token_ids": [
+        8,
+        825,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.00980080000590533,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-122",
+      "category": "signed_random",
+      "expected": "-327.",
+      "acceptable": [
+        "-327."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 606 - -134.",
+      "text": "740.",
+      "token_ids": [
+        1238,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007926899997983128,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-123",
+      "category": "signed_random",
+      "expected": "740.",
+      "acceptable": [
+        "740."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 442 + 672.",
+      "text": "1114.",
+      "token_ids": [
+        1612,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007534600008511916,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-124",
+      "category": "signed_random",
+      "expected": "1114.",
+      "acceptable": [
+        "1114."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-345 + -169",
+      "text": "-514.",
+      "token_ids": [
+        8,
+        1012,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.01033849999657832,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-125",
+      "category": "signed_random",
+      "expected": "-514.",
+      "acceptable": [
+        "-514."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 127 - -425.",
+      "text": "552.",
+      "token_ids": [
+        1050,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007841100014047697,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-126",
+      "category": "signed_random",
+      "expected": "552.",
+      "acceptable": [
+        "552."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Please calculate 651 + 236.",
+      "text": "887.",
+      "token_ids": [
+        1385,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007830399990780279,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-127",
+      "category": "signed_random",
+      "expected": "887.",
+      "acceptable": [
+        "887."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "746 + 995",
+      "text": "1741.",
+      "token_ids": [
+        2239,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0071699999971315265,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-128",
+      "category": "signed_random",
+      "expected": "1741.",
+      "acceptable": [
+        "1741."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-363 + -400",
+      "text": "-763.",
+      "token_ids": [
+        8,
+        1261,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010273699997924268,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-129",
+      "category": "signed_random",
+      "expected": "-763.",
+      "acceptable": [
+        "-763."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "5 + +3",
+      "text": "8.",
+      "token_ids": [
+        506,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077788000053260475,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-130",
+      "category": "unary_and_prefix",
+      "expected": "8.",
+      "acceptable": [
+        "8."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "5 - +3",
+      "text": "2.",
+      "token_ids": [
+        500,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007588700013002381,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-131",
+      "category": "unary_and_prefix",
+      "expected": "2.",
+      "acceptable": [
+        "2."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "+7 + +9",
+      "text": "16.",
+      "token_ids": [
+        514,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077812999952584505,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-132",
+      "category": "unary_and_prefix",
+      "expected": "16.",
+      "acceptable": [
+        "16."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-0 - -0",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007333600020501763,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-133",
+      "category": "unary_and_prefix",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Add -3 and 4.",
+      "text": "1.",
+      "token_ids": [
+        499,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0077470000251196325,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "signed-134",
+      "category": "unary_and_prefix",
+      "expected": "1.",
+      "acceptable": [
+        "1."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Sum -17 and -5.",
+      "text": "-22.",
+      "token_ids": [
+        8,
+        520,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.00986289998400025,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-135",
+      "category": "unary_and_prefix",
+      "expected": "-22.",
+      "acceptable": [
+        "-22."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Add 7 and 9.",
+      "text": "16.",
+      "token_ids": [
+        514,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00801409999257885,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-136",
+      "category": "unary_and_prefix",
+      "expected": "16.",
+      "acceptable": [
+        "16."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-5 - 3",
+      "text": "-8.",
+      "token_ids": [
+        8,
+        506,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.01017419999698177,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-137",
+      "category": "signed_dialogue",
+      "expected": "-8.",
+      "acceptable": [
+        "-8."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-5 + -3",
+      "text": "-8.",
+      "token_ids": [
+        8,
+        506,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.012506799976108596,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "signed-138",
+      "category": "signed_dialogue",
+      "expected": "-8.",
+      "acceptable": [
+        "-8."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "999 - -999",
+      "text": "1998.",
+      "token_ids": [
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009490900003584102,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "signed-139",
+      "category": "signed_dialogue",
+      "expected": "1998.",
+      "acceptable": [
+        "1998."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "8 + 7",
+      "text": "15.",
+      "token_ids": [
+        513,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009909900021739304,
+      "device": "cuda",
+      "prefix_tokens": 36,
+      "id": "signed-140",
+      "category": "signed_dialogue",
+      "expected": "15.",
+      "acceptable": [
+        "15."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "-3 - -11",
+      "text": "8.",
+      "token_ids": [
+        506,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010050299984868616,
+      "device": "cuda",
+      "prefix_tokens": 46,
+      "id": "signed-141",
+      "category": "signed_dialogue",
+      "expected": "8.",
+      "acceptable": [
+        "8."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "0 + 0",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.010092200012877584,
+      "device": "cuda",
+      "prefix_tokens": 54,
+      "id": "signed-142",
+      "category": "signed_dialogue",
+      "expected": "0.",
+      "acceptable": [
+        "0."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "10 - 3 - 2",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015355099982116371,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-143",
+      "category": "unsupported_arity_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "4 + 5 + 6",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015111200016690418,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-144",
+      "category": "unsupported_arity_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 7 + 8 + 9.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015523399983067065,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "id": "signed-145",
+      "category": "unsupported_arity_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 3 + 4 and then 5.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01563670000177808,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-146",
+      "category": "unsupported_arity_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate 4.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015406199992867187,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-147",
+      "category": "unsupported_arity_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Calculate.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015491199999814853,
+      "device": "cuda",
+      "prefix_tokens": 5,
+      "id": "signed-148",
+      "category": "unsupported_arity_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-1000 + 1",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016088000003946945,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-149",
+      "category": "range_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "999 + -1000",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015221400011796504,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-150",
+      "category": "range_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "1000 - 1",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01486199998180382,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "id": "signed-151",
+      "category": "range_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "-1000 - -1000",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015017199999419972,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-152",
+      "category": "range_abstention",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "5 + * 3",
+      "text": "8.",
+      "token_ids": [
+        506,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007881199999246746,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-153",
+      "category": "syntax_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Calculate 3 4.",
+      "text": "7.",
+      "token_ids": [
+        505,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0074176999914925545,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-154",
+      "category": "syntax_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "5 + monkey + 3",
+      "text": "8.",
+      "token_ids": [
+        506,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007816800003638491,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "id": "signed-155",
+      "category": "syntax_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "17 * -24",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015305600012652576,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-156",
+      "category": "multiplication_stress",
+      "expected": "-408.",
+      "acceptable": [
+        "-408."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "-81 / 9",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015144800010602921,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "id": "signed-157",
+      "category": "division_stress",
+      "expected": "-9.",
+      "acceptable": [
+        "-9."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "(-5 + 3) - 2",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015247499977704138,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "id": "signed-158",
+      "category": "parentheses_stress",
+      "expected": "-4.",
+      "acceptable": [
+        "-4."
+      ],
+      "reset": true,
+      "correct": false
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "signed_boundary": {
+      "passed": 10,
+      "total": 10,
+      "success_rate": 1.0,
+      "median_response_ms": 7.971999992150813
+    },
+    "signed_random": {
+      "passed": 120,
+      "total": 120,
+      "success_rate": 1.0,
+      "median_response_ms": 9.72745000035502
+    },
+    "unary_and_prefix": {
+      "passed": 7,
+      "total": 7,
+      "success_rate": 1.0,
+      "median_response_ms": 7.7788000053260475
+    },
+    "signed_dialogue": {
+      "passed": 6,
+      "total": 6,
+      "success_rate": 1.0,
+      "median_response_ms": 10.0712499988731
+    },
+    "unsupported_arity_abstention": {
+      "passed": 6,
+      "total": 6,
+      "success_rate": 1.0,
+      "median_response_ms": 15.44869999634102
+    },
+    "range_abstention": {
+      "passed": 4,
+      "total": 4,
+      "success_rate": 1.0,
+      "median_response_ms": 15.119300005608238
+    },
+    "syntax_stress": {
+      "passed": 0,
+      "total": 3,
+      "success_rate": 0.0,
+      "median_response_ms": 7.816800003638491
+    },
+    "multiplication_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.305600012652576
+    },
+    "division_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.144800010602921
+    },
+    "parentheses_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.247499977704138
+    },
+    "all": {
+      "passed": 153,
+      "total": 159,
+      "success_rate": 0.9622641509433962,
+      "median_response_ms": 9.80080000590533
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

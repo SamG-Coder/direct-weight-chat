@@ -135,3 +135,27 @@ A second removes only the object-key component (with the corresponding sentinel
 adjustment): the same prompt then mistakes a later denial of another action for
 the queried action and says `No.`. Open wh-questions still use the older one-value
 retrieval path; this experiment does not fix that separate multiple-action bug.
+
+# v11a: predicate binding and query negation
+
+Three local inversion markers (can, does, is) and three causal lookbacks compile
+questions into the existing seven-predicate representation. Article, preposition
+and lexical adjective flags distinguish category, location and trait requests.
+The question event carries its own predicate vector, so an object's lexical
+query-word flag cannot accidentally choose a different requested operation.
+The query predicate reuses REQUEST after its initial lexical reader; no extra
+parameters, tokens, host grammar parser or fact records are required.
+
+An independent query-polarity bit records explicit not. For found evidence,
+the answer is affirmative exactly when fact polarity and query polarity agree;
+otherwise it is negative. A missing proposition stays unknown under either
+polarity. The two-bit equality/XOR operation is compiled as Boolean ReLU gates
+and applies uniformly to all seven predicates. Negative membership continues
+to block traversal, even when a negative question is asked about an inherited
+property. In this controlled grammar, not means logical proposition negation;
+ordinary conversational readings can be more ambiguous.
+
+Removing only the query-polarity output from block 2 changes a true negative
+query from yes to no. The earlier object-identity and retrieval ablations still
+change their corresponding answers. Conjunction, general pronoun binding,
+quantifiers, repeated negation and later instruction scope remain unsupported.
