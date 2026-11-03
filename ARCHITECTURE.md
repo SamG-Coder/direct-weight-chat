@@ -160,3 +160,36 @@ Removing only the query-polarity output from block 2 changes a true negative
 query from yes to no. The earlier object-identity and retrieval ablations still
 change their corresponding answers. Conjunction, general pronoun binding,
 quantifiers, repeated negation and later instruction scope remain unsupported.
+
+## v12a: proposition events, composition and clause scope
+
+Clause-boundary attention supplies a monotonically increasing clause ID. The
+first request word has an authored lexical support flag; unfamiliar content
+words use the existing entity-pointer path. This separates the active request
+from older queries, but does not establish general intent understanding.
+
+Block 2 compiles shared-subject proposition continuations, optionally replacing
+the predicate or local negation. Block 3 binds the newest complete atom. Explicit
+and permanent proposition lookups move to blocks 4/6/8/10, using a separate
+cursor lifetime so the existing graph traversal and normal answer subject remain
+available. Each atom is evaluated at its own causal token position. Block 11
+writes true, false or unknown only at genuine atom positions; later positions
+carrying a copied query are not counted as new evidence.
+
+Five block-12 attention heads reduce the presence of true, false, unknown, AND
+and OR within the newest clause. A clause position contributes 65,536 per token
+of clause age; an existential flag contributes 8,192. The newer clause therefore
+dominates any earlier truth flag, while a present flag wins inside that clause.
+The next-token MLP implements strong three-valued conjunction/disjunction:
+false decides AND, true decides OR, and otherwise unknown is retained. This
+works for a homogeneous sequence of any tested length without storing operand
+combinations or answers. Mixed AND/OR precedence is deliberately not implemented.
+
+Ablations redirect AND to OR (no becomes yes), remove unknown evidence (unknown
+becomes yes), or remove clause IDs (an earlier false contaminates a later unknown
+question). Cached/full decoding matches for compound unknown answers. The
+inference runtime is unchanged and the raw checkpoint is never modified.
+
+The first request-head filter is too strict: it treats a leading Please as an
+unsupported request instead of reading the following verb. v12a is preserved
+with this regression before a separate modifier-grammar correction.

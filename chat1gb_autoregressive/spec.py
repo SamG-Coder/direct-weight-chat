@@ -32,7 +32,7 @@ LIVE_ENTITY, LIVE_QUERY = 54, 55
 TOKEN_SUBTRACT, REQUEST_SUBTRACT, NEGATIVE_RESULT = 56, 57, 58
 NEGATION, AUXILIARY, OUTPUT_NEGATIVE = 59, 60, 61
 NUMBER_AFTER_FIRST, NUM_SECOND_POS = 62, 63
-# Lifetimes matter: the three lookback buffers are dead after block 2 and become
+# Lifetimes matter: the four lookback buffers are dead after block 2 and become
 # a seven-relation scratch buffer. The subject and walk cursor are independent.
 RETURN = 176
 CONTEXT_FACTS = 288
@@ -50,7 +50,7 @@ GATES = 484
 STATES = 440  # Reuses completed fact-event registers after retrieval layers.
 
 # Inverted questions reuse lexical/role fields after their last readers.
-# Block 0 writes two subject-prefix markers, block 1 compiles a query event,
+# Block 0 writes three subject-prefix markers, block 1 compiles a query event,
 # and block 2 binds the newest event (or a request-reset sentinel).
 Q_PREFIX_CAN, Q_PREFIX_DOES, Q_PREFIX_IS = GATES + 25, GATES + 26, GATES + 27
 Q_PREV1 = (25, 26, 27)
@@ -62,6 +62,20 @@ Q_OBJECT, Q_MODE, Q_FOUND, Q_NEGATIVE = 30, 44, 45, 46
 Q_EXPLICIT_FOUND, Q_EXPLICIT_NEGATIVE, Q_STATIC_FOUND = 47, 48, 49
 Q_REL_TEMP = (25, 26, 27, 28, 29, 50, 54)
 Q_QUERY_NEGATIVE = 55
+
+# Clause boundaries and proposition composition. The reused coordinates are
+# read for their old purpose before the layer that initializes their new one.
+CLAUSE_BOUNDARY = 477  # Embedding -> block 0, then Q_EVENT_VALID.
+CLAUSE_START = 414
+LOCAL_ADJECTIVE = 414  # Clause position is finished after block 1.
+CLAUSE_FIRST, LOCAL_AND, LOCAL_OR, LEXICAL_REQUEST = 284, 285, 286, 287
+REQUEST_SUPPORTED = 6  # LIVE_NUMBER is finished after block-1 attention.
+Q_EVENT_GROUP, Q_GROUP = 24, 3  # Numeric value and position square are dead.
+Q_JOIN_AND, Q_JOIN_OR = 7, 24
+Q_PREV_JOIN = (284, 287, 61)
+Q_BIND_TEMP = tuple(range(GATES, GATES + 10)) + (GATES + 20, GATES + 21) + Q_REL_TEMP + (52, 56, 59, 60)
+ATOM_TRUE, ATOM_FALSE, ATOM_UNKNOWN = 64, 65, 66
+ANY_TRUE, ANY_FALSE, ANY_UNKNOWN, ANY_AND, ANY_OR, COMPOSED_KNOWN = range(67, 73)
 
 RELATIONS = ("class", "can", "needs", "has", "produces", "trait", "location")
 Q_CLASS, Q_CAN, Q_NEEDS, Q_HAS, Q_PRODUCES, Q_TRAIT, Q_LOCATION, Q_HELLO, Q_ADD, Q_MULTI = range(10)

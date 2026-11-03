@@ -340,3 +340,31 @@ structures and paraphrases remain explicit stress cases. Frozen v11a scores
 243/404; many passes come from using only one conjunct, so the truth-table
 contrasts are essential. The next experiment will evaluate proposition events
 in parallel, reduce their truth values neurally, and keep active clauses separate.
+
+## 2026-11-04: v12a composition, scope and a preserved regression
+
+Implemented per-position proposition events and strong three-valued AND/OR
+reductions inside attention/MLPs. Clause IDs isolate the active request. The
+inference runtime remains unchanged. Composition improves 243/404 -> 398/404,
+including all 395 non-stress cases. Six structural stresses remain failures.
+Graph retains 75/79 and legacy retains 185/185. Polarity improves to 230/233,
+truth to 236/239 and query scope to 265/269. The former creative-request smoke
+failure now correctly abstains; this does not demonstrate creative writing.
+
+All prior suites were rerun. The new request-head filter rejects Please calculate,
+causing 106 regressions across four arithmetic reports: development arithmetic
+falls to 88/120 and signed operands to 121/159. Three additional pass/fail
+regressions are unsupported composition stresses that previously passed by
+ignoring part of the question. Exact comparisons are preserved in
+`results/regressions-v12a.json`; the candidate is frozen, not overwritten.
+
+Integrity and all earlier interventions pass with the shifted truth-head layout.
+AND-to-OR, removed-unknown and removed-clause-key interventions change the
+corresponding outputs. v12a has 788,721 nonzero parameters and raw SHA-256
+`37cca688bea820ab2ca4e64b0dc0641f33df561a54ec402355a77c2e57aa14b3`.
+
+Before correcting the filter, created 81 request-modifier cases, including
+supported and unsupported requests, later clauses, two-modifier forms and
+longer framing stresses. Frozen v12a scores 17/81. The correction will identify
+the request head after transparent modifiers instead of labeling every modified
+command as supported.

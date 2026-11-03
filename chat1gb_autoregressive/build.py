@@ -185,6 +185,8 @@ def main():
                    "add": (8,), "sum": (8,), "calculate": (8,), "-": (8,), "explain": (0, 9), "about": (0, 9), "more": (1,)}
     adjectives = {fact["trait"] for fact in FACTS.values() if "trait" in fact}
     object_words = set(FACTS) | {value for facts in FACTS.values() for value in facts.values()}
+    request_introducers = set(('what where describe explain tell about color colour more '
+                              'hello hi hey add plus sum calculate a an can does is + -').split())
     for tid, label in enumerate(labels):
         row = tensors["token_embedding"][tid]
         put_pair(row, S.ANCHOR, S.ANCHOR_VALUE)
@@ -193,6 +195,10 @@ def main():
             put_pair(row, S.CODE + bit, value)
         if tid == ids["<bos>"]:
             put_pair(row, S.BOS_FLAG, 1)
+        if label in ("<bos>", "<user>", ".", "?", "!"):
+            put_pair(row, S.CLAUSE_BOUNDARY, 1)
+        if label in request_introducers or label in FACTS or tid >= dynamic_start:
+            put_pair(row, S.LEXICAL_REQUEST, 1)
         if label in ("<user>", "<assistant>"):
             put_pair(row, S.ROLE_CANDIDATE, 1)
             put_pair(row, S.ROLE_USER, float(label == "<user>"))
@@ -260,9 +266,14 @@ def main():
                    {S.ONE: -8 * sharpness * 128 ** 2}]
         c.attention(0, shift + 1, queries, [{S.POS: 1}, {S.POS_SQ: 1}], sources, list(range(destination, destination + 27)))
     c.latest(0, 6, S.ROLE_USER, [S.POS], [S.USER_START])
+    c.latest(0, 7, S.CLAUSE_BOUNDARY, [S.POS], [S.CLAUSE_START])
     for src, dst in ((S.ENTITY, S.LIVE_ENTITY), (S.QUERY_CANDIDATE, S.LIVE_QUERY), (S.NUMBER, S.LIVE_NUMBER)):
         c.gate(0, [src, S.USER_STATE], targets={dst: 1})
     p1, p2, p3, p4 = S.PREV
+    for boundary in ("<user>", ".", "?", "!"):
+        c.word(0, boundary, {S.CLAUSE_FIRST: 1}, start=p1, positive=[S.USER_STATE])
+    c.word(0, "and", {S.LOCAL_AND: 1}, positive=[S.USER_STATE])
+    c.word(0, "or", {S.LOCAL_OR: 1}, positive=[S.USER_STATE])
     # A +/- token immediately after a number is binary. Other occurrences
     # are unary and must not replace the expression's binary operator.
     for sign in ("+", "-"):
@@ -280,18 +291,18 @@ def main():
     for verb, marker in (("can", S.Q_PREFIX_CAN), ("does", S.Q_PREFIX_DOES), ("is", S.Q_PREFIX_IS)):
         for article in (False, True):
             verb_at, boundary_at = (p2, p3) if article else (p1, p2)
-            for boundary in ("<user>", ".", "?", "!"):
+            for boundary in ("<user>", ".", "?", "!", "and", "or"):
                 conditions = [S.ENTITY, S.USER_STATE] + ([p1 + 22] if article else [])
                 expression = expr({verb_at + i: bit for i, bit in enumerate(S.code(ids[verb]))},
                                   {boundary_at + i: bit for i, bit in enumerate(S.code(ids[boundary]))},
                                   *({f: 2} for f in conditions))
                 c.unit(0, expression, {marker: 1}, threshold=28 + 2 * len(conditions) - 1)
     # These embedding features have already been consumed by block-0 readers.
-    c.clear(0, list(range(25, 30)) + list(range(40, 49)) + [50])
+    c.clear(0, list(range(25, 30)) + list(range(40, 49)) + [50, S.CLAUSE_BOUNDARY])
 
     # Block 1: prompt subject/facts, request, and first/last numeric operands.
-    sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.FACTS, S.FACTS + 112))
-    destinations = list(range(S.SUBJECT, S.SUBJECT + 14)) + [S.SUBJECT_PRESENT] + list(range(S.CONTEXT_FACTS, S.CONTEXT_FACTS + 112))
+    sources = list(range(S.CODE, S.CODE + 14)) + list(range(S.FACTS, S.FACTS + 112))
+    destinations = list(range(S.SUBJECT, S.SUBJECT + 14)) + list(range(S.CONTEXT_FACTS, S.CONTEXT_FACTS + 112))
     for chunk in range(2):
         c.latest(1, chunk, S.LIVE_ENTITY, sources[chunk * 64:(chunk + 1) * 64], destinations[chunk * 64:(chunk + 1) * 64])
     c.latest(1, 2, S.LIVE_QUERY, list(range(S.QUERY_FLAGS, S.QUERY_FLAGS + 10)) + [S.TOKEN_SUBTRACT],
@@ -307,9 +318,22 @@ def main():
                    {S.ONE: -8 * sharpness * 128 ** 2}]
         c.attention(1, 4 + shift, queries, [{S.POS: 1}, {S.POS_SQ: 1}],
                     [S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS], list(destinations))
+    # Temporary read into Q_EVENT_VALID; its old contents are cleared in this
+    # MLP before the query parser writes the actual event-validity bit.
+    c.latest(1, 8, S.CLAUSE_FIRST, [S.LEXICAL_REQUEST], [S.Q_EVENT_VALID])
     # Query events use CURRENT temporarily; they are read by block 2 before
     # it initializes the normal graph cursor. No completed answer is stored.
     c.clear(1, list(range(25, 51)) + [52, 54, 55, S.Q_PREFIX_CAN, S.Q_PREFIX_DOES, S.Q_PREFIX_IS])
+    c.clear(1, [S.Q_EVENT_VALID, S.REQUEST_SUPPORTED, S.Q_EVENT_GROUP, S.Q_GROUP])
+    c.linear(1, {S.Q_EVENT_VALID: 1}, {S.REQUEST_SUPPORTED: 1})
+    c.linear(1, {S.CLAUSE_START: 1 / 64}, {S.Q_EVENT_GROUP: 1})
+    c.clear(1, [S.LOCAL_ADJECTIVE])
+    c.linear(1, {S.ADJECTIVE: 1}, {S.LOCAL_ADJECTIVE: 1})
+    c.linear(1, {S.CLAUSE_FIRST: 1}, {S.Q_EVENT_CANDIDATE: 1})
+    c.clear(1, [S.CLAUSE_FIRST, S.LEXICAL_REQUEST])
+    for offset, destination in zip(S.PREV[:3], S.Q_PREV_JOIN):
+        for word in ("and", "or"):
+            c.word(1, word, {destination: 1}, start=offset)
     # The same semantic predicate field serves affirmative and negative
     # questions. Negation is an independent bit, not a separate answer rule.
     query_cases = [(1, p1, [S.Q_PREV1[0]], [], False),
@@ -335,7 +359,7 @@ def main():
         c.copy_when(1, subject, S.CURRENT, positive=conditions, negative=excluded, count=14)
         c.copy_when(1, S.REQUEST, S.REQUEST, positive=conditions, negative=excluded, count=10, scale=-1)
     for reset in ("<bos>", "<user>", "what", "where", "describe", "explain"):
-        c.word(1, reset, {S.Q_EVENT_CANDIDATE: 1})
+        c.word(1, reset, {S.Q_EVENT_CANDIDATE: 1}, negative=[S.CLAUSE_FIRST])
     # Mark user numbers after the turn's first number. The clipped ramp is
     # evaluated neurally; no host-side token counting or expression parser.
     after_first = {S.POS: 128, S.NUM_FIRST_POS: -128, S.NUMBER: 8192, S.USER_STATE: 8192}
@@ -379,8 +403,8 @@ def main():
         if polarity_source is not None:
             c.gate(1, pos + [S.OBJECT_ALLOWED, polarity_source], neg, {S.GATES + 20: 1})
     c.latest(2, 0, S.Q_EVENT_CANDIDATE,
-             list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_EVENT_NEGATIVE],
-             list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP) + [S.Q_QUERY_NEGATIVE])
+             list(range(S.CURRENT, S.CURRENT + 14)) + list(range(S.CODE, S.CODE + 14)) + [S.Q_EVENT_VALID] + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_EVENT_NEGATIVE, S.Q_EVENT_GROUP],
+             list(S.Q_SUBJECT_TEMP) + list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + [S.Q_MODE] + list(S.Q_REL_TEMP) + [S.Q_QUERY_NEGATIVE, S.Q_GROUP])
     for i, subject in enumerate((p2, p3, p4)):
         c.copy(2, subject, S.GATES + 7 + i, S.FACT_SUBJECT, 14)
     c.copy(2, S.CODE, S.GATES + 21, S.FACT_OBJECT, 14)
@@ -405,7 +429,37 @@ def main():
         c.copy(2, source, S.Q_MODE, S.REQUEST + relation)
     c.clear(2, range(S.Q_OBJECT, S.Q_OBJECT + 14))
     c.copy(2, S.Q_OBJECT, S.Q_MODE, S.Q_OBJECT, 14)
-    c.clear(2, list(S.Q_SUBJECT_TEMP) + [S.Q_EVENT_CANDIDATE])
+    # Shared-subject continuations inherit the predicate unless a new one is
+    # explicitly present. A locally written not applies only to that atom.
+    continuations = [(None, [S.Q_PREV_JOIN[0]], [], False),
+                     (None, [S.Q_PREV_JOIN[1], p1 + 24], [p1 + 25], True),
+                     (0, [S.Q_PREV_JOIN[1], p1 + 22], [], False),
+                     (6, [S.Q_PREV_JOIN[1], p1 + 23], [], False),
+                     (0, [S.Q_PREV_JOIN[2], p1 + 22, p2 + 24], [p2 + 25], True),
+                     (6, [S.Q_PREV_JOIN[2], p1 + 23, p2 + 24], [p2 + 25], True)]
+    for relation in range(7):
+        extra = [S.LOCAL_ADJECTIVE] if relation == 5 else []
+        excluded = [S.LOCAL_ADJECTIVE] if relation == 0 else []
+        rel_flag = p1 + 15 + (0 if relation == 5 else relation)
+        continuations += [(relation, [S.Q_PREV_JOIN[1], rel_flag] + extra, excluded, False),
+                          (relation, [S.Q_PREV_JOIN[2], rel_flag, p2 + 24] + extra, excluded + [p2 + 25], True)]
+    for relation, conditions, excluded, negated in continuations:
+        conditions += [S.Q_MODE, S.OBJECT_ALLOWED]
+        targets = {S.Q_EVENT_VALID: 1, S.Q_EVENT_CANDIDATE: 1}
+        if relation is not None:
+            targets[S.REQUEST + relation] = 1
+            for r, source in enumerate(S.Q_REL_TEMP):
+                c.copy_when(2, source, S.REQUEST + r, conditions, excluded, scale=-1)
+        if negated:
+            targets[S.Q_QUERY_NEGATIVE] = 1
+        c.gate(2, conditions, excluded, targets)
+        c.copy_when(2, S.Q_OBJECT, S.Q_OBJECT, conditions, excluded, count=14, scale=-1)
+        c.copy_when(2, S.CODE, S.Q_OBJECT, conditions, excluded, count=14)
+        c.copy_when(2, S.Q_QUERY_NEGATIVE, S.Q_QUERY_NEGATIVE, conditions, excluded, scale=-1)
+    c.clear(2, [S.Q_JOIN_AND, S.Q_JOIN_OR, S.OUTPUT_NEGATIVE])
+    c.gate(2, [S.LOCAL_AND, S.Q_MODE], targets={S.Q_JOIN_AND: 1})
+    c.gate(2, [S.LOCAL_OR, S.Q_MODE], targets={S.Q_JOIN_OR: 1})
+    c.clear(2, list(S.Q_SUBJECT_TEMP) + list(S.Q_BIND_TEMP))
     # Preserve the grammar's previous-token predicates before recycling PREV.
     # GATES[0:10] belong to fact parsing; [10:19] are free until block 11.
     previous_words = ("<assistant>", "a", "an", "can", "needs", "has", "produces", "in", "is")
@@ -417,16 +471,31 @@ def main():
     for i, word in enumerate(("do", "does", "not")):
         c.word(2, word, {S.GATES + 22 + i: 1}, start=p1)
 
+    # Block 3 binds the newest atom, including shared-subject continuations.
     # Blocks 3,5,7,9: parallel associative lookup of seven predicates for the
     # current graph node, then follow its class edge. Four lookups support an
     # explicit terminal property after up to three unfamiliar class links.
     # Blocks 4,6,8: consult permanent atomic properties of the new cursor.
     # No prompt order or entity identity is compiled into this algorithm.
-    for layer in range(3, 10):
+    for layer in range(3, 11):
         if layer == 3:
             c.attention(3, 7, [{S.ONE: 8}],
                         [{S.NUMBER_AFTER_FIRST: 65536, S.USER_START: 16384 * 128, S.POS: -8 * 128}],
                         [S.POS], [S.NUM_SECOND_POS])
+            c.latest(3, 8, S.Q_EVENT_CANDIDATE,
+                     list(range(S.Q_OBJECT, S.Q_OBJECT + 14)) + list(range(S.REQUEST, S.REQUEST + 7)) + [S.Q_QUERY_NEGATIVE, S.Q_MODE],
+                     list(S.Q_BIND_TEMP))
+            c.clear(3, range(S.Q_OBJECT, S.Q_OBJECT + 14))
+            for bit, source in enumerate(S.Q_BIND_TEMP[:14]):
+                c.linear(3, {source: 1}, {S.Q_OBJECT + bit: 1})
+            mode = S.Q_BIND_TEMP[-1]
+            c.copy(3, S.REQUEST, mode, S.REQUEST, 10, scale=-1)
+            for relation, source in enumerate(S.Q_BIND_TEMP[14:21]):
+                c.copy(3, source, mode, S.REQUEST + relation)
+            c.clear(3, [S.Q_QUERY_NEGATIVE, S.Q_MODE, S.Q_EVENT_CANDIDATE])
+            c.linear(3, {S.Q_BIND_TEMP[-2]: 1}, {S.Q_QUERY_NEGATIVE: 1})
+            c.linear(3, {mode: 1}, {S.Q_MODE: 1})
+            c.clear(3, S.Q_BIND_TEMP)
         queries = [{S.CURRENT + bit: 8 * 8192} for bit in range(14)] + [{S.ONE: 8 * 8192}, {S.ONE: 8}]
         if layer % 2:
             for relation in range(7):
@@ -445,37 +514,11 @@ def main():
                         c.linear(layer, {scratch + i: 1}, {destination + i: 1})
                 else:
                     c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
-            # A separate associative head asks for an exact proposition,
-            # retaining all event objects rather than one object per predicate.
-            truth_queries = ([{S.CURRENT + bit: 8 * 8192} for bit in range(14)] +
-                             [{S.Q_OBJECT + bit: 8 * 8192} for bit in range(14)] +
-                             [{S.REQUEST + r: 8 * 8192 * 4} for r in range(7)] +
-                             [{S.ONE: 8 * 8192}, {S.ONE: 8}])
-            truth_keys = ([{S.FACT_SUBJECT + bit: 1} for bit in range(14)] +
-                          [{S.FACT_OBJECT + bit: 1} for bit in range(14)] +
-                          [{S.FACT_RELATION + r: 1} for r in range(7)] +
-                          [{S.FACT_VALID: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
-            c.attention(layer, 8, truth_queries, truth_keys, [S.FACT_VALID, S.FACT_NEGATIVE],
-                        [S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_NEGATIVE])
-            # Permanent atomic properties use the same subject/object match;
-            # a missing value never constitutes evidence of a negative fact.
-            for relation in range(7):
-                slot = S.slot(S.FACTS, relation)
-                static_queries = ([{S.CURRENT + bit: 8 * 8192} for bit in range(14)] +
-                                  [{S.Q_OBJECT + bit: 8 * 8192} for bit in range(14)] +
-                                  [{S.REQUEST + relation: 8 * 8192}, {S.ONE: 8 * 8192}, {S.ONE: 8}])
-                static_keys = ([{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids["<bos>"])[bit]} for bit in range(14)] +
-                               [{slot + bit: 1} for bit in range(14)] +
-                               [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
-                c.attention(layer, 9 + relation, static_queries, static_keys, [slot + 14], [S.Q_STATIC_FOUND])
-            c.copy_unless(layer, S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_FOUND, S.Q_FOUND, S.Q_FOUND, 2)
-            c.gate(layer, [S.Q_STATIC_FOUND], [S.Q_EXPLICIT_FOUND, S.Q_FOUND], {S.Q_FOUND: 1})
-            c.clear(layer, [S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_NEGATIVE, S.Q_STATIC_FOUND])
             c.clear(layer, range(S.CURRENT, S.CURRENT + 14))
             # Negative class membership is stored as information but cannot
             # license traversal of the positive class edge.
             c.copy_unless(layer, S.RETURN, S.RETURN + 14, S.RETURN + 15, S.CURRENT, 14)
-        else:
+        elif layer < 10:
             # A sentinel needs a zero identity code, or its own token bits
             # add to the threshold and can defeat an exact memory match.
             keys = [{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids["<bos>"])[bit]} for bit in range(14)] + [{S.BOS_FLAG: 13}, {S.POS: 128}]
@@ -488,7 +531,38 @@ def main():
             for relation in range(1, 7):
                 scratch, destination = S.slot(S.RETURN, relation), S.slot(S.CONTEXT_FACTS, relation)
                 c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
-        c.clear(layer, range(S.RETURN, S.RETURN + 112))
+        if layer % 2 == 0:
+            # A separate associative head asks for an exact proposition,
+            # retaining all event objects rather than one object per predicate.
+            truth_queries = ([{S.SUBJECT + bit: 8 * 8192} for bit in range(14)] +
+                             [{S.Q_OBJECT + bit: 8 * 8192} for bit in range(14)] +
+                             [{S.REQUEST + r: 8 * 8192 * 4} for r in range(7)] +
+                             [{S.ONE: 8 * 8192}, {S.ONE: 8}])
+            truth_keys = ([{S.FACT_SUBJECT + bit: 1} for bit in range(14)] +
+                          [{S.FACT_OBJECT + bit: 1} for bit in range(14)] +
+                          [{S.FACT_RELATION + r: 1} for r in range(7)] +
+                          [{S.FACT_VALID: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
+            c.attention(layer, 2, truth_queries, truth_keys, [S.FACT_VALID, S.FACT_NEGATIVE],
+                        [S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_NEGATIVE])
+            # Permanent atomic properties use the same subject/object match;
+            # a missing value never constitutes evidence of a negative fact.
+            for relation in range(7):
+                slot = S.slot(S.FACTS, relation)
+                static_queries = ([{S.SUBJECT + bit: 8 * 8192} for bit in range(14)] +
+                                  [{S.Q_OBJECT + bit: 8 * 8192} for bit in range(14)] +
+                                  [{S.REQUEST + relation: 8 * 8192}, {S.ONE: 8 * 8192}, {S.ONE: 8}])
+                static_keys = ([{S.CODE + bit: 1, S.BOS_FLAG: -S.code(ids["<bos>"])[bit]} for bit in range(14)] +
+                               [{slot + bit: 1} for bit in range(14)] +
+                               [{S.ONE: 4, S.BOS_FLAG: -4}, {slot + 14: 1, S.BOS_FLAG: 32}, {S.POS: 128}])
+                c.attention(layer, 3 + relation, static_queries, static_keys, [slot + 14], [S.Q_STATIC_FOUND])
+            c.copy_unless(layer, S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_FOUND, S.Q_FOUND, S.Q_FOUND, 2)
+            c.gate(layer, [S.Q_STATIC_FOUND], [S.Q_EXPLICIT_FOUND, S.Q_FOUND], {S.Q_FOUND: 1})
+            c.clear(layer, [S.Q_EXPLICIT_FOUND, S.Q_EXPLICIT_NEGATIVE, S.Q_STATIC_FOUND])
+            if layer < 10:
+                c.copy(layer, S.SUBJECT, S.Q_MODE, S.SUBJECT, 14, scale=-1)
+                c.copy(layer, S.CURRENT, S.Q_MODE, S.SUBJECT, 14)
+        if layer < 10:
+            c.clear(layer, range(S.RETURN, S.RETURN + 112))
 
     # Block 10: current/previous word detectors and valid arithmetic bounds.
     # Reinitialize coordinates after scratch reuse so tiny roundoff cannot
@@ -496,6 +570,7 @@ def main():
     c.clear(10, range(S.OUTPUT, S.OUTPUT + 14))
     c.clear(10, range(S.MATH_BITS, S.MATH_BITS + 14))
     c.clear(10, range(S.STATES, S.STATES + 37))
+    c.clear(10, range(S.ATOM_TRUE, S.COMPOSED_KNOWN + 1))
     for i, word in enumerate(S.STATE_WORDS):
         c.word(10, word, {S.STATES + i: 1})
     for alias, canonical in (("cannot", "can"), ("need", "needs"), ("have", "has"), ("produce", "produces")):
@@ -541,18 +616,21 @@ def main():
     c.clear(11, range(S.GATES, S.GATES + 28))
     state = {word: S.STATES + i for i, word in enumerate(S.STATE_WORDS)}
     for relation in range(7):
-        c.gate(11, [state["<assistant>"], S.REQUEST + relation, S.slot(S.CONTEXT_FACTS, relation) + 14], [S.Q_MODE], targets={S.GATES: 1})
-    c.gate(11, [state["<assistant>"], S.Q_MODE, S.Q_FOUND], targets={S.GATES + 25: 1})
-    known_query = [state["<assistant>"], S.Q_MODE, S.Q_FOUND]
-    c.emit(11, "yes", known_query, [S.Q_NEGATIVE, S.Q_QUERY_NEGATIVE])
-    c.emit(11, "yes", known_query + [S.Q_NEGATIVE, S.Q_QUERY_NEGATIVE])
-    c.emit(11, "no", known_query + [S.Q_NEGATIVE], [S.Q_QUERY_NEGATIVE])
-    c.emit(11, "no", known_query + [S.Q_QUERY_NEGATIVE], [S.Q_NEGATIVE])
+        c.gate(11, [state["<assistant>"], S.REQUEST_SUPPORTED, S.REQUEST + relation, S.slot(S.CONTEXT_FACTS, relation) + 14], [S.Q_MODE], targets={S.GATES: 1})
+    # Each atom's own token position carries its resolved three-valued truth.
+    # Later positions may carry the latest atom for decoding, but are not
+    # additional evidence. Negation operates before connective reduction.
+    known_atom = [S.Q_EVENT_VALID, S.Q_MODE, S.Q_FOUND]
+    c.gate(11, known_atom, [S.Q_NEGATIVE, S.Q_QUERY_NEGATIVE], {S.ATOM_TRUE: 1})
+    c.gate(11, known_atom + [S.Q_NEGATIVE, S.Q_QUERY_NEGATIVE], targets={S.ATOM_TRUE: 1})
+    c.gate(11, known_atom + [S.Q_NEGATIVE], [S.Q_QUERY_NEGATIVE], {S.ATOM_FALSE: 1})
+    c.gate(11, known_atom + [S.Q_QUERY_NEGATIVE], [S.Q_NEGATIVE], {S.ATOM_FALSE: 1})
+    c.gate(11, [S.Q_EVENT_VALID, S.Q_MODE], [S.Q_FOUND], {S.ATOM_UNKNOWN: 1})
     for answer in ("yes", "no"):
         c.word(11, answer, {S.OUTPUT + i: bit for i, bit in enumerate(S.code(ids["."]))}, positive=[S.Q_MODE])
-    c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_HELLO], targets={S.GATES + 1: 1})
-    c.emit(11, "hello", [state["<assistant>"], S.REQUEST + S.Q_HELLO])
-    c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_ADD, S.STATES + 26, S.STATES + 27,
+    c.gate(11, [state["<assistant>"], S.REQUEST_SUPPORTED, S.REQUEST + S.Q_HELLO], targets={S.GATES + 1: 1})
+    c.emit(11, "hello", [state["<assistant>"], S.REQUEST_SUPPORTED, S.REQUEST + S.Q_HELLO])
+    c.gate(11, [state["<assistant>"], S.REQUEST_SUPPORTED, S.REQUEST + S.Q_ADD, S.STATES + 26, S.STATES + 27,
                 S.STATES + 28, S.STATES + 35, S.STATES + 36, S.NUM_FIRST_PRESENT, S.NUM_LAST_PRESENT], targets={S.GATES + 2: 1})
     # General bounded arithmetic: addition or |a-b|, plus a signed-result bit.
     # No table of operand pairs is constructed. Numeric values arrive through
@@ -578,33 +656,53 @@ def main():
         c.emit(11, word, [state["not"], S.STATES + 33, S.REQUEST + relation])
     for article, positive, negative in (("an", [S.CLASS_VOWEL], []), ("a", [], [S.CLASS_VOWEL])):
         c.emit(11, article, [state["is"], S.REQUEST + S.Q_CLASS] + positive, [S.OUTPUT_NEGATIVE] + negative)
-        c.emit(11, article, [state["not"], S.REQUEST + S.Q_CLASS, S.OUTPUT_NEGATIVE] + positive, negative)
-    c.emit(11, "in", [state["not"], S.REQUEST + S.Q_LOCATION, S.OUTPUT_NEGATIVE])
+        c.emit(11, article, [state["not"], S.STATES + 25, S.REQUEST + S.Q_CLASS, S.OUTPUT_NEGATIVE] + positive, negative)
+    c.emit(11, "in", [state["not"], S.STATES + 25, S.REQUEST + S.Q_LOCATION, S.OUTPUT_NEGATIVE])
     for word in ("a", "an"):
         c.gate(11, [state[word]], targets={S.GATES + 3: 1})
     for word, relation in (("can", 1), ("needs", 2), ("has", 3), ("produces", 4), ("in", 6)):
         c.gate(11, [state[word]], targets={S.GATES + 3 + relation: 1})
     c.gate(11, [state["is"], S.REQUEST + S.Q_TRAIT], [S.OUTPUT_NEGATIVE], {S.GATES + 8: 1})
-    c.gate(11, [state["not"], S.REQUEST + S.Q_TRAIT, S.OUTPUT_NEGATIVE], targets={S.GATES + 8: 1})
+    c.gate(11, [state["not"], S.STATES + 25, S.REQUEST + S.Q_TRAIT, S.OUTPUT_NEGATIVE], targets={S.GATES + 8: 1})
     for previous in range(18, 25):
         c.emit(11, ".", [S.STATES + previous])
     c.emit(11, ".", [S.STATES + 25, S.REQUEST + S.Q_TRAIT], [S.OUTPUT_NEGATIVE])
     c.emit(11, ".", [S.STATES + 34, S.REQUEST + S.Q_TRAIT, S.OUTPUT_NEGATIVE])
     c.emit(11, ".", [S.NUMBER, S.STATES + 17])
     c.emit(11, ".", [S.NUMBER, S.STATES + 30])
-    c.emit(11, "it", [state["."], S.REQUEST + S.Q_MULTI, S.slot(S.CONTEXT_FACTS, 1) + 14], [S.PHASE_STATE])
+    c.emit(11, "it", [state["."], S.REQUEST_SUPPORTED, S.REQUEST + S.Q_MULTI, S.slot(S.CONTEXT_FACTS, 1) + 14], [S.PHASE_STATE])
 
     # Block 12: copy subject/object token codes into the output representation.
     # A negative result emits the minus token, then its magnitude on the next
     # forward pass. The host only formats the spacing of these generated tokens.
+    # Monotone clause IDs dominate truth flags: reductions can only select the
+    # newest active clause. Within it, an existential flag wins over zero.
+    for head, (source, destination) in enumerate(zip(
+            (S.ATOM_TRUE, S.ATOM_FALSE, S.ATOM_UNKNOWN, S.Q_JOIN_AND, S.Q_JOIN_OR),
+            (S.ANY_TRUE, S.ANY_FALSE, S.ANY_UNKNOWN, S.ANY_AND, S.ANY_OR))):
+        c.attention(12, head, [{S.ONE: 8}], [{S.Q_GROUP: 8192 * 65536, source: 8192}],
+                    [source], [destination])
+    base = [state["<assistant>"], S.Q_MODE, S.REQUEST_SUPPORTED]
+    truth_outputs = [
+        ("yes", [S.ANY_TRUE], [S.ANY_AND, S.ANY_OR]),
+        ("no", [S.ANY_FALSE], [S.ANY_AND, S.ANY_OR]),
+        ("yes", [S.ANY_AND, S.ANY_TRUE], [S.ANY_OR, S.ANY_FALSE, S.ANY_UNKNOWN]),
+        ("no", [S.ANY_AND, S.ANY_FALSE], [S.ANY_OR]),
+        ("yes", [S.ANY_OR, S.ANY_TRUE], [S.ANY_AND]),
+        ("no", [S.ANY_OR, S.ANY_FALSE], [S.ANY_AND, S.ANY_TRUE, S.ANY_UNKNOWN]),
+    ]
+    for word, positive, negative in truth_outputs:
+        c.emit(12, word, base + positive, negative)
+        c.gate(12, base + positive, negative, {S.COMPOSED_KNOWN: 1})
     c.emit(12, "-", [S.GATES + 2, S.NEGATIVE_RESULT])
     c.gate(12, [S.GATES + 2], [S.NEGATIVE_RESULT], {S.GATES + 21: 1})
     c.gate(12, [S.STATES + 29, S.REQUEST + S.Q_ADD], targets={S.GATES + 21: 1})
-    c.emit(12, "i", [state["<assistant>"]], [S.GATES, S.GATES + 1, S.GATES + 2, S.GATES + 25])
+    c.emit(12, "i", [state["<assistant>"]], [S.GATES, S.GATES + 1, S.GATES + 2, S.Q_MODE])
     c.copy(12, S.SUBJECT, S.GATES, S.OUTPUT, 14)
     for relation in range(7):
         c.copy(12, S.slot(S.CONTEXT_FACTS, relation), S.GATES + 3 + relation, S.OUTPUT, 14)
     c.clip(13, range(S.OUTPUT, S.OUTPUT + 14))
+    c.emit(13, "i", [state["<assistant>"], S.Q_MODE], [S.COMPOSED_KNOWN])
 
     # Blocks 14-16: a directly written piecewise-linear integer-to-token circuit.
     # Its input is the sum of numeric values retrieved by attention, not Python math.
@@ -651,6 +749,7 @@ def main():
                         "New input words are represented by fixed pointer-token slots.",
                         "Arithmetic circuit is intended for two signed operands with magnitudes no greater than 999.",
                         "Object-specific truth questions and logical negation support seven predicates under a limited inversion grammar.",
+                        "Proposition composition uses three-valued reductions for homogeneous AND or OR; mixed-operator syntax and arbitrary requests remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }
     (MODEL / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

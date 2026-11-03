@@ -22,6 +22,7 @@ def main():
     p.add_argument('--signed-operands', action='store_true', help='Ablate unary sign and operand-count validity in v9')
     p.add_argument('--truth', action='store_true', help='Ablate proposition retrieval and its object identity in v10')
     p.add_argument('--query-negation', action='store_true', help='Ablate the separate v11 query-polarity bit')
+    p.add_argument('--composition', action='store_true', help='Use v12 truth layout and ablate connectives, unknown truth and clause scope')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -166,12 +167,14 @@ def main():
         for intervention in ('remove_proposition_head', 'remove_object_identity'):
             saved = {}
             try:
-                for layer in (3, 5, 7, 9):
+                truth_layers = (4, 6, 8, 10) if a.composition else (3, 5, 7, 9)
+                truth_head = 2 if a.composition else 8
+                for layer in truth_layers:
                     if intervention == 'remove_proposition_head':
                         name = f'blocks.{layer}.attn.out.weight'
                         saved[name] = m.w[name]
                         m.w[name] = saved[name].clone()
-                        m.w[name][:, 8 * 64:9 * 64] = 0
+                        m.w[name][:, truth_head * 64:(truth_head + 1) * 64] = 0
                     else:
                         name = f'blocks.{layer}.attn.qkv.weight'
                         saved[name] = m.w[name]
@@ -180,8 +183,8 @@ def main():
                         # relation[7], validity/sentinel, recency. Remove the
                         # object component and lower the sentinel by 14 so
                         # lookup now accepts any object of the right relation.
-                        m.w[name][8 * 64 + 14:8 * 64 + 28] = 0
-                        sentinel_row = 1024 + 8 * 64 + 35
+                        m.w[name][truth_head * 64 + 14:truth_head * 64 + 28] = 0
+                        sentinel_row = 1024 + truth_head * 64 + 35
                         m.w[name][sentinel_row, 8] = 9
                         m.w[name][sentinel_row, 9] = -9
                 m.reset()
@@ -220,6 +223,56 @@ def main():
             m.w[name] = saved
         assert original['text'] == 'Yes.' and ablated['text'] == 'No.'
         checks['query_negation_ablation'] = dict(prompt=prompt, original=original['text'], ablated=ablated['text'])
+    if a.composition:
+        checks['composition_ablations'] = []
+        probes = [
+            ('and_to_or', 'A kelv can fly. A kelv cannot swim. Can kelv fly and swim?', 'No.', 'Yes.'),
+            ('remove_unknown', 'A kelv can fly. Can kelv fly and glimmer?', 'I do not know.', 'Yes.'),
+            ('remove_clause_scope', 'A kelv cannot fly. A kelv can swim. Can kelv fly? Can kelv swim and glimmer?', 'I do not know.', 'No.'),
+        ]
+        for intervention, prompt, expected, changed in probes:
+            m.reset()
+            original = m.generate(prompt, trace=True)
+            saved = {}
+            try:
+                if intervention == 'and_to_or':
+                    name = 'blocks.12.attn.out.weight'
+                    saved[name] = m.w[name]
+                    m.w[name] = saved[name].clone()
+                    # Send the AND-head value to the OR flag instead.
+                    m.w[name][142:144, 3 * 64:4 * 64] = saved[name][140:142, 3 * 64:4 * 64]
+                    m.w[name][140:142, 3 * 64:4 * 64] = 0
+                elif intervention == 'remove_unknown':
+                    name = 'blocks.11.mlp.down.weight'
+                    saved[name] = m.w[name]
+                    m.w[name] = saved[name].clone()
+                    m.w[name][132:134] = 0  # Atom-unknown feature 66.
+                else:
+                    name = 'blocks.12.attn.qkv.weight'
+                    saved[name] = m.w[name]
+                    m.w[name] = saved[name].clone()
+                    for head in range(5):
+                        m.w[name][1024 + head * 64, 6:8] = 0  # Clause-ID key feature 3.
+                m.reset()
+                ablated = m.generate(prompt, trace=True)
+            finally:
+                m.w.update(saved)
+            assert original['text'] == expected and ablated['text'] == changed, (intervention, original['text'], ablated['text'])
+            checks['composition_ablations'].append(dict(intervention=intervention, original=original, ablated=ablated))
+        m.reset()
+        prompt = probes[1][1]
+        prefix = [s['bos'], s['user']] + m.tokenizer.encode(prompt) + [s['assistant']]
+        logits, cache, _ = m.forward(prefix)
+        generated = []
+        for _ in range(12):
+            full, _, _ = m.forward(prefix + generated)
+            token = int(logits[-1].argmax().item())
+            assert token == int(full[-1].argmax().item())
+            generated.append(token)
+            if token == s['eos']:
+                break
+            logits, cache, _ = m.forward([token], cache)
+        checks['compound_unknown_cached_and_full_prefix_tokens_match'] = True
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,
