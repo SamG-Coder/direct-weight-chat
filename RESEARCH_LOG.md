@@ -943,3 +943,21 @@ rules, baseline the frozen version, then investigate a shared Boolean
 saturation step before literal ranking. No frozen v16c source or weights have
 been altered. The trace helper only replays prompts and reads activations;
 diagnostic timings include capture overhead and are not speed benchmarks.
+
+## 2026-11-04: rule-position and Boolean-perturbation baselines
+
+Before changing the compiler, added 162 rule-position tests with seed 170001:
+one-to-three-link signed rules, reverse/shuffled order, facts after rules,
+missing/opposite premises, corrections and dialogue across eleven fixed and
+eight random offsets. Four-link and older-alternative proofs remain stress
+failures with their original semantic expectations. Frozen v16c scores 160/162
+CUDA and 154/162 CPU. The six additional CPU failures extend the previously
+published long-conversation failure beyond that single example.
+
+An external diagnostic injects 220 synthetic residuals into the actual
+compiled block-1 MLP. It perturbs intended Boolean inputs by up to 1/8 and
+checks the four rule-phase outputs and erasure of their old field roles.
+v16c passes 164/220 on both devices, with a maximum output error of 0.5.
+The test performs no conversational inference or parameter update; expected
+Booleans score the tensor output externally. These baseline reports precede
+the proposed shared saturating Boolean gate in the weight compiler.
