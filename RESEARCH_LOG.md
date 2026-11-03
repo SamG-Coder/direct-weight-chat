@@ -887,3 +887,27 @@ and the unchanged config hash. It has 995,881 nonzero parameters, still exactly
 inference runtime is unchanged. Three release archives are prepared offline,
 including the failed v16a/v16b candidates, with decompressed hashes and CRC
 verified. The full research goal remains active.
+
+### v16c CPU validation and long-conversation limitation
+
+CPU matches conditional development 269/293, guards 29/36 and legacy 185/185.
+All eight conditional interventions and the existing full integrity/intervention
+suite pass. The new 31-turn conversation, however, scores 28/31 CPU versus
+31/31 CUDA. CPU misses conditional-smoke-1, -3 and -4, returning unknown rather
+than the required positive/negative conclusions late in a long conversation.
+The previous 23 turns all retain their CPU passes. Exact failures are preserved;
+this release must not claim reliable long-context CPU rule inference.
+
+The source was frozen at `9c84c6ad4c4202764358ab0c48d4d2a4d7cc25e7`
+before selecting conditional seed 1711846539. Its fresh combinations are being
+evaluated without retuning the frozen checkpoint. The next experiment should
+trace the CPU rule-record/proof states at the long-conversation failures before
+adding alternative proof search or broader language structures.
+
+Fresh conditional seed 1711846539 scores 269/293 on both CPU and CUDA, with
+49/49 positive pairs, 49/49 signed applications and all tested one-to-three
+rule chains. The same 24 structural stress failures remain. The generator was
+known before freezing, so this is fresh-combination evidence, not an independent
+language benchmark. The frozen model has not been retuned. The default model
+was switched to v16c by replacing a hardlink, and the old v15a raw hash was
+verified unchanged. Publication will retain the long CPU conversation failure.

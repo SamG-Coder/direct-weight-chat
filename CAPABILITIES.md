@@ -1,6 +1,50 @@
 # Capabilities and limitations
 
-## Current v15a
+## Current v16c
+
+- Ground conditional development improves from v15a 152/293 to 269/293 on
+  CPU and CUDA. All 49 positive predicate pairs and 49 signed applications
+  pass. Missing/false premises, corrections, exact identity isolation and
+  chains up to three rule links pass under the controlled grammar.
+- Additional author-designed scope/dialogue guards score 29/36 on both
+  devices. Their seven failures include unsupported compound rules,
+  paraphrases that become false assertions, and open rule-derived answers.
+- All 33 matched CUDA suites retain every v15a pass: 5,499/5,619, with 130
+  improvements and zero regressions. Repeated cases/structures across suites
+  are included. Earlier post-freeze sets are now regression evidence.
+- v16a/v16b are preserved failed candidates. v16a corrupts some open answers;
+  v16b still creates a false rule row at an atomic entity token. Read-only
+  activation traces identify the field collisions; v16c uses question-mode
+  isolation and a separately bounded rule-terminator penalty.
+- The ordinary tensor runtime is unchanged. Rules and proof goals are neural
+  activations/KV state, never a Python rule database or a parameter update.
+  The frozen compiler reproduces the exact raw/config hashes.
+- Eight conditional interventions pass on CPU and CUDA, including each rule depth,
+  premise evidence, record validity, object identity, signed premises and the
+  typed-record guard. The original ineffective object intervention remains
+  recorded; the corrected intervention preserves its match-score reward.
+- The existing integrity/intervention suite passes on both devices. Legacy
+  CPU remains 185/185. The 31-turn long conversation passes 31/31 CUDA but
+  28/31 CPU: three later conditional answers become unknown. The earlier
+  23 turns retain their CPU passes. Long-context CPU rule inference remains
+  an unresolved numerical boundary, not a completed reliability claim.
+- After source freeze `9c84c6a`, conditional seed 1711846539 scores 269/293
+  on CPU and CUDA. Fresh names/combinations use a known author-designed
+  generator; fixed boundaries repeat. The frozen model was not retuned after
+  these results, and they do not establish independent language generalization.
+
+The circuit follows one latest matching rule at each step. It cannot find an
+older successful alternative when a newer rule has no proof, traverse more
+than three links, bind variables, evaluate compound rule premises or generate
+open answers from rules. General conversation, creative writing and code
+generation remain unachieved. Existing arithmetic, mixed query precedence,
+disjunctive assertion and multiple-parent limitations also remain.
+
+v16c has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **995,881
+nonzero parameters (0.3983524%)**. Raw weight SHA-256:
+`385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc`.
+
+## Historical v15a
 
 - The new 136-case binding development suite passes on CPU and CUDA. Frozen
   v14b scores 133/136 CPU and 136/136 CUDA. The three CPU repairs include two
