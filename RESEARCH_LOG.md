@@ -473,3 +473,23 @@ v13a has 928,135 nonzero parameters; raw SHA-256 is
 This candidate is frozen and committed before drawing a fresh assertion seed.
 Disjunction, conditional application, multiple-parent traversal, open-list
 generation and mixed Boolean precedence remain unresolved.
+
+## 2026-11-04: v13a fresh combinations and adversarial boundary audit
+
+After freeze commit `89e58f3`, seed 4176840521 reproduced 382/390 on CUDA and CPU.
+The generator and grammar were known before freezing; this is fresh combination
+evidence, not an independent language evaluation. Frozen v13a is not retuned.
+
+An additional 76-case audit was authored after the freeze using seed 629104045.
+CUDA scores 41/76. All eight new-subject positive controls pass, but the same
+clauses also create eight false object assertions: `X has wings and Y needs
+water` prematurely stores `X has Y`. Indirect `Tell me whether` requests create
+and retain unasserted facts (sixteen failures); Could you forms pass. At 2,048
+padding tokens and beyond, several fact and generation checks fail despite
+fitting the context window. Exact short/long outputs and timings are preserved.
+
+The next candidate will defer coordinated-object validation to the following
+token and exclude directive request clauses from assertion storage. The long-
+context numerical failures remain a separate unresolved issue. These published
+boundaries become development/regression evidence for that new candidate;
+they will not be relabeled as fresh evidence for it.
