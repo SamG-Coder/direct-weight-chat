@@ -170,9 +170,9 @@ def main():
         if name.endswith(("ln1.weight", "ln2.weight")) or name == "final_norm.weight":
             tensor[:] = gamma
 
-    relation_words = {"is": 0, "can": 1, "needs": 2, "need": 2, "has": 3, "have": 3,
+    relation_words = {"is": 0, "isn't": 0, "can": 1, "cannot": 1, "can't": 1, "needs": 2, "need": 2, "has": 3, "have": 3,
                       "produces": 4, "produce": 4, "exists": 6, "lives": 6, "located": 6}
-    query_words = {"can": (1,), "need": (2,), "needs": (2,), "has": (3,), "have": (3,),
+    query_words = {"can": (1,), "cannot": (1,), "can't": (1,), "need": (2,), "needs": (2,), "has": (3,), "have": (3,),
                    "produces": (4,), "produce": (4,), "describe": (5,), "color": (5,), "colour": (5,),
                    "where": (6,), "hello": (7,), "hi": (7,), "hey": (7,), "+": (8,), "plus": (8,),
                    "add": (8,), "sum": (8,), "calculate": (8,), "-": (8,), "explain": (0, 9), "about": (0, 9), "more": (1,)}
@@ -200,6 +200,10 @@ def main():
             put_pair(row, S.REL_FLAGS + relation_words[label], 1)
         if label == "-":
             put_pair(row, S.TOKEN_SUBTRACT, 1)
+        if label in ("not", "cannot", "can't", "isn't", "doesn't"):
+            put_pair(row, S.NEGATION, 1)
+        if label in ("does", "doesn't"):
+            put_pair(row, S.AUXILIARY, 1)
         if label in ("a", "an"):
             put_pair(row, S.ARTICLE, 1)
         if label in ("in", "on"):
@@ -225,7 +229,8 @@ def main():
                 for bit, value in enumerate(S.code(ids[values[key]])):
                     put_pair(row, base + bit, value)
                 put_pair(row, base + 14, 1)
-                put_pair(row, base + 15, float(values[key][0] in "aeiou"))
+                # Authored facts are positive. Slot 15 now stores polarity;
+                # article choice is derived from the selected object's code.
     for position in range(S.CONTEXT):
         row = tensors["position_embedding"][position]
         put_pair(row, S.POS, position / 128)
@@ -234,16 +239,16 @@ def main():
         add_reader(tensors["lm_head.weight"][tid], {S.OUTPUT + i: 8 * bit for i, bit in enumerate(S.code(tid))})
 
     c = Compiler(tensors, ids)
-    # Block 0: causal role, clause phase, and three previous-token pointers.
+    # Block 0: causal role, clause phase, and four previous-token pointers.
     c.latest(0, 0, S.ROLE_CANDIDATE, [S.ROLE_USER], [S.USER_STATE])
     c.latest(0, 1, S.PHASE_CANDIDATE, [S.PHASE_VALUE], [S.PHASE_STATE])
-    sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.REL_FLAGS, S.REL_FLAGS + 7)) + [S.ARTICLE, S.PREPOSITION]
+    sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.REL_FLAGS, S.REL_FLAGS + 7)) + [S.ARTICLE, S.PREPOSITION, S.NEGATION, S.AUXILIARY]
     for shift, destination in enumerate(S.PREV, 1):
         sharpness = 16
         queries = [{S.POS: 8 * 2 * sharpness * 128 ** 2, S.ONE: -8 * 2 * sharpness * shift * 128},
                    {S.ONE: -8 * sharpness * 128 ** 2}]
-        c.attention(0, shift + 1, queries, [{S.POS: 1}, {S.POS_SQ: 1}], sources, list(range(destination, destination + 24)))
-    c.latest(0, 5, S.ROLE_USER, [S.POS], [S.USER_START])
+        c.attention(0, shift + 1, queries, [{S.POS: 1}, {S.POS_SQ: 1}], sources, list(range(destination, destination + 26)))
+    c.latest(0, 6, S.ROLE_USER, [S.POS], [S.USER_START])
     for src, dst in ((S.ENTITY, S.LIVE_ENTITY), (S.QUERY_CANDIDATE, S.LIVE_QUERY), (S.NUMBER, S.LIVE_NUMBER)):
         c.gate(0, [src, S.USER_STATE], targets={dst: 1})
 
@@ -260,7 +265,7 @@ def main():
                 [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_FIRST, S.NUM_FIRST_POS, S.NUM_FIRST_PRESENT])
     c.latest(1, 4, S.LIVE_NUMBER, [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_LAST, S.NUM_LAST_POS, S.NUM_LAST_PRESENT])
     cases = []
-    p1, p2, p3 = S.PREV
+    p1, p2, p3, p4 = S.PREV
     for relation in range(7):
         pos = [p1 + 15 + (0 if relation == 5 else relation), p2 + 14, S.USER_STATE]
         neg = []
@@ -268,17 +273,40 @@ def main():
             neg = [S.ADJECTIVE]
         elif relation == 5:
             pos += [S.ADJECTIVE]
-        cases.append((relation, p2, pos, neg))
-    cases += [(0, p3, [p1 + 22, p2 + 15, p3 + 14, S.USER_STATE], []),
-              (6, p3, [p1 + 23, p2 + 21, p3 + 14, S.USER_STATE], []),
-              (6, p3, [p1 + 23, p2 + 15, p3 + 14, S.USER_STATE], [])]
-    for number, (relation, subject, pos, neg) in enumerate(cases):
-        c.gate(1, pos + [S.OBJECT_ALLOWED], neg, {S.GATES + number: 1})
-        gate = S.GATES + number
-        c.copy(2, subject, gate, S.FACT_SUBJECT, 14)
-        c.copy(2, S.CODE, gate, S.FACT_OBJECT, 14)
-        c.copy(2, S.VOWEL, gate, S.FACT_VOWEL)
-        c.unit(2, {gate: 1}, {S.FACT_VALID: 1, S.FACT_RELATION + relation: 1})
+        cases.append((relation, p2, pos, neg, p1 + 24))
+        # X REL not OBJECT; including copular traits. Explicit auxiliaries
+        # use separate patterns below, so this pattern excludes them.
+        signed_pos = [p1 + 24, p2 + 15 + (0 if relation == 5 else relation), p3 + 14, S.USER_STATE]
+        if relation == 5:
+            signed_pos += [S.ADJECTIVE]
+        signed_neg = [p1 + 25] + ([S.ADJECTIVE] if relation == 0 else [])
+        cases.append((relation, p3, signed_pos, signed_neg, None))
+        if relation in (2, 3, 4):
+            # X does not REL OBJECT / X doesn't REL OBJECT.
+            cases.append((relation, p4, [p1 + 15 + relation, p2 + 24, p3 + 25, p4 + 14, S.USER_STATE], [], None))
+            cases.append((relation, p3, [p1 + 15 + relation, p2 + 24, p2 + 25, p3 + 14, S.USER_STATE], [], None))
+    cases += [(0, p3, [p1 + 22, p2 + 15, p3 + 14, S.USER_STATE], [], p2 + 24),
+              (6, p3, [p1 + 23, p2 + 21, p3 + 14, S.USER_STATE], [], p2 + 24),
+              (6, p3, [p1 + 23, p2 + 15, p3 + 14, S.USER_STATE], [], p2 + 24),
+              (0, p4, [p1 + 22, p2 + 24, p3 + 15, p4 + 14, S.USER_STATE], [p2 + 25], None),
+              (6, p4, [p1 + 23, p2 + 24, p3 + 15, p4 + 14, S.USER_STATE], [p2 + 25], None)]
+    # Compile syntax alternatives into shared relation/subject/polarity gates,
+    # rather than allocating one semantic register per surface pattern.
+    for relation, subject, pos, neg, polarity_source in cases:
+        subject_gate = S.GATES + 7 + (p2, p3, p4).index(subject)
+        targets = {S.GATES + relation: 1, subject_gate: 1, S.GATES + 21: 1}
+        if polarity_source is None:
+            targets[S.GATES + 20] = 1
+        c.gate(1, pos + [S.OBJECT_ALLOWED], neg, targets)
+        if polarity_source is not None:
+            c.gate(1, pos + [S.OBJECT_ALLOWED, polarity_source], neg, {S.GATES + 20: 1})
+    for i, subject in enumerate((p2, p3, p4)):
+        c.copy(2, subject, S.GATES + 7 + i, S.FACT_SUBJECT, 14)
+    c.copy(2, S.CODE, S.GATES + 21, S.FACT_OBJECT, 14)
+    for relation in range(7):
+        c.linear(2, {S.GATES + relation: 1}, {S.FACT_RELATION + relation: 1})
+    c.linear(2, {S.GATES + 21: 1}, {S.FACT_VALID: 1})
+    c.linear(2, {S.GATES + 20: 1}, {S.FACT_NEGATIVE: 1})
 
     # Release local parsing scratch and initialize a neural graph cursor.
     # All writes within this MLP read its pre-MLP input, so clearing the old
@@ -292,6 +320,10 @@ def main():
     for i, word in enumerate(previous_words):
         c.word(2, word, {S.GATES + 10 + i: 1}, start=p1)
     c.word(2, "-", {S.GATES + 19: 1}, start=p1)
+    for alias, canonical in (("cannot", "can"), ("need", "needs"), ("have", "has"), ("produce", "produces")):
+        c.word(2, alias, {S.GATES + 10 + previous_words.index(canonical): 1}, start=p1)
+    for i, word in enumerate(("do", "does", "not")):
+        c.word(2, word, {S.GATES + 22 + i: 1}, start=p1)
 
     # Blocks 3,5,7,9: parallel associative lookup of seven predicates for the
     # current graph node, then follow its class edge. Four lookups support an
@@ -306,7 +338,7 @@ def main():
                 keys = [{S.FACT_SUBJECT + bit: 1} for bit in range(14)] + [
                     {S.FACT_RELATION + relation: 4, S.FACT_VALID: 1, S.BOS_FLAG: 18.5}, {S.POS: 128}]
                 c.attention(layer, relation, queries, keys,
-                            list(range(S.FACT_OBJECT, S.FACT_OBJECT + 14)) + [S.FACT_VALID, S.FACT_VOWEL],
+                            list(range(S.FACT_OBJECT, S.FACT_OBJECT + 14)) + [S.FACT_VALID, S.FACT_NEGATIVE],
                             list(range(scratch, scratch + 16)))
                 destination = S.slot(S.CONTEXT_FACTS, relation)
                 if layer == 3:
@@ -318,7 +350,9 @@ def main():
                 else:
                     c.copy_unless(layer, scratch, scratch + 14, destination + 14, destination, 16)
             c.clear(layer, range(S.CURRENT, S.CURRENT + 14))
-            c.copy(layer, S.RETURN, S.RETURN + 14, S.CURRENT, 14)
+            # Negative class membership is stored as information but cannot
+            # license traversal of the positive class edge.
+            c.copy_unless(layer, S.RETURN, S.RETURN + 14, S.RETURN + 15, S.CURRENT, 14)
         else:
             # A sentinel needs a zero identity code, or its own token bits
             # add to the threshold and can defeat an exact memory match.
@@ -342,10 +376,24 @@ def main():
     c.clear(10, range(S.STATES, S.STATES + 37))
     for i, word in enumerate(S.STATE_WORDS):
         c.word(10, word, {S.STATES + i: 1})
+    for alias, canonical in (("cannot", "can"), ("need", "needs"), ("have", "has"), ("produce", "produces")):
+        c.word(10, alias, {S.STATES + S.STATE_WORDS.index(canonical): 1})
     for i in range(len(previous_words)):
         c.linear(10, {S.GATES + 10 + i: 1}, {S.STATES + 17 + i: 1})
     c.word(10, "-", {S.STATES + 29: 1})
     c.linear(10, {S.GATES + 19: 1}, {S.STATES + 30: 1})
+    c.word(10, "does", {S.STATES + 31: 1})
+    for i in range(3):
+        c.linear(10, {S.GATES + 22 + i: 1}, {S.STATES + 32 + i: 1})
+    for relation in range(7):
+        c.gate(10, [S.REQUEST + relation, S.slot(S.CONTEXT_FACTS, relation) + 15],
+               [S.PHASE_STATE], {S.OUTPUT_NEGATIVE: 1})
+    c.gate(10, [S.PHASE_STATE, S.slot(S.CONTEXT_FACTS, 1) + 15], targets={S.OUTPUT_NEGATIVE: 1})
+    # A lexical property classifier, not a response bank. Pointer IDs carry
+    # the tokenizer's vowel class; all decisions still occur in this MLP.
+    for tid, label in enumerate(labels):
+        if label[0] in "aeiou" or dynamic_start <= tid < dynamic_start + 64:
+            c.word(10, label, {S.CLASS_VOWEL: 1}, start=S.CONTEXT_FACTS)
     for src, dst in ((S.NUM_FIRST, S.STATES + 26), (S.NUM_LAST, S.STATES + 27)):
         expression = {S.ONE: 1000, src: -1000}
         c.unit(10, expression, {dst: 1})
@@ -374,20 +422,33 @@ def main():
     c.unit(11, negative, {S.NEGATIVE_RESULT: 1}, threshold=2000)
     c.unit(11, negative, {S.NEGATIVE_RESULT: -1}, threshold=2001)
     for relation, word in enumerate(("is", "can", "needs", "has", "produces", "is", "exists")):
-        c.emit(11, word, [S.STATES + 17, S.ENTITY, S.REQUEST + relation])
-    for current, following in (("i", "do"), ("do", "not"), ("not", "know"), ("know", "."),
-                               ("hello", "."), ("it", "can"), ("exists", "in")):
+        c.emit(11, word, [S.STATES + 17, S.ENTITY, S.REQUEST + relation], [S.OUTPUT_NEGATIVE])
+        negative_word = "is" if relation in (0, 5, 6) else "cannot" if relation == 1 else "does"
+        c.emit(11, negative_word, [S.STATES + 17, S.ENTITY, S.REQUEST + relation, S.OUTPUT_NEGATIVE])
+    for current, following in (("i", "do"), ("do", "not"), ("know", "."),
+                               ("hello", "."), ("exists", "in")):
         c.emit(11, following, [state[current]])
-    c.emit(11, "an", [state["is"], S.REQUEST + S.Q_CLASS, S.CONTEXT_FACTS + 15])
-    c.emit(11, "a", [state["is"], S.REQUEST + S.Q_CLASS], [S.CONTEXT_FACTS + 15])
+    c.emit(11, "know", [state["not"], S.STATES + 32])
+    c.emit(11, "not", [S.STATES + 31])
+    c.emit(11, "not", [state["is"], S.OUTPUT_NEGATIVE])
+    c.emit(11, "can", [state["it"]], [S.OUTPUT_NEGATIVE])
+    c.emit(11, "cannot", [state["it"], S.OUTPUT_NEGATIVE])
+    for relation, word in ((2, "need"), (3, "have"), (4, "produce")):
+        c.emit(11, word, [state["not"], S.STATES + 33, S.REQUEST + relation])
+    for article, positive, negative in (("an", [S.CLASS_VOWEL], []), ("a", [], [S.CLASS_VOWEL])):
+        c.emit(11, article, [state["is"], S.REQUEST + S.Q_CLASS] + positive, [S.OUTPUT_NEGATIVE] + negative)
+        c.emit(11, article, [state["not"], S.REQUEST + S.Q_CLASS, S.OUTPUT_NEGATIVE] + positive, negative)
+    c.emit(11, "in", [state["not"], S.REQUEST + S.Q_LOCATION, S.OUTPUT_NEGATIVE])
     for word in ("a", "an"):
         c.gate(11, [state[word]], targets={S.GATES + 3: 1})
     for word, relation in (("can", 1), ("needs", 2), ("has", 3), ("produces", 4), ("in", 6)):
         c.gate(11, [state[word]], targets={S.GATES + 3 + relation: 1})
-    c.gate(11, [state["is"], S.REQUEST + S.Q_TRAIT], targets={S.GATES + 8: 1})
+    c.gate(11, [state["is"], S.REQUEST + S.Q_TRAIT], [S.OUTPUT_NEGATIVE], {S.GATES + 8: 1})
+    c.gate(11, [state["not"], S.REQUEST + S.Q_TRAIT, S.OUTPUT_NEGATIVE], targets={S.GATES + 8: 1})
     for previous in range(18, 25):
         c.emit(11, ".", [S.STATES + previous])
-    c.emit(11, ".", [S.STATES + 25, S.REQUEST + S.Q_TRAIT])
+    c.emit(11, ".", [S.STATES + 25, S.REQUEST + S.Q_TRAIT], [S.OUTPUT_NEGATIVE])
+    c.emit(11, ".", [S.STATES + 34, S.REQUEST + S.Q_TRAIT, S.OUTPUT_NEGATIVE])
     c.emit(11, ".", [S.NUMBER, S.STATES + 17])
     c.emit(11, ".", [S.NUMBER, S.STATES + 30])
     c.emit(11, "it", [state["."], S.REQUEST + S.Q_MULTI, S.slot(S.CONTEXT_FACTS, 1) + 14], [S.PHASE_STATE])

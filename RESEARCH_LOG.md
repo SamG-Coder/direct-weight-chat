@@ -131,3 +131,19 @@ denials, negative membership, multi-sentence output, articles and dialogue.
 Multiple values, yes/no questions, query/instruction scope and double negation
 remain explicit stress tests. No test strings are supplied to construction.
 The baseline outputs are in `results/polarity-v7a-baseline-cuda.json`.
+
+## 2026-11-03: v8a fact polarity
+
+Replaced unused per-property vowel flags with a negative-polarity bit and moved
+article choice to a neural lexical classifier. A shared parser gate layout handles
+four-token lookback, negative auxiliaries and contractions without storing answer
+strings. Polarity follows facts through graph retrieval; negative class edges do
+not license inheritance. Token grammar selects copular negation, cannot or
+auxiliary does/not/base-verb forms from those semantic fields.
+
+Polarity: 226/233 versus v7a's 53/233. Legacy: 185/185. Graph: 75/79; the former
+negative-fact stress now succeeds. Arithmetic remains 114/120. Retained regression:
+positive fly followed by negative swim returns the last denied action, exposing
+the existing one-value-per-relation answer selection. One otherwise correct
+negative sentence appends a token because tiny numerical residuals break the
+implicit all-zero EOS tie. This candidate is archived before correction.

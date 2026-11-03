@@ -25,22 +25,23 @@ ARTICLE, PREPOSITION = 40, 41
 REL_FLAGS = 42
 ADJECTIVE, VOWEL = 49, 50
 USER_START = 51
-FACTS = 64  # Seven slots of [14 object-code bits, present, starts-with-vowel].
+FACTS = 64  # Seven slots of [14 object-code bits, present, negative-polarity].
 USER_STATE, PHASE_STATE = 52, 53
-PREV = (180, 204, 228)  # code[14], entity, relation[7], article, preposition
+PREV = (180, 206, 232, 258)  # code[14], entity, relation[7], article, preposition, negation, auxiliary
 LIVE_ENTITY, LIVE_QUERY = 54, 55
 TOKEN_SUBTRACT, REQUEST_SUBTRACT, NEGATIVE_RESULT = 56, 57, 58
+NEGATION, AUXILIARY, OUTPUT_NEGATIVE = 59, 60, 61
 # Lifetimes matter: the three lookback buffers are dead after block 2 and become
 # a seven-relation scratch buffer. The subject and walk cursor are independent.
 RETURN = 176
 CONTEXT_FACTS = 288
 SUBJECT = 400
 SUBJECT_PRESENT = 414
-CURRENT, CURRENT_PRESENT = 415, 429
+CURRENT, CLASS_VOWEL = 415, 429  # Article feature is computed after traversal.
 REQUEST = 430
 FACT_SUBJECT = 440
 FACT_OBJECT = 454
-FACT_RELATION, FACT_VALID, FACT_VOWEL = 468, 475, 476
+FACT_RELATION, FACT_VALID, FACT_NEGATIVE = 468, 475, 476
 OUTPUT = 256  # RETURN is dead after graph traversal.
 MATH_BITS = 270
 NUM_FIRST, NUM_LAST, NUM_FIRST_POS, NUM_LAST_POS, NUM_FIRST_PRESENT, NUM_LAST_PRESENT = range(478, 484)
