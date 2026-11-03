@@ -594,3 +594,19 @@ The publication checks do not erase the 8/390 assertion stresses or the 11/76
 CUDA and 12/76 CPU fresh boundary failures. Those long-context failures are the
 next investigation. The broader goal of useful flexible conversation is active
 and remains unachieved.
+
+## 2026-11-04: context-position baseline before representation changes
+
+Added 126 deterministic position-shift cases covering existing generation,
+signed arithmetic, near/distant compound facts, negation, distinct subjects,
+three-hop inheritance, correction and active-question scope. Six requests run
+near the declared context capacity, including a 5,007-token prefix. Frozen v13d
+scores 61/126 on CUDA; some failures appear at 1,536 padding tokens.
+
+A separate diagnostic captures actual Q/K activations for all nine local
+lookback heads and runs attention with synthetic positional indices as V. Across
+all 5,048 positions per head, 15,900/45,432 addresses deviate by more than 0.01
+token, with errors as large as three tokens. This diagnostic does not alter
+inference, weights or answers. The quadratic positional scores are large enough
+that float32 error changes address selection. Tests and baseline evidence are
+committed before replacing the representation with bounded positional features.
