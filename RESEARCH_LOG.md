@@ -156,3 +156,18 @@ to resolve the no-output state despite small floating-point residuals. Polarity:
 Legacy remains 185/185, graph improves to 75/79, and arithmetic remains 114/120.
 The previous fresh graph and arithmetic sets were rerun as regressions with the
 same respective scores. This candidate is frozen before a fresh polarity seed.
+
+## 2026-11-03: polarity verification and signed-operand baseline
+
+Frozen v8b passed 227/233 with post-freeze seed 1760738774 on both CUDA and CPU.
+Polarity ablation changes a denied ability into a positive ability and permits
+inheritance from a denied class. Other integrity, causality, cache, graph and
+arithmetic ablations pass. This evidence is bounded by the known generator;
+the six scope/multiple-value stresses still fail, including one regression
+relative to v7a's accidental pass when it ignored a negative assertion.
+
+Created 159 signed-operand cases before implementation, covering negative inputs,
+unary/binary signs, prefix addition, dialogue, bounds and unsupported operand
+counts. Baseline v8b: 46/159. Syntax, multiplication, division and parentheses
+stress cases remain in this suite; old mathematical expected answers remain
+unchanged even when a new abstention check has a different purpose.

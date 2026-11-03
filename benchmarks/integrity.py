@@ -17,6 +17,7 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--device', default='auto', choices=['auto', 'cpu', 'cuda'])
     p.add_argument('--arithmetic', action='store_true', help='Also ablate the v7 signed arithmetic accumulator')
+    p.add_argument('--polarity', action='store_true', help='Also ablate the v8 fact-polarity register')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -87,6 +88,26 @@ def main():
     finally:
         m.w['lm_head.weight'] = saved_head
     assert checks['output_head_ablation_removes_text']
+    if a.polarity:
+        probes = [
+            ('A kelv cannot fly. What can a kelv do?', 'Kelv cannot fly.'),
+            ('A kelv is not a bird. What can a kelv do?', 'I do not know.'),
+        ]
+        checks['polarity_ablation'] = []
+        for prompt, expected in probes:
+            m.reset()
+            original = m.generate(prompt)
+            name = 'blocks.2.mlp.down.weight'
+            saved = m.w[name]
+            try:
+                m.w[name] = saved.clone()
+                m.w[name][952:954] = 0  # Fact polarity is logical feature 476.
+                m.reset()
+                ablated = m.generate(prompt)
+            finally:
+                m.w[name] = saved
+            assert original['text'] == expected and ablated['text'] != expected
+            checks['polarity_ablation'].append(dict(prompt=prompt, original=original['text'], ablated=ablated['text']))
     if a.arithmetic:
         m.reset()
         original_math = m.generate('149 - 370')
