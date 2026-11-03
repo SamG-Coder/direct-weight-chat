@@ -1,0 +1,963 @@
+{
+  "version": "v17a",
+  "suite": "conditional-scope-and-dialogue-guards",
+  "evaluation_status": "development-author-designed-after-v16a",
+  "created_utc": "2026-11-03T18:07:52.736839+00:00",
+  "git": {
+    "commit": "83a2f03afa98075286e7ec82b3e5c53f29cd4ceb",
+    "dirty": true
+  },
+  "model_sha256": "5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2",
+  "suite_sha256": "59aa6e238a9b61dc6ce0ce553bc7dc8b2aea1529db012ef68deee9c29d13566c",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 995905,
+  "device": "cpu",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "Bird can fly. If bird can fly then kelv has fins. Does kelv have fins?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.08322679999400862,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-000",
+      "category": "atomic_premise_and_override",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Bird cannot fly. If bird can fly then kelv has fins. Does kelv have fins?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.1601727999805007,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-001",
+      "category": "atomic_premise_and_override",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": " If bird can fly then kelv has fins. Does kelv have fins?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.07991010000114329,
+      "device": "cpu",
+      "prefix_tokens": 17,
+      "id": "rule-guard-002",
+      "category": "atomic_premise_and_override",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings? Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.15591590001713485,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-003",
+      "category": "scope_or_unsupported_compound",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings and tal has scales. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16136790000018664,
+      "device": "cpu",
+      "prefix_tokens": 25,
+      "id": "rule-guard-004",
+      "category": "scope_or_unsupported_compound",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Kelv can fly. If kelv can fly or kelv can swim then zor has wings. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16748220002045855,
+      "device": "cpu",
+      "prefix_tokens": 25,
+      "id": "rule-guard-005",
+      "category": "scope_or_unsupported_compound",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings? Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.15840270000626333,
+      "device": "cpu",
+      "prefix_tokens": 17,
+      "id": "rule-guard-006",
+      "category": "scope_or_unsupported_compound",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings and tal has scales. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.18256760001531802,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-007",
+      "category": "scope_or_unsupported_compound",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly or kelv can swim then zor has wings. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16154959998675622,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-008",
+      "category": "scope_or_unsupported_compound",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly implies zor has wings. Does zor have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.07538470000145026,
+      "device": "cpu",
+      "prefix_tokens": 16,
+      "id": "rule-guard-009",
+      "category": "unsupported_paraphrase_missing_premise",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Kelv cannot fly. Kelv can fly implies zor has wings. Does zor have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.07927360001485795,
+      "device": "cpu",
+      "prefix_tokens": 20,
+      "id": "rule-guard-010",
+      "category": "unsupported_paraphrase_false_premise",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Whenever kelv can fly, zor has wings. Does zor have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.07859400002053007,
+      "device": "cpu",
+      "prefix_tokens": 17,
+      "id": "rule-guard-011",
+      "category": "unsupported_paraphrase_missing_premise",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Kelv cannot fly. Whenever kelv can fly, zor has wings. Does zor have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.08648830000311136,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-012",
+      "category": "unsupported_paraphrase_false_premise",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings. Does zor have scales?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.15475879999576136,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-013",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings. Does tal have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16561100000399165,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-014",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly. If kelv can fly then zor has wings. Does zor need wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16822969997883774,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-015",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can swim. If kelv can fly then zor has wings. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.1622829999832902,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-016",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Tal can fly. If kelv can fly then zor has wings. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.1694691000157036,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-017",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv needs fly. If kelv can fly then zor has wings. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.1702891000022646,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-018",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv cannot fly. If kelv cannot fly then zor does not have wings. Does zor have wings?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.08535090001532808,
+      "device": "cpu",
+      "prefix_tokens": 23,
+      "id": "rule-guard-019",
+      "category": "literal_field_isolation",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly. If kelv cannot fly then zor has wings. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.1570507999858819,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-020",
+      "category": "literal_field_isolation",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does tal need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.09470210000290535,
+      "device": "cpu",
+      "prefix_tokens": 30,
+      "id": "rule-guard-021",
+      "category": "multi_turn_correction",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv cannot fly. Does tal need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.17311309999786317,
+      "device": "cpu",
+      "prefix_tokens": 44,
+      "id": "rule-guard-022",
+      "category": "multi_turn_correction",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Kelv can fly. Does tal need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.09872829998494126,
+      "device": "cpu",
+      "prefix_tokens": 61,
+      "id": "rule-guard-023",
+      "category": "multi_turn_correction",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Tal does not need water. Does tal need water?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.11907200000132434,
+      "device": "cpu",
+      "prefix_tokens": 77,
+      "id": "rule-guard-024",
+      "category": "multi_turn_correction",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "Does zor have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.1194612999970559,
+      "device": "cpu",
+      "prefix_tokens": 87,
+      "id": "rule-guard-025",
+      "category": "multi_turn_correction",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor have wings and does tal need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.09884289998444729,
+      "device": "cpu",
+      "prefix_tokens": 35,
+      "id": "rule-guard-026",
+      "category": "query_composition",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor have scales or does tal need water?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.09506260001217015,
+      "device": "cpu",
+      "prefix_tokens": 35,
+      "id": "rule-guard-027",
+      "category": "query_composition",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor have scales and does tal need water?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16547669999999925,
+      "device": "cpu",
+      "prefix_tokens": 35,
+      "id": "rule-guard-028",
+      "category": "query_composition",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Does zor not have wings?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.09459839999908581,
+      "device": "cpu",
+      "prefix_tokens": 31,
+      "id": "rule-guard-029",
+      "category": "query_composition",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. What does a computer have?",
+      "text": "Computer has processor.",
+      "token_ids": [
+        75,
+        144,
+        248,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.1446167000103742,
+      "device": "cpu",
+      "prefix_tokens": 31,
+      "id": "rule-guard-030",
+      "category": "open_request_isolation",
+      "expected": "Computer has processor.",
+      "acceptable": [
+        "Computer has processor."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Explain a computer.",
+      "text": "Computer is a machine. It can calculate.",
+      "token_ids": [
+        75,
+        170,
+        13,
+        191,
+        9,
+        172,
+        57,
+        55,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.27486899998621084,
+      "device": "cpu",
+      "prefix_tokens": 29,
+      "id": "rule-guard-031",
+      "category": "open_request_isolation",
+      "expected": "Computer is a machine. It can calculate.",
+      "acceptable": [
+        "Computer is a machine. It can calculate."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then tal needs water. Kelv can fly. Explain a bird.",
+      "text": "Bird is an animal. It can fly.",
+      "token_ids": [
+        46,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.26489009999204427,
+      "device": "cpu",
+      "prefix_tokens": 29,
+      "id": "rule-guard-032",
+      "category": "open_request_isolation",
+      "expected": "Bird is an animal. It can fly.",
+      "acceptable": [
+        "Bird is an animal. It can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. Kelv can fly. What does zor have?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.15559789998224005,
+      "device": "cpu",
+      "prefix_tokens": 21,
+      "id": "rule-guard-033",
+      "category": "open_rule_answer_stress",
+      "expected": "Zor has wings.",
+      "acceptable": [
+        "Zor has wings."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then kelv can fly. Does zor have wings?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.16965029999846593,
+      "device": "cpu",
+      "prefix_tokens": 26,
+      "id": "rule-guard-034",
+      "category": "cyclic_unknown",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "If kelv can fly then zor has wings. If zor has wings then kelv can fly. Kelv can fly. Does zor have wings?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.09596310000051744,
+      "device": "cpu",
+      "prefix_tokens": 30,
+      "id": "rule-guard-035",
+      "category": "cyclic_grounded",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+  "summary": {
+    "atomic_premise_and_override": {
+      "passed": 3,
+      "total": 3,
+      "success_rate": 1.0,
+      "median_response_ms": 83.22679999400862
+    },
+    "scope_or_unsupported_compound": {
+      "passed": 4,
+      "total": 6,
+      "success_rate": 0.6666666666666666,
+      "median_response_ms": 161.45874999347143
+    },
+    "unsupported_paraphrase_missing_premise": {
+      "passed": 0,
+      "total": 2,
+      "success_rate": 0.0,
+      "median_response_ms": 76.98935001099017
+    },
+    "unsupported_paraphrase_false_premise": {
+      "passed": 0,
+      "total": 2,
+      "success_rate": 0.0,
+      "median_response_ms": 82.88095000898466
+    },
+    "literal_field_isolation": {
+      "passed": 8,
+      "total": 8,
+      "success_rate": 1.0,
+      "median_response_ms": 163.94699999364093
+    },
+    "multi_turn_correction": {
+      "passed": 5,
+      "total": 5,
+      "success_rate": 1.0,
+      "median_response_ms": 119.07200000132434
+    },
+    "query_composition": {
+      "passed": 4,
+      "total": 4,
+      "success_rate": 1.0,
+      "median_response_ms": 96.95274999830872
+    },
+    "open_request_isolation": {
+      "passed": 3,
+      "total": 3,
+      "success_rate": 1.0,
+      "median_response_ms": 264.89009999204427
+    },
+    "open_rule_answer_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 155.59789998224005
+    },
+    "cyclic_unknown": {
+      "passed": 1,
+      "total": 1,
+      "success_rate": 1.0,
+      "median_response_ms": 169.65029999846593
+    },
+    "cyclic_grounded": {
+      "passed": 1,
+      "total": 1,
+      "success_rate": 1.0,
+      "median_response_ms": 95.96310000051744
+    },
+    "all": {
+      "passed": 29,
+      "total": 36,
+      "success_rate": 0.8055555555555556,
+      "median_response_ms": 155.75689999968745
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

@@ -1,6 +1,41 @@
 # Capabilities and limitations
 
-## Current v16c
+## Current v17a
+
+- Rule-position development improves from v16c 154/162 to 160/162 on CPU;
+  CUDA stays 160/162. The 31-turn long conversation improves from 28/31 to
+  31/31 CPU and remains 31/31 CUDA. The same two semantic stress failures
+  remain: four-link inference and an older successful alternative rule.
+- A shared saturating Boolean primitive repairs the measured phase-amplitude
+  error before attention ranking. The actual compiled MLP passes 220/220
+  synthetic perturbation checks on each device, versus 164/220 for v16c.
+  Maximum measured output error is below 0.000001. The test's intended Boolean
+  inputs vary by up to 1/8; it does not establish arbitrary error tolerance.
+- Restoring only the old context gate makes the isolated CPU failure return.
+  All saved weights remain unchanged during this intervention.
+- All 36 matched CUDA suites retain identical outputs: 5,959/6,105. Four
+  matched CPU suites gain nine passes with zero regressions. These totals
+  repeat historical structures. Short conditional/guard scores remain
+  269/293 and 29/36 on both devices.
+- The existing 27 integrity check groups and eight conditional interventions
+  pass on CPU and CUDA. The runtime, tokenization and tensor layout are
+  unchanged. Frozen-source rebuilding reproduces exact raw/config hashes.
+- After source commit `83a2f03afa98075286e7ec82b3e5c53f29cd4ceb`, fresh seed
+  2165866013 scores 160/162 on each device. The known generator supplies new
+  combinations/offsets and repeated fixed structures. No frozen weights were
+  retuned after these results; this is not independent language evaluation.
+
+The repair improves measured numerical reliability. It does not add proof
+search, deeper reasoning, variable binding, compound rule premises, open
+answers from rules, broader mathematics, creative writing, code generation
+or useful general conversation. Unsupported paraphrases can still produce
+false assertions. The research objective remains active.
+
+v17a has exactly 250,000,000 float32 parameters / 1,000,000,000 bytes, with
+**995,905 nonzero parameters (0.398362%)**. Raw weight SHA-256:
+`5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2`.
+
+## Historical v16c
 
 - Ground conditional development improves from v15a 152/293 to 269/293 on
   CPU and CUDA. All 49 positive predicate pairs and 49 signed applications

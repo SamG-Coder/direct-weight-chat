@@ -977,3 +977,22 @@ failures are retained. The archived source rebuild reproduces raw SHA-256
 `5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2`
 and the unchanged config hash. CPU position/conversation validation is still
 running. The source is committed before selecting any fresh rule-position seed.
+
+### v17a freeze, CPU repair and fresh combinations
+
+Source commit `83a2f03afa98075286e7ec82b3e5c53f29cd4ceb` froze the candidate
+before seed 2165866013 was selected. CPU development reaches 160/162 rule-position
+cases and 31/31 long-conversation turns, versus v16c 154/162 and 28/31.
+The conditional 269/293 and guard 29/36 CPU suites are unchanged. Across these
+four matched CPU suites there are nine improvements and zero regressions.
+
+The targeted CPU intervention replaces only the two context-flag MLP rows
+with the old unsaturated gate. Case rule-position-059 changes from `Yes.` to
+`I do not know.`, recreating the failure while the saved file stays unchanged.
+CPU and CUDA each pass the existing 27 integrity check groups and all eight
+conditional interventions. The generic inference runtime is unchanged.
+
+Fresh rule-position results are 160/162 on CPU and CUDA. A fourth rule link
+and an older successful alternative still fail. These are new combinations
+and offsets from the known generator, not independent language evidence.
+The frozen source and weights were not retuned after these results.
