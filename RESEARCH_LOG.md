@@ -1038,3 +1038,25 @@ perturbation checks. Replacing only the context gate with its old unsaturated
 form recreates the CPU failure. `results/publication-v0.9.json` is derived from
 those reports and retains the broader semantic limits. No frozen source or
 weights changed after the fresh seed or publication checks.
+
+## 2026-11-04: experiment finished
+
+The user ended the research experiment. v17a is the final checkpoint; no further
+model development is planned as part of this experiment. Publication work may
+continue to preserve the checkpoint, evidence and an accurate demonstration.
+
+The original objective was not achieved: directly constructing a 1 GB neural
+model without training or pretrained parameters did not yield useful,
+open-ended chat. Controlled grammar, fact memory/corrections, bounded signed
+arithmetic and short ground-rule chains work in the measured cases. They do
+not amount to flexible conversation or general language understanding.
+
+The final alternative-proof baseline is 29/104 on both devices. All 75 failures
+remain unresolved, alongside earlier failures in broader reasoning, syntax,
+creative writing and code generation. The proposed parallel proof-search
+architecture above was never implemented. The result is a failed attempt at
+the original objective, not a proof of mathematical impossibility.
+
+All historical checkpoints, exact outputs, test expectations and hashes are
+retained. Final publication assets must use the frozen v17a model and identify
+replays, timing edits and limitations explicitly; they must not invent outputs.

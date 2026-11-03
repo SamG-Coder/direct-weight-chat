@@ -1,8 +1,14 @@
 # direct-weight-chat
 
+> **Experiment finished — 4 November 2026.**
+> **We did not achieve useful, open-ended chat under these constraints.**
+> v17a is the final checkpoint. Research has stopped; the source, weights,
+> successful tests and failed tests are preserved for inspection and reproduction.
+
 An experimental 1 GB neural network built by writing its weights analytically:
 no training, pretrained parameters, downloaded datasets, or network access during
-construction and inference. GitHub is used only to publish code and evidence.
+construction and inference. Online services are used only to publish artifacts
+and verify their delivery.
 
 **This is a research experiment, not a useful general-purpose chat model.** The
 autoregressive model emits tokens through an ordinary causal transformer, with
@@ -15,7 +21,39 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
-The current frozen version is **v17a**, supplied in the
+## Final outcome
+
+The original goal was a model that could generate its own useful conversational
+responses without training or pretrained weights. **That goal was not met.**
+The experiment produced bounded, manually compiled neural algorithms for a
+restricted grammar, context facts, corrections, signed arithmetic and short
+reasoning chains. It did not produce flexible language understanding, useful
+general conversation, creative writing or code generation.
+
+Successful controlled tests demonstrate those specific circuits. They do not
+establish general intelligence, and the 1 GB parameter count does not imply
+learned knowledge. This result shows that this attempt failed to meet its goal;
+it is not a proof that every conceivable untrained architecture must fail.
+
+| Final measured result | CPU | CUDA |
+|---|---:|---:|
+| Long conversation replay | 31/31 | 31/31 |
+| Ground conditional development | 269/293 | 269/293 |
+| Rule-position development | 160/162 | 160/162 |
+| Fresh rule-position combinations after source freeze | 160/162 | 160/162 |
+| Additional scope/dialogue guards | 29/36 | 29/36 |
+| Alternative proof-search baseline | **29/104** | **29/104** |
+
+These are author-designed tests of a controlled grammar, not a general-chat
+benchmark. Earlier post-freeze sets became regression tests for later versions.
+All exact prompts, responses, expected answers, timings, model hashes and
+failures remain in [results](results/README.md). The final checkpoint has
+**995,905 nonzero parameters (0.398362%)**; most of its 250 million parameters
+are zero. Small compressed downloads reflect that sparsity.
+
+## Final checkpoint and regression evidence
+
+The final frozen version is **v17a**, supplied in the
 [v0.9 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.9.0-experiment).
 It repairs CPU rule retrieval across long contexts. A shared saturating Boolean
 circuit makes rule-phase flags stable before sharp attention ranking. Rules
@@ -64,10 +102,10 @@ unsupported. Some paraphrases, including `implies` and `whenever`, can be
 misread as unconditional assertions. Their false positives remain scored failures.
 v17a uses **995,905 nonzero parameters (0.398362%)** of the 250 million slots.
 Earlier releases preserve every failed checkpoint and its original results.
-The next capability baseline, [alternative proof search](results/proof-search-v17a-cpu.json),
+The final unfinished capability baseline, [alternative proof search](results/proof-search-v17a-cpu.json),
 scores **29/104 on CPU and CUDA**. It tests whether a valid proof can be found
-among multiple rules and mixed branches. No improvement has been implemented
-for that suite yet; all 75 failures remain recorded.
+among multiple rules and mixed branches. The experiment ended before an
+improvement was implemented for that suite; all 75 failures remain recorded.
 
 [Fresh-download verification](results/publication-v0.9.json) checks the public
 archive digest, checksum file, decompressed raw/config hashes, ZIP CRC and
@@ -125,7 +163,7 @@ python -m benchmarks.conditional_integrity --model build/current --version curre
 ## Evidence and research
 
 - [Version comparison](results/README.md): exact outputs and failures for each build.
-- [Research log](RESEARCH_LOG.md): experiments, failures and next steps.
+- [Research log](RESEARCH_LOG.md): experiments, failures, abandoned next steps and final closure.
 - [Capabilities](CAPABILITIES.md): measured abilities and limits.
 - [Architecture](ARCHITECTURE.md): mathematical construction and runtime boundary.
 - [v0.7 release verification](results/publication-v0.7.json): the downloaded archive matches public/local checksums, frozen source and decompressed hashes. Fresh tagged-checkout integrity and all interventions pass on CPU/CUDA; its 23-turn long conversation passes on both devices.

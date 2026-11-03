@@ -1,6 +1,11 @@
 # Capabilities and limitations
 
-## Current v17a
+**Experiment finished on 4 November 2026.** v17a is the final checkpoint.
+Useful, open-ended chat was not achieved without training or pretrained weights.
+The measured narrow capabilities below are preserved as the final result;
+research is no longer active.
+
+## Final v17a
 
 - Rule-position development improves from v16c 154/162 to 160/162 on CPU;
   CUDA stays 160/162. The 31-turn long conversation improves from 28/31 to
@@ -38,7 +43,7 @@ The repair improves measured numerical reliability. It does not add proof
 search, deeper reasoning, variable binding, compound rule premises, open
 answers from rules, broader mathematics, creative writing, code generation
 or useful general conversation. Unsupported paraphrases can still produce
-false assertions. The research objective remains active.
+false assertions. The experiment ended with these limitations unresolved.
 
 v17a has exactly 250,000,000 float32 parameters / 1,000,000,000 bytes, with
 **995,905 nonzero parameters (0.398362%)**. Raw weight SHA-256:
