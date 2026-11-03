@@ -1,0 +1,41 @@
+{
+  "version": "v16c",
+  "model_sha256": "385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc",
+  "case_id": "conditional-smoke-1",
+  "devices": {
+    "cpu": {
+      "prefix_tokens": 3398,
+      "answer": "I do not know.",
+      "older_premise_position": 3360,
+      "newer_premise_position": 3369,
+      "older_context_flag": 1.0,
+      "newer_context_flag": 0.9990235567092896,
+      "context_coefficient": 131072,
+      "derived_older_context_score_advantage": 127.984375,
+      "newer_recency_advantage": 72,
+      "selected_premise_clause": 26.218746185302734,
+      "required_clause": 26.2890625,
+      "rule_valid_after_block2": 0.0,
+      "weights_unchanged": true
+    },
+    "cuda": {
+      "prefix_tokens": 3398,
+      "answer": "Yes.",
+      "older_premise_position": 3360,
+      "newer_premise_position": 3369,
+      "older_context_flag": 1.0,
+      "newer_context_flag": 1.0,
+      "context_coefficient": 131072,
+      "derived_older_context_score_advantage": 0.0,
+      "newer_recency_advantage": 72,
+      "selected_premise_clause": 26.2890625,
+      "required_clause": 26.2890625,
+      "rule_valid_after_block2": 1.0029302835464478,
+      "weights_unchanged": true
+    }
+  },
+  "finding": "CPU rule-phase amplitude differences favor an older literal over the newer same-clause literal. The later scope guard rejects the old clause, so the second rule is never recorded.",
+  "evidence_boundary": "The score contributions here are derived externally from captured residuals and the frozen compiler coefficients; they are not a replacement forward pass or a separately captured fused attention score.",
+  "next_experiment": "Add position-varied multi-rule tests before implementing a shared Boolean saturation barrier before rule-literal candidate ranking.",
+  "frozen_model_modified": false
+}

@@ -78,3 +78,11 @@ python -m chat1gb_autoregressive.chat --device auto
 The v16a/v16b archives extract to their historical version directories.
 Every earlier release remains available. v16c raw SHA-256:
 `385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc`.
+
+Fresh-download validation verifies all three published archive sizes/digests,
+the checksum file, decompressed raw/config hashes, ZIP CRC and frozen compiler
+source against a clean tagged clone. CPU and CUDA each pass integrity and all
+eight conditional interventions from that checkout. Its conversation replay
+reproduces **31/31 CUDA and 28/31 CPU**, with the same three CPU failures.
+[Publication evidence](https://github.com/SamG-Coder/direct-weight-chat/blob/main/results/publication-v0.8.json)
+records those failures explicitly. No source or saved weights were retuned.

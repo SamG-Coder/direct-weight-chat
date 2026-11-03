@@ -911,3 +911,35 @@ known before freezing, so this is fresh-combination evidence, not an independent
 language benchmark. The frozen model has not been retuned. The default model
 was switched to v16c by replacing a hardlink, and the old v15a raw hash was
 verified unchanged. Publication will retain the long CPU conversation failure.
+
+### v0.8 published and independently downloaded
+
+Published tag v0.8.0-experiment at `171f9a5fcc8c0166047b61e880d2c72a4a511f7b`,
+including archives for v16a, v16b and v16c. Downloaded archive sizes/digests and
+the checksum file match the public assets. All three raw/config hashes, ZIP
+CRCs and frozen-source manifests match a clean tagged checkout. Extraction
+leaves that source checkout clean.
+
+Fresh CPU/CUDA integrity and all eight conditional interventions pass. The
+31-turn replay reproduces 31/31 CUDA and 28/31 CPU with exactly the same three
+CPU failures. `results/publication-v0.8.json` explicitly marks the conversation
+as not all passed. No saved weights or frozen compiler were changed after the
+fresh seed or publication tests. A bounded read-only dialogue trace is being
+captured to localize the CPU difference before the next model experiment.
+
+The completed matching CPU/CUDA traces replay the same conversation and token
+prefix (3,398 tokens), copying only the final 100 positions for diagnostics.
+CUDA records both rules; CPU loses the second rule at position 3,374. Its
+newer literal's rule-context flag is 0.9990235567 versus 1.0 for the older
+literal. The 131,072 ranking coefficient gives that older flag about 127.98
+score advantage, exceeding the newer literal's 72-point recency advantage.
+The head returns the older clause coordinate, which the scope guard correctly
+rejects. These score contributions are derived externally from captured
+residuals and frozen coefficients, not measured fused attention scores.
+
+`results/rule-phase-diagnosis-v16c.json` summarizes the traces. This localizes
+the next test-first improvement: vary positions/order of multiple conditional
+rules, baseline the frozen version, then investigate a shared Boolean
+saturation step before literal ranking. No frozen v16c source or weights have
+been altered. The trace helper only replays prompts and reads activations;
+diagnostic timings include capture overhead and are not speed benchmarks.

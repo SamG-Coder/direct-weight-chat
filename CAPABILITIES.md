@@ -32,6 +32,11 @@
   on CPU and CUDA. Fresh names/combinations use a known author-designed
   generator; fixed boundaries repeat. The frozen model was not retuned after
   these results, and they do not establish independent language generalization.
+- Public v0.8 download validation checks all three archive digests/sizes,
+  checksum entries, raw/config hashes, CRC and frozen source. A clean tagged
+  checkout passes integrity and all eight conditional interventions on both
+  devices, reproducing 31/31 CUDA and 28/31 CPU conversation scores. The same
+  CPU failures remain explicit in `results/publication-v0.8.json`.
 
 The circuit follows one latest matching rule at each step. It cannot find an
 older successful alternative when a newer rule has no proof, traverse more

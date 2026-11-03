@@ -1,0 +1,101 @@
+{
+  "created_utc": "2026-11-03T17:41:29.560324+00:00",
+  "repository": "https://github.com/SamG-Coder/direct-weight-chat",
+  "visibility": "public",
+  "release_url": "https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.8.0-experiment",
+  "tag": "v0.8.0-experiment",
+  "release_commit": "171f9a5fcc8c0166047b61e880d2c72a4a511f7b",
+  "draft": false,
+  "prerelease": true,
+  "asset_count": 4,
+  "assets": [
+    {
+      "name": "autoregressive-v16a.zip",
+      "size": 1649496,
+      "digest": "sha256:18770d4d90c1646b1845b69f61150b1903bb79f513f27d47890c6ff6949409ca",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/SamG-Coder/direct-weight-chat/releases/download/v0.8.0-experiment/autoregressive-v16a.zip"
+    },
+    {
+      "name": "autoregressive-v16b.zip",
+      "size": 1649685,
+      "digest": "sha256:6bdb4a425049c0203b084775ba9c07840ece73c3b0aea844bf8bb939041e4dd8",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/SamG-Coder/direct-weight-chat/releases/download/v0.8.0-experiment/autoregressive-v16b.zip"
+    },
+    {
+      "name": "autoregressive-v16c.zip",
+      "size": 1649759,
+      "digest": "sha256:1158df7ccc6235b70570557b3e77301c4761031d5209948abfd2062c2423cac7",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/SamG-Coder/direct-weight-chat/releases/download/v0.8.0-experiment/autoregressive-v16c.zip"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 270,
+      "digest": "sha256:3c83e5e32481c6bd3f0cd142d3c873a8cd5a9172cedc924edf372abf3a2c8f18",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/SamG-Coder/direct-weight-chat/releases/download/v0.8.0-experiment/SHA256SUMS.txt"
+    }
+  ],
+  "all_uploaded_archive_hashes_and_sizes_match": true,
+  "downloaded_checksum_file_hash_verified": true,
+  "all_downloaded_archives_decompressed_and_source_verified": true,
+  "fresh_clone_and_download_verified": true,
+  "fresh_integrity_checks_passed": [
+    "cuda",
+    "cpu"
+  ],
+  "fresh_conditional_interventions_passed": {
+    "cuda": 8,
+    "cpu": 8
+  },
+  "fresh_smoke_same_outputs_as_local": true,
+  "fresh_smoke_scores": {
+    "cuda": {
+      "passed": 31,
+      "total": 31,
+      "success_rate": 1.0,
+      "median_response_ms": 111.27550000674091
+    },
+    "cpu": {
+      "passed": 28,
+      "total": 31,
+      "success_rate": 0.9032258064516129,
+      "median_response_ms": 2788.023700006306
+    }
+  },
+  "fresh_smoke_all_passed": false,
+  "retained_publication_smoke_failures": [
+    {
+      "device": "cpu",
+      "id": "conditional-smoke-1",
+      "prompt": "Kelv can shimmer. Does tal need water?",
+      "expected": "Yes.",
+      "actual": "I do not know."
+    },
+    {
+      "device": "cpu",
+      "id": "conditional-smoke-3",
+      "prompt": "Kelv can shimmer. If tal needs water then pel cannot glimmer. Can pel glimmer?",
+      "expected": "No.",
+      "actual": "I do not know."
+    },
+    {
+      "device": "cpu",
+      "id": "conditional-smoke-4",
+      "prompt": "Can pel not glimmer?",
+      "expected": "Yes.",
+      "actual": "I do not know."
+    }
+  ],
+  "raw_weight_sha256": "385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc",
+  "inference_runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "retained_capability_limits": [
+    "CPU misses three conditional conclusions late in the long conversation; the original 23 turns remain correct.",
+    "Only the latest matching rule is followed, at most three links; alternative proofs, variables, compound premises and open rule-derived answers remain unsupported.",
+    "Unsupported implies/whenever paraphrases can become false assertions.",
+    "General conversation, creative writing and code generation remain unachieved."
+  ],
+  "note": "Fresh checks use the clean published tag and downloaded v16c bytes. All three archived candidates are source/hash/CRC verified. The CPU conversation failure is reproduced and retained. No saved model was retuned after fresh evaluation."
+}

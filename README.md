@@ -68,6 +68,12 @@ CPU and CUDA**. These are fresh names/combinations from the known conditional
 generator, not independently designed language tests. The frozen checkpoint
 was not retuned after observing them.
 
+[Fresh-download verification](results/publication-v0.8.json) confirms all three
+published archives against checksums, raw/config hashes, ZIP CRC and frozen
+source in a clean tagged clone. Both devices pass integrity and eight conditional
+interventions; the conversation reproduces 31/31 CUDA and 28/31 CPU. The same
+three CPU failures remain visible in the publication evidence.
+
 ## Run offline
 
 Use a Python environment with NumPy for construction and PyTorch for inference
