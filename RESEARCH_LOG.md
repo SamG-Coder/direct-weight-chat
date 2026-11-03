@@ -633,3 +633,25 @@ The failed candidate is frozen with raw SHA-256
 `2dd59a1e327deaa42f10d5cb18152052b52e19358dc5dd2bf1ad2acfc4a96915`.
 The next candidate will canonicalize fact identity/metadata coordinates before
 proposition retrieval, rather than add a correction-specific answer rule.
+
+## 2026-11-04: v14b shared fact saturation restores corrections
+
+Added a shared block-3 saturation barrier for subject/object identity and fact
+metadata before proposition lookup. This removes the extra magnitude of the
+delayed assertion path without changing any grammar rule. Assertions return to
+382/390 in all three existing assertion suites. Context remains 126/126 and both
+boundary sets are 76/76 on CUDA. All 26 matched v13d/v14b suites retain their
+earlier passes; the adjacent-version report preserves all 48 v14a regressions.
+
+The 45,432-address audit remains exact on CPU and CUDA. Integrity checks pass,
+including phase-removal interventions, long-prefix full/cache parity and a new
+controlled amplitude test: scaling delayed identity writes by 1.001 preserves
+the later denial with saturation, but removing saturation makes the older
+positive fact win. Diagnostic changes use restored tensor copies, not saved
+weight updates. Frozen source reproduces raw/config hashes exactly.
+
+v14b has 960,705 nonzero parameters; raw SHA-256 is
+`61deda2326ad355a3b2921e608e37de3e47e7949f445753cb8a0b78ad7288646`.
+The candidate is committed before choosing a fresh context seed. These numerical
+repairs do not establish general language understanding; broader grammar,
+conditional reasoning, creative writing and code generation remain unachieved.

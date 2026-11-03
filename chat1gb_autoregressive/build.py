@@ -646,6 +646,12 @@ def main():
             c.linear(3, {S.Q_BIND_TEMP[-2]: 1}, {S.Q_QUERY_NEGATIVE: 1})
             c.linear(3, {mode: 1}, {S.Q_MODE: 1})
             c.clear(3, S.Q_BIND_TEMP)
+            # Asserted identities and metadata are digital coordinates in
+            # {-1,0,1}. Saturate them before exact proposition retrieval so
+            # tiny construction-path magnitude differences cannot masquerade
+            # as stronger evidence and compete with recency. This shared
+            # barrier covers all subjects, objects, predicates and polarities.
+            c.clip(3, range(S.FACT_SUBJECT, S.FACT_NEGATIVE + 1))
         queries = [{S.CURRENT + bit: 8 * 8192} for bit in range(14)] + [{S.ONE: 8 * 8192}, {S.ONE: 8}]
         if layer % 2:
             for relation in range(7):
@@ -903,6 +909,7 @@ def main():
                         "Shared AND assertion objects use clause-local neural subject/predicate/polarity binding with a bounded grammar.",
                         "Coordinated objects are committed at a following boundary token; question/directive clauses are excluded from assertions.",
                         "Local lookbacks use bounded periodic address features; broader semantic accuracy still requires separate context tests.",
+                        "Fact coordinates are saturated before proposition retrieval to reduce numeric magnitude bias between assertion paths.",
                         "Disjunction, conditional rules, multiple-parent traversal and unrestricted sentence generation remain unsupported.",
                         "Prompt facts use limited syntactic patterns; no weight updates occur during a conversation."],
     }

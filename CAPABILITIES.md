@@ -1,6 +1,34 @@
 # Capabilities and limitations
 
-## Current v14a
+## Current v14b
+
+- Context/position development scores 126/126 on CUDA, versus v13d 61/126.
+  Assertions return to 382/390 after the v14a correction regression. The
+  nine-head address audit has zero errors out of 45,432 on CPU and CUDA.
+- Bounded positional phases replace quadratic local-address scores. A shared
+  saturation step then removes fact-code magnitude bias before proposition
+  retrieval. These changes preserve the 5,048-position window and ordinary
+  tensor runtime; they do not add a host parser or answer fallback.
+- Phase-removal interventions change the associated response. A controlled
+  identity-magnitude perturbation leaves corrections intact with saturation;
+  removing that step makes the older assertion win. Long-prefix cache/full
+  decoding matches in the integrity check.
+- All 26 matched suites retain their v13d passes. Both older boundary suites
+  now score 76/76 on CUDA. The v14a history retains 48 correction regressions
+  across three reports; all are repaired in v14b. Frozen source reproduces
+  the exact raw/config hashes.
+
+This repairs the tested numerical failures, not every possible long-language
+problem. The existing controlled grammar still fails disjunction, conditional
+rules, mixed query precedence, repeated negation and open multi-value answers.
+Useful open-ended conversation, creative writing and code generation remain
+unachieved. Failed v14a is retained with its correction regressions.
+
+v14b has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **960,705
+nonzero parameters (0.384282%)**. Raw weight SHA-256:
+`61deda2326ad355a3b2921e608e37de3e47e7949f445753cb8a0b78ad7288646`.
+
+## Historical v14a
 
 - Context/position development improves v13d 61/126 -> v14a 126/126 on CUDA.
   The suite moves existing generation, arithmetic, compound facts, corrections,

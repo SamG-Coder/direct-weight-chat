@@ -338,3 +338,24 @@ values. All 45,432 addresses match on CPU and CUDA for v14a. This is evidence
 about address selection, not general language understanding. Semantic position-
 shift tests separately cover generation, arithmetic, facts, correction and
 inheritance, including requests near the window's capacity.
+
+## v14b: saturate fact coordinates before proposition lookup
+
+Accurate addressing exposed a separate numerical assumption. Different paths
+through the parser produced fact-code magnitudes near 1.000001 and 1.000011.
+The proposition match scales many identity dimensions by 8192, so the slightly
+larger older fact could weaken the newer correction's recency advantage. The
+resulting mixture of opposite polarities was not a crisp Boolean value.
+
+Block 3 now applies the existing symmetric saturation primitive to the 37
+subject/object/predicate/validity/polarity coordinates. Valid levels -1, 0 and 1
+are preserved, and values near the active endpoints saturate to the same level.
+This occurs before the block-4 proposition lookup and later retrieval passes;
+the first ordinary graph lookup remains in block 3. The operation is shared
+across all asserted identities and predicates, with no special correction prompt.
+
+A diagnostic scales delayed identity writes by 1.001. With saturation present,
+the explicit later denial still wins. Removing the saturation output then makes
+the older positive assertion win. This controlled intervention demonstrates the
+role of the numerical barrier; it changes cloned runtime tensors only. The
+saved checkpoint and normal inference remain immutable.

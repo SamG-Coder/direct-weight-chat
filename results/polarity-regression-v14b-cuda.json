@@ -1,0 +1,6033 @@
+{
+  "version": "v14b",
+  "suite": "fact-polarity",
+  "evaluation_status": "post-freeze combinations for v8b; known grammar and generator, not structurally independent",
+  "created_utc": "2026-11-03T15:49:34.517702+00:00",
+  "git": {
+    "commit": "c4e2747e3a7b5e60d9058da8c9a63052920d024e",
+    "dirty": true
+  },
+  "model_sha256": "61deda2326ad355a3b2921e608e37de3e47e7949f445753cb8a0b78ad7288646",
+  "suite_sha256": "82c0f6396057a2f0bf1dbc9488afbf7b0f015c624cc1558da59ced704736f49c",
+  "runtime_sha256": "f56d29cd23ba2b3018c4ba6a7ad6928dcb28c437e213929802aa4cba90329e10",
+  "parameter_count": 250000000,
+  "weight_bytes": 1000000000,
+  "nonzero_parameters": 960705,
+  "device": "cuda",
+  "python": "3.11.9",
+  "cases": [
+    {
+      "prompt": "A velmgksdn is not a machine. What is a velmgksdn?",
+      "text": "Velmgksdn is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01847869998891838,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-000",
+      "category": "direct_negative",
+      "expected": "Velmgksdn is not a machine.",
+      "acceptable": [
+        "Velmgksdn is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmgksdn is a machine. A velmgksdn is not a machine. What is a velmgksdn?",
+      "text": "Velmgksdn is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.020615999994333833,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-001",
+      "category": "positive_to_negative",
+      "expected": "Velmgksdn is not a machine.",
+      "acceptable": [
+        "Velmgksdn is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmgksdn is not a machine. A velmgksdn is a machine. What is a velmgksdn?",
+      "text": "Velmgksdn is a machine.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015662899997550994,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-002",
+      "category": "negative_to_positive",
+      "expected": "Velmgksdn is a machine.",
+      "acceptable": [
+        "Velmgksdn is a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdpkslb is a machine. A velmgksdn is not a machine. What is a velmgksdn?",
+      "text": "Velmgksdn is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01913949998561293,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-003",
+      "category": "distractor",
+      "expected": "Velmgksdn is not a machine.",
+      "acceptable": [
+        "Velmgksdn is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnfclmb isn't a machine. What is a velnfclmb?",
+      "text": "Velnfclmb is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017765099997632205,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-004",
+      "category": "direct_negative",
+      "expected": "Velnfclmb is not a machine.",
+      "acceptable": [
+        "Velnfclmb is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnfclmb is a machine. A velnfclmb isn't a machine. What is a velnfclmb?",
+      "text": "Velnfclmb is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01895570001215674,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-005",
+      "category": "positive_to_negative",
+      "expected": "Velnfclmb is not a machine.",
+      "acceptable": [
+        "Velnfclmb is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnfclmb isn't a machine. A velnfclmb is a machine. What is a velnfclmb?",
+      "text": "Velnfclmb is a machine.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016097299987450242,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-006",
+      "category": "negative_to_positive",
+      "expected": "Velnfclmb is a machine.",
+      "acceptable": [
+        "Velnfclmb is a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omcmnrgr is a machine. A velnfclmb isn't a machine. What is a velnfclmb?",
+      "text": "Velnfclmb is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018215400021290407,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-007",
+      "category": "distractor",
+      "expected": "Velnfclmb is not a machine.",
+      "acceptable": [
+        "Velnfclmb is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velplvcph is not a machine. What is a velplvcph?",
+      "text": "Velplvcph is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01818359998287633,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-008",
+      "category": "direct_negative",
+      "expected": "Velplvcph is not a machine.",
+      "acceptable": [
+        "Velplvcph is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velplvcph is a machine. A velplvcph is not a machine. What is a velplvcph?",
+      "text": "Velplvcph is not a machine.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01778649998595938,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-009",
+      "category": "positive_to_negative",
+      "expected": "Velplvcph is not a machine.",
+      "acceptable": [
+        "Velplvcph is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velplvcph is not a machine. A velplvcph is a machine. What is a velplvcph?",
+      "text": "Velplvcph is a machine.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016193099989322945,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-010",
+      "category": "negative_to_positive",
+      "expected": "Velplvcph is a machine.",
+      "acceptable": [
+        "Velplvcph is a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfndhgw is a machine. A velplvcph is not a machine. What is a velplvcph?",
+      "text": "Velplvcph is not a machine.",
+      "token_ids": [
+        435,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018160999985411763,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-011",
+      "category": "distractor",
+      "expected": "Velplvcph is not a machine.",
+      "acceptable": [
+        "Velplvcph is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnhhzgk isn't a machine. What is a omnhhzgk?",
+      "text": "Omnhhzgk is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01826830001664348,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-012",
+      "category": "direct_negative",
+      "expected": "Omnhhzgk is not a machine.",
+      "acceptable": [
+        "Omnhhzgk is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnhhzgk is a machine. A omnhhzgk isn't a machine. What is a omnhhzgk?",
+      "text": "Omnhhzgk is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018589100014651194,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-013",
+      "category": "positive_to_negative",
+      "expected": "Omnhhzgk is not a machine.",
+      "acceptable": [
+        "Omnhhzgk is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnhhzgk isn't a machine. A omnhhzgk is a machine. What is a omnhhzgk?",
+      "text": "Omnhhzgk is a machine.",
+      "token_ids": [
+        370,
+        170,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01563820001319982,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-014",
+      "category": "negative_to_positive",
+      "expected": "Omnhhzgk is a machine.",
+      "acceptable": [
+        "Omnhhzgk is a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkbrsmw is a machine. A omnhhzgk isn't a machine. What is a omnhhzgk?",
+      "text": "Omnhhzgk is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018827799998689443,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-015",
+      "category": "distractor",
+      "expected": "Omnhhzgk is not a machine.",
+      "acceptable": [
+        "Omnhhzgk is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhhmkwl is not a machine. What is a omhhmkwl?",
+      "text": "Omhhmkwl is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01755719998618588,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-016",
+      "category": "direct_negative",
+      "expected": "Omhhmkwl is not a machine.",
+      "acceptable": [
+        "Omhhmkwl is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhhmkwl is a machine. A omhhmkwl is not a machine. What is a omhhmkwl?",
+      "text": "Omhhmkwl is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018652900005690753,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-017",
+      "category": "positive_to_negative",
+      "expected": "Omhhmkwl is not a machine.",
+      "acceptable": [
+        "Omhhmkwl is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhhmkwl is not a machine. A omhhmkwl is a machine. What is a omhhmkwl?",
+      "text": "Omhhmkwl is a machine.",
+      "token_ids": [
+        370,
+        170,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015468900004634634,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-018",
+      "category": "negative_to_positive",
+      "expected": "Omhhmkwl is a machine.",
+      "acceptable": [
+        "Omhhmkwl is a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbnbkdg is a machine. A omhhmkwl is not a machine. What is a omhhmkwl?",
+      "text": "Omhhmkwl is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01872009999351576,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-019",
+      "category": "distractor",
+      "expected": "Omhhmkwl is not a machine.",
+      "acceptable": [
+        "Omhhmkwl is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlgdtfh isn't a machine. What is a omlgdtfh?",
+      "text": "Omlgdtfh is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01733930001500994,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-020",
+      "category": "direct_negative",
+      "expected": "Omlgdtfh is not a machine.",
+      "acceptable": [
+        "Omlgdtfh is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlgdtfh is a machine. A omlgdtfh isn't a machine. What is a omlgdtfh?",
+      "text": "Omlgdtfh is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01841049999347888,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-021",
+      "category": "positive_to_negative",
+      "expected": "Omlgdtfh is not a machine.",
+      "acceptable": [
+        "Omlgdtfh is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlgdtfh isn't a machine. A omlgdtfh is a machine. What is a omlgdtfh?",
+      "text": "Omlgdtfh is a machine.",
+      "token_ids": [
+        370,
+        170,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01604590000351891,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-022",
+      "category": "negative_to_positive",
+      "expected": "Omlgdtfh is a machine.",
+      "acceptable": [
+        "Omlgdtfh is a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcvkstk is a machine. A omlgdtfh isn't a machine. What is a omlgdtfh?",
+      "text": "Omlgdtfh is not a machine.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        191,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01822970001376234,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-023",
+      "category": "distractor",
+      "expected": "Omlgdtfh is not a machine.",
+      "acceptable": [
+        "Omlgdtfh is not a machine."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrrhbwt cannot shimmer. What can a omrrhbwt do?",
+      "text": "Omrrhbwt cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012896200001705438,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-024",
+      "category": "direct_negative",
+      "expected": "Omrrhbwt cannot shimmer.",
+      "acceptable": [
+        "Omrrhbwt cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrrhbwt can shimmer. A omrrhbwt cannot shimmer. What can a omrrhbwt do?",
+      "text": "Omrrhbwt cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014117899991106242,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-025",
+      "category": "positive_to_negative",
+      "expected": "Omrrhbwt cannot shimmer.",
+      "acceptable": [
+        "Omrrhbwt cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrrhbwt cannot shimmer. A omrrhbwt can shimmer. What can a omrrhbwt do?",
+      "text": "Omrrhbwt can shimmer.",
+      "token_ids": [
+        370,
+        57,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01334029997815378,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-026",
+      "category": "negative_to_positive",
+      "expected": "Omrrhbwt can shimmer.",
+      "acceptable": [
+        "Omrrhbwt can shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrpwtcg can shimmer. A omrrhbwt cannot shimmer. What can a omrrhbwt do?",
+      "text": "Omrrhbwt cannot shimmer.",
+      "token_ids": [
+        371,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013814100006129593,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-027",
+      "category": "distractor",
+      "expected": "Omrrhbwt cannot shimmer.",
+      "acceptable": [
+        "Omrrhbwt cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omblkbvv cannot shimmer. A omrrhbwt is a omblkbvv. What can a omrrhbwt do?",
+      "text": "Omrrhbwt cannot shimmer.",
+      "token_ids": [
+        371,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013032400020165369,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-028",
+      "category": "inherited_negative",
+      "expected": "Omrrhbwt cannot shimmer.",
+      "acceptable": [
+        "Omrrhbwt cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrrzskz can't swim. What can a velrrzskz do?",
+      "text": "Velrrzskz cannot swim.",
+      "token_ids": [
+        434,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013367399980779737,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-029",
+      "category": "direct_negative",
+      "expected": "Velrrzskz cannot swim.",
+      "acceptable": [
+        "Velrrzskz cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrrzskz can swim. A velrrzskz can't swim. What can a velrrzskz do?",
+      "text": "Velrrzskz cannot swim.",
+      "token_ids": [
+        434,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013390199979767203,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-030",
+      "category": "positive_to_negative",
+      "expected": "Velrrzskz cannot swim.",
+      "acceptable": [
+        "Velrrzskz cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrrzskz can't swim. A velrrzskz can swim. What can a velrrzskz do?",
+      "text": "Velrrzskz can swim.",
+      "token_ids": [
+        434,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01331090001622215,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-031",
+      "category": "negative_to_positive",
+      "expected": "Velrrzskz can swim.",
+      "acceptable": [
+        "Velrrzskz can swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omclhggd can swim. A velrrzskz can't swim. What can a velrrzskz do?",
+      "text": "Velrrzskz cannot swim.",
+      "token_ids": [
+        434,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013260000006994233,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-032",
+      "category": "distractor",
+      "expected": "Velrrzskz cannot swim.",
+      "acceptable": [
+        "Velrrzskz cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrblsbw can't swim. A ombpdkbb is a omrblsbw. A velrrzskz is a ombpdkbb. What can a velrrzskz do?",
+      "text": "Velrrzskz cannot swim.",
+      "token_ids": [
+        434,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013502399990102276,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "polarity-033",
+      "category": "inherited_negative",
+      "expected": "Velrrzskz cannot swim.",
+      "acceptable": [
+        "Velrrzskz cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omghhvdl can not swim. What can a omghhvdl do?",
+      "text": "Omghhvdl cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013250299991341308,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-034",
+      "category": "direct_negative",
+      "expected": "Omghhvdl cannot swim.",
+      "acceptable": [
+        "Omghhvdl cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omghhvdl can swim. A omghhvdl can not swim. What can a omghhvdl do?",
+      "text": "Omghhvdl cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013146999990567565,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-035",
+      "category": "positive_to_negative",
+      "expected": "Omghhvdl cannot swim.",
+      "acceptable": [
+        "Omghhvdl cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omghhvdl can not swim. A omghhvdl can swim. What can a omghhvdl do?",
+      "text": "Omghhvdl can swim.",
+      "token_ids": [
+        370,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013677200011443347,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-036",
+      "category": "negative_to_positive",
+      "expected": "Omghhvdl can swim.",
+      "acceptable": [
+        "Omghhvdl can swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnwchfw can swim. A omghhvdl can not swim. What can a omghhvdl do?",
+      "text": "Omghhvdl cannot swim.",
+      "token_ids": [
+        370,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013221400004113093,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-037",
+      "category": "distractor",
+      "expected": "Omghhvdl cannot swim.",
+      "acceptable": [
+        "Omghhvdl cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omvfvpdc is a omcswztd. A omghhvdl is a omvfvpdc. A omntkznz can not swim. A omcswztd is a omntkznz. What can a omghhvdl do?",
+      "text": "Omghhvdl cannot swim.",
+      "token_ids": [
+        372,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014963299996452406,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "polarity-038",
+      "category": "inherited_negative",
+      "expected": "Omghhvdl cannot swim.",
+      "acceptable": [
+        "Omghhvdl cannot swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwkvlpt cannot glimmer. What can a omwkvlpt do?",
+      "text": "Omwkvlpt cannot glimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012862200004747137,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-039",
+      "category": "direct_negative",
+      "expected": "Omwkvlpt cannot glimmer.",
+      "acceptable": [
+        "Omwkvlpt cannot glimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwkvlpt can glimmer. A omwkvlpt cannot glimmer. What can a omwkvlpt do?",
+      "text": "Omwkvlpt cannot glimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012957600003574044,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-040",
+      "category": "positive_to_negative",
+      "expected": "Omwkvlpt cannot glimmer.",
+      "acceptable": [
+        "Omwkvlpt cannot glimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwkvlpt cannot glimmer. A omwkvlpt can glimmer. What can a omwkvlpt do?",
+      "text": "Omwkvlpt can glimmer.",
+      "token_ids": [
+        370,
+        57,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013672700006281957,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-041",
+      "category": "negative_to_positive",
+      "expected": "Omwkvlpt can glimmer.",
+      "acceptable": [
+        "Omwkvlpt can glimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrfnldr can glimmer. A omwkvlpt cannot glimmer. What can a omwkvlpt do?",
+      "text": "Omwkvlpt cannot glimmer.",
+      "token_ids": [
+        371,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01306619998649694,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-042",
+      "category": "distractor",
+      "expected": "Omwkvlpt cannot glimmer.",
+      "acceptable": [
+        "Omwkvlpt cannot glimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfthmrl cannot glimmer. A omwkvlpt is a velfthmrl. What can a omwkvlpt do?",
+      "text": "Omwkvlpt cannot glimmer.",
+      "token_ids": [
+        370,
+        59,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013444199983496219,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-043",
+      "category": "inherited_negative",
+      "expected": "Omwkvlpt cannot glimmer.",
+      "acceptable": [
+        "Omwkvlpt cannot glimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhtsrgw can't shimmer. What can a omhtsrgw do?",
+      "text": "Omhtsrgw cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012677199993049726,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-044",
+      "category": "direct_negative",
+      "expected": "Omhtsrgw cannot shimmer.",
+      "acceptable": [
+        "Omhtsrgw cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhtsrgw can shimmer. A omhtsrgw can't shimmer. What can a omhtsrgw do?",
+      "text": "Omhtsrgw cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013343800004804507,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-045",
+      "category": "positive_to_negative",
+      "expected": "Omhtsrgw cannot shimmer.",
+      "acceptable": [
+        "Omhtsrgw cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhtsrgw can't shimmer. A omhtsrgw can shimmer. What can a omhtsrgw do?",
+      "text": "Omhtsrgw can shimmer.",
+      "token_ids": [
+        370,
+        57,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013302699982887134,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-046",
+      "category": "negative_to_positive",
+      "expected": "Omhtsrgw can shimmer.",
+      "acceptable": [
+        "Omhtsrgw can shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmhpkcc can shimmer. A omhtsrgw can't shimmer. What can a omhtsrgw do?",
+      "text": "Omhtsrgw cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01301450000028126,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-047",
+      "category": "distractor",
+      "expected": "Omhtsrgw cannot shimmer.",
+      "acceptable": [
+        "Omhtsrgw cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnrbsfm can't shimmer. A velpnbmpg is a omnrbsfm. A omhtsrgw is a velpnbmpg. What can a omhtsrgw do?",
+      "text": "Omhtsrgw cannot shimmer.",
+      "token_ids": [
+        371,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013894799980334938,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "polarity-048",
+      "category": "inherited_negative",
+      "expected": "Omhtsrgw cannot shimmer.",
+      "acceptable": [
+        "Omhtsrgw cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdfggpg can not shimmer. What can a omdfggpg do?",
+      "text": "Omdfggpg cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012830099993152544,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-049",
+      "category": "direct_negative",
+      "expected": "Omdfggpg cannot shimmer.",
+      "acceptable": [
+        "Omdfggpg cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdfggpg can shimmer. A omdfggpg can not shimmer. What can a omdfggpg do?",
+      "text": "Omdfggpg cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013604299980215728,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-050",
+      "category": "positive_to_negative",
+      "expected": "Omdfggpg cannot shimmer.",
+      "acceptable": [
+        "Omdfggpg cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omdfggpg can not shimmer. A omdfggpg can shimmer. What can a omdfggpg do?",
+      "text": "Omdfggpg can shimmer.",
+      "token_ids": [
+        370,
+        57,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013226699986262247,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-051",
+      "category": "negative_to_positive",
+      "expected": "Omdfggpg can shimmer.",
+      "acceptable": [
+        "Omdfggpg can shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ompkbfgg can shimmer. A omdfggpg can not shimmer. What can a omdfggpg do?",
+      "text": "Omdfggpg cannot shimmer.",
+      "token_ids": [
+        371,
+        59,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013143099989974871,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-052",
+      "category": "distractor",
+      "expected": "Omdfggpg cannot shimmer.",
+      "acceptable": [
+        "Omdfggpg cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velncrpcp is a velwmlhvt. A velwmlhvt can not shimmer. A omdfggpg is a velhlzwch. A velhlzwch is a velncrpcp. What can a omdfggpg do?",
+      "text": "Omdfggpg cannot shimmer.",
+      "token_ids": [
+        370,
+        59,
+        436,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014463899977272376,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "polarity-053",
+      "category": "inherited_negative",
+      "expected": "Omdfggpg cannot shimmer.",
+      "acceptable": [
+        "Omdfggpg cannot shimmer."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velltsngc does not need sunlight. What does a velltsngc need?",
+      "text": "Velltsngc does not need sunlight.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01755699998466298,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-054",
+      "category": "direct_negative",
+      "expected": "Velltsngc does not need sunlight.",
+      "acceptable": [
+        "Velltsngc does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velltsngc needs sunlight. A velltsngc does not need sunlight. What does a velltsngc need?",
+      "text": "Velltsngc does not need sunlight.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018528100015828386,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-055",
+      "category": "positive_to_negative",
+      "expected": "Velltsngc does not need sunlight.",
+      "acceptable": [
+        "Velltsngc does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velltsngc does not need sunlight. A velltsngc needs sunlight. What does a velltsngc need?",
+      "text": "Velltsngc needs sunlight.",
+      "token_ids": [
+        434,
+        216,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013120200019329786,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-056",
+      "category": "negative_to_positive",
+      "expected": "Velltsngc needs sunlight.",
+      "acceptable": [
+        "Velltsngc needs sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwdzvgn needs sunlight. A velltsngc does not need sunlight. What does a velltsngc need?",
+      "text": "Velltsngc does not need sunlight.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01822519997949712,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-057",
+      "category": "distractor",
+      "expected": "Velltsngc does not need sunlight.",
+      "acceptable": [
+        "Velltsngc does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velltsngc is a velvtgsrr. A velvtgsrr does not need sunlight. What does a velltsngc need?",
+      "text": "Velltsngc does not need sunlight.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018694400001550093,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "polarity-058",
+      "category": "inherited_negative",
+      "expected": "Velltsngc does not need sunlight.",
+      "acceptable": [
+        "Velltsngc does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfnmzrb doesn't need sunlight. What does a omfnmzrb need?",
+      "text": "Omfnmzrb does not need sunlight.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017505600000731647,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-059",
+      "category": "direct_negative",
+      "expected": "Omfnmzrb does not need sunlight.",
+      "acceptable": [
+        "Omfnmzrb does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfnmzrb needs sunlight. A omfnmzrb doesn't need sunlight. What does a omfnmzrb need?",
+      "text": "Omfnmzrb does not need sunlight.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01903280001715757,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-060",
+      "category": "positive_to_negative",
+      "expected": "Omfnmzrb does not need sunlight.",
+      "acceptable": [
+        "Omfnmzrb does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfnmzrb doesn't need sunlight. A omfnmzrb needs sunlight. What does a omfnmzrb need?",
+      "text": "Omfnmzrb needs sunlight.",
+      "token_ids": [
+        370,
+        216,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013583099993411452,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-061",
+      "category": "negative_to_positive",
+      "expected": "Omfnmzrb needs sunlight.",
+      "acceptable": [
+        "Omfnmzrb needs sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfshklv needs sunlight. A omfnmzrb doesn't need sunlight. What does a omfnmzrb need?",
+      "text": "Omfnmzrb does not need sunlight.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018969600001582876,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-062",
+      "category": "distractor",
+      "expected": "Omfnmzrb does not need sunlight.",
+      "acceptable": [
+        "Omfnmzrb does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgcsmbs is a velbhhtfv. A omfnmzrb is a omgcsmbs. A velbhhtfv doesn't need sunlight. What does a omfnmzrb need?",
+      "text": "Omfnmzrb does not need sunlight.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018930000020191073,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "polarity-063",
+      "category": "inherited_negative",
+      "expected": "Omfnmzrb does not need sunlight.",
+      "acceptable": [
+        "Omfnmzrb does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvnkfwg does not need water. What does a velvnkfwg need?",
+      "text": "Velvnkfwg does not need water.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018931600003270432,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-064",
+      "category": "direct_negative",
+      "expected": "Velvnkfwg does not need water.",
+      "acceptable": [
+        "Velvnkfwg does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvnkfwg needs water. A velvnkfwg does not need water. What does a velvnkfwg need?",
+      "text": "Velvnkfwg does not need water.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01875429999199696,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-065",
+      "category": "positive_to_negative",
+      "expected": "Velvnkfwg does not need water.",
+      "acceptable": [
+        "Velvnkfwg does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvnkfwg does not need water. A velvnkfwg needs water. What does a velvnkfwg need?",
+      "text": "Velvnkfwg needs water.",
+      "token_ids": [
+        434,
+        216,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013967700011562556,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-066",
+      "category": "negative_to_positive",
+      "expected": "Velvnkfwg needs water.",
+      "acceptable": [
+        "Velvnkfwg needs water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrfrskd needs water. A velvnkfwg does not need water. What does a velvnkfwg need?",
+      "text": "Velvnkfwg does not need water.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018667199998162687,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-067",
+      "category": "distractor",
+      "expected": "Velvnkfwg does not need water.",
+      "acceptable": [
+        "Velvnkfwg does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvnkfwg is a velfhtgdc. A velfhtgdc is a velgmbbmm. A velnwgbzk does not need water. A velgmbbmm is a velnwgbzk. What does a velvnkfwg need?",
+      "text": "Velvnkfwg does not need water.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01929339999333024,
+      "device": "cuda",
+      "prefix_tokens": 34,
+      "id": "polarity-068",
+      "category": "inherited_negative",
+      "expected": "Velvnkfwg does not need water.",
+      "acceptable": [
+        "Velvnkfwg does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsktnkd doesn't need water. What does a omsktnkd need?",
+      "text": "Omsktnkd does not need water.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018421399989165366,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-069",
+      "category": "direct_negative",
+      "expected": "Omsktnkd does not need water.",
+      "acceptable": [
+        "Omsktnkd does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsktnkd needs water. A omsktnkd doesn't need water. What does a omsktnkd need?",
+      "text": "Omsktnkd does not need water.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017826299997977912,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-070",
+      "category": "positive_to_negative",
+      "expected": "Omsktnkd does not need water.",
+      "acceptable": [
+        "Omsktnkd does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsktnkd doesn't need water. A omsktnkd needs water. What does a omsktnkd need?",
+      "text": "Omsktnkd needs water.",
+      "token_ids": [
+        370,
+        216,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013857199985068291,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-071",
+      "category": "negative_to_positive",
+      "expected": "Omsktnkd needs water.",
+      "acceptable": [
+        "Omsktnkd needs water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velndwrpg needs water. A omsktnkd doesn't need water. What does a omsktnkd need?",
+      "text": "Omsktnkd does not need water.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017765199998393655,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-072",
+      "category": "distractor",
+      "expected": "Omsktnkd does not need water.",
+      "acceptable": [
+        "Omsktnkd does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtpgzdr doesn't need water. A omsktnkd is a omtpgzdr. What does a omsktnkd need?",
+      "text": "Omsktnkd does not need water.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        215,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018959199980599806,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-073",
+      "category": "inherited_negative",
+      "expected": "Omsktnkd does not need water.",
+      "acceptable": [
+        "Omsktnkd does not need water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkwwpzf does not need sunlight. What does a velkwwpzf need?",
+      "text": "Velkwwpzf does not need sunlight.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01779129999340512,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-074",
+      "category": "direct_negative",
+      "expected": "Velkwwpzf does not need sunlight.",
+      "acceptable": [
+        "Velkwwpzf does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkwwpzf needs sunlight. A velkwwpzf does not need sunlight. What does a velkwwpzf need?",
+      "text": "Velkwwpzf does not need sunlight.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018038200010778382,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-075",
+      "category": "positive_to_negative",
+      "expected": "Velkwwpzf does not need sunlight.",
+      "acceptable": [
+        "Velkwwpzf does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkwwpzf does not need sunlight. A velkwwpzf needs sunlight. What does a velkwwpzf need?",
+      "text": "Velkwwpzf needs sunlight.",
+      "token_ids": [
+        434,
+        216,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013554300006944686,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-076",
+      "category": "negative_to_positive",
+      "expected": "Velkwwpzf needs sunlight.",
+      "acceptable": [
+        "Velkwwpzf needs sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velltcfpd needs sunlight. A velkwwpzf does not need sunlight. What does a velkwwpzf need?",
+      "text": "Velkwwpzf does not need sunlight.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018128299998352304,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-077",
+      "category": "distractor",
+      "expected": "Velkwwpzf does not need sunlight.",
+      "acceptable": [
+        "Velkwwpzf does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzphrck does not need sunlight. A velkwwpzf is a omfzdrhv. A omfzdrhv is a omzphrck. What does a velkwwpzf need?",
+      "text": "Velkwwpzf does not need sunlight.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019095900002866983,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "polarity-078",
+      "category": "inherited_negative",
+      "expected": "Velkwwpzf does not need sunlight.",
+      "acceptable": [
+        "Velkwwpzf does not need sunlight."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkgcgrz doesn't need fuel. What does a velkgcgrz need?",
+      "text": "Velkgcgrz does not need fuel.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01775279999128543,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-079",
+      "category": "direct_negative",
+      "expected": "Velkgcgrz does not need fuel.",
+      "acceptable": [
+        "Velkgcgrz does not need fuel."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkgcgrz needs fuel. A velkgcgrz doesn't need fuel. What does a velkgcgrz need?",
+      "text": "Velkgcgrz does not need fuel.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        215,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01887990001705475,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-080",
+      "category": "positive_to_negative",
+      "expected": "Velkgcgrz does not need fuel.",
+      "acceptable": [
+        "Velkgcgrz does not need fuel."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkgcgrz doesn't need fuel. A velkgcgrz needs fuel. What does a velkgcgrz need?",
+      "text": "Velkgcgrz needs fuel.",
+      "token_ids": [
+        434,
+        216,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012961499975062907,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-081",
+      "category": "negative_to_positive",
+      "expected": "Velkgcgrz needs fuel.",
+      "acceptable": [
+        "Velkgcgrz needs fuel."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhppkkb needs fuel. A velkgcgrz doesn't need fuel. What does a velkgcgrz need?",
+      "text": "Velkgcgrz does not need fuel.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        215,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01872000002185814,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-082",
+      "category": "distractor",
+      "expected": "Velkgcgrz does not need fuel.",
+      "acceptable": [
+        "Velkgcgrz does not need fuel."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrbrdvs is a omtgcltp. A velkgcgrz is a omtsvswl. A omtsvswl is a velrbrdvs. A omtgcltp doesn't need fuel. What does a velkgcgrz need?",
+      "text": "Velkgcgrz does not need fuel.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        215,
+        132,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019255599996540695,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "polarity-083",
+      "category": "inherited_negative",
+      "expected": "Velkgcgrz does not need fuel.",
+      "acceptable": [
+        "Velkgcgrz does not need fuel."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbrmcgl does not have wings. What does a velbrmcgl have?",
+      "text": "Velbrmcgl does not have wings.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01809910000883974,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-084",
+      "category": "direct_negative",
+      "expected": "Velbrmcgl does not have wings.",
+      "acceptable": [
+        "Velbrmcgl does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbrmcgl has wings. A velbrmcgl does not have wings. What does a velbrmcgl have?",
+      "text": "Velbrmcgl does not have wings.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018626000004587695,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-085",
+      "category": "positive_to_negative",
+      "expected": "Velbrmcgl does not have wings.",
+      "acceptable": [
+        "Velbrmcgl does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velbrmcgl does not have wings. A velbrmcgl has wings. What does a velbrmcgl have?",
+      "text": "Velbrmcgl has wings.",
+      "token_ids": [
+        434,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013262399996165186,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-086",
+      "category": "negative_to_positive",
+      "expected": "Velbrmcgl has wings.",
+      "acceptable": [
+        "Velbrmcgl has wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velshdkkt has wings. A velbrmcgl does not have wings. What does a velbrmcgl have?",
+      "text": "Velbrmcgl does not have wings.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019284000009065494,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-087",
+      "category": "distractor",
+      "expected": "Velbrmcgl does not have wings.",
+      "acceptable": [
+        "Velbrmcgl does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhdbntb does not have wings. A velbrmcgl is a velhdbntb. What does a velbrmcgl have?",
+      "text": "Velbrmcgl does not have wings.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018907699995907024,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "polarity-088",
+      "category": "inherited_negative",
+      "expected": "Velbrmcgl does not have wings.",
+      "acceptable": [
+        "Velbrmcgl does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrvgskr doesn't have wings. What does a omrvgskr have?",
+      "text": "Omrvgskr does not have wings.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.022200999985216185,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-089",
+      "category": "direct_negative",
+      "expected": "Omrvgskr does not have wings.",
+      "acceptable": [
+        "Omrvgskr does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrvgskr has wings. A omrvgskr doesn't have wings. What does a omrvgskr have?",
+      "text": "Omrvgskr does not have wings.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018100400018738583,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-090",
+      "category": "positive_to_negative",
+      "expected": "Omrvgskr does not have wings.",
+      "acceptable": [
+        "Omrvgskr does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrvgskr doesn't have wings. A omrvgskr has wings. What does a omrvgskr have?",
+      "text": "Omrvgskr has wings.",
+      "token_ids": [
+        370,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013282800005981699,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-091",
+      "category": "negative_to_positive",
+      "expected": "Omrvgskr has wings.",
+      "acceptable": [
+        "Omrvgskr has wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfrzpfc has wings. A omrvgskr doesn't have wings. What does a omrvgskr have?",
+      "text": "Omrvgskr does not have wings.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01816010000766255,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-092",
+      "category": "distractor",
+      "expected": "Omrvgskr does not have wings.",
+      "acceptable": [
+        "Omrvgskr does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velstlhmk doesn't have wings. A omrvgskr is a velbdnzfg. A velbdnzfg is a velstlhmk. What does a omrvgskr have?",
+      "text": "Omrvgskr does not have wings.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01841070002410561,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "polarity-093",
+      "category": "inherited_negative",
+      "expected": "Omrvgskr does not have wings.",
+      "acceptable": [
+        "Omrvgskr does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtbzhpv does not have wheels. What does a omtbzhpv have?",
+      "text": "Omtbzhpv does not have wheels.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        349,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017986299993935972,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-094",
+      "category": "direct_negative",
+      "expected": "Omtbzhpv does not have wheels.",
+      "acceptable": [
+        "Omtbzhpv does not have wheels."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtbzhpv has wheels. A omtbzhpv does not have wheels. What does a omtbzhpv have?",
+      "text": "Omtbzhpv does not have wheels.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        349,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01814830000512302,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-095",
+      "category": "positive_to_negative",
+      "expected": "Omtbzhpv does not have wheels.",
+      "acceptable": [
+        "Omtbzhpv does not have wheels."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtbzhpv does not have wheels. A omtbzhpv has wheels. What does a omtbzhpv have?",
+      "text": "Omtbzhpv has wheels.",
+      "token_ids": [
+        370,
+        144,
+        349,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013846399990143254,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-096",
+      "category": "negative_to_positive",
+      "expected": "Omtbzhpv has wheels.",
+      "acceptable": [
+        "Omtbzhpv has wheels."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrgdvnm has wheels. A omtbzhpv does not have wheels. What does a omtbzhpv have?",
+      "text": "Omtbzhpv does not have wheels.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        146,
+        349,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018112200021278113,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-097",
+      "category": "distractor",
+      "expected": "Omtbzhpv does not have wheels.",
+      "acceptable": [
+        "Omtbzhpv does not have wheels."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velpcgmts is a velhrgspv. A velcwtrsn is a velpcgmts. A velhrgspv does not have wheels. A omtbzhpv is a velcwtrsn. What does a omtbzhpv have?",
+      "text": "Omtbzhpv does not have wheels.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        349,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.020385899988468736,
+      "device": "cuda",
+      "prefix_tokens": 34,
+      "id": "polarity-098",
+      "category": "inherited_negative",
+      "expected": "Omtbzhpv does not have wheels.",
+      "acceptable": [
+        "Omtbzhpv does not have wheels."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhbnrlf doesn't have sensors. What does a velhbnrlf have?",
+      "text": "Velhbnrlf does not have sensors.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017366900021443143,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-099",
+      "category": "direct_negative",
+      "expected": "Velhbnrlf does not have sensors.",
+      "acceptable": [
+        "Velhbnrlf does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhbnrlf has sensors. A velhbnrlf doesn't have sensors. What does a velhbnrlf have?",
+      "text": "Velhbnrlf does not have sensors.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01880140000139363,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-100",
+      "category": "positive_to_negative",
+      "expected": "Velhbnrlf does not have sensors.",
+      "acceptable": [
+        "Velhbnrlf does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhbnrlf doesn't have sensors. A velhbnrlf has sensors. What does a velhbnrlf have?",
+      "text": "Velhbnrlf has sensors.",
+      "token_ids": [
+        434,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01311499997973442,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-101",
+      "category": "negative_to_positive",
+      "expected": "Velhbnrlf has sensors.",
+      "acceptable": [
+        "Velhbnrlf has sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velsvgksn has sensors. A velhbnrlf doesn't have sensors. What does a velhbnrlf have?",
+      "text": "Velhbnrlf does not have sensors.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019547500007320195,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-102",
+      "category": "distractor",
+      "expected": "Velhbnrlf does not have sensors.",
+      "acceptable": [
+        "Velhbnrlf does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhbnrlf is a omvcgmtr. A omvcgmtr doesn't have sensors. What does a velhbnrlf have?",
+      "text": "Velhbnrlf does not have sensors.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01814210001612082,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-103",
+      "category": "inherited_negative",
+      "expected": "Velhbnrlf does not have sensors.",
+      "acceptable": [
+        "Velhbnrlf does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrztdgc does not have sensors. What does a omrztdgc have?",
+      "text": "Omrztdgc does not have sensors.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018248600012157112,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-104",
+      "category": "direct_negative",
+      "expected": "Omrztdgc does not have sensors.",
+      "acceptable": [
+        "Omrztdgc does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrztdgc has sensors. A omrztdgc does not have sensors. What does a omrztdgc have?",
+      "text": "Omrztdgc does not have sensors.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018861499993363395,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-105",
+      "category": "positive_to_negative",
+      "expected": "Omrztdgc does not have sensors.",
+      "acceptable": [
+        "Omrztdgc does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrztdgc does not have sensors. A omrztdgc has sensors. What does a omrztdgc have?",
+      "text": "Omrztdgc has sensors.",
+      "token_ids": [
+        370,
+        144,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014001899980939925,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-106",
+      "category": "negative_to_positive",
+      "expected": "Omrztdgc has sensors.",
+      "acceptable": [
+        "Omrztdgc has sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommtslvh has sensors. A omrztdgc does not have sensors. What does a omrztdgc have?",
+      "text": "Omrztdgc does not have sensors.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01863559999037534,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-107",
+      "category": "distractor",
+      "expected": "Omrztdgc does not have sensors.",
+      "acceptable": [
+        "Omrztdgc does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omrztdgc is a velzmpgtp. A velvbdzsh does not have sensors. A velzmpgtp is a velvbdzsh. What does a omrztdgc have?",
+      "text": "Omrztdgc does not have sensors.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        146,
+        276,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01872769999317825,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "polarity-108",
+      "category": "inherited_negative",
+      "expected": "Omrztdgc does not have sensors.",
+      "acceptable": [
+        "Omrztdgc does not have sensors."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgpcvmt doesn't have wings. What does a velgpcvmt have?",
+      "text": "Velgpcvmt does not have wings.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018409599986625835,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-109",
+      "category": "direct_negative",
+      "expected": "Velgpcvmt does not have wings.",
+      "acceptable": [
+        "Velgpcvmt does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgpcvmt has wings. A velgpcvmt doesn't have wings. What does a velgpcvmt have?",
+      "text": "Velgpcvmt does not have wings.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018642299983184785,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-110",
+      "category": "positive_to_negative",
+      "expected": "Velgpcvmt does not have wings.",
+      "acceptable": [
+        "Velgpcvmt does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgpcvmt doesn't have wings. A velgpcvmt has wings. What does a velgpcvmt have?",
+      "text": "Velgpcvmt has wings.",
+      "token_ids": [
+        434,
+        144,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013434699998470023,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-111",
+      "category": "negative_to_positive",
+      "expected": "Velgpcvmt has wings.",
+      "acceptable": [
+        "Velgpcvmt has wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfgbwhw has wings. A velgpcvmt doesn't have wings. What does a velgpcvmt have?",
+      "text": "Velgpcvmt does not have wings.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018177099991589785,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-112",
+      "category": "distractor",
+      "expected": "Velgpcvmt does not have wings.",
+      "acceptable": [
+        "Velgpcvmt does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnwfzcs doesn't have wings. A velgpcvmt is a omkwdcnh. A omkwdcnh is a ombrckmp. A ombrckmp is a omnwfzcs. What does a velgpcvmt have?",
+      "text": "Velgpcvmt does not have wings.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        146,
+        358,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.020193900010781363,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "polarity-113",
+      "category": "inherited_negative",
+      "expected": "Velgpcvmt does not have wings.",
+      "acceptable": [
+        "Velgpcvmt does not have wings."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdttgs does not produce heat. What does a veltdttgs produce?",
+      "text": "Veltdttgs does not produce heat.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018369299999903888,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-114",
+      "category": "direct_negative",
+      "expected": "Veltdttgs does not produce heat.",
+      "acceptable": [
+        "Veltdttgs does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdttgs produces heat. A veltdttgs does not produce heat. What does a veltdttgs produce?",
+      "text": "Veltdttgs does not produce heat.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018606600002385676,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-115",
+      "category": "positive_to_negative",
+      "expected": "Veltdttgs does not produce heat.",
+      "acceptable": [
+        "Veltdttgs does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltdttgs does not produce heat. A veltdttgs produces heat. What does a veltdttgs produce?",
+      "text": "Veltdttgs produces heat.",
+      "token_ids": [
+        434,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013939500000560656,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-116",
+      "category": "negative_to_positive",
+      "expected": "Veltdttgs produces heat.",
+      "acceptable": [
+        "Veltdttgs produces heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrfslgr produces heat. A veltdttgs does not produce heat. What does a veltdttgs produce?",
+      "text": "Veltdttgs does not produce heat.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018992299999808893,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-117",
+      "category": "distractor",
+      "expected": "Veltdttgs does not produce heat.",
+      "acceptable": [
+        "Veltdttgs does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrflswg does not produce heat. A veltdttgs is a velrflswg. What does a veltdttgs produce?",
+      "text": "Veltdttgs does not produce heat.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019658200006233528,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "id": "polarity-118",
+      "category": "inherited_negative",
+      "expected": "Veltdttgs does not produce heat.",
+      "acceptable": [
+        "Veltdttgs does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlkhcpp doesn't produce heat. What does a omlkhcpp produce?",
+      "text": "Omlkhcpp does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018159599974751472,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-119",
+      "category": "direct_negative",
+      "expected": "Omlkhcpp does not produce heat.",
+      "acceptable": [
+        "Omlkhcpp does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlkhcpp produces heat. A omlkhcpp doesn't produce heat. What does a omlkhcpp produce?",
+      "text": "Omlkhcpp does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01865649997489527,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-120",
+      "category": "positive_to_negative",
+      "expected": "Omlkhcpp does not produce heat.",
+      "acceptable": [
+        "Omlkhcpp does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlkhcpp doesn't produce heat. A omlkhcpp produces heat. What does a omlkhcpp produce?",
+      "text": "Omlkhcpp produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013754899991909042,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-121",
+      "category": "negative_to_positive",
+      "expected": "Omlkhcpp produces heat.",
+      "acceptable": [
+        "Omlkhcpp produces heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnpdwst produces heat. A omlkhcpp doesn't produce heat. What does a omlkhcpp produce?",
+      "text": "Omlkhcpp does not produce heat.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018539699987741187,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-122",
+      "category": "distractor",
+      "expected": "Omlkhcpp does not produce heat.",
+      "acceptable": [
+        "Omlkhcpp does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmhcfnc doesn't produce heat. A omlkhcpp is a velcspztt. A velcspztt is a velmhcfnc. What does a omlkhcpp produce?",
+      "text": "Omlkhcpp does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018966399977216497,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "polarity-123",
+      "category": "inherited_negative",
+      "expected": "Omlkhcpp does not produce heat.",
+      "acceptable": [
+        "Omlkhcpp does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omprwbrd does not produce oxygen. What does a omprwbrd produce?",
+      "text": "Omprwbrd does not produce oxygen.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01850239999475889,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-124",
+      "category": "direct_negative",
+      "expected": "Omprwbrd does not produce oxygen.",
+      "acceptable": [
+        "Omprwbrd does not produce oxygen."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omprwbrd produces oxygen. A omprwbrd does not produce oxygen. What does a omprwbrd produce?",
+      "text": "Omprwbrd does not produce oxygen.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018952000013086945,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-125",
+      "category": "positive_to_negative",
+      "expected": "Omprwbrd does not produce oxygen.",
+      "acceptable": [
+        "Omprwbrd does not produce oxygen."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omprwbrd does not produce oxygen. A omprwbrd produces oxygen. What does a omprwbrd produce?",
+      "text": "Omprwbrd produces oxygen.",
+      "token_ids": [
+        370,
+        250,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013387899991357699,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-126",
+      "category": "negative_to_positive",
+      "expected": "Omprwbrd produces oxygen.",
+      "acceptable": [
+        "Omprwbrd produces oxygen."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlzdchv produces oxygen. A omprwbrd does not produce oxygen. What does a omprwbrd produce?",
+      "text": "Omprwbrd does not produce oxygen.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        249,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018938799999887124,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-127",
+      "category": "distractor",
+      "expected": "Omprwbrd does not produce oxygen.",
+      "acceptable": [
+        "Omprwbrd does not produce oxygen."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsnzlcw is a veldktvvn. A veldktvvn does not produce oxygen. A omprwbrd is a velzlplmg. A velzlplmg is a omsnzlcw. What does a omprwbrd produce?",
+      "text": "Omprwbrd does not produce oxygen.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        249,
+        237,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019879499974194914,
+      "device": "cuda",
+      "prefix_tokens": 34,
+      "id": "polarity-128",
+      "category": "inherited_negative",
+      "expected": "Omprwbrd does not produce oxygen.",
+      "acceptable": [
+        "Omprwbrd does not produce oxygen."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzrhggc doesn't produce heat. What does a omzrhggc produce?",
+      "text": "Omzrhggc does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017839000007370487,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-129",
+      "category": "direct_negative",
+      "expected": "Omzrhggc does not produce heat.",
+      "acceptable": [
+        "Omzrhggc does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzrhggc produces heat. A omzrhggc doesn't produce heat. What does a omzrhggc produce?",
+      "text": "Omzrhggc does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018916500004706904,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-130",
+      "category": "positive_to_negative",
+      "expected": "Omzrhggc does not produce heat.",
+      "acceptable": [
+        "Omzrhggc does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzrhggc doesn't produce heat. A omzrhggc produces heat. What does a omzrhggc produce?",
+      "text": "Omzrhggc produces heat.",
+      "token_ids": [
+        370,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.0136767000076361,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-131",
+      "category": "negative_to_positive",
+      "expected": "Omzrhggc produces heat.",
+      "acceptable": [
+        "Omzrhggc produces heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrkktkn produces heat. A omzrhggc doesn't produce heat. What does a omzrhggc produce?",
+      "text": "Omzrhggc does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01878209999995306,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-132",
+      "category": "distractor",
+      "expected": "Omzrhggc does not produce heat.",
+      "acceptable": [
+        "Omzrhggc does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omzrhggc is a velpwtgnk. A velpwtgnk doesn't produce heat. What does a omzrhggc produce?",
+      "text": "Omzrhggc does not produce heat.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018769699992844835,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-133",
+      "category": "inherited_negative",
+      "expected": "Omzrhggc does not produce heat.",
+      "acceptable": [
+        "Omzrhggc does not produce heat."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommggrvr does not produce light. What does a ommggrvr produce?",
+      "text": "Ommggrvr does not produce light.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018964999995660037,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-134",
+      "category": "direct_negative",
+      "expected": "Ommggrvr does not produce light.",
+      "acceptable": [
+        "Ommggrvr does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommggrvr produces light. A ommggrvr does not produce light. What does a ommggrvr produce?",
+      "text": "Ommggrvr does not produce light.",
+      "token_ids": [
+        370,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.0186371999734547,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-135",
+      "category": "positive_to_negative",
+      "expected": "Ommggrvr does not produce light.",
+      "acceptable": [
+        "Ommggrvr does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommggrvr does not produce light. A ommggrvr produces light. What does a ommggrvr produce?",
+      "text": "Ommggrvr produces light.",
+      "token_ids": [
+        370,
+        250,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013701599993510172,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-136",
+      "category": "negative_to_positive",
+      "expected": "Ommggrvr produces light.",
+      "acceptable": [
+        "Ommggrvr produces light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhzkcrk produces light. A ommggrvr does not produce light. What does a ommggrvr produce?",
+      "text": "Ommggrvr does not produce light.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.0186874000064563,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-137",
+      "category": "distractor",
+      "expected": "Ommggrvr does not produce light.",
+      "acceptable": [
+        "Ommggrvr does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfbthzh is a velkltvvm. A ommggrvr is a omfbthzh. A velkltvvm does not produce light. What does a ommggrvr produce?",
+      "text": "Ommggrvr does not produce light.",
+      "token_ids": [
+        371,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018308899976545945,
+      "device": "cuda",
+      "prefix_tokens": 28,
+      "id": "polarity-138",
+      "category": "inherited_negative",
+      "expected": "Ommggrvr does not produce light.",
+      "acceptable": [
+        "Ommggrvr does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrzsmkm doesn't produce light. What does a velrzsmkm produce?",
+      "text": "Velrzsmkm does not produce light.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018175099976360798,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-139",
+      "category": "direct_negative",
+      "expected": "Velrzsmkm does not produce light.",
+      "acceptable": [
+        "Velrzsmkm does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrzsmkm produces light. A velrzsmkm doesn't produce light. What does a velrzsmkm produce?",
+      "text": "Velrzsmkm does not produce light.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018904500000644475,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-140",
+      "category": "positive_to_negative",
+      "expected": "Velrzsmkm does not produce light.",
+      "acceptable": [
+        "Velrzsmkm does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrzsmkm doesn't produce light. A velrzsmkm produces light. What does a velrzsmkm produce?",
+      "text": "Velrzsmkm produces light.",
+      "token_ids": [
+        434,
+        250,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01395669998601079,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-141",
+      "category": "negative_to_positive",
+      "expected": "Velrzsmkm produces light.",
+      "acceptable": [
+        "Velrzsmkm produces light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velvcksdl produces light. A velrzsmkm doesn't produce light. What does a velrzsmkm produce?",
+      "text": "Velrzsmkm does not produce light.",
+      "token_ids": [
+        435,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01843120000557974,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-142",
+      "category": "distractor",
+      "expected": "Velrzsmkm does not produce light.",
+      "acceptable": [
+        "Velrzsmkm does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrzsmkm is a omppdwkf. A velcrsnwh is a omccbdwg. A omccbdwg doesn't produce light. A omppdwkf is a velcrsnwh. What does a velrzsmkm produce?",
+      "text": "Velrzsmkm does not produce light.",
+      "token_ids": [
+        434,
+        90,
+        220,
+        249,
+        182,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.020421499997610226,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "polarity-143",
+      "category": "inherited_negative",
+      "expected": "Velrzsmkm does not produce light.",
+      "acceptable": [
+        "Velrzsmkm does not produce light."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwwsctr is not furry. Describe a velwwsctr.",
+      "text": "Velwwsctr is not furry.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        134,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.0156841000134591,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "polarity-144",
+      "category": "direct_negative",
+      "expected": "Velwwsctr is not furry.",
+      "acceptable": [
+        "Velwwsctr is not furry."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwwsctr is furry. A velwwsctr is not furry. Describe a velwwsctr.",
+      "text": "Velwwsctr is not furry.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        134,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016907299985177815,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-145",
+      "category": "positive_to_negative",
+      "expected": "Velwwsctr is not furry.",
+      "acceptable": [
+        "Velwwsctr is not furry."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwwsctr is not furry. A velwwsctr is furry. Describe a velwwsctr.",
+      "text": "Velwwsctr is furry.",
+      "token_ids": [
+        434,
+        170,
+        134,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013546000001952052,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-146",
+      "category": "negative_to_positive",
+      "expected": "Velwwsctr is furry.",
+      "acceptable": [
+        "Velwwsctr is furry."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omnlmbmk is furry. A velwwsctr is not furry. Describe a velwwsctr.",
+      "text": "Velwwsctr is not furry.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        134,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016099500004202127,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-147",
+      "category": "distractor",
+      "expected": "Velwwsctr is not furry.",
+      "acceptable": [
+        "Velwwsctr is not furry."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velwwsctr is a velgdzwsc. A velgdzwsc is not furry. Describe a velwwsctr.",
+      "text": "Velwwsctr is not furry.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        134,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015648300002794713,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-148",
+      "category": "inherited_negative",
+      "expected": "Velwwsctr is not furry.",
+      "acceptable": [
+        "Velwwsctr is not furry."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommwklfv isn't cold. Describe a ommwklfv.",
+      "text": "Ommwklfv is not cold.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015294899989385158,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "polarity-149",
+      "category": "direct_negative",
+      "expected": "Ommwklfv is not cold.",
+      "acceptable": [
+        "Ommwklfv is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommwklfv is cold. A ommwklfv isn't cold. Describe a ommwklfv.",
+      "text": "Ommwklfv is not cold.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015803199989022687,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-150",
+      "category": "positive_to_negative",
+      "expected": "Ommwklfv is not cold.",
+      "acceptable": [
+        "Ommwklfv is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommwklfv isn't cold. A ommwklfv is cold. Describe a ommwklfv.",
+      "text": "Ommwklfv is cold.",
+      "token_ids": [
+        370,
+        170,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013211699988460168,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-151",
+      "category": "negative_to_positive",
+      "expected": "Ommwklfv is cold.",
+      "acceptable": [
+        "Ommwklfv is cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrmbrdv is cold. A ommwklfv isn't cold. Describe a ommwklfv.",
+      "text": "Ommwklfv is not cold.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015610400005243719,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-152",
+      "category": "distractor",
+      "expected": "Ommwklfv is not cold.",
+      "acceptable": [
+        "Ommwklfv is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommwklfv is a velhcpdbd. A velkgsskh isn't cold. A velhcpdbd is a velkgsskh. Describe a ommwklfv.",
+      "text": "Ommwklfv is not cold.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01626209999085404,
+      "device": "cuda",
+      "prefix_tokens": 24,
+      "id": "polarity-153",
+      "category": "inherited_negative",
+      "expected": "Ommwklfv is not cold.",
+      "acceptable": [
+        "Ommwklfv is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgsmhcf is not green. Describe a omgsmhcf.",
+      "text": "Omgsmhcf is not green.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014842399978078902,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "polarity-154",
+      "category": "direct_negative",
+      "expected": "Omgsmhcf is not green.",
+      "acceptable": [
+        "Omgsmhcf is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgsmhcf is green. A omgsmhcf is not green. Describe a omgsmhcf.",
+      "text": "Omgsmhcf is not green.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01621610001893714,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-155",
+      "category": "positive_to_negative",
+      "expected": "Omgsmhcf is not green.",
+      "acceptable": [
+        "Omgsmhcf is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgsmhcf is not green. A omgsmhcf is green. Describe a omgsmhcf.",
+      "text": "Omgsmhcf is green.",
+      "token_ids": [
+        370,
+        170,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013171300000976771,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-156",
+      "category": "negative_to_positive",
+      "expected": "Omgsmhcf is green.",
+      "acceptable": [
+        "Omgsmhcf is green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veltlkfgc is green. A omgsmhcf is not green. Describe a omgsmhcf.",
+      "text": "Omgsmhcf is not green.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016642100003082305,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-157",
+      "category": "distractor",
+      "expected": "Omgsmhcf is not green.",
+      "acceptable": [
+        "Omgsmhcf is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzwdltr is not green. A velhwkhhv is a velzwdltr. A omstwlzc is a velhwkhhv. A omgsmhcf is a omstwlzc. Describe a omgsmhcf.",
+      "text": "Omgsmhcf is not green.",
+      "token_ids": [
+        371,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015855700010433793,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "id": "polarity-158",
+      "category": "inherited_negative",
+      "expected": "Omgsmhcf is not green.",
+      "acceptable": [
+        "Omgsmhcf is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtnldrg isn't green. Describe a omtnldrg.",
+      "text": "Omtnldrg is not green.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015744299977086484,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "polarity-159",
+      "category": "direct_negative",
+      "expected": "Omtnldrg is not green.",
+      "acceptable": [
+        "Omtnldrg is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtnldrg is green. A omtnldrg isn't green. Describe a omtnldrg.",
+      "text": "Omtnldrg is not green.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015284599998267367,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-160",
+      "category": "positive_to_negative",
+      "expected": "Omtnldrg is not green.",
+      "acceptable": [
+        "Omtnldrg is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtnldrg isn't green. A omtnldrg is green. Describe a omtnldrg.",
+      "text": "Omtnldrg is green.",
+      "token_ids": [
+        370,
+        170,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013795999984722584,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-161",
+      "category": "negative_to_positive",
+      "expected": "Omtnldrg is green.",
+      "acceptable": [
+        "Omtnldrg is green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A veldrsnkd is green. A omtnldrg isn't green. Describe a omtnldrg.",
+      "text": "Omtnldrg is not green.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016262799996184185,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-162",
+      "category": "distractor",
+      "expected": "Omtnldrg is not green.",
+      "acceptable": [
+        "Omtnldrg is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ompcvswh isn't green. A omtnldrg is a ompcvswh. Describe a omtnldrg.",
+      "text": "Omtnldrg is not green.",
+      "token_ids": [
+        371,
+        170,
+        220,
+        141,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016175500000827014,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-163",
+      "category": "inherited_negative",
+      "expected": "Omtnldrg is not green.",
+      "acceptable": [
+        "Omtnldrg is not green."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtbghfg is not cold. Describe a omtbghfg.",
+      "text": "Omtbghfg is not cold.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014858500013360754,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "polarity-164",
+      "category": "direct_negative",
+      "expected": "Omtbghfg is not cold.",
+      "acceptable": [
+        "Omtbghfg is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtbghfg is cold. A omtbghfg is not cold. Describe a omtbghfg.",
+      "text": "Omtbghfg is not cold.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01603839997551404,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-165",
+      "category": "positive_to_negative",
+      "expected": "Omtbghfg is not cold.",
+      "acceptable": [
+        "Omtbghfg is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omtbghfg is not cold. A omtbghfg is cold. Describe a omtbghfg.",
+      "text": "Omtbghfg is cold.",
+      "token_ids": [
+        370,
+        170,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013260499981697649,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-166",
+      "category": "negative_to_positive",
+      "expected": "Omtbghfg is cold.",
+      "acceptable": [
+        "Omtbghfg is cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsgfpfk is cold. A omtbghfg is not cold. Describe a omtbghfg.",
+      "text": "Omtbghfg is not cold.",
+      "token_ids": [
+        371,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016131999989738688,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-167",
+      "category": "distractor",
+      "expected": "Omtbghfg is not cold.",
+      "acceptable": [
+        "Omtbghfg is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omwglrnl is not cold. A velkrsmbf is a omwglrnl. A omtbghfg is a velkrsmbf. Describe a omtbghfg.",
+      "text": "Omtbghfg is not cold.",
+      "token_ids": [
+        371,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01573449998977594,
+      "device": "cuda",
+      "prefix_tokens": 25,
+      "id": "polarity-168",
+      "category": "inherited_negative",
+      "expected": "Omtbghfg is not cold.",
+      "acceptable": [
+        "Omtbghfg is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcthlmc isn't cold. Describe a velcthlmc.",
+      "text": "Velcthlmc is not cold.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015758900000946596,
+      "device": "cuda",
+      "prefix_tokens": 12,
+      "id": "polarity-169",
+      "category": "direct_negative",
+      "expected": "Velcthlmc is not cold.",
+      "acceptable": [
+        "Velcthlmc is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcthlmc is cold. A velcthlmc isn't cold. Describe a velcthlmc.",
+      "text": "Velcthlmc is not cold.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015606300003128126,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-170",
+      "category": "positive_to_negative",
+      "expected": "Velcthlmc is not cold.",
+      "acceptable": [
+        "Velcthlmc is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcthlmc isn't cold. A velcthlmc is cold. Describe a velcthlmc.",
+      "text": "Velcthlmc is cold.",
+      "token_ids": [
+        434,
+        170,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.0137477999960538,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-171",
+      "category": "negative_to_positive",
+      "expected": "Velcthlmc is cold.",
+      "acceptable": [
+        "Velcthlmc is cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omhmffwm is cold. A velcthlmc isn't cold. Describe a velcthlmc.",
+      "text": "Velcthlmc is not cold.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015857100021094084,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-172",
+      "category": "distractor",
+      "expected": "Velcthlmc is not cold.",
+      "acceptable": [
+        "Velcthlmc is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omgntdkp isn't cold. A vellslbkk is a omgntdkp. A omcmpnrn is a vellslbkk. A velcthlmc is a omcmpnrn. Describe a velcthlmc.",
+      "text": "Velcthlmc is not cold.",
+      "token_ids": [
+        435,
+        170,
+        220,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016692300006980076,
+      "device": "cuda",
+      "prefix_tokens": 30,
+      "id": "polarity-173",
+      "category": "inherited_negative",
+      "expected": "Velcthlmc is not cold.",
+      "acceptable": [
+        "Velcthlmc is not cold."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omflhgkm is not in water. Where is a omflhgkm?",
+      "text": "Omflhgkm is not in water.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017672100017080083,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-174",
+      "category": "direct_negative",
+      "expected": "Omflhgkm is not in water.",
+      "acceptable": [
+        "Omflhgkm is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omflhgkm exists in water. A omflhgkm is not in water. Where is a omflhgkm?",
+      "text": "Omflhgkm is not in water.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018815999996149912,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-175",
+      "category": "positive_to_negative",
+      "expected": "Omflhgkm is not in water.",
+      "acceptable": [
+        "Omflhgkm is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omflhgkm is not in water. A omflhgkm exists in water. Where is a omflhgkm?",
+      "text": "Omflhgkm exists in water.",
+      "token_ids": [
+        370,
+        108,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.01564450000296347,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-176",
+      "category": "negative_to_positive",
+      "expected": "Omflhgkm exists in water.",
+      "acceptable": [
+        "Omflhgkm exists in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velchpmsr exists in water. A omflhgkm is not in water. Where is a omflhgkm?",
+      "text": "Omflhgkm is not in water.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01884450000943616,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-177",
+      "category": "distractor",
+      "expected": "Omflhgkm is not in water.",
+      "acceptable": [
+        "Omflhgkm is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhnznfp is not in water. A omflhgkm is a velhnznfp. Where is a omflhgkm?",
+      "text": "Omflhgkm is not in water.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01804290001746267,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-178",
+      "category": "inherited_negative",
+      "expected": "Omflhgkm is not in water.",
+      "acceptable": [
+        "Omflhgkm is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velspcvrt isn't in land. Where is a velspcvrt?",
+      "text": "Velspcvrt is not in land.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017927699984284118,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-179",
+      "category": "direct_negative",
+      "expected": "Velspcvrt is not in land.",
+      "acceptable": [
+        "Velspcvrt is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velspcvrt exists in land. A velspcvrt isn't in land. Where is a velspcvrt?",
+      "text": "Velspcvrt is not in land.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01853170001413673,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-180",
+      "category": "positive_to_negative",
+      "expected": "Velspcvrt is not in land.",
+      "acceptable": [
+        "Velspcvrt is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velspcvrt isn't in land. A velspcvrt exists in land. Where is a velspcvrt?",
+      "text": "Velspcvrt exists in land.",
+      "token_ids": [
+        434,
+        108,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015889100002823398,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-181",
+      "category": "negative_to_positive",
+      "expected": "Velspcvrt exists in land.",
+      "acceptable": [
+        "Velspcvrt exists in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A ommcsrwl exists in land. A velspcvrt isn't in land. Where is a velspcvrt?",
+      "text": "Velspcvrt is not in land.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018515200004912913,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-182",
+      "category": "distractor",
+      "expected": "Velspcvrt is not in land.",
+      "acceptable": [
+        "Velspcvrt is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velspcvrt is a velhmlcpc. A velhmlcpc is a omnmsfnk. A omnmsfnk isn't in land. Where is a velspcvrt?",
+      "text": "Velspcvrt is not in land.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018859800009522587,
+      "device": "cuda",
+      "prefix_tokens": 26,
+      "id": "polarity-183",
+      "category": "inherited_negative",
+      "expected": "Velspcvrt is not in land.",
+      "acceptable": [
+        "Velspcvrt is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmmmnhk is not in land. Where is a velmmmnhk?",
+      "text": "Velmmmnhk is not in land.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018534300004830584,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-184",
+      "category": "direct_negative",
+      "expected": "Velmmmnhk is not in land.",
+      "acceptable": [
+        "Velmmmnhk is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmmmnhk exists in land. A velmmmnhk is not in land. Where is a velmmmnhk?",
+      "text": "Velmmmnhk is not in land.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017691299988655373,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-185",
+      "category": "positive_to_negative",
+      "expected": "Velmmmnhk is not in land.",
+      "acceptable": [
+        "Velmmmnhk is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velmmmnhk is not in land. A velmmmnhk exists in land. Where is a velmmmnhk?",
+      "text": "Velmmmnhk exists in land.",
+      "token_ids": [
+        434,
+        108,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016183300002012402,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-186",
+      "category": "negative_to_positive",
+      "expected": "Velmmmnhk exists in land.",
+      "acceptable": [
+        "Velmmmnhk exists in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velhnttzc exists in land. A velmmmnhk is not in land. Where is a velmmmnhk?",
+      "text": "Velmmmnhk is not in land.",
+      "token_ids": [
+        435,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018316600006073713,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-187",
+      "category": "distractor",
+      "expected": "Velmmmnhk is not in land.",
+      "acceptable": [
+        "Velmmmnhk is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velznzcfw is a omwcbrbr. A velgnlzmh is a velznzcfw. A omwcbrbr is not in land. A velmmmnhk is a velgnlzmh. Where is a velmmmnhk?",
+      "text": "Velmmmnhk is not in land.",
+      "token_ids": [
+        436,
+        170,
+        220,
+        163,
+        176,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019644899992272258,
+      "device": "cuda",
+      "prefix_tokens": 33,
+      "id": "polarity-188",
+      "category": "inherited_negative",
+      "expected": "Velmmmnhk is not in land.",
+      "acceptable": [
+        "Velmmmnhk is not in land."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velttlgkc isn't in water. Where is a velttlgkc?",
+      "text": "Velttlgkc is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.0181006999919191,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-189",
+      "category": "direct_negative",
+      "expected": "Velttlgkc is not in water.",
+      "acceptable": [
+        "Velttlgkc is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velttlgkc exists in water. A velttlgkc isn't in water. Where is a velttlgkc?",
+      "text": "Velttlgkc is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018074399995384738,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-190",
+      "category": "positive_to_negative",
+      "expected": "Velttlgkc is not in water.",
+      "acceptable": [
+        "Velttlgkc is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velttlgkc isn't in water. A velttlgkc exists in water. Where is a velttlgkc?",
+      "text": "Velttlgkc exists in water.",
+      "token_ids": [
+        434,
+        108,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016201000020373613,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-191",
+      "category": "negative_to_positive",
+      "expected": "Velttlgkc exists in water.",
+      "acceptable": [
+        "Velttlgkc exists in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omsfbpcv exists in water. A velttlgkc isn't in water. Where is a velttlgkc?",
+      "text": "Velttlgkc is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018665800016606227,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-192",
+      "category": "distractor",
+      "expected": "Velttlgkc is not in water.",
+      "acceptable": [
+        "Velttlgkc is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velttlgkc is a omzktzdf. A omzktzdf isn't in water. Where is a velttlgkc?",
+      "text": "Velttlgkc is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018912400002591312,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-193",
+      "category": "inherited_negative",
+      "expected": "Velttlgkc is not in water.",
+      "acceptable": [
+        "Velttlgkc is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgkmnlt is not in water. Where is a velgkmnlt?",
+      "text": "Velgkmnlt is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01783570001134649,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-194",
+      "category": "direct_negative",
+      "expected": "Velgkmnlt is not in water.",
+      "acceptable": [
+        "Velgkmnlt is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgkmnlt exists in water. A velgkmnlt is not in water. Where is a velgkmnlt?",
+      "text": "Velgkmnlt is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.0183275000017602,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-195",
+      "category": "positive_to_negative",
+      "expected": "Velgkmnlt is not in water.",
+      "acceptable": [
+        "Velgkmnlt is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velgkmnlt is not in water. A velgkmnlt exists in water. Where is a velgkmnlt?",
+      "text": "Velgkmnlt exists in water.",
+      "token_ids": [
+        434,
+        108,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016118900006404147,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-196",
+      "category": "negative_to_positive",
+      "expected": "Velgkmnlt exists in water.",
+      "acceptable": [
+        "Velgkmnlt exists in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omkznffr exists in water. A velgkmnlt is not in water. Where is a velgkmnlt?",
+      "text": "Velgkmnlt is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018104199989465997,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-197",
+      "category": "distractor",
+      "expected": "Velgkmnlt is not in water.",
+      "acceptable": [
+        "Velgkmnlt is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omfslrzw is a velchtrrw. A velgkmnlt is a omfslrzw. A velchtrrw is not in water. Where is a velgkmnlt?",
+      "text": "Velgkmnlt is not in water.",
+      "token_ids": [
+        435,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01861780000035651,
+      "device": "cuda",
+      "prefix_tokens": 27,
+      "id": "polarity-198",
+      "category": "inherited_negative",
+      "expected": "Velgkmnlt is not in water.",
+      "acceptable": [
+        "Velgkmnlt is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrsmhcn isn't in water. Where is a velrsmhcn?",
+      "text": "Velrsmhcn is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017394599999533966,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-199",
+      "category": "direct_negative",
+      "expected": "Velrsmhcn is not in water.",
+      "acceptable": [
+        "Velrsmhcn is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrsmhcn exists in water. A velrsmhcn isn't in water. Where is a velrsmhcn?",
+      "text": "Velrsmhcn is not in water.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01861629998893477,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-200",
+      "category": "positive_to_negative",
+      "expected": "Velrsmhcn is not in water.",
+      "acceptable": [
+        "Velrsmhcn is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velrsmhcn isn't in water. A velrsmhcn exists in water. Where is a velrsmhcn?",
+      "text": "Velrsmhcn exists in water.",
+      "token_ids": [
+        434,
+        108,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015556400001514703,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-201",
+      "category": "negative_to_positive",
+      "expected": "Velrsmhcn exists in water.",
+      "acceptable": [
+        "Velrsmhcn exists in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velnczrzf exists in water. A velrsmhcn isn't in water. Where is a velrsmhcn?",
+      "text": "Velrsmhcn is not in water.",
+      "token_ids": [
+        435,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.0189484000147786,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "id": "polarity-202",
+      "category": "distractor",
+      "expected": "Velrsmhcn is not in water.",
+      "acceptable": [
+        "Velrsmhcn is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velfrmppt is a velsrzfrk. A velrsmhcn is a velvkrrfv. A velvkrrfv is a velfrmppt. A velsrzfrk isn't in water. Where is a velrsmhcn?",
+      "text": "Velrsmhcn is not in water.",
+      "token_ids": [
+        436,
+        170,
+        220,
+        163,
+        342,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.019162499986123294,
+      "device": "cuda",
+      "prefix_tokens": 32,
+      "id": "polarity-203",
+      "category": "inherited_negative",
+      "expected": "Velrsmhcn is not in water.",
+      "acceptable": [
+        "Velrsmhcn is not in water."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omkwgtwv is not a bird. What can a omkwgtwv do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015580400009639561,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-204",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellmpvfs can fly. A omkwgtwv is not a vellmpvfs. What can a omkwgtwv do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016357999993488193,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-205",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omkwgtwv is a bird. A omkwgtwv cannot fly. Explain a omkwgtwv.",
+      "text": "Omkwgtwv is a bird. It cannot fly.",
+      "token_ids": [
+        370,
+        170,
+        13,
+        46,
+        9,
+        172,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.0256525999866426,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-206",
+      "category": "multi_sentence",
+      "expected": "Omkwgtwv is a bird. It cannot fly.",
+      "acceptable": [
+        "Omkwgtwv is a bird. It cannot fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omkwgtwv is not a bird. A omkwgtwv can swim. Explain a omkwgtwv.",
+      "text": "Omkwgtwv is not a bird. It can swim.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        13,
+        46,
+        9,
+        172,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 11,
+      "seconds": 0.028258199978154153,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-207",
+      "category": "multi_sentence",
+      "expected": "Omkwgtwv is not a bird. It can swim.",
+      "acceptable": [
+        "Omkwgtwv is not a bird. It can swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "An omkwgtwv is not an observatory. What is an omkwgtwv?",
+      "text": "Omkwgtwv is not an observatory.",
+      "token_ids": [
+        370,
+        170,
+        220,
+        23,
+        371,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.018341500021051615,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-208",
+      "category": "article_choice",
+      "expected": "Omkwgtwv is not an observatory.",
+      "acceptable": [
+        "Omkwgtwv is not an observatory."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzpthhv is not a bird. What can a velzpthhv do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.014986599999247119,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-209",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzmmfrf can fly. A velzpthhv is not a velzmmfrf. What can a velzpthhv do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016062799986684695,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-210",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzpthhv is a bird. A velzpthhv cannot fly. Explain a velzpthhv.",
+      "text": "Velzpthhv is a bird. It cannot fly.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        46,
+        9,
+        172,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02575030000298284,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-211",
+      "category": "multi_sentence",
+      "expected": "Velzpthhv is a bird. It cannot fly.",
+      "acceptable": [
+        "Velzpthhv is a bird. It cannot fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzpthhv is not a bird. A velzpthhv can swim. Explain a velzpthhv.",
+      "text": "Velzpthhv is not a bird. It can swim.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        46,
+        9,
+        172,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 11,
+      "seconds": 0.02794160001212731,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-212",
+      "category": "multi_sentence",
+      "expected": "Velzpthhv is not a bird. It can swim.",
+      "acceptable": [
+        "Velzpthhv is not a bird. It can swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "An velzpthhv is not an observatory. What is an velzpthhv?",
+      "text": "Velzpthhv is not an observatory.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        23,
+        370,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01794379999046214,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-213",
+      "category": "article_choice",
+      "expected": "Velzpthhv is not an observatory.",
+      "acceptable": [
+        "Velzpthhv is not an observatory."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkbmndn is not a bird. What can a velkbmndn do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015586699999403208,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-214",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velcmbnfn can fly. A velkbmndn is not a velcmbnfn. What can a velkbmndn do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015742400020826608,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-215",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkbmndn is a bird. A velkbmndn cannot fly. Explain a velkbmndn.",
+      "text": "Velkbmndn is a bird. It cannot fly.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        46,
+        9,
+        172,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02585850001196377,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-216",
+      "category": "multi_sentence",
+      "expected": "Velkbmndn is a bird. It cannot fly.",
+      "acceptable": [
+        "Velkbmndn is a bird. It cannot fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velkbmndn is not a bird. A velkbmndn can swim. Explain a velkbmndn.",
+      "text": "Velkbmndn is not a bird. It can swim.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        46,
+        9,
+        172,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 11,
+      "seconds": 0.0283060000219848,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-217",
+      "category": "multi_sentence",
+      "expected": "Velkbmndn is not a bird. It can swim.",
+      "acceptable": [
+        "Velkbmndn is not a bird. It can swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "An velkbmndn is not an observatory. What is an velkbmndn?",
+      "text": "Velkbmndn is not an observatory.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        23,
+        370,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.01856910000788048,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-218",
+      "category": "article_choice",
+      "expected": "Velkbmndn is not an observatory.",
+      "acceptable": [
+        "Velkbmndn is not an observatory."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzshvmh is not a bird. What can a velzshvmh do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015994600020349026,
+      "device": "cuda",
+      "prefix_tokens": 16,
+      "id": "polarity-219",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A omlvvhcp can fly. A velzshvmh is not a omlvvhcp. What can a velzshvmh do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015496799984248355,
+      "device": "cuda",
+      "prefix_tokens": 21,
+      "id": "polarity-220",
+      "category": "negative_class_blocks_inheritance",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzshvmh is a bird. A velzshvmh cannot fly. Explain a velzshvmh.",
+      "text": "Velzshvmh is a bird. It cannot fly.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        46,
+        9,
+        172,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02601680002408102,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "id": "polarity-221",
+      "category": "multi_sentence",
+      "expected": "Velzshvmh is a bird. It cannot fly.",
+      "acceptable": [
+        "Velzshvmh is a bird. It cannot fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A velzshvmh is not a bird. A velzshvmh can swim. Explain a velzshvmh.",
+      "text": "Velzshvmh is not a bird. It can swim.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        13,
+        46,
+        9,
+        172,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 11,
+      "seconds": 0.028314299997873604,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-222",
+      "category": "multi_sentence",
+      "expected": "Velzshvmh is not a bird. It can swim.",
+      "acceptable": [
+        "Velzshvmh is not a bird. It can swim."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "An velzshvmh is not an observatory. What is an velzshvmh?",
+      "text": "Velzshvmh is not an observatory.",
+      "token_ids": [
+        434,
+        170,
+        220,
+        23,
+        370,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 7,
+      "seconds": 0.017961999983526766,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-223",
+      "category": "article_choice",
+      "expected": "Velzshvmh is not an observatory.",
+      "acceptable": [
+        "Velzshvmh is not an observatory."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl can fly. What can a vellnflfl do?",
+      "text": "Vellnflfl can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.012782600009813905,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "id": "polarity-224",
+      "category": "conversation",
+      "expected": "Vellnflfl can fly.",
+      "acceptable": [
+        "Vellnflfl can fly."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl cannot fly. What can a vellnflfl do?",
+      "text": "Vellnflfl cannot fly.",
+      "token_ids": [
+        434,
+        59,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013158799993107095,
+      "device": "cuda",
+      "prefix_tokens": 32,
+      "id": "polarity-225",
+      "category": "conversation",
+      "expected": "Vellnflfl cannot fly.",
+      "acceptable": [
+        "Vellnflfl cannot fly."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl can swim. What can a vellnflfl do?",
+      "text": "Vellnflfl can swim.",
+      "token_ids": [
+        434,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.015359599987277761,
+      "device": "cuda",
+      "prefix_tokens": 50,
+      "id": "polarity-226",
+      "category": "conversation",
+      "expected": "Vellnflfl can swim.",
+      "acceptable": [
+        "Vellnflfl can swim."
+      ],
+      "reset": false,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl can fly. A vellnflfl cannot swim. What can a vellnflfl do?",
+      "text": "Vellnflfl cannot swim.",
+      "token_ids": [
+        434,
+        59,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013144099997589365,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "id": "polarity-227",
+      "category": "multi_value_stress",
+      "expected": "Vellnflfl can fly.",
+      "acceptable": [
+        "Vellnflfl can fly."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "A vellnflfl can fly. Can a vellnflfl fly?",
+      "text": "Yes.",
+      "token_ids": [
+        366,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.00783330001286231,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "polarity-228",
+      "category": "yes_no_stress",
+      "expected": "Yes.",
+      "acceptable": [
+        "Yes."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl cannot fly. Can a vellnflfl fly?",
+      "text": "No.",
+      "token_ids": [
+        219,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008172899979399517,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "id": "polarity-229",
+      "category": "yes_no_stress",
+      "expected": "No.",
+      "acceptable": [
+        "No."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl can fly. What can a vellnflfl not do?",
+      "text": "Vellnflfl can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01280120000592433,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "id": "polarity-230",
+      "category": "query_scope_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": false
+    },
+    {
+      "prompt": "Do not explain a cat.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015118600014830008,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "id": "polarity-231",
+      "category": "instruction_scope_stress",
+      "expected": "I do not know.",
+      "acceptable": [
+        "I do not know."
+      ],
+      "reset": true,
+      "correct": true
+    },
+    {
+      "prompt": "A vellnflfl is not unable to fly. What can a vellnflfl do?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015557600010652095,
+      "device": "cuda",
+      "prefix_tokens": 17,
+      "id": "polarity-232",
+      "category": "double_negation_stress",
+      "expected": "Vellnflfl can fly.",
+      "acceptable": [
+        "Vellnflfl can fly."
+      ],
+      "reset": true,
+      "correct": false
+    }
+  ],
+  "probes": [],
+  "torch": "2.8.0+cu128",
+  "hardware": "NVIDIA GeForce RTX 5080",
+  "summary": {
+    "direct_negative": {
+      "passed": 42,
+      "total": 42,
+      "success_rate": 1.0,
+      "median_response_ms": 17.778199995518662
+    },
+    "positive_to_negative": {
+      "passed": 42,
+      "total": 42,
+      "success_rate": 1.0,
+      "median_response_ms": 18.469300004653633
+    },
+    "negative_to_positive": {
+      "passed": 42,
+      "total": 42,
+      "success_rate": 1.0,
+      "median_response_ms": 13.724699994781986
+    },
+    "distractor": {
+      "passed": 42,
+      "total": 42,
+      "success_rate": 1.0,
+      "median_response_ms": 18.22744999662973
+    },
+    "inherited_negative": {
+      "passed": 36,
+      "total": 36,
+      "success_rate": 1.0,
+      "median_response_ms": 18.71104999736417
+    },
+    "negative_class_blocks_inheritance": {
+      "passed": 8,
+      "total": 8,
+      "success_rate": 1.0,
+      "median_response_ms": 15.664550010114908
+    },
+    "multi_sentence": {
+      "passed": 8,
+      "total": 8,
+      "success_rate": 1.0,
+      "median_response_ms": 26.979200018104166
+    },
+    "article_choice": {
+      "passed": 4,
+      "total": 4,
+      "success_rate": 1.0,
+      "median_response_ms": 18.15175000228919
+    },
+    "conversation": {
+      "passed": 3,
+      "total": 3,
+      "success_rate": 1.0,
+      "median_response_ms": 13.158799993107095
+    },
+    "multi_value_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 13.144099997589365
+    },
+    "yes_no_stress": {
+      "passed": 2,
+      "total": 2,
+      "success_rate": 1.0,
+      "median_response_ms": 8.003099996130913
+    },
+    "query_scope_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 12.80120000592433
+    },
+    "instruction_scope_stress": {
+      "passed": 1,
+      "total": 1,
+      "success_rate": 1.0,
+      "median_response_ms": 15.118600014830008
+    },
+    "double_negation_stress": {
+      "passed": 0,
+      "total": 1,
+      "success_rate": 0.0,
+      "median_response_ms": 15.557600010652095
+    },
+    "all": {
+      "passed": 230,
+      "total": 233,
+      "success_rate": 0.9871244635193133,
+      "median_response_ms": 17.765099997632205
+    }
+  },
+  "checks": {
+    "weights_unchanged": true,
+    "runtime_imports_no_compiler_or_fact_table": true
+  }
+}

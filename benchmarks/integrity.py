@@ -26,6 +26,7 @@ def main():
     p.add_argument('--compound-facts', action='store_true', help='Use v13 assertion layout and ablate continuation, predicate, and question/clause binding')
     p.add_argument('--deferred-assertions', action='store_true', help='Use v13c delayed-clause layout and ablate following-token validation')
     p.add_argument('--periodic-lookbacks', action='store_true', help='Ablate the two v14 positional phases and check long-prefix cache parity')
+    p.add_argument('--fact-canonicalization', action='store_true', help='Test the v14b fact-coordinate saturation under a controlled magnitude perturbation')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -375,6 +376,29 @@ def main():
             logits, cache, _ = m.forward([token], cache)
         assert m.tokenizer.decode(generated) == 'I do not know.'
         checks['long_prefix_cached_and_full_tokens_match'] = dict(prefix_tokens=len(prefix), text=m.tokenizer.decode(generated))
+    if a.fact_canonicalization:
+        prompt = 'A kelv can fly and swim. A kelv cannot swim. Can kelv swim?'
+        m.reset()
+        original = m.generate(prompt)
+        saved = {}
+        try:
+            name = 'blocks.2.mlp.down.weight'
+            saved[name] = m.w[name]
+            m.w[name] = saved[name].clone()
+            m.w[name][880:936] *= 1.001  # Small extra magnitude in delayed identity codes.
+            m.reset()
+            protected = m.generate(prompt)
+            name = 'blocks.3.mlp.down.weight'
+            saved[name] = m.w[name]
+            m.w[name] = saved[name].clone()
+            m.w[name][880:954] = 0  # Remove the shared saturation barrier.
+            m.reset()
+            unprotected = m.generate(prompt)
+        finally:
+            m.w.update(saved)
+        assert original['text'] == 'No.' and protected['text'] == 'No.' and unprotected['text'] == 'Yes.', (original['text'], protected['text'], unprotected['text'])
+        checks['fact_coordinate_amplitude_intervention'] = dict(original=original, protected=protected,
+                                                               unprotected=unprotected, identity_scale=1.001)
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,
