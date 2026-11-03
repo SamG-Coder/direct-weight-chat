@@ -147,3 +147,12 @@ positive fly followed by negative swim returns the last denied action, exposing
 the existing one-value-per-relation answer selection. One otherwise correct
 negative sentence appends a token because tiny numerical residuals break the
 implicit all-zero EOS tie. This candidate is archived before correction.
+
+## 2026-11-03: v8b robust neural termination
+
+Added a one-logit EOS bias, below the 16-logit margin between valid token codes,
+to resolve the no-output state despite small floating-point residuals. Polarity:
+227/233, with the six structural/scope/multiple-value stress failures retained.
+Legacy remains 185/185, graph improves to 75/79, and arithmetic remains 114/120.
+The previous fresh graph and arithmetic sets were rerun as regressions with the
+same respective scores. This candidate is frozen before a fresh polarity seed.

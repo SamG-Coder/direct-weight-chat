@@ -237,6 +237,10 @@ def main():
         put_pair(row, S.POS_SQ, (position / 128) ** 2)
     for tid in range(S.VOCAB):
         add_reader(tensors["lm_head.weight"][tid], {S.OUTPUT + i: 8 * bit for i, bit in enumerate(S.code(tid))})
+    # Valid token codes have an exact nearest-neighbor margin of 16 logits.
+    # A one-logit EOS prior resolves an otherwise all-zero code robustly,
+    # instead of allowing tiny accumulated floating-point residue to emit text.
+    tensors["lm_head.bias"][ids["<eos>"]] = 1
 
     c = Compiler(tensors, ids)
     # Block 0: causal role, clause phase, and four previous-token pointers.
