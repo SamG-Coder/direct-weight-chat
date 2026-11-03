@@ -7,7 +7,7 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('version', help='v0, v1-v5, or current')
+    parser.add_argument('version', help='current, v0, or an archived version such as v5, v6c, v7a')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.version == 'v0':

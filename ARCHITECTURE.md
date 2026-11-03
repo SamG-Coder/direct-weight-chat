@@ -32,3 +32,43 @@ formatting. It does not parse facts into a host dictionary or compute answers.
 The external evaluator computes expected results but passes only each input
 prompt to `Model.generate`. Ablations and causal/cache checks are recorded in
 the original verification reports.
+
+## v6: a bounded graph algorithm
+
+The answer subject and graph cursor occupy separate residual registers. After
+local fact parsing, layers 3, 5, 7 and 9 use seven parallel attention heads to
+look up all predicates for the current cursor. A direct prompt assertion can
+override the queried subject's authored fact. Later ancestors fill properties
+that are still absent. Each step copies the class object's code into the cursor.
+Layers 4, 6 and 8 query the permanent atomic fields for that new cursor. Lookup
+is causal with respect to the answer token, but does not require assertions to
+appear in parent-first order. It is bounded to three class links before a
+terminal explicit-property lookup.
+
+For an exact fact match, signed identity bits contribute 14 and the valid
+predicate contributes 5. A BOS sentinel scores 18.5; one mismatching identity
+bit drops a candidate by 2. Recency breaks ties within the available context.
+For static identity lookup, the sentinel's identity is explicitly zeroed so
+its threshold of 13 sits between exact score 14 and mismatch score at most 12.
+
+Temporary lookback buffers are recycled into a 112-feature relation buffer.
+Nine grammar predicates are saved before that reuse. Decoding coordinates are
+reinitialized to suppress floating-point residue before the implicit EOS tie.
+The failed v6a and v6b snapshots demonstrate why these lifetime/score details
+matter. Disabling later graph attention changes an inherited answer to an
+unknown response without any host-side fallback.
+
+## v7: signed subtraction
+
+Attention retrieves the current query's arithmetic operator and numeric
+operands. With operands `a,b` in `[0,999]`, the compiled MLP forms
+`abs(a-b) = ReLU(a-b) + ReLU(b-a)` and a one-unit ramp for `b > a`. ReLU gates
+select addition or subtraction using the operator feature. The existing
+piecewise-linear integer decoder maps the magnitude to token-code bits.
+
+The next-token circuit emits a minus token for a negative result, then magnitude
+and punctuation in subsequent forward passes. Detokenization removes whitespace
+between a generated minus and a generated number. No Python subtraction,
+comparison, expression evaluation or answer rendering occurs inside inference.
+The large bounded integer-to-code decoder is retained; a reusable arbitrary-
+precision arithmetic algorithm remains future research.

@@ -1,3 +1,13 @@
+# Historical v5 report
+
+This document preserves the original v5 description and test results. The current
+model is v7a; see the [root README](../README.md), [capabilities](../CAPABILITIES.md)
+and [version table](../results/README.md) for current behavior. Commands below
+that refer to the default model now load the current release. Use
+`--model-dir versions/autoregressive_v5/model` to run the archived v5 checkpoint.
+The original `verify.py` is historical; use `benchmarks.evaluate` for current
+versioned results.
+
 # Direct-weight autoregressive chat experiment
 
 This is a concrete attempt to construct a generative neural chat model without
@@ -22,19 +32,19 @@ model. Its file size should not be interpreted as evidence of intelligence.
 Double-click `Chat.cmd`, or run:
 
 ```powershell
-& 'D:\TestAIWeightsFromScratch\chat1gb_autoregressive\Chat.ps1'
+python -m chat1gb_autoregressive.chat
 ```
 
 For a single prompt and a record of every next-token decision:
 
 ```powershell
-& 'D:\TestAIWeightsFromScratch\chat1gb_autoregressive\Chat.ps1' `
-    -Prompt 'A dax is a bird. What can a dax do?' -Trace
+python -m chat1gb_autoregressive.chat `
+    --prompt 'A dax is a bird. What can a dax do?' --trace
 ```
 
 Use `/reset` for a fresh context and `/quit` to exit. `-Cpu` selects the CPU.
 The launcher uses the existing local PyTorch 2.8.0 CUDA installation at
-`D:\LittleBit\.venv\Scripts\python.exe`. Nothing is downloaded or installed.
+`python` from your active environment. Nothing is downloaded or installed.
 
 ## Actual generated outputs
 

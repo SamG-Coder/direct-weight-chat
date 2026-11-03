@@ -15,6 +15,22 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
+The current frozen version is **v7a**. It adds bounded traversal through unfamiliar
+class relationships and subtraction with signed results. Tests and failed
+intermediate versions are public; see the [version table](results/README.md).
+
+| Development suite | v5 | Current v7a |
+|---|---:|---:|
+| Original narrow cases | 185/185 | 185/185 |
+| Graph composition and stress | 12/79 | 74/79 |
+| Arithmetic and stress | Not run | 114/120 |
+
+The arithmetic baseline was v6c at 22/120. After freezing the candidates,
+fresh-seed graph and arithmetic evaluations reproduced 74/79 and 114/120 on
+CUDA and CPU. Their structures were already known; these are fresh combinations,
+not independent evidence of broad intelligence. The failing stress cases remain
+part of every score.
+
 ## Run offline
 
 Use a Python environment with NumPy for construction and PyTorch for inference
@@ -27,11 +43,25 @@ python -m chat1gb_autoregressive.chat --model-dir build/current --device auto
 python -m benchmarks.evaluate --model build/current --suite tests/legacy-185.json --output results/local-current.json --version current --device auto
 ```
 
-For a historical build, replace `current` with `v1`, `v2`, `v3`, `v4` or `v5`.
+For a historical build, replace `current` with `v1`–`v5`, `v6a`, `v6b`, `v6c` or `v7a`.
 `v0` builds the separate response-selector prototype. Builders refuse to overwrite
 an existing directory. The archived source bytes and checkpoint hashes are
 preserved. Raw weight files are excluded from Git; compressed checkpoints are
 published as release assets.
+
+To run a downloaded checkpoint, extract its ZIP in the repository root.
+The v7a archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
+`python -m chat1gb_autoregressive.chat`. Historical archives use
+`versions/autoregressive_VERSION/model`; select that directory with `--model-dir`.
+Check archive SHA-256 against `SHA256SUMS.txt` and raw weight SHA-256 against the
+included manifest. Small ZIPs reflect sparse/repetitive weights: every extracted
+checkpoint still has exactly 1,000,000,000 parameter bytes.
+
+```powershell
+python -m benchmarks.evaluate --model build/current --suite tests/graph-development.json --output results/local-graph.json --version current
+python -m benchmarks.evaluate --model build/current --suite tests/math-development.json --output results/local-math.json --version current
+python -m benchmarks.integrity --model build/current --source versions/autoregressive_v7a --output results/local-integrity.json
+```
 
 ## Evidence and research
 
@@ -45,6 +75,8 @@ published as release assets.
 
 The original v5 passed 185/185 restricted tests and 39/39 shorter CPU tests, while
 failing the broad requests for poetry, code, negation and general reasoning. The
+current model improves bounded relationship composition and subtraction, but
+still fails open-ended conversation, creative writing and code generation. The
 185-case suite was evaluated retrospectively on earlier versions. It is a
 development suite, not an independent general intelligence benchmark. All
 observed failures are retained.

@@ -26,7 +26,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", choices=("cuda", "cpu", "auto"), default="auto")
     parser.add_argument("--quick", action="store_true")
+    parser.add_argument("--output", type=Path, required=True, help="New result path; existing evidence is never overwritten")
     args = parser.parse_args()
+    if args.output.exists():
+        raise SystemExit("Refusing to overwrite an existing verification report")
     manifest = json.loads((DEFAULT_MODEL / "manifest.json").read_text(encoding="utf-8"))
     for name, expected in manifest["sha256"].items():
         if digest(DEFAULT_MODEL / name) != expected:
@@ -41,7 +44,7 @@ def main():
     assert (DEFAULT_MODEL / "weights.f32").stat().st_size == 1_000_000_000
     result = {"device": model.device, "quick": args.quick, "weight_sha256": manifest["sha256"]["weights.f32"],
               "parameter_count": count, "nonzero_parameters": manifest["nonzero_parameters"],
-              "checks": {}, "cases": [], "general_chat_probes": [], "version": "fifth analytic build"}
+              "checks": {}, "cases": [], "general_chat_probes": [], "version": "checkpoint identified by weight_sha256"}
     result["checks"]["integrity_and_standard_tensor_layout"] = True
     result["checks"]["runtime_imports_no_facts_or_response_program"] = True
     with socket.socket() as connection:
@@ -185,9 +188,8 @@ def main():
     result["summary"]["median_complete_response_ms"] = statistics.median(item["seconds"] for item in result["cases"]) * 1000
     assert digest(DEFAULT_MODEL / "weights.f32") == manifest["sha256"]["weights.f32"]
     result["checks"]["weight_hash_unchanged_after_all_tests"] = True
-    evidence = DEFAULT_MODEL.parent / "evidence"
-    evidence.mkdir(exist_ok=True)
-    path = evidence / f"verification-{model.device}.json"
+    path = args.output
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result["summary"], indent=2), flush=True)
     print(f"Integrity, causality, cache parity, ablations and offline checks passed. Saved {path}", flush=True)

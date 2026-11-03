@@ -1,3 +1,8 @@
+# Historical selector v0 (rejected)
+
+This prototype stores canned answers and does not satisfy the current task.
+For current work, see the [root README](../README.md).
+
 # 1 GB Neural Chat Experiment
 
 An offline neural conversation program whose weights were written directly,
@@ -18,7 +23,7 @@ understanding by itself.
 Double-click `Chat.cmd` in this directory, or run this in PowerShell:
 
 ```powershell
-& 'D:\TestAIWeightsFromScratch\chat1gb\Chat.ps1'
+python -m chat1gb.chat
 ```
 
 Try:
@@ -41,13 +46,11 @@ or persistent personal memory.
 For a single response with routing details:
 
 ```powershell
-& 'D:\TestAIWeightsFromScratch\chat1gb\Chat.ps1' -Prompt '12345 + 67890' -Trace
+python -m chat1gb.chat --prompt '12345 + 67890' --trace
 ```
 
-The launcher uses the already installed PyTorch environment at
-`D:\LittleBit\.venv\Scripts\python.exe`, with CUDA when available. It makes no
-changes to that environment. If that executable is absent, it uses the existing
-Python 3.14 installation and NumPy on the CPU. Nothing is downloaded or installed.
+The launcher uses `python` from your active environment. Install dependencies
+from an offline package cache before running. No package is downloaded by inference.
 To select the verified NumPy CPU path explicitly:
 
 ```powershell

@@ -91,3 +91,24 @@ failures, including negative operands and a chained expression that produce
 incorrect answers. These failures are retained. The existing integer-to-token
 piecewise decoder remains a limitation; this is not arbitrary-precision math.
 Candidate v7a is frozen before generating new arithmetic combinations.
+
+## 2026-11-03: final verification and release preparation
+
+v7a arithmetic with post-freeze seed 2964068083 scored 114/120 on both CUDA and
+CPU. That set contains 100 fresh random operand combinations and 20 repeated
+boundary, dialogue and stress cases. The former v6c fresh graph set is now a
+regression suite for v7a and remains 74/79. No frozen weights were tuned after
+these evaluations. Arithmetic accumulator ablation changes `149 - 370` from
+`-221.` to `-0.`, while graph and output-head ablations, causality, cache parity,
+size, finiteness, hash and offline checks pass.
+
+Rebuilding v7a from its archived compiler reproduces the exact weight and config
+hashes. Ten checkpoint archives (selector v0, autoregressive v1-v5, v6a, v6b,
+v6c and v7a) were compressed and their decompressed hashes/CRCs verified. Raw
+1 GB tensors remain outside Git. The public experiment is MIT licensed.
+
+Recommended next experiment: add an explicit neural validity/polarity
+representation, test negative assertions and compound expressions before
+implementation, and reject unsupported structures consistently. Broader language,
+code generation and useful open-ended conversation are still unresolved. The
+long-term research objective is not complete.

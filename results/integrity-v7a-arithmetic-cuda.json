@@ -1,0 +1,38 @@
+{
+  "git": {
+    "commit": "60169ec23186114b40069961c61c48dd01de51b9",
+    "dirty": true
+  },
+  "model_sha256": "85a6b709cead89d261a1b1d412ad8e64bac19d4e12b9f9ec6bc947fff1869c2d",
+  "device": "cuda",
+  "checks": {
+    "file_and_source_hashes": true,
+    "runtime_imports_no_compiler": true,
+    "parameter_count": 250000000,
+    "weight_bytes": 1000000000,
+    "nonzero_parameters": 717554,
+    "finite_weights": true,
+    "socket_audit_guard": true,
+    "causal_prefix_max_logit_difference": 0.0,
+    "cached_and_full_prefix_tokens_match": true,
+    "multi_hop_ablation": {
+      "prompt": "A lavrik is a pelvon. A pelvon is a nebvik. A nebvik can shimmer. What can a lavrik do?",
+      "original": "Lavrik can shimmer.",
+      "ablated": "I do not know.",
+      "changed": true,
+      "layers": [
+        5,
+        7,
+        9
+      ]
+    },
+    "output_head_ablation_removes_text": true,
+    "arithmetic_ablation": {
+      "prompt": "149 - 370",
+      "original": "-221.",
+      "ablated": "-0."
+    },
+    "weight_file_unchanged_after_ablations": true
+  },
+  "note": "Ablations replace selected runtime tensor references with zero copies, then restore them. The saved checkpoint is never modified."
+}

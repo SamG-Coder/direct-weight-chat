@@ -1,5 +1,42 @@
 # Capabilities and limitations
 
+## Current v7a
+
+- Legacy regression: 185/185. Graph development: 74/79. Arithmetic: 114/120.
+- Follows up to three unfamiliar class links to a terminal property, across
+  six property relations, with shuffled fact order and irrelevant facts.
+- Uses nearest available properties along the chain and the latest assertion
+  for a matching entity. Direct assertions override static facts for the queried
+  subject. Known category leaves can supply authored properties.
+- Handles the tested multi-turn corrections, unknown links and cycles without
+  inventing a property. It does not implement a general cycle detector or
+  unrestricted graph search; it executes four graph lookup steps.
+- Adds and subtracts two nonnegative integers from 0 to 999. Subtraction emits
+  negative results as a minus token and a magnitude token.
+
+v6c's post-freeze graph cases scored 74/79 on both CPU and CUDA. v7a's post-freeze
+arithmetic cases scored 114/120 on both, including all 80 new random subtraction
+and 20 new addition combinations. The known generator/syntax limits these claims.
+No code or weights were tuned against those post-freeze outputs.
+
+Latest raw weight SHA-256:
+`85a6b709cead89d261a1b1d412ad8e64bac19d4e12b9f9ec6bc947fff1869c2d`.
+Only **717,554 parameters (0.2870216%)** are nonzero. All 250M float32 parameters
+belong to standard transformer tensors, but most connections are unused.
+
+Still fails: longer graph chains, unsupported paraphrases, negation, arbitrary
+relations/events, comparisons, conditionals, plurals, creative writing, coding,
+general conversation, algebra, fractions, multiplication and division. Negative
+operands and chained subtraction can return incorrect numbers (for example,
+`-5 - 3` and `10 - 3 - 2`); signed outputs do not imply signed-input support.
+Knowledge is still seeded by 40 authored entity records and seven relation types.
+There is no general pronoun/variable binding or durable memory outside the token
+context. Static ancestor facts can have precedence interactions with explicit
+ancestor facts that have not been exhaustively tested.
+
+The research milestones remain partial. In particular, broad language generation,
+code generation and useful open-ended conversation have not been achieved.
+
 ## Historical v5
 
 Measured on the restricted development suite: 15/15 functional cases, 40/40

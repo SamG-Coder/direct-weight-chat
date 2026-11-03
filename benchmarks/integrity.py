@@ -16,6 +16,7 @@ def main():
     p.add_argument('--source', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--device', default='auto', choices=['auto', 'cpu', 'cuda'])
+    p.add_argument('--arithmetic', action='store_true', help='Also ablate the v7 signed arithmetic accumulator')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite evidence')
@@ -86,6 +87,23 @@ def main():
     finally:
         m.w['lm_head.weight'] = saved_head
     assert checks['output_head_ablation_removes_text']
+    if a.arithmetic:
+        m.reset()
+        original_math = m.generate('149 - 370')
+        # Logical accumulator 5 is paired in physical rows 10 and 11. This is
+        # a diagnostic intervention, not an alternate inference path.
+        name = 'blocks.11.mlp.down.weight'
+        saved_math = m.w[name]
+        try:
+            m.w[name] = saved_math.clone()
+            m.w[name][10:12] = 0
+            m.reset()
+            ablated_math = m.generate('149 - 370')
+        finally:
+            m.w[name] = saved_math
+        checks['arithmetic_ablation'] = dict(prompt='149 - 370', original=original_math['text'],
+                                            ablated=ablated_math['text'])
+        assert original_math['text'] == '-221.' and ablated_math['text'] != original_math['text']
     checks['weight_file_unchanged_after_ablations'] = digest(a.model / 'weights.f32') == manifest['sha256']['weights.f32']
     assert checks['weight_file_unchanged_after_ablations']
     result = dict(git=git_state(), model_sha256=manifest['sha256']['weights.f32'], device=m.device, checks=checks,
