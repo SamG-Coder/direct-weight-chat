@@ -112,3 +112,12 @@ representation, test negative assertions and compound expressions before
 implementation, and reject unsupported structures consistently. Broader language,
 code generation and useful open-ended conversation are still unresolved. The
 long-term research objective is not complete.
+
+## 2026-11-03: publication verified
+
+Public repository and prerelease `v0.1.0-experiment` are live. GitHub reports all
+11 assets uploaded (ten checkpoint archives plus checksums); each ZIP's size
+and SHA-256 match the local packaging report. A fresh clone of release commit
+`33952a6` and a fresh downloaded v7a ZIP passed raw/config hash checks, 39/39
+quick verification cases, and four graph/subtraction smoke checks across CUDA
+and CPU. Evidence is in `results/publication.json` and `results/release-validation/`.

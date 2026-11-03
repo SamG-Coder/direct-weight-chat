@@ -1,0 +1,2641 @@
+{
+  "device": "cuda",
+  "quick": true,
+  "weight_sha256": "85a6b709cead89d261a1b1d412ad8e64bac19d4e12b9f9ec6bc947fff1869c2d",
+  "parameter_count": 250000000,
+  "nonzero_parameters": 717554,
+  "checks": {
+    "integrity_and_standard_tensor_layout": true,
+    "runtime_imports_no_facts_or_response_program": true,
+    "offline_socket_guard": true,
+    "causal_prefix_max_logit_difference": 0.0,
+    "cached_and_full_prefix_tokens_match": true,
+    "retrieval_ablation": {
+      "original": "Kelv is a vehicle. It can shimmer.",
+      "ablated": "I do not know."
+    },
+    "output_head_ablation_removes_text": true,
+    "weight_hash_unchanged_after_all_tests": true
+  },
+  "cases": [
+    {
+      "prompt": "Hello",
+      "text": "Hello.",
+      "token_ids": [
+        149,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.18637440001475625,
+      "device": "cuda",
+      "prefix_tokens": 4,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 149,
+          "token": "hello",
+          "top3": [
+            {
+              "token": "hello",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "fur",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "all",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Hello.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "Explain a cat.",
+      "text": "Cat is an animal. It can move.",
+      "token_ids": [
+        61,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        209,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02727500000037253,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 61,
+          "token": "cat",
+          "top3": [
+            {
+              "token": "cat",
+              "logit": 112.0
+            },
+            {
+              "token": "bicycle",
+              "logit": 96.0
+            },
+            {
+              "token": "aquatic",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 170,
+          "token": "is",
+          "top3": [
+            {
+              "token": "is",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "gpu",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "being",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 23,
+          "token": "an",
+          "top3": [
+            {
+              "token": "an",
+              "logit": 112.0
+            },
+            {
+              "token": "air",
+              "logit": 96.0
+            },
+            {
+              "token": ",",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 25,
+          "token": "animal",
+          "top3": [
+            {
+              "token": "animal",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "after",
+              "logit": 96.0
+            },
+            {
+              "token": ".",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 172,
+          "token": "it",
+          "top3": [
+            {
+              "token": "it",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "internet",
+              "logit": 96.0
+            },
+            {
+              "token": "gravity",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "before",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "token_id": 209,
+          "token": "move",
+          "top3": [
+            {
+              "token": "move",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "hasn't",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "craters",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Cat is an animal. It can move.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "Explain a neural network.",
+      "text": "Neural network is a model. It can learn.",
+      "token_ids": [
+        217,
+        170,
+        13,
+        205,
+        9,
+        172,
+        57,
+        178,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.026589699991745874,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 217,
+          "token": "neural network",
+          "top3": [
+            {
+              "token": "neural network",
+              "logit": 112.0
+            },
+            {
+              "token": "hi",
+              "logit": 96.0
+            },
+            {
+              "token": "do",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 170,
+          "token": "is",
+          "top3": [
+            {
+              "token": "is",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "gpu",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "being",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 13,
+          "token": "a",
+          "top3": [
+            {
+              "token": "a",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": ".",
+              "logit": 96.0
+            },
+            {
+              "token": "*",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 205,
+          "token": "model",
+          "top3": [
+            {
+              "token": "model",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "green",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "continue",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 172,
+          "token": "it",
+          "top3": [
+            {
+              "token": "it",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "internet",
+              "logit": 96.0
+            },
+            {
+              "token": "gravity",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "before",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "token_id": 178,
+          "token": "learn",
+          "top3": [
+            {
+              "token": "learn",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "have",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "both",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Neural network is a model. It can learn.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "What can a fish do?",
+      "text": "Fish can swim.",
+      "token_ids": [
+        121,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013586599990958348,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 121,
+          "token": "fish",
+          "top3": [
+            {
+              "token": "fish",
+              "logit": 112.0
+            },
+            {
+              "token": "do",
+              "logit": 96.0
+            },
+            {
+              "token": "can",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "before",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 305,
+          "token": "swim",
+          "top3": [
+            {
+              "token": "swim",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "some",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "satellite",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Fish can swim.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "What does a tree need?",
+      "text": "Tree needs sunlight.",
+      "token_ids": [
+        330,
+        216,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013758299988694489,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 330,
+          "token": "tree",
+          "top3": [
+            {
+              "token": "tree",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "river",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "compute",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 216,
+          "token": "needs",
+          "top3": [
+            {
+              "token": "needs",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "mean",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "hey",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 302,
+          "token": "sunlight",
+          "top3": [
+            {
+              "token": "sunlight",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "structure",
+              "logit": 96.0
+            },
+            {
+              "token": "bird",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Tree needs sunlight.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "What does a computer have?",
+      "text": "Computer has processor.",
+      "token_ids": [
+        75,
+        144,
+        248,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013757799984887242,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 75,
+          "token": "computer",
+          "top3": [
+            {
+              "token": "computer",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "cold",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 144,
+          "token": "has",
+          "top3": [
+            {
+              "token": "has",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "food",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "add",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 248,
+          "token": "processor",
+          "top3": [
+            {
+              "token": "processor",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "needs",
+              "logit": 96.0
+            },
+            {
+              "token": "first",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Computer has processor.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "What does a fire produce?",
+      "text": "Fire produces heat.",
+      "token_ids": [
+        119,
+        250,
+        148,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014325800002552569,
+      "device": "cuda",
+      "prefix_tokens": 9,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 119,
+          "token": "fire",
+          "top3": [
+            {
+              "token": "fire",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "difference",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "calculate",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 250,
+          "token": "produces",
+          "top3": [
+            {
+              "token": "produces",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "other",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "lives",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 148,
+          "token": "heat",
+          "top3": [
+            {
+              "token": "heat",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "fuel",
+              "logit": 96.0
+            },
+            {
+              "token": "airplane",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Fire produces heat.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "Describe ice.",
+      "text": "Ice is cold.",
+      "token_ids": [
+        159,
+        170,
+        67,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.01380699998117052,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 159,
+          "token": "ice",
+          "top3": [
+            {
+              "token": "ice",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "hadn't",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "aren't",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 170,
+          "token": "is",
+          "top3": [
+            {
+              "token": "is",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "gpu",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "being",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 67,
+          "token": "cold",
+          "top3": [
+            {
+              "token": "cold",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "cloud",
+              "logit": 96.0
+            },
+            {
+              "token": "<assistant>",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Ice is cold.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "Where is a moon?",
+      "text": "Moon exists in space.",
+      "token_ids": [
+        206,
+        108,
+        163,
+        292,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.016540899989195168,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 206,
+          "token": "moon",
+          "top3": [
+            {
+              "token": "moon",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "grow",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "conversation",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 108,
+          "token": "exists",
+          "top3": [
+            {
+              "token": "exists",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "electromagnetic",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "concept",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 163,
+          "token": "in",
+          "top3": [
+            {
+              "token": "in",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "attractive",
+              "logit": 96.0
+            },
+            {
+              "token": "from",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 292,
+          "token": "space",
+          "top3": [
+            {
+              "token": "space",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "solid",
+              "logit": 96.0
+            },
+            {
+              "token": "reasoning",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Moon exists in space.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "A dax is a vehicle. A dax can fly. Explain a dax.",
+      "text": "Dax is a vehicle. It can fly.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        337,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.030159999994793907,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 434,
+          "token": "dax",
+          "top3": [
+            {
+              "token": "dax",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<copy_62>",
+              "logit": 96.0
+            },
+            {
+              "token": "learn",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 170,
+          "token": "is",
+          "top3": [
+            {
+              "token": "is",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "gpu",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "being",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 13,
+          "token": "a",
+          "top3": [
+            {
+              "token": "a",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": ".",
+              "logit": 96.0
+            },
+            {
+              "token": "*",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 337,
+          "token": "vehicle",
+          "top3": [
+            {
+              "token": "vehicle",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "this",
+              "logit": 96.0
+            },
+            {
+              "token": "satellite",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 172,
+          "token": "it",
+          "top3": [
+            {
+              "token": "it",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "internet",
+              "logit": 96.0
+            },
+            {
+              "token": "gravity",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "before",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "token_id": 126,
+          "token": "fly",
+          "top3": [
+            {
+              "token": "fly",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "fins",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "droplets",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Dax is a vehicle. It can fly.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "A zorb needs sunlight. What does a zorb need?",
+      "text": "Zorb needs sunlight.",
+      "token_ids": [
+        434,
+        216,
+        302,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013561800005845726,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 434,
+          "token": "zorb",
+          "top3": [
+            {
+              "token": "zorb",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "tell",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "learn",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 216,
+          "token": "needs",
+          "top3": [
+            {
+              "token": "needs",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "mean",
+              "logit": 96.0
+            },
+            {
+              "token": "hey",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 302,
+          "token": "sunlight",
+          "top3": [
+            {
+              "token": "sunlight",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "structure",
+              "logit": 96.0
+            },
+            {
+              "token": "star",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Zorb needs sunlight.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "A dax can swim. A dax can fly. What can a dax do?",
+      "text": "Dax can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.013892399991163984,
+      "device": "cuda",
+      "prefix_tokens": 19,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 434,
+          "token": "dax",
+          "top3": [
+            {
+              "token": "dax",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<copy_62>",
+              "logit": 96.0
+            },
+            {
+              "token": "learn",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "before",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "animal",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 126,
+          "token": "fly",
+          "top3": [
+            {
+              "token": "fly",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "fins",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "droplets",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Dax can fly.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "A dax is a bird. What can a dax do?",
+      "text": "Dax can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014007799996761605,
+      "device": "cuda",
+      "prefix_tokens": 15,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 434,
+          "token": "dax",
+          "top3": [
+            {
+              "token": "dax",
+              "logit": 112.0
+            },
+            {
+              "token": "tell",
+              "logit": 96.0
+            },
+            {
+              "token": "learn",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "before",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "animal",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 126,
+          "token": "fly",
+          "top3": [
+            {
+              "token": "fly",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "fins",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "droplets",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Dax can fly.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "A dax is a bird. A dax can swim. What can a dax do?",
+      "text": "Dax can swim.",
+      "token_ids": [
+        434,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014040900015970692,
+      "device": "cuda",
+      "prefix_tokens": 20,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 434,
+          "token": "dax",
+          "top3": [
+            {
+              "token": "dax",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<copy_62>",
+              "logit": 96.0
+            },
+            {
+              "token": "learn",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "before",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "animal",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 305,
+          "token": "swim",
+          "top3": [
+            {
+              "token": "swim",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "some",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "satellite",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Dax can swim.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "An ombre is an observatory. An ombre can shimmer. Explain an ombre.",
+      "text": "Ombre is an observatory. It can shimmer.",
+      "token_ids": [
+        370,
+        170,
+        23,
+        371,
+        9,
+        172,
+        57,
+        434,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.027662800013786182,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 370,
+          "token": "ombre",
+          "top3": [
+            {
+              "token": "ombre",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "you",
+              "logit": 96.0
+            },
+            {
+              "token": "feathered",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 170,
+          "token": "is",
+          "top3": [
+            {
+              "token": "is",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "gpu",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "being",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 23,
+          "token": "an",
+          "top3": [
+            {
+              "token": "an",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "air",
+              "logit": 96.0
+            },
+            {
+              "token": ",",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 371,
+          "token": "observatory",
+          "top3": [
+            {
+              "token": "observatory",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "very",
+              "logit": 96.0
+            },
+            {
+              "token": "than",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 172,
+          "token": "it",
+          "top3": [
+            {
+              "token": "it",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "internet",
+              "logit": 96.0
+            },
+            {
+              "token": "gravity",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "token_id": 57,
+          "token": "can",
+          "top3": [
+            {
+              "token": "can",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "before",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "token_id": 434,
+          "token": "shimmer",
+          "top3": [
+            {
+              "token": "shimmer",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<copy_32>",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "tell",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99998474121094
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "=",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            },
+            {
+              "token": "<eos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "Ombre is an observatory. It can shimmer.",
+      "correct": true,
+      "category": "functional"
+    },
+    {
+      "prompt": "A velccbzv is an animal. A velccbzv can zindle. Explain a velccbzv.",
+      "text": "Velccbzv is an animal. It can zindle.",
+      "token_ids": [
+        434,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.026835500000743195,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "expected": "Velccbzv is an animal. It can zindle.",
+      "correct": true,
+      "category": "novel_composition"
+    },
+    {
+      "prompt": "A velhbtmm is an animal. A velhbtmm can pivot. Explain a velhbtmm.",
+      "text": "Velhbtmm is an animal. It can pivot.",
+      "token_ids": [
+        434,
+        170,
+        23,
+        25,
+        9,
+        172,
+        57,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02601840000716038,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "expected": "Velhbtmm is an animal. It can pivot.",
+      "correct": true,
+      "category": "novel_composition"
+    },
+    {
+      "prompt": "A velgfztb is a machine. A velgfztb can glimmer. Explain a velgfztb.",
+      "text": "Velgfztb is a machine. It can glimmer.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        191,
+        9,
+        172,
+        57,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.026826599991181865,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "expected": "Velgfztb is a machine. It can glimmer.",
+      "correct": true,
+      "category": "novel_composition"
+    },
+    {
+      "prompt": "A velwcghn is a machine. A velwcghn can swim. Explain a velwcghn.",
+      "text": "Velwcghn is a machine. It can swim.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        191,
+        9,
+        172,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02590899998904206,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "expected": "Velwcghn is a machine. It can swim.",
+      "correct": true,
+      "category": "novel_composition"
+    },
+    {
+      "prompt": "A velfrkpw is an observatory. A velfrkpw can zindle. Explain a velfrkpw.",
+      "text": "Velfrkpw is an observatory. It can zindle.",
+      "token_ids": [
+        434,
+        170,
+        23,
+        370,
+        9,
+        172,
+        57,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.027162699989276007,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "expected": "Velfrkpw is an observatory. It can zindle.",
+      "correct": true,
+      "category": "novel_composition"
+    },
+    {
+      "prompt": "A veltdsgv is a vehicle. A veltdsgv can shimmer. Explain a veltdsgv.",
+      "text": "Veltdsgv is a vehicle. It can shimmer.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        337,
+        9,
+        172,
+        57,
+        435,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02653979999013245,
+      "device": "cuda",
+      "prefix_tokens": 18,
+      "expected": "Veltdsgv is a vehicle. It can shimmer.",
+      "correct": true,
+      "category": "novel_composition"
+    },
+    {
+      "prompt": "0 + 0",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007262099999934435,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "0.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "9 + 1",
+      "text": "10.",
+      "token_ids": [
+        508,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007786699978169054,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "10.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "123 + 456",
+      "text": "579.",
+      "token_ids": [
+        1077,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007510900002671406,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "579.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "999 + 999",
+      "text": "1998.",
+      "token_ids": [
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007588900014525279,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "1998.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "817 + 749",
+      "text": "1566.",
+      "token_ids": [
+        2064,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007225200009997934,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "1566.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "485 + 514",
+      "text": "999.",
+      "token_ids": [
+        1497,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007707100012339652,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "999.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "134 + 154",
+      "text": "288.",
+      "token_ids": [
+        786,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.0074148999992758036,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "288.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "607 + 472",
+      "text": "1079.",
+      "token_ids": [
+        1577,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007952300016768277,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "1079.",
+      "correct": true,
+      "category": "unseen_arithmetic"
+    },
+    {
+      "prompt": "123 + 456",
+      "text": "579.",
+      "token_ids": [
+        1077,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007207699993159622,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "expected": "579.",
+      "correct": true,
+      "category": "multi_turn_arithmetic"
+    },
+    {
+      "prompt": "11 + 22",
+      "text": "33.",
+      "token_ids": [
+        531,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008215300011215732,
+      "device": "cuda",
+      "prefix_tokens": 14,
+      "expected": "33.",
+      "correct": true,
+      "category": "multi_turn_arithmetic"
+    },
+    {
+      "prompt": "999 + 1",
+      "text": "1000.",
+      "token_ids": [
+        1498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.008627800008980557,
+      "device": "cuda",
+      "prefix_tokens": 22,
+      "expected": "1000.",
+      "correct": true,
+      "category": "multi_turn_arithmetic"
+    },
+    {
+      "prompt": "72 + 128",
+      "text": "200.",
+      "token_ids": [
+        698,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009368800005177036,
+      "device": "cuda",
+      "prefix_tokens": 30,
+      "expected": "200.",
+      "correct": true,
+      "category": "multi_turn_arithmetic"
+    },
+    {
+      "prompt": "0 + 0",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.009749999997438863,
+      "device": "cuda",
+      "prefix_tokens": 38,
+      "expected": "0.",
+      "correct": true,
+      "category": "multi_turn_arithmetic"
+    },
+    {
+      "prompt": "A vesk is a bird. Explain a vesk.",
+      "text": "Vesk is a bird. It can fly.",
+      "token_ids": [
+        434,
+        170,
+        13,
+        46,
+        9,
+        172,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.02698150000651367,
+      "device": "cuda",
+      "prefix_tokens": 13,
+      "expected": "Vesk is a bird. It can fly.",
+      "correct": true,
+      "category": "multi_turn_facts"
+    },
+    {
+      "prompt": "What can a vesk do?",
+      "text": "Vesk can fly.",
+      "token_ids": [
+        434,
+        57,
+        126,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.014291200001025572,
+      "device": "cuda",
+      "prefix_tokens": 31,
+      "expected": "Vesk can fly.",
+      "correct": true,
+      "category": "multi_turn_facts"
+    },
+    {
+      "prompt": "A vesk can swim. What can a vesk do?",
+      "text": "Vesk can swim.",
+      "token_ids": [
+        434,
+        57,
+        305,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.015133999986574054,
+      "device": "cuda",
+      "prefix_tokens": 49,
+      "expected": "Vesk can swim.",
+      "correct": true,
+      "category": "multi_turn_facts"
+    },
+    {
+      "prompt": "Explain a computer.",
+      "text": "Computer is a machine. It can calculate.",
+      "token_ids": [
+        75,
+        170,
+        13,
+        191,
+        9,
+        172,
+        57,
+        55,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 10,
+      "seconds": 0.028382000018609688,
+      "device": "cuda",
+      "prefix_tokens": 60,
+      "expected": "Computer is a machine. It can calculate.",
+      "correct": true,
+      "category": "multi_turn_facts"
+    },
+    {
+      "prompt": "Tell me more.",
+      "text": "Computer can calculate.",
+      "token_ids": [
+        75,
+        57,
+        55,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 5,
+      "seconds": 0.016412699973443523,
+      "device": "cuda",
+      "prefix_tokens": 76,
+      "expected": "Computer can calculate.",
+      "correct": true,
+      "category": "multi_turn_facts"
+    }
+  ],
+  "general_chat_probes": [],
+  "version": "checkpoint identified by weight_sha256",
+  "summary": {
+    "functional": {
+      "correct": 15,
+      "total": 15
+    },
+    "multi_turn_arithmetic": {
+      "correct": 5,
+      "total": 5
+    },
+    "multi_turn_facts": {
+      "correct": 5,
+      "total": 5
+    },
+    "novel_composition": {
+      "correct": 6,
+      "total": 6
+    },
+    "unseen_arithmetic": {
+      "correct": 8,
+      "total": 8
+    },
+    "all": {
+      "correct": 39,
+      "total": 39
+    },
+    "median_complete_response_ms": 14.007799996761605
+  }
+}
