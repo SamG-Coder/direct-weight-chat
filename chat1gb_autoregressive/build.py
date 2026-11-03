@@ -404,7 +404,10 @@ def main():
     # remaining ones for a delayed event and its previous-clause address.
     c.clear(1, range(S.PREV[2], S.PREV[3] + 27))
     c.linear(1, {S.POS_SQ: 1}, {S.ASSERTION_POSITION_SQ: 1})
-    c.linear(1, {S.ASSERTION_GROUP_TEMP: 1 / 64}, {S.ASSERTION_PREVIOUS_GROUP: 1})
+    # Preserve the natural position/128 scale. Dividing by another 64 before
+    # writing over a +/-1 residual loses low bits in float32 cancellation;
+    # multiplying that error by a clause penalty can overwhelm recency.
+    c.linear(1, {S.ASSERTION_GROUP_TEMP: 1}, {S.ASSERTION_PREVIOUS_GROUP: 1})
     c.clear(1, [S.ASSERTION_GROUP_TEMP])
     for terminator in ('and', 'or', 'but', '.', '?', '!', ',', '<user>', '<assistant>', '<eos>'):
         c.word(1, terminator, {S.ASSERTION_TERMINATOR: 1})
@@ -530,7 +533,7 @@ def main():
     # period the current clause ID has advanced, but its delayed object and
     # its frame still belong to the clause just completed. Full fact events
     # occur after a subject/verb, so their previous/current clause IDs agree.
-    c.latest_in_clause(2, 1, S.FACT_VALID, S.ASSERTION_PREVIOUS_GROUP, 8192,
+    c.latest_in_clause(2, 1, S.FACT_VALID, S.ASSERTION_PREVIOUS_GROUP, 128,
                        list(range(S.FACT_SUBJECT, S.FACT_SUBJECT + 14)) + [S.FACT_VALID],
                        list(range(S.CURRENT, S.CURRENT + 14)) + [S.ASSERTION_FRAME_VALID])
     # The token after a provisional object decides whether it is complete.

@@ -535,3 +535,26 @@ trace are preserved before changing the coordinate scale.
 
 v13c raw SHA-256:
 `af534471a28ef79649013f09d7c645561b01aef23288de7e07d39e687c897292`.
+
+## 2026-11-04: v13d coordinate precision and restored subject controls
+
+Preserved the delayed clause coordinate at position/128 instead of position/8192
+and changed the attention coefficient inversely. The ideal score is identical;
+the residual write loses less float32 precision. Assertion development remains
+382/390, and the boundary audit improves 61/76 -> 65/76 on CUDA. All 48 short
+boundary cases now pass. The 11 remaining failures are long-context cases.
+
+All 22 existing suites were rerun. No regression remains against v13a across
+matched reports; the earlier conditional-stress regression against v12b remains
+explicit. Legacy 185/185, graph 75/79, arithmetic 115/120, polarity 230/233,
+signed 153/159, truth 236/239, query scope 265/269, composition 398/404 and
+modifiers 78/81 are retained. All integrity/ablation checks pass, including
+following-token validity and deferred-event cache parity. Frozen source
+reproduces raw/config hashes exactly. The inference runtime is unchanged.
+
+v13d has 929,381 nonzero parameters; raw SHA-256 is
+`ff0b1e1af0909fc6237bdcfc7fc41e6df590cd678bc9552705bb3a943e2b549d`.
+This candidate is committed before choosing its fresh assertion/boundary seeds.
+Useful general chat remains unachieved. The next priority is the demonstrated
+long-context positional/generation failure, followed by broader expression
+structure, rather than treating the full storage window as reliable.

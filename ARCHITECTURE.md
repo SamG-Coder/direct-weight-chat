@@ -258,3 +258,48 @@ changes are checked externally, and the original runtime tensors are restored.
 Raw checkpoint bytes remain unchanged. Most parameters remain zero; the added
 circuits expand a controlled grammar rather than establishing natural-language
 understanding or useful open-ended chat.
+
+## v13b/v13c: defer ambiguous objects until the following token
+
+The v13a boundary audit showed that a causal parser could prematurely store the
+new subject in `X has wings and Y needs water` as an object of X. The next token
+distinguishes these interpretations. Block 1 still prepares a provisional
+coordinated event, but block 2 now reads the previous token's provisional flag,
+predicate, polarity and object code. It validates that event only at a following
+boundary/connector token. A following verb therefore prevents the spurious
+object from becoming evidence. The full assertion about Y remains available.
+
+The third and fourth old lexical lookback buffers are dead after block 1. They
+now carry the delayed event, a copy of the position-square feature and the
+preceding token's clause coordinate. This uses ordinary causal attention and
+ReLU gates; it requires neither future-token access nor host-side retraction.
+The clause-head exclusion category also includes directive request verbs such
+as tell/describe/explain/write, so subordinate content in those requests is not
+silently stored as an asserted fact.
+
+v13b exposed a phase-alignment error: at a sentence-ending period, the query
+used the preceding clause coordinate while the zero-value key at the current
+period used the new coordinate. The new key won and hid the subject frame.
+The candidate is preserved with its 184/390 assertion score. v13c uses the
+preceding-token clause coordinate for both keys and queries. A full assertion
+already follows a subject and verb, so its current/preceding clause coordinates
+agree. A delayed object at punctuation now addresses the clause it completes.
+
+This addresses bounded object/subject ambiguity, not all future-dependent
+sentence semantics. Disjunctions still need separate proposition treatment.
+The post-freeze context audit also exposed numerical failures in long prompts;
+the declared storage window is not a demonstrated accuracy guarantee.
+
+## v13d: preserve clause-coordinate precision when recycling a residual field
+
+v13c copies the preceding clause position into a recycled lexical-code field
+at position/8192 scale. Clearing a previous +/-1 code and adding this tiny value
+in a float32 residual loses low bits. The clause-attention penalty then amplifies
+that error enough to overwhelm the recency difference between two subjects in
+the same clause. A diagnostic trace records the resulting wrong subject binding.
+
+v13d retains position/128 scale and adjusts the attention coefficient so the
+ideal real-arithmetic score is unchanged. The larger stored coordinate reduces
+cancellation error at the residual write. This is a numerical representation
+change, not a new grammar case or answer rule. It does not address every source
+of long-context error in the existing positional lookbacks and output circuits.

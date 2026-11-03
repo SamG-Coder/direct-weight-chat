@@ -1,6 +1,34 @@
 # Capabilities and limitations
 
-## Current v13a
+## Current v13d
+
+- Assertion development scores 382/390 (381/381 targeted grammar; 1/9 structural
+  stress), versus v12b 158/390. The boundary audit improves v13a 41/76 -> v13d
+  65/76 on CUDA. All 48 short boundary cases pass; 17/28 context-length cases pass.
+- Shared coordinated assertions bind subject, predicate and polarity neurally.
+  A following-token gate prevents `X has wings and Y needs water` from storing
+  Y as an object of X. Predicate changes, object correction and inheritance
+  remain supported within the tested grammar.
+- Question and directive clauses do not create the observed unasserted facts.
+  The Tell-me-whether checks demonstrate assertion isolation, not general
+  understanding of indirect questions or arbitrary instruction following.
+- Failed v13b (184/390 assertions, 41/76 boundaries) and intermediate v13c
+  (382/390, 61/76) remain archived with exact results. v13b misaligns clause
+  coordinates at punctuation; v13c loses low bits in a recycled float32 field.
+  v13d preserves the coordinate scale while keeping the ideal attention score.
+
+The long-context audit fails some cases beginning at 2,048 padding tokens.
+The 5,048-token storage window is **not** a demonstrated accuracy window.
+At long positions, answers can change between CPU and CUDA or stop mid-sentence.
+Disjunction, conditional rules, multiple class parents, comma lists, repeated
+negation, open multi-value answers and mixed query precedence remain failures.
+Useful flexible conversation, creative writing and code generation are unachieved.
+
+v13d has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **929,381
+nonzero parameters (0.3717524%)**. Raw weight SHA-256:
+`ff0b1e1af0909fc6237bdcfc7fc41e6df590cd678bc9552705bb3a943e2b549d`.
+
+## Historical v13a
 
 - Coordinated assertions improve from v12b's 158/390 to 382/390, including
   all 381 cases within the targeted grammar and 1/9 broader structural stresses.

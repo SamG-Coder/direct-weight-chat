@@ -10,15 +10,15 @@ def main():
     versions = sorted([p.name.removeprefix('autoregressive_') for p in (root / 'versions').glob('autoregressive_*')], key=lambda v: (int(re.search(r'v([0-9]+)', v).group(1)), v))
     rows = ['# Version results', '',
             'Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.', '',
-            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Nonzero parameters | Source commit |',
-            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
+            '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Nonzero parameters | Source commit |',
+            '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
     index = []
     for v in versions:
         source = Path('versions') / ('autoregressive_' + v)
         m = json.loads((root / source / 'model' / 'manifest.json').read_text(encoding='utf-8'))
         commit = subprocess.check_output(['git', 'log', '--diff-filter=A', '--format=%H', '--', str(source / 'build.py')], cwd=root, text=True).strip().splitlines()[-1]
         scores, reports = [], []
-        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions'):
+        for suite in ('legacy', 'graph', 'math', 'polarity', 'signed', 'truth', 'query-scope', 'composition', 'request-modifiers', 'assertions', 'assertion-boundaries'):
             p = root / 'results' / f'{suite}-{v}-cuda.json'
             if not p.exists():
                 p = root / 'results' / f'{suite}-{v}-baseline-cuda.json'

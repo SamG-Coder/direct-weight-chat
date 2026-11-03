@@ -9,7 +9,8 @@ import random
 from pathlib import Path
 
 
-def generate(seed):
+def generate(seed, status='post-freeze-author-designed-boundaries',
+             frozen_source_commit='89e58f3625b61c952c5cbac2284ce4cde8948279'):
     rng = random.Random(seed)
     cases = []
 
@@ -49,20 +50,22 @@ def generate(seed):
         for prompt, expected, category in examples:
             add(prompt, expected, category)
             cases[-1]['padding_tokens'] = 2 * padding
-    return dict(name='assertion-boundary-audit', status='post-freeze-author-designed-boundaries',
-                seed=seed, frozen_source_commit='89e58f3625b61c952c5cbac2284ce4cde8948279',
+    return dict(name='assertion-boundary-audit', status=status,
+                seed=seed, frozen_source_commit=frozen_source_commit,
                 cases=cases,
-                objective='Audit false assertions from coordinated subjects and indirect questions, plus numerical/context-length boundaries. No v13a weights are changed after these results.')
+                objective='Audit false assertions from coordinated subjects and indirect questions, plus numerical/context-length boundaries. No candidate weights are changed after its post-freeze results.')
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--seed', type=int, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--status', default='post-freeze-author-designed-boundaries')
+    p.add_argument('--frozen-source-commit', default='89e58f3625b61c952c5cbac2284ce4cde8948279')
     a = p.parse_args()
     if a.output.exists():
         raise SystemExit('Refusing to overwrite a suite')
-    suite = generate(a.seed)
+    suite = generate(a.seed, a.status, a.frozen_source_commit)
     a.output.write_text(json.dumps(suite, indent=2) + '\n', encoding='utf-8')
     print(f"Wrote {len(suite['cases'])} post-freeze boundary cases")
 

@@ -15,39 +15,41 @@ prototype is retained only as a rejected historical baseline.
 Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
 **1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
 
-The current frozen version is **v12b**, available with the failed v12a candidate
-in the [v0.4 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.4.0-experiment).
-It composes true, false and unknown propositions with AND/OR, binds different
-subjects and predicates, and separates the active clause from older questions.
+The current frozen version is **v13d**, available with v13a, v13b and v13c
+in the [v0.5 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.5.0-experiment).
+It binds coordinated assertion objects to their subject, predicate and polarity,
+defers ambiguous objects until the next token, and excludes the tested question
+and directive clauses from fact storage. Earlier Boolean composition remains.
 Tests and failed intermediate versions are public in the [version table](results/README.md).
 
-| Development suite | v11a | v12a | Current v12b |
-|---|---:|---:|---:|
-| Original narrow cases | 185/185 | 185/185 | 185/185 |
-| Graph composition and stress | 75/79 | 75/79 | 75/79 |
-| Arithmetic and stress | 115/120 | 88/120 | 115/120 |
-| Fact polarity and scope stress | 229/233 | 230/233 | 230/233 |
-| Signed operands and validity stress | 153/159 | 121/159 | 153/159 |
-| Object-specific truth and stress | 234/239 | 236/239 | 236/239 |
-| Query predicates, negation and stress | 262/269 | 265/269 | 265/269 |
-| Proposition composition and scope | 243/404 | 398/404 | 397/404 |
-| Request modifiers and stress | Not run | 17/81 | 78/81 |
+| Development suite | v12b | v13a | v13b | v13c | Current v13d |
+|---|---:|---:|---:|---:|---:|
+| Original narrow cases | 185/185 | 185/185 | 185/185 | 185/185 | 185/185 |
+| Graph composition and stress | 75/79 | 75/79 | 75/79 | 75/79 | 75/79 |
+| Arithmetic and stress | 115/120 | 115/120 | 115/120 | 115/120 | 115/120 |
+| Fact polarity and scope stress | 230/233 | 230/233 | 230/233 | 230/233 | 230/233 |
+| Signed operands and validity stress | 153/159 | 153/159 | 153/159 | 153/159 | 153/159 |
+| Object-specific truth and stress | 236/239 | 236/239 | 236/239 | 236/239 | 236/239 |
+| Query predicates, negation and stress | 265/269 | 265/269 | 265/269 | 265/269 | 265/269 |
+| Proposition composition and scope | 397/404 | 398/404 | 397/404 | 398/404 | 398/404 |
+| Request modifiers and stress | 78/81 | 78/81 | 78/81 | 78/81 | 78/81 |
+| Coordinated assertions and stress | 158/390 | 382/390 | 184/390 | 382/390 | 382/390 |
+| Assertion boundary audit, CUDA | Not run | 41/76 | 41/76 | 61/76 | 65/76 |
 
-v12a's overly strict request filter broke Please calculate prompts. v12b repairs
-all 106 affected cases across the four arithmetic reports. Its modifier grammar
-also exposes an unsupported paraphrase that v12a had rejected. Three composition
-regressions against v11a remain recorded: mixed-operator precedence, compound
-assertions and a request to answer only part of a question. Earlier partial-answer
-passes are not evidence that those structures were understood. All failures and
-exact before/after outputs remain in the reports.
+v13a's fresh assertion combinations score 382/390 on CPU and CUDA. A later
+boundary audit exposed false object assertions, indirect-question memory leaks
+and long-context failures. Those tests became development evidence for the next
+candidates. v13b's first deferred-commit implementation drops sentence-final
+objects; v13c restores them but exposes a float32 clause-coordinate error. v13d
+repairs that representation and passes all 48 short boundary controls. All failed
+candidates and exact before/after outputs are retained.
 
 Fresh-seed tests use generators and structures already known before freezing.
 They vary combinations and inputs; they are not independently designed evidence
-of broad intelligence. After freezing v12b, composition seed 1676552291 reproduced
-397/404 and modifier seed 973315925 reproduced 78/81 on both CUDA and CPU.
-The model still fails useful open-ended conversation,
-creative writing and code generation. Correct abstention on a poem request does
-not demonstrate poetry generation.
+of broad intelligence. The model still fails useful open-ended conversation,
+creative writing and code generation. Some context checks fail from 2,048 padding
+tokens onward: the 5,048-token storage window is not a demonstrated accuracy
+window. Correct abstention on a poem request does not demonstrate poetry generation.
 
 ## Run offline
 
@@ -62,14 +64,15 @@ python -m benchmarks.evaluate --model build/current --suite tests/legacy-185.jso
 ```
 
 For a historical build, replace `current` with an archived version such as `v5`,
-`v6c`, `v7a`, `v8a`, `v8b`, `v9a`, `v10a`, `v11a`, `v12a` or `v12b`.
+`v6c`, `v7a`, `v8a`, `v8b`, `v9a`, `v10a`, `v11a`, `v12a`, `v12b`,
+`v13a`, `v13b`, `v13c` or `v13d`.
 `v0` builds the separate response-selector prototype. Builders refuse to overwrite
 an existing directory. The archived source bytes and checkpoint hashes are
 preserved. Raw weight files are excluded from Git; compressed checkpoints are
 published as release assets.
 
 To run a downloaded checkpoint, extract its ZIP in the repository root.
-The v12b archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
+The v13d archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
 `python -m chat1gb_autoregressive.chat`. Historical archives use
 `versions/autoregressive_VERSION/model`; select that directory with `--model-dir`.
 Check archive SHA-256 against `SHA256SUMS.txt` and raw weight SHA-256 against the
@@ -85,7 +88,9 @@ python -m benchmarks.evaluate --model build/current --suite tests/truth-developm
 python -m benchmarks.evaluate --model build/current --suite tests/query-scope-development.json --output results/local-query-scope.json --version current
 python -m benchmarks.evaluate --model build/current --suite tests/composition-development.json --output results/local-composition.json --version current
 python -m benchmarks.evaluate --model build/current --suite tests/request-modifiers-development.json --output results/local-modifiers.json --version current
-python -m benchmarks.integrity --model build/current --source versions/autoregressive_v12b --output results/local-integrity.json --arithmetic --arithmetic-layer 10 --polarity --signed-operands --truth --query-negation --composition
+python -m benchmarks.evaluate --model build/current --suite tests/assertions-development.json --output results/local-assertions.json --version current
+python -m benchmarks.evaluate --model build/current --suite tests/assertion-boundaries-v13a.json --output results/local-boundaries.json --version current
+python -m benchmarks.integrity --model build/current --source versions/autoregressive_v13d --output results/local-integrity.json --arithmetic --arithmetic-layer 10 --polarity --signed-operands --truth --query-negation --composition --compound-facts --deferred-assertions
 ```
 
 ## Evidence and research
