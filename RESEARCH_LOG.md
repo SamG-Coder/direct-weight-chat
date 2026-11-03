@@ -807,3 +807,21 @@ The next capability experiment should address actual conditional-rule inference:
 distinguish a rule from an asserted conclusion and require its premise, including
 missing and negative premises. Useful flexible conversation remains unachieved;
 the full research goal stays active.
+
+## 2026-11-04: conditional reasoning tests before implementation
+
+Added `tests/generate_conditionals.py` and 293 seeded development cases before
+changing the compiler. The target is signed ground implications with explicit
+subjects and one premise, including facts before or after the rule, corrections,
+identity isolation, absent/false premises, and position shifts. Chains through
+eight rules, alternative proofs, cycles, compound premises and paraphrases are
+retained as stress cases. The external finite-closure oracle never enters the
+inference process. Explicit facts take precedence over derived information.
+
+Frozen v15a scores 152/293 on both CPU and CUDA. It passes 0/49 positive
+predicate-pair implications and 0/49 signed implications; most passes are
+correct unknown answers. Its two positive paraphrase passes do not establish
+conditional understanding: unsupported syntax can be mistaken for assertions.
+Exact outputs, timings and source/model hashes are in the two baseline reports.
+The next compiler experiment will encode typed rule records, retrieve a rule
+by its conclusion, and check its signed premise through neural fact attention.
