@@ -27,10 +27,11 @@ ADJECTIVE, VOWEL = 49, 50
 USER_START = 51
 FACTS = 64  # Seven slots of [14 object-code bits, present, negative-polarity].
 USER_STATE, PHASE_STATE = 52, 53
-PREV = (180, 206, 232, 258)  # code[14], entity, relation[7], article, preposition, negation, auxiliary
+PREV = (176, 203, 230, 257)  # code[14], entity, relation[7], article, preposition, negation, auxiliary, number
 LIVE_ENTITY, LIVE_QUERY = 54, 55
 TOKEN_SUBTRACT, REQUEST_SUBTRACT, NEGATIVE_RESULT = 56, 57, 58
 NEGATION, AUXILIARY, OUTPUT_NEGATIVE = 59, 60, 61
+NUMBER_AFTER_FIRST, NUM_SECOND_POS = 62, 63
 # Lifetimes matter: the three lookback buffers are dead after block 2 and become
 # a seven-relation scratch buffer. The subject and walk cursor are independent.
 RETURN = 176

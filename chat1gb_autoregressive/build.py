@@ -246,15 +246,26 @@ def main():
     # Block 0: causal role, clause phase, and four previous-token pointers.
     c.latest(0, 0, S.ROLE_CANDIDATE, [S.ROLE_USER], [S.USER_STATE])
     c.latest(0, 1, S.PHASE_CANDIDATE, [S.PHASE_VALUE], [S.PHASE_STATE])
-    sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.REL_FLAGS, S.REL_FLAGS + 7)) + [S.ARTICLE, S.PREPOSITION, S.NEGATION, S.AUXILIARY]
+    sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.REL_FLAGS, S.REL_FLAGS + 7)) + [S.ARTICLE, S.PREPOSITION, S.NEGATION, S.AUXILIARY, S.NUMBER]
     for shift, destination in enumerate(S.PREV, 1):
         sharpness = 16
         queries = [{S.POS: 8 * 2 * sharpness * 128 ** 2, S.ONE: -8 * 2 * sharpness * shift * 128},
                    {S.ONE: -8 * sharpness * 128 ** 2}]
-        c.attention(0, shift + 1, queries, [{S.POS: 1}, {S.POS_SQ: 1}], sources, list(range(destination, destination + 26)))
+        c.attention(0, shift + 1, queries, [{S.POS: 1}, {S.POS_SQ: 1}], sources, list(range(destination, destination + 27)))
     c.latest(0, 6, S.ROLE_USER, [S.POS], [S.USER_START])
     for src, dst in ((S.ENTITY, S.LIVE_ENTITY), (S.QUERY_CANDIDATE, S.LIVE_QUERY), (S.NUMBER, S.LIVE_NUMBER)):
         c.gate(0, [src, S.USER_STATE], targets={dst: 1})
+    p1, p2, p3, p4 = S.PREV
+    # A +/- token immediately after a number is binary. Other occurrences
+    # are unary and must not replace the expression's binary operator.
+    for sign in ("+", "-"):
+        c.word(0, sign, {S.LIVE_QUERY: -1}, positive=[S.USER_STATE], negative=[p1 + 26])
+    # Conditional sign reversal using the previous token's identity. Numeric
+    # embeddings are bounded by the vocabulary (< 16), so a 16-unit identity
+    # penalty suppresses every nonmatching or binary-minus case.
+    unary_minus = expr({S.NUMBER_VALUE: 1, p2 + 26: -16},
+                       {p1 + i: 16 * bit for i, bit in enumerate(S.code(ids["-"]))})
+    c.unit(0, unary_minus, {S.NUMBER_VALUE: -2}, threshold=16 * S.CODE_BITS)
 
     # Block 1: prompt subject/facts, request, and first/last numeric operands.
     sources = list(range(S.CODE, S.CODE + 14)) + [S.ENTITY] + list(range(S.FACTS, S.FACTS + 112))
@@ -268,8 +279,12 @@ def main():
     c.attention(1, 3, [{S.ONE: 8}], [{S.LIVE_NUMBER: 65536, S.USER_START: 16384 * 128, S.POS: -8 * 128}],
                 [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_FIRST, S.NUM_FIRST_POS, S.NUM_FIRST_PRESENT])
     c.latest(1, 4, S.LIVE_NUMBER, [S.NUMBER_VALUE, S.POS, S.NUMBER], [S.NUM_LAST, S.NUM_LAST_POS, S.NUM_LAST_PRESENT])
+    # Mark user numbers after the turn's first number. The clipped ramp is
+    # evaluated neurally; no host-side token counting or expression parser.
+    after_first = {S.POS: 128, S.NUM_FIRST_POS: -128, S.NUMBER: 8192, S.USER_STATE: 8192}
+    c.unit(1, after_first, {S.NUMBER_AFTER_FIRST: 1}, threshold=16384)
+    c.unit(1, after_first, {S.NUMBER_AFTER_FIRST: -1}, threshold=16385)
     cases = []
-    p1, p2, p3, p4 = S.PREV
     for relation in range(7):
         pos = [p1 + 15 + (0 if relation == 5 else relation), p2 + 14, S.USER_STATE]
         neg = []
@@ -335,6 +350,10 @@ def main():
     # Blocks 4,6,8: consult permanent atomic properties of the new cursor.
     # No prompt order or entity identity is compiled into this algorithm.
     for layer in range(3, 10):
+        if layer == 3:
+            c.attention(3, 7, [{S.ONE: 8}],
+                        [{S.NUMBER_AFTER_FIRST: 65536, S.USER_START: 16384 * 128, S.POS: -8 * 128}],
+                        [S.POS], [S.NUM_SECOND_POS])
         queries = [{S.CURRENT + bit: 8 * 8192} for bit in range(14)] + [{S.ONE: 8 * 8192}, {S.ONE: 8}]
         if layer % 2:
             for relation in range(7):
@@ -399,12 +418,25 @@ def main():
         if label[0] in "aeiou" or dynamic_start <= tid < dynamic_start + 64:
             c.word(10, label, {S.CLASS_VOWEL: 1}, start=S.CONTEXT_FACTS)
     for src, dst in ((S.NUM_FIRST, S.STATES + 26), (S.NUM_LAST, S.STATES + 27)):
-        expression = {S.ONE: 1000, src: -1000}
-        c.unit(10, expression, {dst: 1})
-        c.unit(10, expression, {dst: -1}, threshold=1)
+        for sign in (1, -1):
+            expression = {S.ONE: 1000, src: sign * 1000}
+            c.unit(10, expression, {dst: 1})
+            c.unit(10, expression, {dst: -1}, threshold=1)
+        c.unit(10, {S.ONE: 1}, {dst: -1})
     difference = {S.NUM_LAST_POS: 128, S.NUM_FIRST_POS: -128}
-    c.unit(10, difference, {S.STATES + 28: 1})
-    c.unit(10, difference, {S.STATES + 28: -1}, threshold=1)
+    c.unit(10, difference, {S.STATES + 35: 1})
+    c.unit(10, difference, {S.STATES + 35: -1}, threshold=1)
+    # Exactly two operands: the earliest number after the first must also be
+    # the last. Larger counts become nonpositive validity, never an answer.
+    c.unit(10, {S.ONE: 1}, {S.STATES + 28: 1})
+    for sign in (1, -1):
+        c.unit(10, {S.NUM_LAST_POS: sign * 128, S.NUM_SECOND_POS: -sign * 128}, {S.STATES + 28: -1})
+    current_turn = {S.NUM_FIRST_POS: 128, S.USER_START: -128}
+    c.unit(10, current_turn, {S.STATES + 36: 1})
+    c.unit(10, current_turn, {S.STATES + 36: -1}, threshold=1)
+    # Form the signed result before the next layer extracts magnitude/sign.
+    c.linear(10, {S.NUM_FIRST: 1000, S.NUM_LAST: 1000}, {S.MATH_SUM: 1})
+    c.copy(10, S.NUM_LAST, S.REQUEST_SUBTRACT, S.MATH_SUM, scale=-2000)
 
     # Block 11: next-token grammar and semantic selection, not sentence selection.
     c.clear(11, range(S.GATES, S.GATES + 28))
@@ -414,17 +446,15 @@ def main():
     c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_HELLO], targets={S.GATES + 1: 1})
     c.emit(11, "hello", [state["<assistant>"], S.REQUEST + S.Q_HELLO])
     c.gate(11, [state["<assistant>"], S.REQUEST + S.Q_ADD, S.STATES + 26, S.STATES + 27,
-                S.STATES + 28, S.NUM_FIRST_PRESENT, S.NUM_LAST_PRESENT], targets={S.GATES + 2: 1})
+                S.STATES + 28, S.STATES + 35, S.STATES + 36, S.NUM_FIRST_PRESENT, S.NUM_LAST_PRESENT], targets={S.GATES + 2: 1})
     # General bounded arithmetic: addition or |a-b|, plus a signed-result bit.
     # No table of operand pairs is constructed. Numeric values arrive through
     # attention and all operations below become matrix/ReLU tensor operations.
-    c.unit(11, {S.NUM_FIRST: 1000, S.NUM_LAST: 1000, S.REQUEST_SUBTRACT: -2000}, {S.MATH_SUM: 1})
-    for sign in (1, -1):
-        c.unit(11, {S.NUM_FIRST: sign * 1000, S.NUM_LAST: -sign * 1000, S.REQUEST_SUBTRACT: 2000},
-               {S.MATH_SUM: 1}, threshold=2000)
-    negative = {S.NUM_LAST: 1000, S.NUM_FIRST: -1000, S.REQUEST_SUBTRACT: 2000}
-    c.unit(11, negative, {S.NEGATIVE_RESULT: 1}, threshold=2000)
-    c.unit(11, negative, {S.NEGATIVE_RESULT: -1}, threshold=2001)
+    c.clear(11, [S.MATH_SUM])
+    c.unit(11, {S.MATH_SUM: 1}, {S.MATH_SUM: 1})
+    c.unit(11, {S.MATH_SUM: -1}, {S.MATH_SUM: 1})
+    c.unit(11, {S.MATH_SUM: -1}, {S.NEGATIVE_RESULT: 1})
+    c.unit(11, {S.MATH_SUM: -1}, {S.NEGATIVE_RESULT: -1}, threshold=1)
     for relation, word in enumerate(("is", "can", "needs", "has", "produces", "is", "exists")):
         c.emit(11, word, [S.STATES + 17, S.ENTITY, S.REQUEST + relation], [S.OUTPUT_NEGATIVE])
         negative_word = "is" if relation in (0, 5, 6) else "cannot" if relation == 1 else "does"

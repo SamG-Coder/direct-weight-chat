@@ -171,3 +171,21 @@ unary/binary signs, prefix addition, dialogue, bounds and unsupported operand
 counts. Baseline v8b: 46/159. Syntax, multiplication, division and parentheses
 stress cases remain in this suite; old mathematical expected answers remain
 unchanged even when a new abstention check has a different purpose.
+
+## 2026-11-03: v9a signed operands and operand-count validity
+
+Expanded local neural lookback with number flags. Unary +/- no longer replace
+the binary operator, and a gated linear circuit applies a unary minus to numeric
+embeddings. A signed accumulator is formed in block 10; block 11 derives its
+magnitude and sign. Bounds now test both sides of [-999,999]. An attention head
+retrieves the second numeric position; comparison with the last position and
+current-turn bounds rejects unsupported operand counts without Python parsing.
+
+Signed suite: 153/159, including all 120 random signed cases and all unary,
+prefix-addition, dialogue, range and operand-count cases. The three malformed
+syntax cases still return numbers; multiplication, division and parentheses
+remain failures. Legacy 185/185, graph 75/79, polarity 227/233, old arithmetic
+115/120. The former negative-operand stress now succeeds; the chained-expression
+math test still fails its mathematical answer even though the separate validity
+test now correctly records abstention. All former fresh sets were rerun as
+regressions. Candidate frozen before a new signed-arithmetic seed.
