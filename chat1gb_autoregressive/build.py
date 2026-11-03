@@ -283,6 +283,11 @@ def main():
     c.clear(2, range(S.RETURN, S.RETURN + 112))
     for bit in range(14):
         c.linear(2, {S.SUBJECT + bit: 1}, {S.CURRENT + bit: 1})
+    # Preserve the grammar's previous-token predicates before recycling PREV.
+    # GATES[0:10] belong to fact parsing; [10:19] are free until block 11.
+    previous_words = ("<assistant>", "a", "an", "can", "needs", "has", "produces", "in", "is")
+    for i, word in enumerate(previous_words):
+        c.word(2, word, {S.GATES + 10 + i: 1}, start=p1)
 
     # Blocks 3,5,7,9: parallel associative lookup of seven predicates for the
     # current graph node, then follow its class edge. Four lookups support an
@@ -327,9 +332,8 @@ def main():
     c.clear(10, range(S.STATES, S.STATES + 37))
     for i, word in enumerate(S.STATE_WORDS):
         c.word(10, word, {S.STATES + i: 1})
-    previous_words = ("<assistant>", "a", "an", "can", "needs", "has", "produces", "in", "is")
-    for i, word in enumerate(previous_words, 17):
-        c.word(10, word, {S.STATES + i: 1}, start=p1)
+    for i in range(len(previous_words)):
+        c.linear(10, {S.GATES + 10 + i: 1}, {S.STATES + 17 + i: 1})
     for src, dst in ((S.NUM_FIRST, S.STATES + 26), (S.NUM_LAST, S.STATES + 27)):
         expression = {S.ONE: 1000, src: -1000}
         c.unit(10, expression, {dst: 1})

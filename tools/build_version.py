@@ -1,6 +1,7 @@
 """Build a checkpoint offline, refusing to replace an existing output directory."""
 import argparse
 import importlib
+import re
 from pathlib import Path
 
 
@@ -13,7 +14,7 @@ def main():
         name = 'chat1gb.build'
     elif args.version == 'current':
         name = 'chat1gb_autoregressive.build'
-    elif args.version in ('v1', 'v2', 'v3', 'v4', 'v5'):
+    elif re.fullmatch(r'v[1-9][0-9]*[a-z]?', args.version) and (Path(__file__).resolve().parents[1] / 'versions' / ('autoregressive_' + args.version)).is_dir():
         name = 'versions.autoregressive_' + args.version + '.build'
     else:
         raise SystemExit('Unknown version')
