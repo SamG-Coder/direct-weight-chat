@@ -9,7 +9,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     versions = sorted([p.name.removeprefix('autoregressive_') for p in (root / 'versions').glob('autoregressive_*')], key=lambda v: (int(re.search(r'v([0-9]+)', v).group(1)), v))
     rows = ['# Version results', '',
-            'Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.', '',
+            'The current compact artifact has exactly 1,528,592 packed weight bytes. Historical dense checkpoints and failed candidates remain in this table. See ../publication/COMPACT.md for storage and response parity. A dash means the suite was not run for that version.', '',
             '| Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Context /126 | Binding CPU /136 | Conditionals /293 | Rule guards /36 | Rule positions CPU /162 | Proof alternatives /104 | Nonzero parameters | Source commit |',
             '|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|']
     index = []

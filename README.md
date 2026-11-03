@@ -5,10 +5,13 @@
 > v17a is the final checkpoint. Research has stopped; the source, weights,
 > successful tests and failed tests are preserved for inspection and reproduction.
 
-An experimental 1 GB neural network built by writing its weights analytically:
-no training, pretrained parameters, downloaded datasets, or network access during
-construction and inference. Online services are used only to publish artifacts
-and verify their delivery.
+**Analytically constructed weights — no training.**
+
+The final model is **v17a compact**, with an exact packed weight size of
+**1,528,592 bytes**. Its weights were written analytically, without training,
+pretrained parameters, downloaded datasets or network access during construction
+and inference. Online services are used to publish and verify the artifacts.
+Configuration and runnable source files are additional to the packed weight size.
 
 **This is a research experiment, not a useful general-purpose chat model.** The
 autoregressive model emits tokens through an ordinary causal transformer, with
@@ -18,8 +21,20 @@ hand-programmed in weights; token-by-token generation does not establish languag
 understanding. Most parameters are zero. The older `chat1gb` response-selector
 prototype is retained only as a rejected historical baseline.
 
-Every checkpoint has exactly **250,000,000 float32 parameters**, occupying
-**1,000,000,000 bytes** (decimal GB; 0.9313 GiB). File size is not a capability claim.
+The artifact stores **995,905 nonzero float32 coefficients** and their positions,
+preserving every weight bit, including six negative zeros. Its persistent
+runtime weight tensors occupy **12,952,916 bytes** after inference. Total
+application memory is higher because temporary tensors, activations and the
+Python/PyTorch runtime need additional memory. The loader materializes one
+requested tensor at a time.
+
+[Download model + matching runnable source on Hugging Face](https://huggingface.co/SamGCoder/direct-weight-chat-v17a)
+· [Compact format, size, memory and parity evidence](publication/COMPACT.md)
+· [Construction claim audit](publication/CONSTRUCTION-AUDIT.md)
+
+Both word/fact handling and arithmetic retain the same frozen circuits. This
+storage change adds no language or reasoning ability. File size is not a
+capability claim.
 
 ## Final outcome
 
@@ -31,7 +46,7 @@ reasoning chains. It did not produce flexible language understanding, useful
 general conversation, creative writing or code generation.
 
 Successful controlled tests demonstrate those specific circuits. They do not
-establish general intelligence, and the 1 GB parameter count does not imply
+establish general intelligence, and parameter count does not imply
 learned knowledge. This result shows that this attempt failed to meet its goal;
 it is not a proof that every conceivable untrained architecture must fail.
 
@@ -53,7 +68,8 @@ are zero. Small compressed downloads reflect that sparsity.
 
 ## Final checkpoint and regression evidence
 
-The final frozen version is **v17a**, supplied in the
+The final frozen version is **v17a**. The compact edition is the default; the
+original dense checkpoint is preserved in the historical
 [v0.9 experimental release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.9.0-experiment).
 It repairs CPU rule retrieval across long contexts. A shared saturating Boolean
 circuit makes rule-phase flags stable before sharp attention ranking. Rules
@@ -114,7 +130,29 @@ passes the 31-turn conversation on CPU and CUDA, with exactly the local outputs.
 Both devices also pass integrity, eight conditional interventions and 220 phase
 checks. Restoring the old context gate reproduces the CPU failure again.
 
-## Run offline
+## Run the compact edition
+
+Download and extract the
+[compact final release](https://github.com/SamG-Coder/direct-weight-chat/releases/tag/v0.10.0-compact-final),
+or download the files from [Hugging Face](https://huggingface.co/SamGCoder/direct-weight-chat-v17a).
+Use an environment with PyTorch already installed. From the extracted GitHub
+release directory:
+
+```bash
+python -m chat1gb_autoregressive.compact_chat --model-dir compact --device auto
+```
+
+For Hugging Face, first extract `runtime.zip`, then use `--model-dir .` instead.
+`/reset` clears the conversation and `/quit` exits. This is a custom PyTorch
+runtime, not a Transformers AutoModel or GGUF checkpoint. Inference is offline.
+
+[Actual compact conversations](publication/demo-transcript-compact.json) include
+continued facts, corrections, short rule chains, bounded arithmetic and failures.
+The [local UI and compact guide](publication/COMPACT.md) provide captured replay
+and a live local chat mode. The finished video is a paced replay of real outputs,
+not a live speed demonstration. [X post draft](publication/twitter-post.txt).
+
+## Rebuild the original dense checkpoint offline
 
 Use a Python environment with NumPy for construction and PyTorch for inference
 already installed. No packages or weights are downloaded by these commands.
@@ -134,13 +172,13 @@ an existing directory. The archived source bytes and checkpoint hashes are
 preserved. Raw weight files are excluded from Git; compressed checkpoints are
 published as release assets.
 
-To run a downloaded checkpoint, extract its ZIP in the repository root.
-The v17a archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
+To run a historical dense checkpoint, extract its ZIP in the repository root.
+The historical v0.9 archive supplies `chat1gb_autoregressive/model/weights.f32`; then run
 `python -m chat1gb_autoregressive.chat`. Historical archives use
 `versions/autoregressive_VERSION/model`; select that directory with `--model-dir`.
 Check archive SHA-256 against `SHA256SUMS.txt` and raw weight SHA-256 against the
-included manifest. Small ZIPs reflect sparse/repetitive weights: every extracted
-checkpoint still has exactly 1,000,000,000 parameter bytes.
+included manifest. These historical archives expand to dense files; the
+current compact download is **1,528,592 weight bytes** and uses the loader above.
 
 ```powershell
 python -m benchmarks.evaluate --model build/current --suite tests/graph-development.json --output results/local-graph.json --version current

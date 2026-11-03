@@ -1,8 +1,9 @@
 # v0.3 experiment: object-specific truth and query negation
 
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
 Two new analytically compiled checkpoints, v10a and v11a, extend the existing
-offline transformer. Each contains exactly 250,000,000 float32 parameters and
-1,000,000,000 raw weight bytes. No training, pretrained weights, downloaded
+offline transformer. Each contains exactly 250,000,000 float32 parameters. No training, pretrained weights, downloaded
 knowledge or runtime answer generator is used.
 
 - **v10a:** exact subject/predicate/object retrieval, three-valued truth,
@@ -47,5 +48,5 @@ It supplies the default model directory. The v10a archive uses
 `versions/autoregressive_v10a/model`; select that path with `--model-dir`.
 Check archive hashes against `SHA256SUMS.txt`, then raw/config hashes against
 the included manifest. The small ZIPs reflect sparse/repetitive weights; every
-unpacked checkpoint is exactly 1 GB. NumPy/PyTorch must already be installed;
+unpacked checkpoint uses the original dense tensor layout. NumPy/PyTorch must already be installed;
 construction and inference perform no downloads.

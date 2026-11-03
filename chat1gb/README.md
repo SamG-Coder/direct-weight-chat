@@ -1,22 +1,21 @@
 # Historical selector v0 (rejected)
 
 This prototype stores canned answers and does not satisfy the current task.
-For current work, see the [root README](../README.md).
+The current compact model is exactly **1,528,592 packed weight bytes**.
+See the [root README](../README.md). The rejected prototype below is historical.
 
-# 1 GB Neural Chat Experiment
+# Archived neural conversation prototype
 
 An offline neural conversation program whose weights were written directly,
-without training or pretrained checkpoints. The completed parameter file is
-**exactly 1,000,000,000 bytes**: **250,000,000 float32 parameters**. That is one
-decimal GB, or approximately 0.9313 GiB. Metadata and source files are additional.
+without training or pretrained checkpoints. The archived parameter layout and file hashes remain recorded in its original
+manifest. This prototype is not the current compact checkpoint.
 
 **Scope:** this is a bounded, explicitly programmed neural chatbot. It has 160
 authored response states, topic follow-ups, a session name slot, and a neural
 integer-adder circuit. It does not have the open-ended language abilities of a
 trained language model. Its large dense representation is deliberately
 overcomplete: most parameters are redundant projections, not independently
-learned knowledge. Making this representation one GB does not improve its
-understanding by itself.
+learned knowledge. A larger representation does not improve its understanding by itself.
 
 ## Chat now
 
@@ -105,7 +104,7 @@ produced identical text and routing on the recorded direct and follow-up checks.
 
 | Check | Result |
 |---|---:|
-| Parameter file size | 1,000,000,000 bytes |
+| Artifact | Historical dense prototype; see its original manifest |
 | Float32 parameters | 250,000,000 |
 | Named tensor layout | No gaps, overlaps, or trailing padding |
 | Direct chat questions: expected reply selected | 67 / 68 |

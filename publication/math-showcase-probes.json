@@ -1,0 +1,793 @@
+{
+  "created_utc": "2026-11-03T18:53:51.522969+00:00",
+  "version": "v17a",
+  "model_sha256": "5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2",
+  "probes": [
+    {
+      "prompt": "999 - -999",
+      "text": "1998.",
+      "token_ids": [
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.18886950000887737,
+      "device": "cuda",
+      "prefix_tokens": 7,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 2496,
+          "token": "1998",
+          "top3": [
+            {
+              "token": "1998",
+              "logit": 111.99971771240234
+            },
+            {
+              "token": "1742",
+              "logit": 95.99976348876953
+            },
+            {
+              "token": "<copy_78>",
+              "logit": 95.99976348876953
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99977111816406
+            },
+            {
+              "token": "-",
+              "logit": 95.99980163574219
+            },
+            {
+              "token": "<bos>",
+              "logit": 95.99980163574219
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "1998.",
+      "correct": true
+    },
+    {
+      "prompt": "-999 + -999",
+      "text": "-1998.",
+      "token_ids": [
+        8,
+        2496,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 4,
+      "seconds": 0.010839199996553361,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 8,
+          "token": "-",
+          "top3": [
+            {
+              "token": "-",
+              "logit": 111.9997787475586
+            },
+            {
+              "token": "<eos>",
+              "logit": 96.99980926513672
+            },
+            {
+              "token": ".",
+              "logit": 95.99980926513672
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 2496,
+          "token": "1998",
+          "top3": [
+            {
+              "token": "1998",
+              "logit": 111.99977111816406
+            },
+            {
+              "token": "1742",
+              "logit": 95.99980163574219
+            },
+            {
+              "token": "<copy_78>",
+              "logit": 95.99980163574219
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99977111816406
+            },
+            {
+              "token": "-",
+              "logit": 95.99980163574219
+            },
+            {
+              "token": "<bos>",
+              "logit": 95.99980163574219
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "-1998.",
+      "correct": true
+    },
+    {
+      "prompt": "-999 - -999",
+      "text": "0.",
+      "token_ids": [
+        498,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 3,
+      "seconds": 0.007678200025111437,
+      "device": "cuda",
+      "prefix_tokens": 8,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 498,
+          "token": "0",
+          "top3": [
+            {
+              "token": "0",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<copy_0>",
+              "logit": 95.99999237060547
+            },
+            {
+              "token": "please",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 112.0
+            },
+            {
+              "token": "-",
+              "logit": 96.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "0.",
+      "correct": true
+    },
+    {
+      "prompt": "997 * 991",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015651200024876744,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 158,
+          "token": "i",
+          "top3": [
+            {
+              "token": "i",
+              "logit": 111.9997787475586
+            },
+            {
+              "token": "hot",
+              "logit": 95.99981689453125
+            },
+            {
+              "token": "are",
+              "logit": 95.99980926513672
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 89,
+          "token": "do",
+          "top3": [
+            {
+              "token": "do",
+              "logit": 111.9997787475586
+            },
+            {
+              "token": "compose",
+              "logit": 95.99981689453125
+            },
+            {
+              "token": "animal",
+              "logit": 95.99981689453125
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 220,
+          "token": "not",
+          "top3": [
+            {
+              "token": "not",
+              "logit": 111.99977111816406
+            },
+            {
+              "token": "hot",
+              "logit": 95.99980163574219
+            },
+            {
+              "token": "dog",
+              "logit": 95.99980163574219
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 175,
+          "token": "know",
+          "top3": [
+            {
+              "token": "know",
+              "logit": 111.99978637695312
+            },
+            {
+              "token": "hadn't",
+              "logit": 95.99981689453125
+            },
+            {
+              "token": "blow",
+              "logit": 95.99981689453125
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.9997787475586
+            },
+            {
+              "token": "<bos>",
+              "logit": 95.99981689453125
+            },
+            {
+              "token": "-",
+              "logit": 95.99980926513672
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "988027.",
+      "correct": false
+    },
+    {
+      "prompt": "144 / 12",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015475800028070807,
+      "device": "cuda",
+      "prefix_tokens": 6,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 158,
+          "token": "i",
+          "top3": [
+            {
+              "token": "i",
+              "logit": 112.0
+            },
+            {
+              "token": "grow",
+              "logit": 96.0
+            },
+            {
+              "token": "are",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 89,
+          "token": "do",
+          "top3": [
+            {
+              "token": "do",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "compose",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 220,
+          "token": "not",
+          "top3": [
+            {
+              "token": "not",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "might",
+              "logit": 96.0
+            },
+            {
+              "token": "dog",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 175,
+          "token": "know",
+          "top3": [
+            {
+              "token": "know",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "isn't",
+              "logit": 96.0
+            },
+            {
+              "token": "blow",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "12.",
+      "correct": false
+    },
+    {
+      "prompt": "What is the square root of 144?",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015138900023885071,
+      "device": "cuda",
+      "prefix_tokens": 11,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 158,
+          "token": "i",
+          "top3": [
+            {
+              "token": "i",
+              "logit": 112.0
+            },
+            {
+              "token": "grow",
+              "logit": 96.0
+            },
+            {
+              "token": "are",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 89,
+          "token": "do",
+          "top3": [
+            {
+              "token": "do",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "compose",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 220,
+          "token": "not",
+          "top3": [
+            {
+              "token": "not",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "might",
+              "logit": 96.0
+            },
+            {
+              "token": "dog",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 175,
+          "token": "know",
+          "top3": [
+            {
+              "token": "know",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "isn't",
+              "logit": 96.0
+            },
+            {
+              "token": "blow",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "12.",
+      "correct": false
+    },
+    {
+      "prompt": "Solve x + 7 = 20.",
+      "text": "I do not know.",
+      "token_ids": [
+        158,
+        89,
+        220,
+        175,
+        9,
+        0
+      ],
+      "stopped_on_eos": true,
+      "generated_tokens": 6,
+      "seconds": 0.015219799999613315,
+      "device": "cuda",
+      "prefix_tokens": 10,
+      "token_trace": [
+        {
+          "step": 0,
+          "token_id": 158,
+          "token": "i",
+          "top3": [
+            {
+              "token": "i",
+              "logit": 112.0
+            },
+            {
+              "token": "grow",
+              "logit": 96.0
+            },
+            {
+              "token": "are",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 1,
+          "token_id": 89,
+          "token": "do",
+          "top3": [
+            {
+              "token": "do",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "compose",
+              "logit": 96.0
+            },
+            {
+              "token": "animal",
+              "logit": 96.0
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "token_id": 220,
+          "token": "not",
+          "top3": [
+            {
+              "token": "not",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "might",
+              "logit": 96.0
+            },
+            {
+              "token": "dog",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "token_id": 175,
+          "token": "know",
+          "top3": [
+            {
+              "token": "know",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "isn't",
+              "logit": 96.0
+            },
+            {
+              "token": "blow",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "token_id": 9,
+          "token": ".",
+          "top3": [
+            {
+              "token": ".",
+              "logit": 111.99999237060547
+            },
+            {
+              "token": "<bos>",
+              "logit": 96.0
+            },
+            {
+              "token": "-",
+              "logit": 95.99999237060547
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "token_id": 0,
+          "token": "<eos>",
+          "top3": [
+            {
+              "token": "<eos>",
+              "logit": 1.0
+            },
+            {
+              "token": "<user>",
+              "logit": 0.0
+            },
+            {
+              "token": "<bos>",
+              "logit": 0.0
+            }
+          ]
+        }
+      ],
+      "expected": "x = 13.",
+      "correct": false
+    }
+  ],
+  "note": "Publication demonstration probes of the unchanged frozen checkpoint. Expected values score outputs externally and are never supplied to inference. Not a held-out research benchmark."
+}

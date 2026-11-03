@@ -1,8 +1,10 @@
 # v0.7 experiment: preserve subjects across long contexts
 
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
 The v15a checkpoint fixes demonstrated CPU subject-binding failures through a
 shared neural retrieval primitive. It still has exactly 250,000,000 float32
-parameters and 1,000,000,000 raw weight bytes, with no padding, training,
+parameters, with no padding, training,
 pretrained parameters or downloaded data. Construction and inference remain
 offline; the ordinary transformer runtime is unchanged.
 
@@ -71,5 +73,5 @@ python -m chat1gb_autoregressive.chat --device auto
 
 Verify the ZIP hash against `SHA256SUMS.txt` and raw/config hashes against the
 included manifest. The small archive reflects sparse and repetitive weights;
-the extracted checkpoint is exactly 1 GB. NumPy and PyTorch must already be
+the extracted checkpoint uses the original dense tensor layout. NumPy and PyTorch must already be
 installed. Every previous release, including failed candidates, remains public.

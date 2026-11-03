@@ -1,13 +1,14 @@
 # v0.9 experiment: stable rule phases across long contexts
 
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
 v17a repairs measured CPU failures in conditional-rule retrieval. Small errors
 in a nominally Boolean phase flag previously outweighed literal recency in
 sharp attention. A shared two-ReLU saturation primitive gives the rule-phase
 flags flat zero/one regions before ranking. It adds two ReLU units and 24
 nonzero parameters; the ordinary transformer runtime and layout are unchanged.
 
-The checkpoint has exactly **250,000,000 float32 parameters / 1,000,000,000
-bytes**, including **995,905 nonzero parameters (0.398362%)**. All parameters
+The checkpoint has exactly **250,000,000 float32 parameters**, including **995,905 nonzero parameters (0.398362%)**. All parameters
 belong to named model tensors. Construction uses no training, optimization,
 pretrained weights, downloaded data or internet. Inference uses tensor
 operations without a host rule engine, completed-response bank or weight update.
@@ -58,7 +59,7 @@ development evidence for the next experiment; all 75 failures remain recorded.
 
 Download `autoregressive-v17a.zip`, verify `SHA256SUMS.txt`, and extract into
 the repository root. The compressed size reflects sparse/repetitive weights;
-the raw parameter file is exactly 1 GB. With PyTorch already installed:
+the raw parameter file uses the original dense tensor layout. With PyTorch already installed:
 
 ```powershell
 python -m chat1gb_autoregressive.chat --device auto

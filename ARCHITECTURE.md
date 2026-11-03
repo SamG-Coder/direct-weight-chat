@@ -1,5 +1,11 @@
 # Architecture
 
+The default published artifact is **v17a compact**: lossless sparse storage of
+the final frozen circuit. The logical architecture described below is unchanged.
+The [compact loader](chat1gb_autoregressive/compact_engine.py) reconstructs one
+requested tensor at a time and inherits the original forward/generation code.
+See [format, measured memory and output parity](publication/COMPACT.md).
+
 All autoregressive versions use ordinary decoder transformer tensors: token and
 position embeddings, 18 causal self-attention blocks with 16 heads, residual
 connections, LayerNorm, ReLU feed-forward layers and a final vocabulary projection.

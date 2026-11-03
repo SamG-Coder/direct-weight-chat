@@ -1,13 +1,14 @@
 # v0.8 experiment: ground conditional reasoning inside the weights
 
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
 v16c adds signed ground implications to the analytically compiled decoder.
 Rules supplied during a conversation can connect unfamiliar subjects through
 up to three links. Neural attention retrieves a rule by its conclusion, checks
 the premise against current signed facts, and propagates proof through the
 existing truth/query circuit. Missing or false premises remain unknown.
 
-The checkpoint remains exactly **250,000,000 float32 parameters / 1,000,000,000
-bytes**, with no padding. It uses 995,881 nonzero parameters (0.3983524%).
+The checkpoint remains exactly **250,000,000 float32 parameters**, with no padding. It uses 995,881 nonzero parameters (0.3983524%).
 Construction uses no training, optimization, pretrained weights, downloaded
 data or internet. Inference uses the unchanged generic transformer runtime;
 there is no host rule engine, answer fallback, completed-response bank or
@@ -68,7 +69,7 @@ remain failures. The experimental goal stays active.
 
 Download `autoregressive-v16c.zip`, verify `SHA256SUMS.txt`, and extract it into
 the repository root. The smaller archive reflects sparse/repetitive weights;
-the decompressed parameter file is exactly 1 GB. NumPy/PyTorch must already be
+the decompressed parameter file uses the original dense tensor layout. NumPy/PyTorch must already be
 installed; the project downloads no dependencies or model data.
 
 ```powershell

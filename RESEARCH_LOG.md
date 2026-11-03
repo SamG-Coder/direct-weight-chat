@@ -107,7 +107,7 @@ size, finiteness, hash and offline checks pass.
 Rebuilding v7a from its archived compiler reproduces the exact weight and config
 hashes. Ten checkpoint archives (selector v0, autoregressive v1-v5, v6a, v6b,
 v6c and v7a) were compressed and their decompressed hashes/CRCs verified. Raw
-1 GB tensors remain outside Git. The public experiment is MIT licensed.
+Dense weight tensors remain outside Git. The public experiment is MIT licensed.
 
 Recommended next experiment: add an explicit neural validity/polarity
 representation, test negative assertions and compound expressions before
@@ -586,7 +586,7 @@ source tree clean.
 
 Fresh-download integrity passes independently on CUDA and CPU, including every
 graph/arithmetic/polarity/truth/composition/assertion intervention, causal-prefix
-and cache checks, exact 1 GB layout, finite weights and offline guard. The 20-turn
+and cache checks, original dense layout, finite weights and offline guard. The 20-turn
 smoke conversation scores 20/20 on each device. No checkpoint bytes change.
 Evidence is in `results/publication-v0.5.json` and `results/release-validation-v0.5/`.
 
@@ -687,7 +687,7 @@ Published v0.6.0-experiment at source commit
 Both downloaded archives match public digests, sizes, the local package report
 and checksum entries. Streamed decompression verifies raw/config hashes and CRC;
 both manifests and compiler hashes match the clean tagged clone. Extracted v14b
-has exactly 1,000,000,000 raw weight bytes and leaves the source tree clean.
+has the recorded original dense layout and leaves the source tree clean.
 
 Fresh-download integrity and all interventions pass on CPU and CUDA, including
 bounded-phase removal, long-prefix cache parity and fact-magnitude saturation.
@@ -740,7 +740,7 @@ group. Each dependent ReLU pattern, validity gate and bounded identity copy
 includes `512*(retrieved_group-current_group)`. An older clause is rejected;
 matching groups cannot bias attention's recency ranking. Predicate/frame scratch
 fields are cleared before later query/grammar roles. The generic tensor runtime
-is unchanged. Exact weight bytes remain 1,000,000,000; 961,697 parameters are
+is unchanged. The dense weight layout remains unchanged; 961,697 parameters are
 nonzero. Raw SHA-256 is
 `6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81`.
 
@@ -793,7 +793,7 @@ Published v0.7.0-experiment at `afb8241c50d59cdfc405292aaf89024d631585de`.
 The downloaded v15a ZIP and SHA256SUMS match public digests/sizes and the local
 package report. Streamed decompression checks raw/config hashes and CRC; the
 manifest/compiler hashes match a fresh tagged clone. Extraction leaves the
-source tree clean. The checkpoint remains exactly 1 GB of float32 parameters.
+source tree clean. The checkpoint retains its dense float32 layout.
 
 Fresh-checkout integrity and every intervention pass on CPU and CUDA. The long
 23-turn conversation scores 23/23 on each device, including new three-subject
@@ -883,7 +883,7 @@ The 31-turn publication smoke passes on CUDA. CPU validation follows.
 Rebuilding the frozen v16c compiler reproduces raw SHA-256
 `385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc`
 and the unchanged config hash. It has 995,881 nonzero parameters, still exactly
-250,000,000 float32 values / 1,000,000,000 bytes without padding. The ordinary
+250,000,000 float32 values without padding. The ordinary
 inference runtime is unchanged. Three release archives are prepared offline,
 including the failed v16a/v16b candidates, with decompressed hashes and CRC
 verified. The full research goal remains active.
@@ -1027,7 +1027,7 @@ The 104-case baseline and all older suites must be rerun on any new candidate.
 
 Published tag `v0.9.0-experiment` at
 `7f8d500021d3260a09a014408774ce17e7c9ab46`. The 1,649,878-byte ZIP expands to
-the exact 1 GB raw model. Public asset/checksum digests, raw/config hashes,
+the original dense raw model. Public asset/checksum digests, raw/config hashes,
 ZIP CRC and frozen source all match a clean tagged clone. Extraction and
 the subsequent tests leave that source checkout clean.
 
@@ -1045,7 +1045,7 @@ The user ended the research experiment. v17a is the final checkpoint; no further
 model development is planned as part of this experiment. Publication work may
 continue to preserve the checkpoint, evidence and an accurate demonstration.
 
-The original objective was not achieved: directly constructing a 1 GB neural
+The original objective was not achieved: directly constructing a neural
 model without training or pretrained parameters did not yield useful,
 open-ended chat. Controlled grammar, fact memory/corrections, bounded signed
 arithmetic and short ground-rule chains work in the measured cases. They do
@@ -1060,3 +1060,24 @@ the original objective, not a proof of mathematical impossibility.
 All historical checkpoints, exact outputs, test expectations and hashes are
 retained. Final publication assets must use the frozen v17a model and identify
 replays, timing edits and limitations explicitly; they must not invent outputs.
+
+## 2026-11-03 UTC / 4 November local: compact publication edition
+
+At the user's request, publication now uses a lossless sparse representation of
+the frozen v17a weights. This is a packaging/runtime-loading change, not resumed
+capability research. No coefficient, tokenizer, forward-pass algorithm or
+generation rule was changed. Positive zeros are implicit; nonzero coefficients
+and six negative-zero entries retain their original float32 bits.
+
+The packed weights are 1,528,592 bytes. The new loader keeps 12,952,916 bytes of
+persistent weight tensors and materializes individual dense tensors on demand.
+An independent archive round trip reconstructs the exact original dense hash.
+The CUDA comparison matches every text/token/EOS result across 38 suites and
+6,371 cases, including all 223 failures. CPU evidence, total-memory limits and
+all exact outputs are linked from `publication/COMPACT.md`.
+
+The model card and README prominently state that useful open-ended chat was
+not achieved. Publication assets include matching runnable source, an actual
+13-turn compact-model transcript, a labelled paced-replay video and an X post
+draft. The post is prepared only, not published. Original dense releases and
+all historical failed candidates remain preserved.

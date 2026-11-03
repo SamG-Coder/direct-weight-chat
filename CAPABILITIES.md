@@ -5,6 +5,11 @@ Useful, open-ended chat was not achieved without training or pretrained weights.
 The measured narrow capabilities below are preserved as the final result;
 research is no longer active.
 
+The default artifact is now **v17a compact**: exactly 1,528,592 packed weight bytes and
+12,952,916 bytes of persistent runtime weight tensors, plus temporary/inference memory.
+This is a lossless storage edition of the same checkpoint, with the same word,
+fact and arithmetic behavior. [Packing and parity evidence](publication/COMPACT.md).
+
 ## Final v17a
 
 - Rule-position development improves from v16c 154/162 to 160/162 on CPU;
@@ -31,7 +36,7 @@ research is no longer active.
   retuned after these results; this is not independent language evaluation.
 - A new 104-case alternative-proof suite scores 29/104 on both devices.
   It includes two to eight alternatives, mixed branches, declaration order,
-  corrections and dialogue. This is a baseline for the next capability,
+  corrections and dialogue. This was the final unimplemented capability baseline,
   authored after v17a froze; it is not a held-out language score.
 - Public v0.9 fresh-download validation matches the archive/checksum/raw/config
   hashes, CRC and frozen source. A clean tagged checkout reproduces 31/31
@@ -45,7 +50,7 @@ answers from rules, broader mathematics, creative writing, code generation
 or useful general conversation. Unsupported paraphrases can still produce
 false assertions. The experiment ended with these limitations unresolved.
 
-v17a has exactly 250,000,000 float32 parameters / 1,000,000,000 bytes, with
+The original dense v17a layout has 250,000,000 float32 slots, with
 **995,905 nonzero parameters (0.398362%)**. Raw weight SHA-256:
 `5cc52f3793a1546c620195c110a7d1c3a2f8d3417cb72f193003589b16e8e0d2`.
 
@@ -94,7 +99,7 @@ open answers from rules. General conversation, creative writing and code
 generation remain unachieved. Existing arithmetic, mixed query precedence,
 disjunctive assertion and multiple-parent limitations also remain.
 
-v16c has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **995,881
+v16c has 250,000,000 float32 parameters, with **995,881
 nonzero parameters (0.3983524%)**. Raw weight SHA-256:
 `385dff256910dec6eba802d3930452c2963e85223bbaa54251d2931b9b86b1dc`.
 
@@ -137,7 +142,7 @@ not add conditional-rule reasoning, disjunctive assertions, mixed-precedence
 parsing, open multi-value answers, creative writing, code generation or useful
 general conversation. Those capabilities remain unachieved.
 
-v15a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **961,697
+v15a has 250,000,000 float32 parameters, with **961,697
 nonzero parameters (0.3846788%)**. Raw weight SHA-256:
 `6386f31062760a2f5d81c1197c734af7ddd73f888fe0d44c09180de7f026ad81`.
 
@@ -178,7 +183,7 @@ rules, mixed query precedence, repeated negation and open multi-value answers.
 Useful open-ended conversation, creative writing and code generation remain
 unachieved. Failed v14a is retained with its correction regressions.
 
-v14b has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **960,705
+v14b has 250,000,000 float32 parameters, with **960,705
 nonzero parameters (0.384282%)**. Raw weight SHA-256:
 `61deda2326ad355a3b2921e608e37de3e47e7949f445753cb8a0b78ad7288646`.
 
@@ -205,7 +210,7 @@ and reasoning grammar. Disjunction, conditional rules, mixed query precedence,
 repeated negation, open multi-value answers, creative writing, code generation
 and useful flexible conversation remain unachieved.
 
-v14a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **959,817
+v14a has 250,000,000 float32 parameters, with **959,817
 nonzero parameters (0.3839268%)**. Raw weight SHA-256:
 `2dd59a1e327deaa42f10d5cb18152052b52e19358dc5dd2bf1ad2acfc4a96915`.
 
@@ -244,7 +249,7 @@ Disjunction, conditional rules, multiple class parents, comma lists, repeated
 negation, open multi-value answers and mixed query precedence remain failures.
 Useful flexible conversation, creative writing and code generation are unachieved.
 
-v13d has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **929,381
+v13d has 250,000,000 float32 parameters, with **929,381
 nonzero parameters (0.3717524%)**. Raw weight SHA-256:
 `ff0b1e1af0909fc6237bdcfc7fc41e6df590cd678bc9552705bb3a943e2b549d`.
 
@@ -277,7 +282,7 @@ Mixed query AND/OR precedence, pronouns, broader instruction scope and all
 previous arithmetic/depth limits remain. Useful flexible conversation, creative
 writing and code generation are unachieved.
 
-v13a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **928,135
+v13a has 250,000,000 float32 parameters, with **928,135
 nonzero parameters (0.371254%)**. Raw weight SHA-256:
 `dcd4cdeff8c750fc95a9071e3de833a8849b4874d8dfda984dceb885197858af`.
 
@@ -315,7 +320,7 @@ arithmetic limits remain. Correct abstention on a creative request does not
 demonstrate creative writing; useful flexible conversation and code generation
 are still unachieved.
 
-v12b has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **873,633
+v12b has 250,000,000 float32 parameters, with **873,633
 nonzero parameters (0.3494532%)**. Raw weight SHA-256:
 `07349cb626864c4ea77e32300af5670a6de69ee612662ec5e9d2d2cdba43cea5`.
 
@@ -350,14 +355,14 @@ claim. No additional v11a regressions appear in the matched suites.
 The arithmetic limits and failures described below remain. Useful open-ended
 conversation, creative writing, program generation and broad general reasoning
 are unachieved. This is still a sparse, hand-compiled neural program with a small
-authored lexicon, not 1 GB of useful learned knowledge.
+authored lexicon, not acquired conversational knowledge.
 
 Fresh-download CPU/CUDA validation each scores 11/12: all mixed-conversation
 checks pass, but `Write a poem about rain.` returns factual rain sentences
 instead of the expected abstention. This is preserved as a failed creative-
 request check in the publication evidence.
 
-v11a has 250,000,000 float32 parameters / 1,000,000,000 bytes, with **744,215
+v11a has 250,000,000 float32 parameters, with **744,215
 nonzero parameters (0.297686%)**. Raw weight SHA-256:
 `f15e70fdeddf91f94bfac13a505b1f14157a9dae79bb4388febf1c62a2a637b4`.
 
@@ -398,7 +403,7 @@ world knowledge and general logical reasoning remain unachieved. The earlier
 pointer/context/grammar limits still apply. No research milestone is declared
 complete from these narrow scores.
 
-v9a has 250,000,000 float32 parameters / 1,000,000,000 bytes; **720,343 parameters
+v9a has 250,000,000 float32 parameters; **720,343 parameters
 (0.2881372%)** are nonzero. Raw weight SHA-256:
 `397b76ee15d876d6d28d4f30ce59dd4d40069029018887133a173a4a67a74f53`.
 
@@ -461,7 +466,7 @@ raises a visible error rather than silently changing meaning.
 
 The model has 18 blocks, width 1024, 16 attention heads, ReLU FFN width 4096 and
 vocabulary size 8832. Only 697,392 of v5's 250M parameters are nonzero (0.279%).
-No claim is made that 1 GB of useful knowledge has been created.
+File size does not establish useful conversational knowledge.
 
 The legacy selector v0 uses canned responses and does not satisfy the current
 research constraints. Its successful routing tests are not conversational or

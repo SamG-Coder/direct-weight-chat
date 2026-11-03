@@ -1,8 +1,9 @@
 # v0.6 experiment: stable local attention and fact magnitudes
 
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
 Two analytically compiled checkpoints are preserved: failed v14a and current
-v14b. Each contains exactly 250,000,000 float32 parameters and 1,000,000,000 raw
-weight bytes. Construction and inference remain offline, with no training,
+v14b. Each contains exactly 250,000,000 float32 parameters. Construction and inference remain offline, with no training,
 pretrained tensors, downloaded knowledge, response bank or host answer logic.
 The generic transformer runtime is unchanged.
 
@@ -70,5 +71,4 @@ python -m chat1gb_autoregressive.chat --device auto
 The failed v14a archive extracts to `versions/autoregressive_v14a/model`; use
 `--model-dir` to inspect it. Verify ZIP hashes against `SHA256SUMS.txt` and
 raw/config hashes against each manifest. ZIPs are small because these weights
-are sparse and repetitive; every extracted checkpoint contains exactly 1 GB
-of float32 parameters. NumPy and PyTorch must already be installed.
+are sparse and repetitive; every extracted checkpoint contains the original dense float32 layout. NumPy and PyTorch must already be installed.

@@ -1,0 +1,105 @@
+{
+  "method": "Separate fresh subprocess for each edition and device; one short fact prompt. Working set includes Python/PyTorch. CUDA allocator excludes driver/context and other processes. Not a latency benchmark or maximum-context memory requirement.",
+  "measurements": [
+    {
+      "device": "cpu",
+      "before": {
+        "working_set_bytes": 404455424,
+        "peak_working_set_bytes": 404455424,
+        "pagefile_bytes": 794906624
+      },
+      "after_load": {
+        "working_set_bytes": 410107904,
+        "peak_working_set_bytes": 410107904,
+        "pagefile_bytes": 1803288576
+      },
+      "after_response": {
+        "working_set_bytes": 1395335168,
+        "peak_working_set_bytes": 1395335168,
+        "pagefile_bytes": 1844940800
+      },
+      "response": "Kelv can fly.",
+      "weight_tensors": {
+        "total": 1000000000
+      },
+      "edition": "dense"
+    },
+    {
+      "device": "cpu",
+      "before": {
+        "working_set_bytes": 404856832,
+        "peak_working_set_bytes": 404856832,
+        "pagefile_bytes": 795365376
+      },
+      "after_load": {
+        "working_set_bytes": 431067136,
+        "peak_working_set_bytes": 431067136,
+        "pagefile_bytes": 841056256
+      },
+      "after_response": {
+        "working_set_bytes": 507301888,
+        "peak_working_set_bytes": 507301888,
+        "pagefile_bytes": 931823616
+      },
+      "response": "Kelv can fly.",
+      "weight_tensors": {
+        "sparse_buffers": 11950932,
+        "cached_vectors": 1001984,
+        "total": 12952916
+      },
+      "edition": "compact"
+    },
+    {
+      "device": "cuda",
+      "before": {
+        "working_set_bytes": 404545536,
+        "peak_working_set_bytes": 404545536,
+        "pagefile_bytes": 794976256
+      },
+      "after_load": {
+        "working_set_bytes": 541892608,
+        "peak_working_set_bytes": 1541894144,
+        "pagefile_bytes": 2165444608
+      },
+      "after_response": {
+        "working_set_bytes": 958164992,
+        "peak_working_set_bytes": 1541894144,
+        "pagefile_bytes": 2866307072
+      },
+      "response": "Kelv can fly.",
+      "weight_tensors": {
+        "total": 1000000000
+      },
+      "cuda_peak_allocated_bytes": 1015777792,
+      "cuda_peak_reserved_bytes": 1029701632,
+      "edition": "dense"
+    },
+    {
+      "device": "cuda",
+      "before": {
+        "working_set_bytes": 404570112,
+        "peak_working_set_bytes": 404570112,
+        "pagefile_bytes": 794906624
+      },
+      "after_load": {
+        "working_set_bytes": 610365440,
+        "peak_working_set_bytes": 610365440,
+        "pagefile_bytes": 1485594624
+      },
+      "after_response": {
+        "working_set_bytes": 993558528,
+        "peak_working_set_bytes": 993558528,
+        "pagefile_bytes": 1958297600
+      },
+      "response": "Kelv can fly.",
+      "weight_tensors": {
+        "sparse_buffers": 11950932,
+        "cached_vectors": 1001984,
+        "total": 12952916
+      },
+      "cuda_peak_allocated_bytes": 64599552,
+      "cuda_peak_reserved_bytes": 111149056,
+      "edition": "compact"
+    }
+  ]
+}

@@ -1,6 +1,11 @@
 # Version results
 
-Every autoregressive checkpoint has exactly 250,000,000 float32 parameters and 1,000,000,000 weight bytes. Failed candidates remain in this table. A dash means the suite was not run for that version.
+The current compact artifact contains exactly **1,528,592 weight bytes**. The historical dense checkpoints use the original transformer layout. Failed candidates remain in this table. A dash means the suite was not run for that version.
+
+**The experiment is finished; useful open-ended chat was not achieved.** The
+default download is the lossless **v17a compact** storage edition (**1,528,592 packed weight bytes**). It adds no capabilities. [Compact storage/runtime comparisons](../publication/COMPACT.md)
+preserve the exact outputs and failures of the dense baseline, separately from
+the historical capability scores below.
 
 | Version | Legacy /185 | Graph /79 | Arithmetic /120 | Polarity /233 | Signed /159 | Truth /239 | Query scope /269 | Composition /404 | Modifiers /81 | Assertions /390 | Assertion boundaries /76 | Context /126 | Binding CPU /136 | Conditionals /293 | Rule guards /36 | Rule positions CPU /162 | Proof alternatives /104 | Nonzero parameters | Source commit |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|

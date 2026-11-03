@@ -1,8 +1,9 @@
 # v0.5 experiment: coordinated assertions and deferred binding
 
-Four analytically compiled 1 GB checkpoints are preserved: v13a, failed v13b,
-intermediate v13c and current v13d. Each has exactly 250,000,000 float32 parameters
-and 1,000,000,000 raw weight bytes. Construction and inference remain offline,
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
+Four analytically compiled dense checkpoints are preserved: v13a, failed v13b,
+intermediate v13c and current v13d. Each has exactly 250,000,000 float32 parameters. Construction and inference remain offline,
 with no training, pretrained parameters or downloaded knowledge. The generic
 transformer runtime is unchanged.
 
@@ -62,5 +63,5 @@ python -m chat1gb_autoregressive.chat --device auto
 The other archives extract to `versions/autoregressive_VERSION/model`; choose
 that directory with `--model-dir`. Verify ZIP hashes using `SHA256SUMS.txt` and
 raw/config hashes using each manifest. Small ZIPs reflect sparse/repetitive
-weights; every extracted checkpoint is exactly 1 GB. NumPy and PyTorch must
+weights; every extracted checkpoint uses the original dense tensor layout. NumPy and PyTorch must
 already be installed; these commands do not download dependencies.

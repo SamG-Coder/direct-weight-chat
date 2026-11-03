@@ -1,8 +1,9 @@
 # v0.4 experiment: proposition composition and active request scope
 
-Two new analytically compiled 1 GB checkpoints are preserved: v12a and corrected
-v12b. Each contains exactly 250,000,000 float32 parameters / 1,000,000,000 raw
-weight bytes. No training, pretrained parameters or downloaded knowledge is used;
+> Historical release notes. The current compact artifact is exactly **1,528,592 packed weight bytes**. See the [current release](RELEASE-COMPACT.md); the old assets below remain historical.
+
+Two new analytically compiled dense checkpoints are preserved: v12a and corrected
+v12b. Each contains exactly 250,000,000 float32 parameters. No training, pretrained parameters or downloaded knowledge is used;
 construction and inference remain offline.
 
 v12 compiles proposition events, evaluates each one neurally, and reduces true,
@@ -54,5 +55,5 @@ python -m chat1gb_autoregressive.chat --device auto
 The v12a archive uses `versions/autoregressive_v12a/model`; select it explicitly
 with `--model-dir`. Compare archive hashes with `SHA256SUMS.txt`, and raw/config
 hashes with the included manifest. Small compressed archives reflect sparse,
-repetitive weights; each extracted checkpoint is exactly 1 GB. NumPy/PyTorch
+repetitive weights; each extracted checkpoint uses the original dense tensor layout. NumPy/PyTorch
 must already be installed; the build and runtime do not download dependencies.
