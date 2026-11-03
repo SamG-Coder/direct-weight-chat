@@ -24,7 +24,9 @@
 - All 22 matched v13a/v13d suites retain their earlier passes. The conditional
   stress regression against v12b remains in the direct comparison. All integrity
   checks and neural interventions pass; frozen source reproduces exact raw and
-  config hashes. A separate 20-turn publication smoke conversation passes locally.
+  config hashes. A separate 20-turn publication smoke conversation passes locally
+  and on both CPU/CUDA from a fresh tagged clone and downloaded checkpoint.
+  [Publication verification](results/publication-v0.5.json) checks all four archives.
 
 The long-context audit fails some cases beginning at 2,048 padding tokens.
 The 5,048-token storage window is **not** a demonstrated accuracy window.

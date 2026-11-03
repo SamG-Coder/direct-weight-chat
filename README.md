@@ -103,6 +103,7 @@ python -m benchmarks.integrity --model build/current --source versions/autoregre
 - [Research log](RESEARCH_LOG.md): experiments, failures and next steps.
 - [Capabilities](CAPABILITIES.md): measured abilities and limits.
 - [Architecture](ARCHITECTURE.md): mathematical construction and runtime boundary.
+- [Release verification](results/publication-v0.5.json): all four downloaded archives match; fresh CPU/CUDA integrity and 20/20 smoke conversations pass.
 - `tests/`: frozen development cases and separately identified post-freeze cases.
 - `benchmarks/`: external evaluators; expected answers are never passed to inference.
 - `versions/`: frozen historical compiler sources and checkpoint metadata.

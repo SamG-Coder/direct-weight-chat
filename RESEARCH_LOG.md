@@ -574,3 +574,23 @@ intermediate v13c and v13d. Streamed decompression validates hashes and CRC for
 every checkpoint. The 20-turn local publication smoke passes 20/20, exercising
 deferred objects, subject isolation, correction, inherited properties, negative
 facts, question/directive isolation, arithmetic and unsupported-request abstention.
+
+## 2026-11-04: v0.5 public release and fresh-download validation
+
+Published v0.5.0-experiment at source commit `81c7f7b`, with four checkpoint ZIPs
+and SHA256SUMS. GitHub reports all five assets uploaded. All four downloaded
+archives match the public digests, sizes, local package hashes and checksum
+file. Streamed decompression verifies raw/config hashes and CRC; each frozen
+source manifest matches the clean tagged clone. The v13d extraction leaves the
+source tree clean.
+
+Fresh-download integrity passes independently on CUDA and CPU, including every
+graph/arithmetic/polarity/truth/composition/assertion intervention, causal-prefix
+and cache checks, exact 1 GB layout, finite weights and offline guard. The 20-turn
+smoke conversation scores 20/20 on each device. No checkpoint bytes change.
+Evidence is in `results/publication-v0.5.json` and `results/release-validation-v0.5/`.
+
+The publication checks do not erase the 8/390 assertion stresses or the 11/76
+CUDA and 12/76 CPU fresh boundary failures. Those long-context failures are the
+next investigation. The broader goal of useful flexible conversation is active
+and remains unachieved.
