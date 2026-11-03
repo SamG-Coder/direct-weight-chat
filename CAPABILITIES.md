@@ -17,6 +17,15 @@
   now score 76/76 on CUDA. The v14a history retains 48 correction regressions
   across three reports; all are repaired in v14b. Frozen source reproduces
   the exact raw/config hashes.
+- After freeze commit `b3b6e1b`, context seed 2063643282 scores 126/126 on CUDA
+  and 125/126 on CPU. CPU case `context-086` has a 4,720-token prefix and loses
+  the second coordinated object of an unfamiliar subject: `I do not know.`
+  instead of `Yes.`. This failure is retained; v14b was not retuned.
+  These are fresh combinations from a known generator, not independent tests
+  of broad language ability. The six near-capacity requests repeat.
+- A separate 20-turn publication smoke conversation passes locally on CUDA,
+  after 3,000 initial tokens of declarative distractors. It exercises existing
+  grammar at later positions, not new linguistic understanding.
 
 This repairs the tested numerical failures, not every possible long-language
 problem. The existing controlled grammar still fails disjunction, conditional

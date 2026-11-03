@@ -655,3 +655,27 @@ v14b has 960,705 nonzero parameters; raw SHA-256 is
 The candidate is committed before choosing a fresh context seed. These numerical
 repairs do not establish general language understanding; broader grammar,
 conditional reasoning, creative writing and code generation remain unachieved.
+
+## 2026-11-04: frozen v14b fresh context evaluation
+
+After committing v14b at `b3b6e1bd76a7e007262d6cf16c27dd3ed4cc1c04`, selected
+context seed 2063643282. The 126 fresh combinations score 126/126 on CUDA and
+125/126 on CPU. CPU case `context-086` has a 4,720-token prefix, followed by
+`A omnddrvr has wings and a omsmpnrl needs water and fuel. Does omsmpnrl need fuel?`
+It answers `I do not know.` instead of `Yes.`. Exact output, token IDs and timing
+are retained. The zero-error local-address audit therefore does not guarantee
+all semantic binding at long positions. Frozen weights were not retuned.
+
+This generator and its structures were known before freezing. Fresh spellings,
+operands and twelve random offsets are useful combination checks; many fixed
+offsets and all six near-capacity structures repeat. This is not independently
+designed evidence of general language understanding. Median response time is
+55.99 ms on CUDA and 1,230.27 ms on CPU, across varying prefix/output lengths.
+
+A separate publication smoke adds 3,000 tokens of real declarative distractors
+before the existing 20-turn conversation; it passes 20/20 locally on CUDA.
+Both v14a and v14b are packaged, preserving v14a's correction regressions.
+Streamed decompression verifies both raw/config hashes and ZIP CRC. The default
+local checkpoint now references v14b; the frozen v13d raw hash is unchanged.
+The remaining CPU binding failure is a suitable next diagnostic target before
+extending logical structure or claiming reliable long conversations.
